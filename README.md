@@ -19,3 +19,8 @@
 - Sichtbarkeit und Zugriffskontrolle auf die Java Inhalte liegt in Verantwortung des Anwenders
 - Jede Funktion mit Rückgabe gibt den letzten Wert im Funktionsbody zurück (Scala style) 
 - Funktionen und Klassen können in andere Definitionen importiert werden
+
+
+## Ideen
+
+- Mit der Sprache selbst lässt sich ein eigener Levelgenerator/Graphgenerator schreiben (dann Edgar) 
