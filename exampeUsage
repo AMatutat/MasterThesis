@@ -1,0 +1,95 @@
+//Für Zielsetzung B
+// Liste an Dungeon Spezifischen Keywords und funktionen:
+    //Hero
+    //Monster
+    //Item
+    //Level
+    //Room
+    //startRoom
+    //endRoom
+    //room.spawn(What,HowMany)
+    //spawnRandom(What,HowMany)
+    //drop(what)
+    //connect(room,room)
+    //nextLevel
+
+
+//Anmerkungen
+//Es gibt eine Vielzahl an Events, welche genau muss noch bestimmt werden. Objekte müssen nicht alle Events implementieren. Manche Events werden default Implementationen haben
+//statementlist -> Code mit allen Funktionen die man so braucht
+
+//Steuern des Spiels
+
+    //Das ist der MainController
+    Game:
+        //es folgt die Event liste, die statments jedes Events werden dann ausgeführt, wenn das Event eintritt 
+        game_start:
+            statementlist
+        begin_frame:
+            statementlist
+        frame:
+            statementlist
+        end_frame:
+            statementlist
+
+
+    //Das ist die Klasse Hero. 
+    Hero(parameterList): 
+        //im create statement werden auch die attribute erstellt
+        create:
+            statementlist
+        begin_frame:
+            statementlist
+        on_press("W"):
+            statementlist
+        destroy:
+            statementlist
+
+
+    // Ork extends Monster mit Beispiel on_destroy Implementationen
+    Ork is Monster (parameterList):
+        create:
+            statementlist
+        end_frame:
+            statementlist
+        on_colide(Hero):
+            statementlist
+        on_colide(Monster):
+            statementlist
+        on_destroy:
+            drop(Healpot)
+
+    // Healpot extends Item
+    Healpot is Item (parameterList):
+        usage:  
+            statementlist
+        destroy:
+            statementlist
+
+
+
+
+//Levelgenerierung Beispiel
+
+SquareRoom is Room:
+    create:
+        var points=Points[(0,0), (5,0),(0,5),(5,5)]
+
+
+SmallLevel is Level:
+    create: 
+        var r1= new SquareRoom
+        var r2= new SquareRoom
+        var r3= new SquareRoom
+        var r4= new SquareRoom
+        connect(r1,r2)
+        connect(r2,r3)
+        connect(r3,r4)
+        connect(r4,2)
+        do_Edgar()
+        startRoom=3
+        endRoom=1
+        r1.spawn(Ork,5)
+        spawnRandom(Ork,3) 
+        //hier muss man auf rekursion aufpassen
+        nextLevel= new SmallLevel      
