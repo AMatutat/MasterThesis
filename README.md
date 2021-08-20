@@ -2,6 +2,22 @@
 
 *Anmerkung: Zielsetzung A und B sind getrennt voneinander zu betrachten.* 
 
+# Idee: Levelgenerator
+- Weiterführung der Ansätze aus der BA. Analysieren von vorhandenen Algorithmen zur prozeduralen Generierung und aus den gewonnenen Kenntnissen einen eigenen Generator schreiben.
+- Evtl mit Beschreibungssprache
+
+# Idee: Gameplayfeatures
+- Erweitern des Spiels um verschiedene Gameplayfeatures und Baukastenelemente.
+
+# Idee: Logik
+- Kann man was mit Logischerprogrammierung machen?
+
+# Idee: Petri-Netzte
+- Verwenden von Petrinetzten um Questsketten zu beschreiben. 
+
+
+# Idee: Sprache
+
 ## Zielsetzung A
 - Die Sprache soll verwendet werden um den Aufbau des Dungeons zu beschreiben. Dies umfasst:
   - Struktur des Levels bestimmen
