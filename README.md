@@ -12,8 +12,8 @@
 # Idee: Logik
 - Kann man was mit Logischerprogrammierung machen?
 
-# Idee: Petri-Netzte
-- Verwenden von Petrinetzten um Questsketten zu beschreiben. 
+# Idee: Petri-Netze
+- Verwenden von Petrinetzen um Questsketten zu beschreiben. 
 
 
 # Idee: Sprache
