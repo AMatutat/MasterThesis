@@ -58,7 +58,9 @@ Alles für den schriftlichen Teil der Masterarbeit.
 
 - [MIGS: Far Cry 2's Guay On The Importance Of Procedural Content](https://users.informatik.haw-hamburg.de/~schumann/BachelorArbeitKevinHagen.pdf#page=88&zoom=100,72,584)
 
-  
 
+## Questions
+- Extra Kapitel für die Analyse?
+- Zitierstile?
 
 
