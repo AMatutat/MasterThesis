@@ -7,19 +7,19 @@ Alles für den schriftlichen Teil der Masterarbeit.
 ## Ideen
 - Arbeiten auf 3 Ebenen
   - Macro-Ebene
-    - Stellt die gesamte Welt da
+    - Stellt die gesamte Welt dar
     - Ein Knoten sind größere Gebiete 
     - Darstellung als Graph
   - Micro-Ebene
-    - Stellt gebiete der Welt da (z.B Waldgebiet, Feuergebiet etc.) 
+    - Stellt Gebiete der Welt da (z.B Waldgebiet, Feuergebiet etc.) 
     - Besteht aus mehreren Knoten
-    - Knoten stellen einzelne Räume da
+    - Knoten stellen einzelne Räume dar
     - Hat kritische Wege und Räume (diese müssen betreten werden um weiter zu kommen)
     - Hat optionale Wege und Räume
     - Darstellung als Graph
   - Nano-Ebene
     - Sind die einzelnen Räume
-    - Werden als Array Dargestellt  
+    - Darstellung als Graph
     - Sind "Teil" Prozedural? 
 
 
