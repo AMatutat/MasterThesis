@@ -57,10 +57,31 @@ Alles für den schriftlichen Teil der Masterarbeit.
 - [Procedural Content Generation](https://www.gamecareerguide.com/features/336/procedural_content_.php?page=1)
 
 - [MIGS: Far Cry 2's Guay On The Importance Of Procedural Content](https://users.informatik.haw-hamburg.de/~schumann/BachelorArbeitKevinHagen.pdf#page=88&zoom=100,72,584)
+- [Zufallsgenerierte Spielwelten - Das Spiel mit dem Zufall](https://www.gamestar.de/artikel/zufallsgenerierte-spielwelten-das-spiel-mit-dem-zufall,3025323,seite1.html)
+
+### Spiele mit prozedurale Generierung
+- Hades
+  - nach ersten Eindruck: Fest gebaute Räume die random verknüpft werden   
+- Spelunky
+  - GridLayout
+  - Feste Räume die nochmal random etwas angepast werden
+   - das könnte man gut auf Nano-Ebene verwenden 
+  - Constraints zum verteilen von Monstern und Items     
+- Rogue
+- Shattered Pixel Dungeon
+- Anno (die Inseln)
+- Returnal
+  - nach ersten Eindruck: Fest gebaute Räume die random verknüpft werden    
+- Dead Cells
+- Minecraft (3D) 
+- Rogue Legacy
+- The Binding of Isaac
+ - nach ersten Eindruck: Fest gebaute Räume die random verknüpft werden    
 
 
 ## Questions
 - Extra Kapitel für die Analyse?
 - Zitierstile?
+- Reverse engeneering? 
 
 
