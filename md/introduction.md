@@ -10,106 +10,12 @@
 Umfang: typisch ca. 8% ... 10% der Arbeit
 -->
 
+Ein essenzieller Bestandteil eines jeden Videospiels sind seine Level. Level gehören zum Kernpunkt der Interaktion, sie sind die Spielwiese, auf der sich der Spieler mithilfe der Spielmechaniken austobt. Daher sind die Konzeptionierung und Gestaltung guter Level ein Zeit- und damit kostenintensives Unterfangen. Da Videospiele immer umfangreicher werden, müssen auch mehr Level produziert werden. Eine Möglichkeit, um kostengünstig eine Vielzahl an unterschiedlichen Level zu produzieren ist die Verwendung von Level-Generatoren, welche eigenständig unter Betrachtung verschiedener vorher definierter Kriterien, Level erzeugen können. Da jedes Videospiel sich von anderen unterscheidet und daher eigenen Anforderungen an seine Level stellt, müssen Level-Generatoren für jedes Projekt angepasst werden, um den Anforderungen des Spiels gerecht zu werden. Die Entwicklung eines solchen Generators kann je nach Anforderungen anspruchsvoller und teurer sein als die manuelle Gestaltung von Level. Ein gut entworfener Algorithmus ist jedoch in der Lage nahezu unendlich viele unterschiedliche Level zu generieren und so den Spielspaß aufrechtzuerhalten, vor allem das Genre der Rogue Like macht sich dies zu nutzen.
 
-## Markdown und -Erweiterungen durch Pandoc
+Im Rahmen des Moduls Programmiermethoden des Studienganges Informatik der FH-Bielefeld sollen die Studenten ihre Fähigkeiten mit der Programmiersprache Java und verschiedenen Konzepten und Tools der Softwareentwicklung verbessern. Hierzu findet neben den theoretischen Vorlesungsteil ein praktischer Programmierteil statt. In diesem praktischen Anteil entwickeln die Studenten ein eigenes 2D-Rollenspiel, das PM-Dungeon. [@Prüfungsordnung] Hierfür bekommen sie das PM-Dungeon-Framework zur Verfügung gestellt.[@DungeonGIT] Das Framework entlastet die Studenten, indem es die für das Lernziel des Moduls irrelevanten Inhalte übernimmt. Dazu zählt nebst der grafischen Darstellung auch das Laden der Level. In der Version *1.1.5.1* unterstützt das Framework nur Level welche durch den **Edgar-DotNet** Generator in der veralteten Version *1.0.6* erzeugt wurden.[@EdgarGIT] Da dieser Generator nicht auf die spezifischen Anforderungen des PM-Dungeons optimiert wurde, beschäftigt sich diese Arbeit mit der Entwicklung eines neuen Generators. 
 
-Für eine Einführung in (Pandoc-) Markdown vgl. [pandoc.org/MANUAL.html](https://pandoc.org/MANUAL.html).
+Ziel dieser Arbeit ist es, bekannte und bereits etablierte Verfahren zur Generierung von 2D-Level zu analysieren und die jeweils besten Elemente der verschiedenen Algorithmen in einen neuen Graphen basierten Generator zu kombinieren. Die erzeugten Level sollen gängigen Kriterien für gutes Leveldesign erfüllen, daher werden im Rahmen dieser Arbeit solche Kriterien erläutert und ausgearbeitet. Der implementierte Algorithmus soll dann in das PM-Dungeon-Framework integriert werden und den Studenten verschiedene Möglichkeiten bieten, mit diesem Level zu arbeiten und ihre eigenen Spielelemente wie Items oder Monster mit dem Level zu verbinden. Die Studenten sollen auch in der Lage sein, den Algorithmus so zu konfigurieren, dass sie Level nach eigenem Belieben gestalten können. Das bedeutet, die Studenten müssen in der Lage sein, den Aufbau der Level dynamisch abfragen zu können um Beispielhaft den kritischen Pfad, also den Pfad vom Spieler bis zum Ziel bestimmen zu können, um entsprechend Monster zu platzieren. Der Generator soll möglichst spaßige und abwechslungsreiche Level erzeugen.
 
-Da als Backend \LaTeX{} zum Einsatz kommt, können alle entsprechenden Befehle und Umgebungen ebenfalls
-genutzt werden (ggf. muss noch das jeweilige Paket importiert werden).
+Die Implementation der Spiellogik ist nicht Bestandteil dieser Arbeit. Ebenso konzentriert sich diese Arbeit nicht darauf, einen Laufzeit oder Speicherplatz optimierten Algorithmus zu entwickeln. Diese Arbeit beschäftigt sich ausschließlich mit der Generierung von Level im zweidimensionalen Raum, 3D-Level und Spiele werden aufgrund ihrer stark abweichenden Anforderungen zu 2D-Level nicht betrachtet. Grafiken und Soundeffekte werden nicht generiert, jedoch soll der Generator in der Lage sein zur Verfügung gestellte Texturen zu verwenden. 
 
-**Tipp**: Für eine schnelle Übersicht einfach den Quelltext ansehen (`./md/introduction.md`).
-
-
-## Zitieren
-
-Einfach den Bibtex-Key mit einem `@` davor in eckigen Klammern schreiben: Aus `[@Dietz2018]` wird [@Dietz2018] ...
-Mit Seiten- oder Kapitelangabe: Aus `[@Dietz2018, Seite 111]` oder `[@Dietz2018, Kapitel 111]` wird
-[@Dietz2018, Seite 111] oder [@Dietz2018, Kapitel 111] ...
-
-Pandoc (bzw. `pandoc-citeproc`) nutzt per Default den *Chicago Manual of Style*-Stil^[vgl.
-[pandoc.org/MANUAL.html#citations](https://pandoc.org/MANUAL.html#citations)].
-Für andere Zitierstile (etwa numerisch oder als Fußnote) sind auf [zotero.org/styles](https://www.zotero.org/styles)
-die passenden CSL-Dateien zum Download zu finden. Die Aktivierung erfolgt über die Option
-`--csl=XXX.csl` in der Datei `Makefile`.
-
-**Tipp**: Unter [editor.citationstyles.org/searchByName/](https://editor.citationstyles.org/searchByName/)
-können Sie sich die Wirkung der jeweiligen Zitierstile/CSL-Definitionen anschauen.
-
-
-## Abbildungen
-
-![Hier steht die Bildunterschrift, Quelle: [@Dietz2018] \label{fig:foo}](figs/wuppie.png){width=80%}
-
-
-## Source-Code
-
-```{.python caption="The preprocessing step, cf. [@Dietz2018]" #lst:huh}
-def foo():
-  """ Wuppie! """
-  pass
-```
-
-## Mathe
-
-Display-Math geht wie in \LaTeX{} mit einem doppelten Dollarzeichen (entspricht der `equation`-Umgebung):
-
-$$
-    \label{eq:wuppie}
-    \nabla E(\mathbf{w}) = \left( \frac{\partial E}{\partial w_{0}}, \frac{\partial E}{\partial w_{1}}, \ldots, \frac{\partial E}{\partial w_{n}} \right)^T
-$$
-
-Inline-Math geht mit einem einfachen Dollar-Zeichen: $\mathbf{w} \gets \mathbf{w} + \Delta\mathbf{w}$ ...
-
-
-## Tabellen
-
-| Rechtsbündig | Linksbündig | Default | Zentriert |
-|-------------:|:------------|---------|:---------:|
-|          foo | foo         | foo     |    foo    |
-|          123 | 123         | 123     |    123    |
-|          bar | bar         | bar     |    bar    |
-
-: Tabelle als Markdown-Pipe-Table, vgl. [@Dietz2018] \label{tab:ugh}
-
-
-Leider gibt es derzeit einen Bug (siehe [github.com/Wandmalfarbe/pandoc-latex-template/issues/29](https://github.com/Wandmalfarbe/pandoc-latex-template/issues/29)
-bzw. [github.com/jgm/pandoc/issues/3929](https://github.com/jgm/pandoc/issues/3929)), wodurch die Breite beim Einfärben der
-Tabellenzeilen etwas zu breit wird. Wenn das stört, kann man immer noch normale \LaTeX{}-Tabellen nutzen (siehe
-Tabelle \ref{tab:ieks}).
-
-\begin{longtable}[]{rllc}
-\caption{Tabelle als \LaTeX{}-Table \label{tab:ieks}} \\
-\toprule
-Rechtsbündig & Linksbündig & Default & Zentriert \tabularnewline
-\midrule
-\endhead
-foo & foo & foo & foo \tabularnewline
-123 & 123 & 123 & 123 \tabularnewline
-bar & bar & bar & bar \tabularnewline
-\bottomrule
-\end{longtable}
-
-
-## Querverweise
-
-Querverweise funktionieren in Markdown leider nicht so richtig wie von \LaTeX{} gewohnt.
-
-Hier kann aber einfach auf die ensprechenden \LaTeX{}-Pendants ausgewichen werden:
-
-*   Definieren einer Referenz mit `\label{<id>}`{.latex} (beispielsweise in den jeweiligen Unterschriften
-    unter einer Abbildung/Tabelle/Code-Schnipsel), und
-*   Bezugnahme auf eine Referenz im Text mit `\ref{<id>}`{.latex}.
-
-Vgl. Abbildung \ref{fig:foo} oder Tabelle \ref{tab:ugh} oder Listing \ref{lst:huh} ...
-
-Wer mehr braucht, kann sogenannte Filter^[vgl. [pandoc.org/filters.html](https://pandoc.org/filters.html)
-bzw. [pandoc.org/lua-filters.html](https://pandoc.org/lua-filters.html)] einsetzen, beispielsweise
-[github.com/lierdakil/pandoc-crossref](https://github.com/lierdakil/pandoc-crossref).
-
-
-## Hinweise zum generierten PDF
-
-Das generierte PDF ist für den **doppelseitigen** Ausdruck gedacht. Wie bei einem Buch fangen neue Kapitel
-immer auf einer neuen rechten Seite an, d.h. es kann passieren, dass am Ende eines Kapitels ggf. eine leere
-Seite erzeugt wird. Dies ist durchaus beabsichtigt.
+*todo aufbau der arbeit* 
