@@ -11,4 +11,42 @@
 geschätzter  ca. 20% ... 30% der Arbeit
 -->
 
-Lorem ipsum dolor sit amet, consectetur adipisici elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquid ex ea commodi consequat. Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+
+## Zielsetzung und Anforderungen an das Projekt
+
+- Was genau muss der Algo können?
+- Was nicht?
+- Welche Anforderungen muss der Algorithmus und das Framework erfüllen?
+
+## Bewertungsverfahren
+
+- Kriterien aus Kapitel 2
+
+  - Manuelle Analyse 
+
+- Umfrage bei Studenten (Zeitplanung?)
+
+  
+
+## Bausteine
+
+- Auflisten der der Bausteine aus Kapitel 3 
+- Begründen warum diese verwendet werden
+
+## Abgrenzung zu den anderen Algorithmen
+
+- Warum ist dieser Algo besser für das PM-Dungeon als die anderen?
+- Welche Grenzen wird dieser Algo haben im vergleich zu den anderen?
+
+## Darstellung des Konzeptes
+
+- WIe werden die Bausteine kombiniert?
+- Welche Probleme treten dabei auf?
+- Welche anpassungen müssen daher gemacht werden?
+- Zusätzliche Features die NICHT aus den Algorithmen stammen (vermutlich die API für die Studenten)
+
+
+
+
+
