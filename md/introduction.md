@@ -19,3 +19,8 @@ Ziel dieser Arbeit ist es, bekannte und bereits etablierte Verfahren zur Generie
 Die Implementation der Spiellogik ist nicht Bestandteil dieser Arbeit. Ebenso konzentriert sich diese Arbeit nicht darauf, einen Laufzeit oder Speicherplatz optimierten Algorithmus zu entwickeln. Diese Arbeit beschäftigt sich ausschließlich mit der Generierung von Level im zweidimensionalen Raum, 3D-Level und Spiele werden aufgrund ihrer stark abweichenden Anforderungen zu 2D-Level nicht betrachtet. Grafiken und Soundeffekte werden nicht generiert, jedoch soll der Generator in der Lage sein zur Verfügung gestellte Texturen zu verwenden. 
 
 *todo aufbau der arbeit* 
+
+
+
+
+
