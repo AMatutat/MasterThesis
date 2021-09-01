@@ -1,0 +1,25 @@
+% Encoding: UTF-8
+
+@Manual{Prüfungsordnung,
+  title   = {Studiengangsprüfungsordnung für den BachelorstudiengangInformatikan der Fachhochschule Bielefeld(University of Applied Sciences)vom 20. September 2018 in der Fassung der Änderungvom 05. Juni 2019},
+  edition = {2019},
+  year    = {2018},
+}
+
+@Online{DungeonGIT,
+author = {André Matutat},
+title = {PM-Dungeon on Git},
+year = {2021},
+url = {https://github.com/PM-Dungeon/pmdungeon},
+urldate = {28.08.2021},
+}
+
+@Online{EdgarGIT,
+author = {Ondrej Nepozitek},
+title = {Edgar-DotNet on Git},
+year = {2017},
+url = {https://github.com/OndrejNepozitek/Edgar-DotNet},
+urldate = {28.08.2021},
+}
+
+@Comment{jabref-meta: databaseType:bibtex;}
