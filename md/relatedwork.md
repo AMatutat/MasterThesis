@@ -10,6 +10,38 @@
 geschätzter Umfang 15% - 20%
 -->
 
+## Bewertungskriterien für gute Level
+
+- Aufstellen von Bewertungskriterien 
+- Fokusiert auf prozedurale Anwendungsfälle
+- Fokusiert auf Rogue-Likes
+- Fokusiert auf 2D-Spiele
+- Kürzer als in der BA
+
+## Graphen zur darstellung von Level
+
+- Wie verwendet man Graphen zur darstellung von Level?
+- Warum ist das gut?
+- Welche Vortiele bietet das?
+- Welche Nachteile und Grenzen gibt es?
+- Warum mach ich das in dieser arbeit so?
+
+## Prozedurale Generierung
+
+- Begrifferläuterung
+
+- Anwendungsfälle und Beispiele
+
+- Anwendung zur Level generierung
+
+- Beispiele welche NICHT im Kapitel Analyse verwendet werden, daher auch kurz und knall (z.B Random Walk)
+
+- Granzen und Probleme
+
+- Vor und Nachteile
+
+  
+
 ## PM-Dungeon
 
 Um ein Verständnis für das PM-Dungeon zu bekommen, erklärt dieses Kapitel das grundlegende Spielkonzept des Genres der Rogue-Like Rollenspiele sowie den Aufbau der Lehrveranstaltung und des PM-Dungeon-Frameworks. 
@@ -22,7 +54,7 @@ Dieses Spielkonzept ist zu dieser Zeit kein unbekanntes, was Rogue hingegen bis 
 
 > But I think Rogue’s biggest contribution, and one that still stands out to this day, is that the computer itself generated the adventure in Rogue. Every time you played, you got a new adventure. That’s really what made it so popular for all those years in the early eighties.[@Wichman1997]
 
-**Frage: Macht es Sinn für relevante Persönlichkeiten eine Art Bio in den Anhang zu packen?** 
+ <span style="color:red">  **Frage: Macht es Sinn für relevante Persönlichkeiten eine Art Bio in den Anhang zu packen?** </span>
 
 Bei jedem Neustart von Rogue werden die Level neu generiert. Das bedeutet der Aufbau der Level, die Anzahl und Positionierung von Monstern und Items unterscheiden sich mit jedem Spieldurchlauf. Man spielt also niemals zweimal dieselbe Partie von Rogue. Zusätzlich setzt Rogue auf dem sogenannten Permadeath. Stirbt der Spieler im Dungeon, verliert er all seinen Fortschritt und muss das Spiel von vorne beginnen, mit neu generiertem Level. Rogue zeichnet sich also vor allem dadurch aus, dass jeder Spieldurchlauf anders als der andere ist und dadurch ein besonders hohes Maß an Abwechslung und damit Wiederspielwert gegeben war.  
 
@@ -36,32 +68,17 @@ Heute muss ein Spiel nur zwei wichtige Features implementieren um *like* Rogue z
 
 ### PM-Dungeon
 
-- Was ist das PM-Dungeon
-- Welches Ziel soll das PM-Dungeon erfüllen
-- Was ist das PM-Dungeon-Framework?
-- Welche Probleme hat das Framework aktuell noch bezogen auf Level
+Im praktischen Anteil des Moduls Programmiermethoden sollen die Studenten das gelernte Wissen aus dem theoretischen Anteil anwenden und vertiefen, dafür bekommen sie in regelmäßigen Abständen Aufgaben gestellt. Um die Aufgaben in einen gemeinsamen Kontext zu bringen und zeitgleich die Motivation der Studenten zu steigern, wurde 2021 das PM-Dungeon eingeführt. Über den verlauf des Semesters entwickeln die Studenten ihr eigenes Rouge-Like Rollenspiel. Zwar stehen weiterhin die Lehrinhalte im Fokus, dennoch haben die Studenten viele Freiheiten um ihr Spiel nach ihren wünschen zu gestalten. Für die Entwicklung des Spiels bekommen die Studenten ein extra dafür entwickeltes Framework zur Verfügung gestellt, das PM-Dungeon-Framework. Das PM-Dungeon-Framework erweitert das libGDX-Framework (https://libgdx.com/) um vereinfachte Schnittstellen zur grafischen Darstellung. Die Studenten können sich daher rein auf die Implementierung der Spielfeatures konzentrieren.
 
-## Prozedurale Generierung
-- Begrifferläuterung
-- Anwendungsfälle und Beispiele
-- Anwendung zur Level generierung
-- Beispiele welche NICHT im Kapitel Analyse verwendet werden, daher auch kurz und knall (z.B Random Walk)
-- Granzen und Probleme
-- Vor und Nachteile
+![Ausschnitt aus dem PM-Dungeon \label{pmd}](figs/chapter2/pmd.png){width=100%}
 
-## Bewertungskriterien für gute Level
-- Aufstellen von Bewertungskriterien 
-- Fokusiert auf prozedurale Anwendungsfälle
-- Fokusiert auf Rogue-Likes
-- Fokusiert auf 2D-Spiele
-- Kürzer als in der BA
+Abbildung \ref{pmd} zeigt einen Ausschnitt aus dem Startlevel einer Beispiel Implementierung des PM-Dungeons. Die Spielfigur (grüner Kreis) muss mithilfe der Leiter (blauer Kreis) in die nächste Ebene gebracht werden. Auf den Weg dorthin kann der Spieler die Monster (roter Kreis) töten, um Erfahrungspunkte zu sammeln oder Items zu finden. Sowohl die Spielerposition als auch die Position der Monster und der Leiter werden zu Beginn des Levels zufällig bestimmt. 
 
-## Graphen zur darstellung von Level
-- Wie verwendet man Graphen zur darstellung von Level?
-- Warum ist das gut?
-- Welche Vortiele bietet das?
-- Welche Nachteile und Grenzen gibt es?
-- Warum mach ich das in dieser arbeit so?
+Aktuell besitzt das PM-Dungeon keinen eigenen Level-Generator und die zur Verfügung gestellten Level sind in Anzahl und Abwechslung stark begrenzt. Die Level greifen auf einen gemeinsamen Texturenpool zu und unterscheiden sich daher optisch kaum voneinander. Auch bieten die generierten Level keine Schnittstelle, um die Struktur des Levels dynamisch im Code abzufragen. Die Studenten haben daher keine Möglichkeit ihre implementieren Inhalte strategisch im Level zu platzieren oder die Struktur der Level zu bestimmen. Inhalte wie Monster und Items wurden daher von den Studenten zufällig im Level verteilt. Dadurch das die Level nicht neu generiert werden, ist das PM-Dungeon streng genommen auch kein Rouge-Like.
+
+<span style="color:red"> **ToDo Matrix mit Anforderungen und ob diese Erfüllt sind** </span>
+
+Zwar genügen die bereitgestellten Level zum Erfüllen des Lernzieles, jedoch könnte ein eigener Generator die Studenten weiter motivieren ihr Spiel im inhaltlichen Teil auszubauen. Am Ende des Semesters würde so ein eigenes fertiges Spiel entstehen und nicht nur ein Prototyp eines Spiels. 
 
 
 
