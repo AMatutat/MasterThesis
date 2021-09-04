@@ -10,49 +10,9 @@
 geschätzter Umfang 15% - 20%
 -->
 
-## Bewertungskriterien für gute Level
+<span style="color:red"> **ToDo Kapitel Einleitung** </span>
 
-- Aufstellen von Bewertungskriterien 
-
-- Fokusiert auf prozedurale Anwendungsfälle
-
-- Fokusiert auf Rogue-Likes
-
-- Fokusiert auf 2D-Spiele
-
-- Kürzer als in der BA
-
-
-
-## Graphen zur Darstellung von Level
-
-- Wie verwendet man Graphen zur darstellung von Level?
-- Warum ist das gut?
-- Welche Vortiele bietet das?
-- Welche Nachteile und Grenzen gibt es?
-- Warum mach ich das in dieser arbeit so?
-
-## Prozedurale Generierung
-
-- Begrifferläuterung
-
-- Anwendungsfälle und Beispiele
-
-- Anwendung zur Level generierung
-
-- Beispiele welche NICHT im Kapitel Analyse verwendet werden, daher auch kurz und knall (z.B Random Walk)
-
-- Granzen und Probleme
-
-- Vor und Nachteile
-
-  
-
-## Die Anwendungsumgebung 
-
-Um ein Verständnis für das PM-Dungeon zu bekommen, erklärt dieses Kapitel das grundlegende Spielkonzept des Genres der Rogue-Like Rollenspiele sowie den Aufbau der Lehrveranstaltung und des PM-Dungeon. 
-
-### Das Genre der Rogue Likes 
+## Rouge und Rouge Like
 
 *Rogue: Exploring the Dungeons of Doom*, ist ein in den 1980er entwickeltes Dungeoncrawler-Rollenspiel. Dungeoncrawler sind Spiele, indem sich der Spieler durch ein Labyrinth gefüllt mit Gegnern und Rätseln kämpft und meist über mehrere Ebenen versucht das Spielziel (z .B. den Ausgang oder einen Schatz) zu erreichen.[@qrpg2020] In Rogue bewegt sich der Spieler rundenbasiert durch ein, durch ASCII-Zeichen dargestelltes, Levelsystem und versucht sich mithilfe von Gegenständen und Zaubersprüchen bis in die tiefste Ebene des Dungeons vorzukämpfen um dort das Amulett von Yendor zu erlangen.[@MattBarton2009]
 
@@ -70,7 +30,59 @@ In den Jahren haben viele Entwickler versucht Regeln für das Genre aufzustellen
 
 Heute muss ein Spiel nur zwei wichtige Features implementieren um *like* Rogue zu sein, prozedural generierte Level und Permadeath. [@Brown2019] Das Genre ist daher nicht nur noch auf Rollenspiele in Labyrinthen begrenzt, sondern umfasst mittlerweile Spiele aus den unterschiedlichsten Genres wie Plattformer, Shooter oder Action-Adventures und vielen mehr. [@Wikipedia2020]
 
-### PM-Dungeon
+
+## Graphen zur Darstellung von Level
+
+- Wie verwendet man Graphen zur darstellung von Level?
+- Warum ist das gut?
+- Welche Vortiele bietet das?
+- Welche Nachteile und Grenzen gibt es?
+- Warum mach ich das in dieser arbeit so?
+
+
+## Bewertungskriterien für gute Level
+
+- Warum bezieh ich mich auf die Branche/ "wichtige" Menschen darin
+- Lücke in der Wissenschaft adressieren
+- Daraus folgt. Diese Liste ist subjektiv, nicht allgemeingültig, kann kein anspruch auf vollständigkeit und korrektheit, jeder Punkt kann diskutiert werden
+- Regeln werden auf die für die arbeit releveanten bereiche begrenzt. 
+
+### Lösbarkeit
+- Kritisch
+
+### Gameplay First
+
+### Balancing
+
+### Pacing
+- Star Wars Kurve nochmal verwenden
+- Zelda a Link to the past Wüstentempel kann also gutes Beispiel genutzt werden, erst Erkunden dann "Boss rush" zum ende
+
+### Risk and Reward
+
+### Einzigartigkeit
+
+### Effizienz 
+- da kann man dann auch ne gute überleitung zu pcg machen
+
+
+## Prozedurale Generierung
+
+- Begrifferläuterung
+
+- Anwendungsfälle und Beispiele
+
+- Anwendung zur Level generierung
+
+- Beispiele welche NICHT im Kapitel Analyse verwendet werden, daher auch kurz und knall (z.B Random Walk)
+
+- Granzen und Probleme
+
+- Vor und Nachteile
+
+  
+
+## Die Anwendungsumgebung  PM-Dungeon
 
 Im praktischen Anteil des Moduls Programmiermethoden sollen die Studenten das gelernte Wissen aus dem theoretischen Anteil anwenden und vertiefen, dafür bekommen sie in regelmäßigen Abständen Aufgaben gestellt. Um die Aufgaben in einen gemeinsamen Kontext zu bringen und zeitgleich die Motivation der Studenten zu steigern, wurde 2021 das PM-Dungeon eingeführt. Über den verlauf des Semesters entwickeln die Studenten ihr eigenes Rouge-Like Rollenspiel. Zwar stehen weiterhin die Lehrinhalte im Fokus, dennoch haben die Studenten viele Freiheiten um ihr Spiel nach ihren wünschen zu gestalten. Sie konzeptionieren eigenständig das Verhalten von Monstern, implementieren Schatztruhen und Items sowie unterschiedliche Fähigkeiten die der Spieler im laufe des Spiels freischalten kann. Für die Entwicklung des Spiels bekommen die Studenten ein extra dafür entwickeltes Framework zur Verfügung gestellt, das PM-Dungeon-Framework. Das PM-Dungeon-Framework erweitert das libGDX-Framework \footnote{libGDX: https://libgdx.com} um vereinfachte Schnittstellen zur grafischen Darstellung. Die Studenten können sich daher rein auf die Implementierung der Spielfeatures konzentrieren.
 
@@ -80,7 +92,7 @@ Abbildung \ref{pmd} zeigt einen Ausschnitt aus dem Startlevel einer Beispiel Imp
 
 Aktuell besitzt das PM-Dungeon keinen eigenen Level-Generator und die zur Verfügung gestellten Level sind in Anzahl und Abwechslung stark begrenzt. Die Level greifen auf einen gemeinsamen Texturenpool zu und unterscheiden sich daher optisch kaum voneinander. Auch bieten die generierten Level keine Schnittstelle, um die Struktur des Levels dynamisch im Code abzufragen. Die Studenten haben daher keine Möglichkeit ihre implementieren Inhalte strategisch im Level zu platzieren oder die Struktur der Level zu bestimmen. Inhalte wie Monster und Items wurden daher von den Studenten zufällig im Level verteilt. Dadurch das die Level nicht neu generiert werden, ist das PM-Dungeon streng genommen auch kein Rouge-Like.
 
-<span style="color:red"> **ToDo Matrix mit Anforderungen an Level für das PM-Dungeon und ob diese Erfüllt sind** </span>
+<span style="color:red"> **ToDo Matrix mit Anforderungen an Level für das PM-Dungeon und ob diese Erfüllt sind. PM-Dungeon level als Graph. Erläutern der Probleme** </span>
 
 Zwar genügen die bereitgestellten Level zum Erfüllen des Lernzieles, jedoch könnte ein eigener Generator die Studenten weiter motivieren ihr Spiel im inhaltlichen Teil auszubauen. Am Ende des Semesters würde so ein eigenes fertiges Spiel entstehen und nicht nur ein Prototyp eines Spiels. 
 

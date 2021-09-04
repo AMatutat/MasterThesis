@@ -15,6 +15,8 @@ geschätzter  ca. 20% ... 30% der Arbeit
 
 ## Zielsetzung und Anforderungen an das Projekt
 
+- Fokussiert auf die Anforderungen an das Programm, nicht auf die Anforderungen der Level
+- Schnittstellenanforderungen
 - Was genau muss der Algo können?
 - Was nicht?
 - Welche Anforderungen muss der Algorithmus und das Framework erfüllen?
