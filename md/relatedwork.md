@@ -57,6 +57,7 @@ Heute muss ein Spiel nur zwei wichtige Features implementieren um *like* Rogue z
 ### Pacing
 - Star Wars Kurve nochmal verwenden
 - Zelda a Link to the past Wüstentempel kann also gutes Beispiel genutzt werden, erst Erkunden dann "Boss rush" zum ende
+ ![Zelda 3 Dungeon](figs/chapter2/Zelda3Dungeon.png){width=100%}
 
 ### Risk and Reward
 
@@ -79,8 +80,6 @@ Heute muss ein Spiel nur zwei wichtige Features implementieren um *like* Rogue z
 - Granzen und Probleme
 
 - Vor und Nachteile
-
-  
 
 ## Die Anwendungsumgebung  PM-Dungeon
 
