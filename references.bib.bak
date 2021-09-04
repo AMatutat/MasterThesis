@@ -6,28 +6,12 @@
   year    = {2018},
 }
 
-@Online{DungeonGIT,
-author = {André Matutat},
-title = {PM-Dungeon on Git},
-year = {2021},
-url = {https://github.com/PM-Dungeon/pmdungeon},
-urldate = {28.08.2021},
-}
-
 @Online{qrpg2020,
   author  = {qrpg},
   title   = {Bedeutung: Was bedeutet Dungeon Crawler?},
   url     = {https://www.qrpg.de/dungeon-crawler-bedeutung/},
   urldate = {01.09.2021},
   year    = {2020},
-}
-
-@Online{EdgarGIT,
-author = {Ondrej Nepozitek},
-title = {Edgar-DotNet on Git},
-year = {2017},
-url = {https://github.com/OndrejNepozitek/Edgar-DotNet},
-urldate = {28.08.2021},
 }
 
 @Online{Wichman1997,
@@ -86,4 +70,7 @@ urldate = {28.08.2021},
   year    = {2019},
 }
 
-@Comment{jabref-meta: databaseType:bibtex;}
+@Comment{jabref-meta: databaseType:biblatex;}
+
+{Petzold2019,
+  author  = {Sara Petzold},

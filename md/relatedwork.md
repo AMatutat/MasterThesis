@@ -39,25 +39,34 @@ Heute muss ein Spiel nur zwei wichtige Features implementieren um *like* Rogue z
 - Welche Nachteile und Grenzen gibt es?
 - Warum mach ich das in dieser arbeit so?
 
-
 ## Bewertungskriterien für gute Level
 
-- Warum bezieh ich mich auf die Branche/ "wichtige" Menschen darin
-- Lücke in der Wissenschaft adressieren
-- Daraus folgt. Diese Liste ist subjektiv, nicht allgemeingültig, kann kein anspruch auf vollständigkeit und korrektheit, jeder Punkt kann diskutiert werden
-- Regeln werden auf die für die arbeit releveanten bereiche begrenzt. 
+Auch wenn es viel Diskussion darüber gibt, ob Videospiele Kunst sind oder nicht, muss man den kreativen Schaffensprozess eingestehen.[@Petzold2019] Daher lassen sich für Videospiele auch keine festen Regeln definieren, wie bestimmte Designelemente zu sein haben. In diesem Abschnitt werden Regeln für gutes Level Design präsentiert. Sie sollten weder als objektive Maßstäbe noch als verpflichtende Gesetzte betrachtet werden, sondern vielmehr als Leitpfaden. Die Liste erhebt keinen Anspruch auf Allgemeingültigkeit, Korrektheit oder Vollständigkeit Sie wurde gezielt für die in dieser Arbeit betrachteten Probleme zusammengestellt. Zwar beschäftigt sich die Wissenschaft sehr wohl mit Videospielen und deren Level, jedoch nicht auf die Ausarbeitung objektiver Bewertungskriterien, daher basieren die Regeln dieser Liste auf Aussagen verschiedener Persönlichkeiten der Videospielbranche. Dabei ist zu bedenken, dass diese Branche dazu neigt einen Personenkult, um einige Entwickler aufzubauen. Auch wenn sich bei der Aufarbeitung der Regeln bemüht wurde, Aspekte zu wählen, die von unterschiedlichen Entwicklern als relevant betrachtet werden, muss in Betracht gezogen werden, dass viele Entwickler sich von den bekannten Persönlichkeiten beeinflusst haben lassen.
 
-### Lösbarkeit
-- Kritisch
+Die Grundlagen der Regeln stammen aus Dan Taylors *Ten Principles of Good Level Design* [@Taylor2013] [@Taylor2018] und Tim Ryans *Beginning Level Design* [@Ryan1999] und wurden bei Bedarf um weitere Aspekte, Meinungen und Beispielen ergänzt. 
+
+
+
+### Lösbarkeit und Fehlerfreiheit
+
+Ein Level muss lösbar sein. Es darf keine Fehler geben, die das Voranschreiten verhindern. Es sollte zusätzlich darauf geachtet werden, dass Spieler nicht in Sackgassen geraten könne. Braucht der Spieler beispielsweise ein bestimmtes Item, um weiterzukommen sollte er das Item an diesem Punkt immer noch erreichen können. Bei Spielen die Lebensenergie verwenden, sollte das Level gelöst werden können ohne Lebensenergie zu verlieren, so bleiben Spieler, die im vorherigen Abschnitt viel Schaden bekommen haben, nicht stecken. Gibt es im Spiel optionale Wege oder Ziele müssen auch diese lösbar sein und dürfen nicht durch einen Fehler unlösbar werden. Bei optionalen Inhalten liegt es in der kreativen Entscheidungsfreiheit des Entwicklers, ob diese auch immer erreichbar sein müssen oder ob zum Beispiel ein optionales Item benötigt wird, welches nicht mehr erreichbar ist. Zusätzlich sollten die Level frei von Fehlern sein, die Spielern Möglichkeiten wie das ungewollte Überspringen von Abschnitten erlauben.
 
 ### Gameplay First
+
+> Above all else, great level design is driven by interaction - the game’s mechanics. Game levels don’t just provide context for mechanics, they provide the very reality in which they exist.[@Taylor2013]
+
+> Always remember that interactivity is what makes videogames different from any other form of entertainment: books have stories, movies have visuals, games have interaction. If your level design isn’t showcasing your game mechanics, your players might as well be watching a movie or reading a book. [@Taylor2013]
+
+
 
 ### Balancing
 
 ### Pacing
 - Star Wars Kurve nochmal verwenden
+
 - Zelda a Link to the past Wüstentempel kann also gutes Beispiel genutzt werden, erst Erkunden dann "Boss rush" zum ende
- ![Zelda 3 Dungeon](figs/chapter2/Zelda3Dungeon.png){width=100%}
+ 
+![Zelda 3 Dungeon](figs/chapter2/Zelda3Dungeon.png){width=100%}
 
 ### Risk and Reward
 
