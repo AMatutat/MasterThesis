@@ -91,7 +91,17 @@ Abbildung \ref{pmd} zeigt einen Ausschnitt aus dem Startlevel einer Beispiel Imp
 
 Aktuell besitzt das PM-Dungeon keinen eigenen Level-Generator und die zur Verfügung gestellten Level sind in Anzahl und Abwechslung stark begrenzt. Die Level greifen auf einen gemeinsamen Texturenpool zu und unterscheiden sich daher optisch kaum voneinander. Auch bieten die generierten Level keine Schnittstelle, um die Struktur des Levels dynamisch im Code abzufragen. Die Studenten haben daher keine Möglichkeit ihre implementieren Inhalte strategisch im Level zu platzieren oder die Struktur der Level zu bestimmen. Inhalte wie Monster und Items wurden daher von den Studenten zufällig im Level verteilt. Dadurch das die Level nicht neu generiert werden, ist das PM-Dungeon streng genommen auch kein Rouge-Like.
 
+![Ausschnitt aus dem PM-Dungeon in Graphendarstellung \label{pmdAsGraph}](figs/chapter2/PMDExampleLevel1.png){width=100%}
+
+Abbildung \ref{pmdAsGraph} zeigt das Level aus Abbidlung \ref{pmd} in Graphendarstellung. 
+
 <span style="color:red"> **ToDo Matrix mit Anforderungen an Level für das PM-Dungeon und ob diese Erfüllt sind. PM-Dungeon level als Graph. Erläutern der Probleme** </span>
+
+
+
+
+
+
 
 Zwar genügen die bereitgestellten Level zum Erfüllen des Lernzieles, jedoch könnte ein eigener Generator die Studenten weiter motivieren ihr Spiel im inhaltlichen Teil auszubauen. Am Ende des Semesters würde so ein eigenes fertiges Spiel entstehen und nicht nur ein Prototyp eines Spiels. 
 

@@ -1,34 +1,35 @@
 digraph Zelda3Dungeon {
- Eingang -> A 
- 
-## Anfang und oben 
- A -> A1
- A1 -> B
- A1 -> C
- A1 -> A2
- 
-##Links
- B -> B1
- B -> B2
- B2 -> BigChest
- B1 -> B3
- B3 -> B4
- B4 -> B5
- B4 -> D
- 
+    subgraph Anfang {   
+        edge [dir=none]
 
-## Rechts
- C -> C1
- C -> C2
- C2 -> C3
- C3 -> BigKey
- C2 -> C4
+        Eingang -> A 
+ 
+        ## Anfang und oben 
+         A -> A1
+         A1 -> B
+         A1 -> C
+         A1 -> A2
+         
+        ##Links
+         B -> B1
+         B -> B2
+         B2 -> BigChest
+         B1 -> B3
+         B3 -> B4
+         B4 -> B5
+         B4 -> D
+        
+        ## Rechts
+         C -> C1
+         C -> C2
+         C2 -> C3
+         C3 -> BigKey
+         C2 -> C4
 
+    } 
+      
+    subgraph BossRush{
+        D -> D1 -> D2 -> D3 -> D4 -> D5 -> D6 -> Boss
  
-  
- # das der Boss rush
- D -> D1 -> D2 -> D3 -> D4 -> D5 -> D6 -> Boss
- 
- 
- 
+    }
 }

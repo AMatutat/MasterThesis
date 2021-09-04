@@ -14,12 +14,76 @@ url = {https://github.com/PM-Dungeon/pmdungeon},
 urldate = {28.08.2021},
 }
 
+@Online{qrpg2020,
+  author  = {qrpg},
+  title   = {Bedeutung: Was bedeutet Dungeon Crawler?},
+  url     = {https://www.qrpg.de/dungeon-crawler-bedeutung/},
+  urldate = {01.09.2021},
+  year    = {2020},
+}
+
 @Online{EdgarGIT,
 author = {Ondrej Nepozitek},
 title = {Edgar-DotNet on Git},
 year = {2017},
 url = {https://github.com/OndrejNepozitek/Edgar-DotNet},
 urldate = {28.08.2021},
+}
+
+@Online{Wichman1997,
+  author  = {Glenn R. Wichman},
+  title   = {A Brief History of Rogue},
+  url     = {http://www.digital-eel.com/deep/A_Brief_History_of_Rogue.htm},
+  urldate = {01.09.2021},
+  year    = {1997},
+}
+
+@Online{Brown2017,
+  author  = {Mark Brown},
+  title   = {Do We need a Soulslike Genre? | Game Makers Toolkit},
+  url     = {https://www.youtube.com/watch?v=Lx7BWayWu08},
+  urldate = {01.09.2021},
+  year    = {2017},
+}
+
+@Online{MattBarton2009,
+  author  = {Matt Barton, Bill Loguidice},
+  title   = {The History of Rogue: Have @ You, You Deadly Zs},
+  url     = {https://www.gamasutra.com/view/feature/4013/the_history_of_rogue_have__you_.php?print=1},
+  urldate = {01.09.2021},
+  year    = {2009},
+}
+
+@Online{Conference2008,
+  author  = {I. R. D. Conference},
+  title   = {Berlin Interpretation},
+  url     = {http://roguebasin.com/?title=Berlin_Interpretation},
+  urldate = {01.09.2021},
+  year    = {2008},
+}
+
+@Online{Grey2013,
+  author  = {Darren Grey},
+  title   = {Screw the Berlin Interpretation!},
+  url     = {http://www.gamesofgrey.com/blog/?p=403},
+  urldate = {01.09.2021},
+  year    = {2013},
+}
+
+@Online{Wikipedia2020,
+  author  = {Wikipedia},
+  title   = {List of roguelikes},
+  url     = {https://en.wikipedia.org/wiki/List_of_roguelikes},
+  urldate = {01.09.2021},
+  year    = {2020},
+}
+
+@Online{Brown2019,
+  author  = {Mark Brown},
+  title   = {Roguelikes, Persistency, and Progression | Game Maker’s Toolkit},
+  url     = {https://www.youtube.com/watch?v=G9FB5R4wVno&t=1s},
+  urldate = {01.09.2021},
+  year    = {2019},
 }
 
 @Comment{jabref-meta: databaseType:bibtex;}

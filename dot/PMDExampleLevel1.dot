@@ -1,0 +1,7 @@
+digraph PMDExampleLevel1 {
+edge [dir=none]
+Start -> Ausgang
+Start -> Rechts
+Rechts -> Unten
+Ausgang -> Unten
+}
