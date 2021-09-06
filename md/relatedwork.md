@@ -39,7 +39,9 @@ Heute muss ein Spiel nur zwei wichtige Features implementieren um *like* Rogue z
 - Welche Nachteile und Grenzen gibt es?
 - Warum mach ich das in dieser arbeit so?
 
-## Bewertungskriterien für gute Level
+## Regeln für gutes Level Design
+
+Der Begriff Level Design kann unterschiedlich interpretiert werden. Im Allgemeinen beschreibt der Begriff die Erstellung und Bearbeitungen von Spielwelten für Videospiele. [@Wikipedia2020a] Es gibt keine festen vorgaben dafür, welche Aspekte Teil des Level-Designs sind und welche bereits darüber hinausgehen. [@DevPlay2019] Im Rahmen dieser Arbeit beschreibt Level Design den örtlichen Aufbau der Spielwelt, die Platzierung von Gegnern, Items und anderen Objekten sowie die optische Gestaltung der Level, dabei ist nicht das erstellen von Texturen gemeint ist, sondern die Verwendung dieser. 
 
 Auch wenn es viel Diskussion darüber gibt, ob Videospiele Kunst sind oder nicht, muss man den kreativen Schaffensprozess eingestehen.[@Petzold2019] Daher lassen sich für Videospiele auch keine festen Regeln definieren, wie bestimmte Designelemente zu sein haben. In diesem Abschnitt werden Regeln für gutes Level Design präsentiert. Sie sollten weder als objektive Maßstäbe noch als verpflichtende Gesetzte betrachtet werden, sondern vielmehr als Leitpfaden. Die Liste erhebt keinen Anspruch auf Allgemeingültigkeit, Korrektheit oder Vollständigkeit Sie wurde gezielt für die in dieser Arbeit betrachteten Probleme zusammengestellt. Zwar beschäftigt sich die Wissenschaft sehr wohl mit Videospielen und deren Level, jedoch nicht auf die Ausarbeitung objektiver Bewertungskriterien, daher basieren die Regeln dieser Liste auf Aussagen verschiedener Persönlichkeiten der Videospielbranche. Dabei ist zu bedenken, dass diese Branche dazu neigt einen Personenkult, um einige Entwickler aufzubauen. Auch wenn sich bei der Aufarbeitung der Regeln bemüht wurde, Aspekte zu wählen, die von unterschiedlichen Entwicklern als relevant betrachtet werden, muss in Betracht gezogen werden, dass viele Entwickler sich von den bekannten Persönlichkeiten beeinflusst haben lassen.
 
@@ -51,44 +53,62 @@ Die Grundlagen der Regeln stammen aus Dan Taylors *Ten Principles of Good Level 
 
 Ein Level muss lösbar sein. Es darf keine Fehler geben, die das Voranschreiten verhindern. Es sollte zusätzlich darauf geachtet werden, dass Spieler nicht in Sackgassen geraten könne. Braucht der Spieler beispielsweise ein bestimmtes Item, um weiterzukommen sollte er das Item an diesem Punkt immer noch erreichen können. Bei Spielen die Lebensenergie verwenden, sollte das Level gelöst werden können ohne Lebensenergie zu verlieren, so bleiben Spieler, die im vorherigen Abschnitt viel Schaden bekommen haben, nicht stecken. Gibt es im Spiel optionale Wege oder Ziele müssen auch diese lösbar sein und dürfen nicht durch einen Fehler unlösbar werden. Bei optionalen Inhalten liegt es in der kreativen Entscheidungsfreiheit des Entwicklers, ob diese auch immer erreichbar sein müssen oder ob zum Beispiel ein optionales Item benötigt wird, welches nicht mehr erreichbar ist. Zusätzlich sollten die Level frei von Fehlern sein, die Spielern Möglichkeiten wie das ungewollte Überspringen von Abschnitten erlauben.
 
-### Gameplay First
-
-> Above all else, great level design is driven by interaction - the game’s mechanics. Game levels don’t just provide context for mechanics, they provide the very reality in which they exist.[@Taylor2013]
+### Driven by  game’s mechanics
 
 > Always remember that interactivity is what makes videogames different from any other form of entertainment: books have stories, movies have visuals, games have interaction. If your level design isn’t showcasing your game mechanics, your players might as well be watching a movie or reading a book. [@Taylor2013]
 
+> Above all else, great level design is driven by interaction - the game’s mechanics. Game levels don’t just provide context for mechanics, they provide the very reality in which they exist. [@Taylor2013]
 
+Das Level ist der Spielplatz für den Spieler, in dem er die verschiedenen Mechaniken des Spiels anwenden kann. Daher müssen alle Level so gebaut werden, dass sie die Mechaniken beanspruchen und es Spaß macht sie zu verwenden. Die Kernmechaniken des Spiels sollten in jedem Level gefordert sein. Ein Shooter braucht gute Kampfareale, ein Rennspiel spaßige Rennstrecken und ein Plattformer gute Hindernisse. Gute Level bieten den Spieler verschiedene Möglichkeiten die Herausforderungen auf unterschiedliche Weise unter Einbeziehung der Mechaniken zu lösen.
 
 ### Balancing
+
+
 
 ### Pacing
 - Star Wars Kurve nochmal verwenden
 
 - Zelda a Link to the past Wüstentempel kann also gutes Beispiel genutzt werden, erst Erkunden dann "Boss rush" zum ende
- 
+
 ![Zelda 3 Dungeon](figs/chapter2/Zelda3Dungeon.png){width=100%}
 
 ### Risk and Reward
 
+### Storytelling
+
+Es gibt viele Möglichkeiten in einem Spiel eine Geschichte zu erzählen. Üblicherweise werden Dialoge und Texte wie Bücher oder Notizen verwendet, um die Geschichte voranzutreiben. Aber auch die Gestaltung der Level kann genutzt werden, um Geschichten zu erzählen, man spricht von Environmental Storytelling.
+
+> Environmental storytelling is the art of arranging a careful selection of the objects available in a game world so that they suggest a story to the player who sees them. [@Stewart2015]
+
+Durch diese Art der Erzählung können kleine Geschichten erzählt werden, ohne den Gameplayfluss zu unterbrechen.[@Brown2020] Eine Hütte im Wald in der eine alte Frau mit Hut an einem Kessel ein Gebräu zubereitet. Auf den Tisch liegen einige Pilze und andere Pflanzen. Ohne weitere Erklärung wird dem Spieler klar sein, dass es sich wohl um eine Hexe handelt, die grade einen Zaubertrank zubereitet. Environmental Storytelling kann so genutzt werden, um die Spielwelt glaubwürdiger und interessante zu machen.
+
 ### Einzigartigkeit
 
+Die einzelnen Level sollten sich stark voneinander unterscheiden. Auch wenn das überliegende Designkonzept über den gesamten Spielverlauf konstant sein sollte. 
+
+> [...] people don’t like playing the same level twice.[@Ryan1999]
+
+Variation in Gegner, Texturen und Strukturen helfen dabei die Abwechslung im Level zu gewährleisten und keine Langeweile aufkommen zu lassen.
+
 ### Effizienz 
-- da kann man dann auch ne gute überleitung zu pcg machen
+
+Spieleentwicklung ist ein kostspieliges Unterfangen und bereits kleinere Produktionen können mehrere Millionen Dollar kosten. [@DevPlay2017] Daher ist die effiziente Nutzung von Ressourcen unabdingbar. Gute Level-Designer erstellen ein Set aus Modularen verschiedenen Assets und Events. Diese Module können dann miteinander kombiniert und bei Bedarf angepasst werden. Aus einer Handvoll solcher Module lassen sich bereits viele verschiedene Level und Situationen erzeugen. 
+
+Eine besonders Effiziente Art um Level zu erstellen ist die Verwendung eines prozeduralen Level Generators. 
 
 
 ## Prozedurale Generierung
 
 - Begrifferläuterung
-
 - Anwendungsfälle und Beispiele
-
 - Anwendung zur Level generierung
-
 - Beispiele welche NICHT im Kapitel Analyse verwendet werden, daher auch kurz und knall (z.B Random Walk)
-
 - Granzen und Probleme
-
 - Vor und Nachteile
+
+
+
+## Bewertungsmatrix
 
 ## Die Anwendungsumgebung  PM-Dungeon
 

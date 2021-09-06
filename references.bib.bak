@@ -70,7 +70,68 @@
   year    = {2019},
 }
 
-@Comment{jabref-meta: databaseType:biblatex;}
-
-{Petzold2019,
+@Online{Petzold2019,
   author  = {Sara Petzold},
+  title   = {Sind Videospiele Kunst? Experten sind sich einig: Es ist kompliziert},
+  url     = {https://www.gamestar.de/artikel/sind-videospiele-kunst-bestandsaufnahme-einer-debatte,3339958.html},
+  urldate = {2021-09-04},
+  year    = {2019},
+}
+
+@Online{Taylor2018,
+  author  = {Dan Taylor},
+  title   = {Ten Principles for Good Level Design | GDC},
+  url     = {https://www.youtube.com/watch?v=iNEe3KhMvXM},
+  urldate = {2021-09-04},
+  year    = {2018},
+}
+
+@Online{Taylor2013,
+  author  = {Dan Taylor},
+  title   = {Ten Principles of Good Level Design (Part 1)},
+  url     = {https://www.gamedeveloper.com/design/ten-principles-of-good-level-design-part-1-},
+  urldate = {2021-09-04},
+  year    = {2013},
+}
+
+@Online{Ryan1999,
+  author  = {Tim Ryan},
+  title   = {Beginning Level Design, Part 1},
+  url     = {https://www.gamedeveloper.com/design/beginning-level-design-part-1},
+  urldate = {2021-09-04},
+  year    = {1999},
+}
+
+@Online{DevPlay2019,
+  author  = {DevPlay},
+  title   = {So sieht gutes Level Design aus! - DevPlay},
+  url     = {https://www.youtube.com/watch?v=k2mjPLbQuzA},
+  urldate = {2021-09-06},
+  year    = {2019},
+}
+
+@Online{Wikipedia2020a,
+  author  = {Wikipedia},
+  title   = {Leveldesign},
+  url     = {https://de.wikipedia.org/wiki/Leveldesign},
+  urldate = {2021-09-06},
+  year    = {2020},
+}
+
+@Online{Stewart2015,
+  author  = {Bart Stewart},
+  title   = {Environmental Storytelling},
+  url     = {https://www.gamedeveloper.com/design/environmental-storytelling},
+  urldate = {2021-09-06},
+  year    = {2015},
+}
+
+@Online{Brown2020,
+  author  = {Mark Brown},
+  title   = {How Level Design Can Tell a Story},
+  url     = {https://www.youtube.com/watch?v=RwlnCn2EB9o},
+  urldate = {2021-09-06},
+  year    = {2020},
+}
+
+@Comment{jabref-meta: databaseType:biblatex;}
