@@ -14,7 +14,7 @@ geschätzter Umfang 15% - 20%
 
 ## Rouge und Rouge Like
 
-*Rogue: Exploring the Dungeons of Doom*, ist ein in den 1980er entwickeltes Dungeoncrawler-Rollenspiel. Dungeoncrawler sind Spiele, indem sich der Spieler durch ein Labyrinth gefüllt mit Gegnern und Rätseln kämpft und meist über mehrere Ebenen versucht das Spielziel (z .B. den Ausgang oder einen Schatz) zu erreichen.[@qrpg2020] In Rogue bewegt sich der Spieler rundenbasiert durch ein, durch ASCII-Zeichen dargestelltes, Levelsystem und versucht sich mithilfe von Gegenständen und Zaubersprüchen bis in die tiefste Ebene des Dungeons vorzukämpfen um dort das Amulett von Yendor zu erlangen.[@MattBarton2009]
+*Rogue: Exploring the Dungeons of Doom*, ist ein in den 1980er entwickeltes Dungeoncrawler-Rollenspiel. Dungeoncrawler sind Spiele, indem sich der Spieler durch ein Labyrinth gefüllt mit Gegnern und Rätseln kämpft und meist über mehrere Ebenen versucht das Spielziel (z .B. den Ausgang oder einen Schatz) zu erreichen.[@qrpg2020] In Rogue bewegt sich der Spieler rundenbasiert durch ein, durch ASCII-Zeichen dargestelltes, Levelsystem und versucht sich mithilfe von Gegenständen und Zaubersprüchen bis in die tiefste Ebene des Dungeons vorzukämpfen, um dort das Amulett von Yendor zu erlangen.[@MattBarton2009]
 
 Dieses Spielkonzept ist zu dieser Zeit kein unbekanntes, was Rogue hingegen bis heute als eine der relevantesten Videospiele der Geschichte herausstellt, ist die prozedurale Generierung der Level. 
 
@@ -28,7 +28,7 @@ Rogue konnte sich schnell an einiger Beliebtheit erfreuen und es dauert nicht la
 
 In den Jahren haben viele Entwickler versucht Regeln für das Genre aufzustellen, also Bedingungen, die ein Spiel erfüllen muss, um sich als Rogue-Like bezeichnen zu dürfen. 2008 wurde auf der Internationalen Rogue-Like Entwickler Konferenz eine Liste mit verschiedenen Faktoren veröffentlicht. Diese Liste ist als Berliner Interpretation bekannt. [@Conference2008] Über die Jahre wurde die Interpretation harsch kritisiert und sogar als *downright nonsense* bezeichnet. [@Grey2013] Die Berliner Interpretation schade der kreativen Freiheit.
 
-Heute muss ein Spiel nur zwei wichtige Features implementieren um *like* Rogue zu sein, prozedural generierte Level und Permadeath. [@Brown2019] Das Genre ist daher nicht nur noch auf Rollenspiele in Labyrinthen begrenzt, sondern umfasst mittlerweile Spiele aus den unterschiedlichsten Genres wie Plattformer, Shooter oder Action-Adventures und vielen mehr. [@Wikipedia2020]
+Heute muss ein Spiel nur zwei wichtige Features implementieren, um *like* Rogue zu sein, prozedural generierte Level und Permadeath. [@Brown2019] Das Genre ist daher nicht nur noch auf Rollenspiele in Labyrinthen begrenzt, sondern umfasst mittlerweile Spiele aus den unterschiedlichsten Genres wie Plattformer, Shooter oder Action-Adventures und vielen mehr. [@Wikipedia2020]
 
 
 ## Graphen zur Darstellung von Level
@@ -41,7 +41,7 @@ Heute muss ein Spiel nur zwei wichtige Features implementieren um *like* Rogue z
 
 ## Regeln für gutes Level Design
 
-Der Begriff Level Design kann unterschiedlich interpretiert werden. Im Allgemeinen beschreibt der Begriff die Erstellung und Bearbeitungen von Spielwelten für Videospiele. [@Wikipedia2020a] Es gibt keine festen vorgaben dafür, welche Aspekte Teil des Level-Designs sind und welche bereits darüber hinausgehen. [@DevPlay2019] Im Rahmen dieser Arbeit beschreibt Level Design den örtlichen Aufbau der Spielwelt, die Platzierung von Gegnern, Items und anderen Objekten sowie die optische Gestaltung der Level, dabei ist nicht das erstellen von Texturen gemeint ist, sondern die Verwendung dieser. 
+Der Begriff Level Design kann unterschiedlich interpretiert werden. Im Allgemeinen beschreibt der Begriff die Erstellung und Bearbeitungen von Spielwelten für Videospiele. [@Wikipedia2020a] Es gibt keine festen vorgaben dafür, welche Aspekte Teil des Level-Designs sind und welche bereits darüber hinausgehen. [@DevPlay2019] Im Rahmen dieser Arbeit beschreibt Level Design den örtlichen Aufbau der Spielwelt, die Platzierung von Gegnern, Items und anderen Objekten sowie die optische Gestaltung der Level, dabei ist nicht das Erstellen von Texturen gemeint ist, sondern die Verwendung dieser. 
 
 Auch wenn es viel Diskussion darüber gibt, ob Videospiele Kunst sind oder nicht, muss man den kreativen Schaffensprozess eingestehen.[@Petzold2019] Daher lassen sich für Videospiele auch keine festen Regeln definieren, wie bestimmte Designelemente zu sein haben. In diesem Abschnitt werden Regeln für gutes Level Design präsentiert. Sie sollten weder als objektive Maßstäbe noch als verpflichtende Gesetzte betrachtet werden, sondern vielmehr als Leitpfaden. Die Liste erhebt keinen Anspruch auf Allgemeingültigkeit, Korrektheit oder Vollständigkeit Sie wurde gezielt für die in dieser Arbeit betrachteten Probleme zusammengestellt. Zwar beschäftigt sich die Wissenschaft sehr wohl mit Videospielen und deren Level, jedoch nicht auf die Ausarbeitung objektiver Bewertungskriterien, daher basieren die Regeln dieser Liste auf Aussagen verschiedener Persönlichkeiten der Videospielbranche. Dabei ist zu bedenken, dass diese Branche dazu neigt einen Personenkult, um einige Entwickler aufzubauen. Auch wenn sich bei der Aufarbeitung der Regeln bemüht wurde, Aspekte zu wählen, die von unterschiedlichen Entwicklern als relevant betrachtet werden, muss in Betracht gezogen werden, dass viele Entwickler sich von den bekannten Persönlichkeiten beeinflusst haben lassen.
 
@@ -49,7 +49,7 @@ Die Grundlagen der Regeln stammen aus Dan Taylors *Ten Principles of Good Level 
 
 ### Lösbarkeit und Fehlerfreiheit
 
-Ein Level muss lösbar sein. Es darf keine Fehler geben, die das Voranschreiten verhindern. Es sollte zusätzlich darauf geachtet werden, dass Spieler nicht in Sackgassen geraten könne. Braucht der Spieler beispielsweise ein bestimmtes Item, um weiterzukommen sollte er das Item an diesem Punkt immer noch erreichen können. Bei Spielen die Lebensenergie verwenden, sollte das Level gelöst werden können ohne Lebensenergie zu verlieren, so bleiben Spieler, die im vorherigen Abschnitt viel Schaden bekommen haben, nicht stecken. Gibt es im Spiel optionale Wege oder Ziele müssen auch diese lösbar sein und dürfen nicht durch einen Fehler unlösbar werden. Bei optionalen Inhalten liegt es in der kreativen Entscheidungsfreiheit des Entwicklers, ob diese auch immer erreichbar sein müssen oder ob zum Beispiel ein optionales Item benötigt wird, welches nicht mehr erreichbar ist. Zusätzlich sollten die Level frei von Fehlern sein, die Spielern Möglichkeiten wie das ungewollte Überspringen von Abschnitten erlauben.
+Ein Level muss lösbar sein. Es darf keine Fehler geben, die das Voranschreiten verhindern. Es sollte zusätzlich darauf geachtet werden, dass Spieler nicht in Sackgassen geraten könne. Braucht der Spieler beispielsweise ein bestimmtes Item, um weiterzukommen, sollte er das Item an diesem Punkt immer noch erreichen können. Bei Spielen, die Lebensenergie verwenden, sollte das Level gelöst werden können, ohne Lebensenergie zu verlieren, so bleiben Spieler, die im vorherigen Abschnitt viel Schaden bekommen haben, nicht stecken. Gibt es im Spiel optionale Wege oder Ziele, müssen auch diese lösbar sein und dürfen nicht durch einen Fehler unlösbar werden. Bei optionalen Inhalten liegt es in der kreativen Entscheidungsfreiheit des Entwicklers, ob diese auch immer erreichbar sein müssen oder ob zum Beispiel ein optionales Item benötigt wird, welches nicht mehr erreichbar ist. Zusätzlich sollten die Level frei von Fehlern sein, die Spielern Möglichkeiten wie das ungewollte Überspringen von Abschnitten erlauben.
 
 ### Driven by  game’s mechanics
 
@@ -57,7 +57,7 @@ Ein Level muss lösbar sein. Es darf keine Fehler geben, die das Voranschreiten 
 
 > Above all else, great level design is driven by interaction - the game’s mechanics. Game levels don’t just provide context for mechanics, they provide the very reality in which they exist. [@Taylor2013]
 
-Das Level ist der Spielplatz für den Spieler, in dem er die verschiedenen Mechaniken des Spiels anwenden kann. Daher müssen alle Level so gebaut werden, dass sie die Mechaniken beanspruchen und es Spaß macht sie zu verwenden. Die Kernmechaniken des Spiels sollten in jedem Level gefordert sein. Ein Shooter braucht gute Kampfareale, ein Rennspiel spaßige Rennstrecken und ein Plattformer gute Hindernisse. Gute Level bieten den Spieler verschiedene Möglichkeiten die Herausforderungen auf unterschiedliche Weise unter Einbeziehung der Mechaniken zu lösen.
+Das Level ist der Spielplatz für den Spieler, in dem er die verschiedenen Mechaniken des Spiels anwenden kann. Daher müssen alle Level so gebaut werden, dass sie die Mechaniken beanspruchen und es Spaß macht sie zu verwenden. Die Kernmechaniken des Spiels sollten in jedem Level gefordert sein. Ein Shooter braucht gute Kampfareale, ein Rennspiel spaßige Rennstrecken und ein Platformer gute Hindernisse. Gute Level bieten den Spieler verschiedene Möglichkeiten die Herausforderungen auf unterschiedliche Weise unter Einbeziehung der Mechaniken zu lösen.
 
 ### Balancing
 
@@ -65,7 +65,7 @@ Beim balancen geht es darum den Schwierigkeitsgrad der Herausforderungen zu best
 
 > The trick to good level design is to present challenges that are difficult enough to merit the players’ attention and make their heart or mind race, but not so difficult as to always leave them failing and disappointed. [@Ryan1999] 
 
-Da nicht jeder Spieler gleich gut beim spielen ist und die Vorlieben der Spieler sich unterscheiden, ist ein fest vorgegebener Schwierigkeitsgrad oft nicht zielführend. Oft lassen Spiele den Spieler selbst entscheiden, wie schwer das Spiel werden soll, indem sie vor dem Spielstart die Auswahl verschiedener Schwierigkeitsgrade anbieten. Je nach gewählter Option werden dann stärkere oder schwächere Monster platziert, die Lebenspunkte der Spielfigur angepasst oder andere Hilfestellung gegeben oder neue Hindernisse platziert. [@DevPlay2019a] Dieses Variante kann sehr effektiv sein, setzt aber voraus, dass der Spieler seine eigenen Fähigkeiten richtig einschätzt, was vor allem dadurch erschwert wird, wenn der Spieler noch keine Erfahrung mit dem Spiel gemacht hat. Da sich die Auswirkungen des Schwierigkeitsgrades auch von Spiel zu Spiel unterscheiden, kann eine gute Selbsteinschätzung auch daran scheitern.
+Da nicht jeder Spieler gleich gut beim spielen ist und die Vorlieben der Spieler sich unterscheiden, ist ein fest vorgegebener Schwierigkeitsgrad oft nicht zielführend. Oft lassen Spiele den Spieler selbst entscheiden, wie schwer das Spiel werden soll, indem sie vor dem Spielstart die Auswahl verschiedener Schwierigkeitsgrade anbieten. Je nach gewählter Option werden dann stärkere oder schwächere Monster platziert, die Lebenspunkte der Spielfigur angepasst oder andere Hilfestellung gegeben oder neue Hindernisse platziert. [@DevPlay2019a] Diese Variante kann sehr effektiv sein, setzt aber voraus, dass der Spieler seine eigenen Fähigkeiten richtig einschätzt, was vor allem dadurch erschwert wird, wenn der Spieler noch keine Erfahrung mit dem Spiel gemacht hat. Da sich die Auswirkungen des Schwierigkeitsgrades auch von Spiel zu Spiel unterscheiden, kann eine gute Selbsteinschätzung auch daran scheitern.
 
 > [... ] they (the players) might pick the easier option even though they could handle more challenge, and rob themselves of the best, and designer-intended experience [@Brown2016]
 
@@ -87,7 +87,7 @@ Der Begriff Pacing entstammt der Filmbranche und beschreibt die Spannungskurve d
 2. Zu Beginn sollte viel Spannung erzeugt werden, um den Zuschauer bei Stange zu halten 
 3. Kurz vor Ende sollte der spannendste Moment sein, der sich am Ende entlädt
 
-Auch Videospiele sollten darauf Achten ihre Spannungskurve zu kontrollieren. Gutes Pacing sorgt dafür, dass ein Spiel nicht langweilig oder repetitiv wird.  [@Brown2018]
+Auch Videospiele sollten darauf achten ihre Spannungskurve zu kontrollieren. Gutes Pacing sorgt dafür, dass ein Spiel nicht langweilig oder repetitiv wird.  [@Brown2018]
 
 \ref{zelda3} zeigt den Wüstenpalast aus dem Spiel *Zelda: A Link to the past*, wobei jeder Knoten ein eigener Raum ist. Um das Level zu bestehen, muss der Spieler den Boss im letzten Raum besiegen. Um zum Boss zu gelangen benötigt der Spieler das Item aus der großen Truhe die sich im Raum 'BigChest' befindet, um diese Truhe zu öffnen braucht er den großen Schlüssel aus dem 'BigKey' Raum. Das Level beginnt am Eingang. Das Level startet mit einem kurzen linearen Abschnitt (Knoten A und A1) um die Neugier des Spielers zu wecken. Danach folgt ein größeres Areal, in dem der Spieler sich frei bewegen und den Palast erkunden kann. (Knoten die mit B oder C gelabelt sind). Während dieser Erkundungsphase ist der Spannungsstechnische Tiefpunkt dieses Levels. Wenn der Spieler das Item aus der Truhe genommen hat, uns sich auf dem Weg zum Boss macht, muss er durch den Raum D gehen. Von nun an gibt es keine Abzweigungen mehr, die Räume sind kleiner und die Spannung nährt sich ihrem Höhepunkt an, bis sie schlussendlich beim Bosskampf ihren Peak erreicht und nach dem bezwingen des Bosses abfällt. 
 
@@ -105,9 +105,9 @@ Variation in Gegner, Texturen und Strukturen helfen dabei die Abwechslung im Lev
 
 ### Effizienz 
 
-Spieleentwicklung ist ein kostspieliges Unterfangen und bereits kleinere Produktionen können mehrere Millionen Dollar kosten. [@DevPlay2017] Daher ist die effiziente Nutzung von Ressourcen unabdingbar. Gute Level-Designer erstellen ein Set aus Modulen verschiedenen Assets und Events. Diese Module können dann miteinander kombiniert und bei Bedarf angepasst werden. Aus einer Handvoll solcher Module lassen sich bereits viele verschiedene Level und Situationen erzeugen. 
+Spieleentwicklung ist ein kostspieliges Unterfangen und bereits kleinere Produktionen können mehrere Millionen Dollar kosten. [@DevPlay2017] Daher ist die effiziente Nutzung von Ressourcen unabdingbar. Gute Level-Designer erstellen ein Set aus Modulen, verschiedenen Assets und Events. Diese Module können dann miteinander kombiniert und bei Bedarf angepasst werden. Aus einer Handvoll solcher Module lassen sich bereits viele verschiedene Level und Situationen erzeugen. 
 
-Eine besonders Effiziente Art um Level zu erstellen ist die Verwendung eines prozeduralen Level Generators. 
+Eine besonders effiziente Art um Level zu erstellen ist die Verwendung eines prozeduralen Level Generators. 
 
 
 ## Prozedurale Generierung
@@ -123,7 +123,7 @@ Eine besonders Effiziente Art um Level zu erstellen ist die Verwendung eines pro
 
 ## Bewertungsmatrix
 
-Um im weiteren Verlauf der Arbeit die verschiedenen Algorithmen zur  prozeduralen Generierung Bewerten und miteinander vergleichen zu können, wird Anhand der Vorgestellten Regeln eine Bewertungsmatrix erstellt. 
+Um im weiteren Verlauf der Arbeit die verschiedenen Algorithmen zur  prozeduralen Generierung bewerten und miteinander vergleichen zu können, wird anhand der vorgestellten Regeln eine Bewertungsmatrix erstellt. 
 
 - Lösbarkeit und Fehlerfreiht
   - MUSS erfüllt sein
@@ -151,11 +151,11 @@ Um im weiteren Verlauf der Arbeit die verschiedenen Algorithmen zur  prozedurale
 
 ## Die Anwendungsumgebung  PM-Dungeon
 
-Im praktischen Anteil des Moduls Programmiermethoden sollen die Studenten das gelernte Wissen aus dem theoretischen Anteil anwenden und vertiefen, dafür bekommen sie in regelmäßigen Abständen Aufgaben gestellt. Um die Aufgaben in einen gemeinsamen Kontext zu bringen und zeitgleich die Motivation der Studenten zu steigern, wurde 2021 das PM-Dungeon eingeführt. Über den verlauf des Semesters entwickeln die Studenten ihr eigenes Rouge-Like Rollenspiel. Zwar stehen weiterhin die Lehrinhalte im Fokus, dennoch haben die Studenten viele Freiheiten um ihr Spiel nach ihren wünschen zu gestalten. Sie konzeptionieren eigenständig das Verhalten von Monstern, implementieren Schatztruhen und Items sowie unterschiedliche Fähigkeiten die der Spieler im laufe des Spiels freischalten kann. Für die Entwicklung des Spiels bekommen die Studenten ein extra dafür entwickeltes Framework zur Verfügung gestellt, das PM-Dungeon-Framework. Das PM-Dungeon-Framework erweitert das libGDX-Framework \footnote{libGDX: https://libgdx.com} um vereinfachte Schnittstellen zur grafischen Darstellung. Die Studenten können sich daher rein auf die Implementierung der Spielfeatures konzentrieren.
+Im praktischen Anteil des Moduls Programmiermethoden sollen die Studenten das gelernte Wissen aus dem theoretischen Anteil anwenden und vertiefen, dafür bekommen sie in regelmäßigen Abständen Aufgaben gestellt. Um die Aufgaben in einen gemeinsamen Kontext zu bringen und zeitgleich die Motivation der Studenten zu steigern, wurde 2021 das PM-Dungeon eingeführt. Über den Verlauf des Semesters entwickeln die Studenten ihr eigenes Rouge-Like Rollenspiel. Zwar stehen weiterhin die Lehrinhalte im Fokus, dennoch haben die Studenten viele Freiheiten um ihr Spiel nach ihren Wünschen zu gestalten. Sie konzeptionieren eigenständig das Verhalten von Monstern, implementieren Schatztruhen und Items sowie unterschiedliche Fähigkeiten, die der Spieler im Laufe des Spiels freischalten kann. Für die Entwicklung des Spiels bekommen die Studenten ein extra dafür entwickeltes Framework zur Verfügung gestellt, das PM-Dungeon-Framework. Das PM-Dungeon-Framework erweitert das libGDX-Framework \footnote{libGDX: https://libgdx.com} um vereinfachte Schnittstellen zur grafischen Darstellung. Die Studenten können sich daher rein auf die Implementierung der Spielfeatures konzentrieren.
 
 ![Ausschnitt aus dem PM-Dungeon \label{pmd}](figs/chapter2/pmd.png){width=100%}
 
-Abbildung \ref{pmd} zeigt einen Ausschnitt aus dem Startlevel einer Beispiel Implementierung des PM-Dungeons. Die Spielfigur (grüner Kreis) muss mithilfe der Leiter (blauer Kreis) in die nächste Ebene gebracht werden. Auf den Weg dorthin kann der Spieler die Monster (roter Kreis) töten, um Erfahrungspunkte zu sammeln oder Items zu finden. Sowohl die Spielerposition als auch die Position der Monster und der Leiter werden zu Beginn des Levels zufällig bestimmt. 
+Abbildung \ref{pmd} zeigt einen Ausschnitt aus dem Startlevel einer Beispielimplementierung des PM-Dungeons. Die Spielfigur (grüner Kreis) muss mithilfe der Leiter (blauer Kreis) in die nächste Ebene gebracht werden. Auf den Weg dorthin kann der Spieler die Monster (roter Kreis) töten, um Erfahrungspunkte zu sammeln oder Items zu finden. Sowohl die Spielerposition als auch die Position der Monster und der Leiter werden zu Beginn des Levels zufällig bestimmt. 
 
 Aktuell besitzt das PM-Dungeon keinen eigenen Level-Generator und die zur Verfügung gestellten Level sind in Anzahl und Abwechslung stark begrenzt. Die Level greifen auf einen gemeinsamen Texturenpool zu und unterscheiden sich daher optisch kaum voneinander. Auch bieten die generierten Level keine Schnittstelle, um die Struktur des Levels dynamisch im Code abzufragen. Die Studenten haben daher keine Möglichkeit ihre implementieren Inhalte strategisch im Level zu platzieren oder die Struktur der Level zu bestimmen. Inhalte wie Monster und Items wurden daher von den Studenten zufällig im Level verteilt. Dadurch das die Level nicht neu generiert werden, ist das PM-Dungeon streng genommen auch kein Rouge-Like.
 
