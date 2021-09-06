@@ -47,8 +47,6 @@ Auch wenn es viel Diskussion darüber gibt, ob Videospiele Kunst sind oder nicht
 
 Die Grundlagen der Regeln stammen aus Dan Taylors *Ten Principles of Good Level Design* [@Taylor2013] [@Taylor2018] und Tim Ryans *Beginning Level Design* [@Ryan1999] und wurden bei Bedarf um weitere Aspekte, Meinungen und Beispielen ergänzt. 
 
-
-
 ### Lösbarkeit und Fehlerfreiheit
 
 Ein Level muss lösbar sein. Es darf keine Fehler geben, die das Voranschreiten verhindern. Es sollte zusätzlich darauf geachtet werden, dass Spieler nicht in Sackgassen geraten könne. Braucht der Spieler beispielsweise ein bestimmtes Item, um weiterzukommen sollte er das Item an diesem Punkt immer noch erreichen können. Bei Spielen die Lebensenergie verwenden, sollte das Level gelöst werden können ohne Lebensenergie zu verlieren, so bleiben Spieler, die im vorherigen Abschnitt viel Schaden bekommen haben, nicht stecken. Gibt es im Spiel optionale Wege oder Ziele müssen auch diese lösbar sein und dürfen nicht durch einen Fehler unlösbar werden. Bei optionalen Inhalten liegt es in der kreativen Entscheidungsfreiheit des Entwicklers, ob diese auch immer erreichbar sein müssen oder ob zum Beispiel ein optionales Item benötigt wird, welches nicht mehr erreichbar ist. Zusätzlich sollten die Level frei von Fehlern sein, die Spielern Möglichkeiten wie das ungewollte Überspringen von Abschnitten erlauben.
@@ -63,20 +61,43 @@ Das Level ist der Spielplatz für den Spieler, in dem er die verschiedenen Mecha
 
 ### Balancing
 
+Beim balancen geht es darum den Schwierigkeitsgrad der Herausforderungen zu bestimmen. Ist ein Spiel zu einfach kann es schnell anspruchslos und langweilig werden, ist es zu schwer kann es frustrierend werden. 
 
+> The trick to good level design is to present challenges that are difficult enough to merit the players’ attention and make their heart or mind race, but not so difficult as to always leave them failing and disappointed. [@Ryan1999] 
 
-### Pacing
-- Star Wars Kurve nochmal verwenden
+Da nicht jeder Spieler gleich gut beim spielen ist und die Vorlieben der Spieler sich unterscheiden, ist ein fest vorgegebener Schwierigkeitsgrad oft nicht zielführend. Oft lassen Spiele den Spieler selbst entscheiden, wie schwer das Spiel werden soll, indem sie vor dem Spielstart die Auswahl verschiedener Schwierigkeitsgrade anbieten. Je nach gewählter Option werden dann stärkere oder schwächere Monster platziert, die Lebenspunkte der Spielfigur angepasst oder andere Hilfestellung gegeben oder neue Hindernisse platziert. [@DevPlay2019a] Dieses Variante kann sehr effektiv sein, setzt aber voraus, dass der Spieler seine eigenen Fähigkeiten richtig einschätzt, was vor allem dadurch erschwert wird, wenn der Spieler noch keine Erfahrung mit dem Spiel gemacht hat. Da sich die Auswirkungen des Schwierigkeitsgrades auch von Spiel zu Spiel unterscheiden, kann eine gute Selbsteinschätzung auch daran scheitern.
 
-- Zelda a Link to the past Wüstentempel kann also gutes Beispiel genutzt werden, erst Erkunden dann "Boss rush" zum ende
+> [... ] they (the players) might pick the easier option even though they could handle more challenge, and rob themselves of the best, and designer-intended experience [@Brown2016]
 
-![Zelda 3 Dungeon](figs/chapter2/Zelda3Dungeon.png){width=100%}
+Eine andere Möglichkeit zum balancen ist die Verwendung von dynamischen Schwierigkeitsgraden. Im Spiel *Resident Evil 4* werden mehr oder weniger Gegner platziert, abhängig davon ob der Spieler bisher besonders gut durch die Level gekommen ist oder oft gestorben ist und viel daneben schießt. [@Brown2015] Im Spiel Half-Life werden mehr Medikits platziert, wenn der Gegner wenig Lebenspunkte hat. [@Brown2016a] 
+
+Es sollte beachtet werden, dass Spieler mit voranschreiten immer besser werden, daher sollten frühe Level deutlich einfacher sein als Level gegen Ende des Spiels. Dabei muss die Schwierigkeit der Level nicht linear steigen, es bietet sich an nach einem besonders schweren Level ein einfacheres Level einzubauen, um den Spieler Zeit zum Aufatmen zu lassen.
 
 ### Risk and Reward
 
+Risk and Reward beschreibt Momente im Spiel, bei den der Spieler eine besonders schwere Herausforderung lösen muss, dafür aber auch entsprechend belohnt wird. Diese stets optionalen Momente sollten in regelmäßigen Abständen auftauchen, um den Spieler vor eine interessante Entscheidung zu stellen, ob sie die Herausforderung annehmen oder lieber ablehnen möchten.
+
+Vor allem bei Rouge Like Spielen sollte es ständig zu solchen Momenten kommen, da diese hier einen erhöhten Nervenkitzel bieten. Jede Herausforderung könnte den Tod bedeuten und damit den permanenten Verlust des Fortschrittes. Die Frage, ob sich der Kampf wirklich lohnt und ob man das Risiko eingehen sollte, fällt hier umso schwerer. 
+
+### Pacing
+
+Der Begriff Pacing entstammt der Filmbranche und beschreibt die Spannungskurve des Films. Aus dem Film lassen sich drei Regeln für gutes Pacing ableiten, welche auch für Videospiele Anwendung finden können. 
+
+1. Pacing verläuft nicht linear, nach Hochpunkten sollte ein Tiefpunkt folgen 
+2. Zu Beginn sollte viel Spannung erzeugt werden, um den Zuschauer bei Stange zu halten 
+3. Kurz vor Ende sollte der spannendste Moment sein, der sich am Ende entlädt
+
+Auch Videospiele sollten darauf Achten ihre Spannungskurve zu kontrollieren. Gutes Pacing sorgt dafür, dass ein Spiel nicht langweilig oder repetitiv wird.  [@Brown2018]
+
+\ref{zelda3} zeigt den Wüstenpalast aus dem Spiel *Zelda: A Link to the past*, wobei jeder Knoten ein eigener Raum ist. Um das Level zu bestehen, muss der Spieler den Boss im letzten Raum besiegen. Um zum Boss zu gelangen benötigt der Spieler das Item aus der großen Truhe die sich im Raum 'BigChest' befindet, um diese Truhe zu öffnen braucht er den großen Schlüssel aus dem 'BigKey' Raum. Das Level beginnt am Eingang. Das Level startet mit einem kurzen linearen Abschnitt (Knoten A und A1) um die Neugier des Spielers zu wecken. Danach folgt ein größeres Areal, in dem der Spieler sich frei bewegen und den Palast erkunden kann. (Knoten die mit B oder C gelabelt sind). Während dieser Erkundungsphase ist der Spannungsstechnische Tiefpunkt dieses Levels. Wenn der Spieler das Item aus der Truhe genommen hat, uns sich auf dem Weg zum Boss macht, muss er durch den Raum D gehen. Von nun an gibt es keine Abzweigungen mehr, die Räume sind kleiner und die Spannung nährt sich ihrem Höhepunkt an, bis sie schlussendlich beim Bosskampf ihren Peak erreicht und nach dem bezwingen des Bosses abfällt. 
+
+
+![Wüstenpalast aus Zelda 3 in Graphendarstellung \label{zelda3}](figs/chapter2/Zelda3Dungeon.png){width=100%}
+
+
 ### Einzigartigkeit
 
-Die einzelnen Level sollten sich stark voneinander unterscheiden. Auch wenn das überliegende Designkonzept über den gesamten Spielverlauf konstant sein sollte. 
+Die einzelnen Level sollten sich stark voneinander unterscheiden. Auch wenn das überliegende Designkonzept über den gesamten Spielverlauf konstant sein sollte.
 
 > [...] people don’t like playing the same level twice.[@Ryan1999]
 
@@ -84,7 +105,7 @@ Variation in Gegner, Texturen und Strukturen helfen dabei die Abwechslung im Lev
 
 ### Effizienz 
 
-Spieleentwicklung ist ein kostspieliges Unterfangen und bereits kleinere Produktionen können mehrere Millionen Dollar kosten. [@DevPlay2017] Daher ist die effiziente Nutzung von Ressourcen unabdingbar. Gute Level-Designer erstellen ein Set aus Modularen verschiedenen Assets und Events. Diese Module können dann miteinander kombiniert und bei Bedarf angepasst werden. Aus einer Handvoll solcher Module lassen sich bereits viele verschiedene Level und Situationen erzeugen. 
+Spieleentwicklung ist ein kostspieliges Unterfangen und bereits kleinere Produktionen können mehrere Millionen Dollar kosten. [@DevPlay2017] Daher ist die effiziente Nutzung von Ressourcen unabdingbar. Gute Level-Designer erstellen ein Set aus Modulen verschiedenen Assets und Events. Diese Module können dann miteinander kombiniert und bei Bedarf angepasst werden. Aus einer Handvoll solcher Module lassen sich bereits viele verschiedene Level und Situationen erzeugen. 
 
 Eine besonders Effiziente Art um Level zu erstellen ist die Verwendung eines prozeduralen Level Generators. 
 

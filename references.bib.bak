@@ -134,4 +134,12 @@
   year    = {2020},
 }
 
+@Online{DevPlay2017,
+  author  = {DevPlay},
+  title   = {DevPlay - Was kosten unsere Spiele und woher bekommen wir das Geld dafür?},
+  url     = {https://www.youtube.com/watch?v=JZrsYp6kCLw},
+  urldate = {2021-09-06},
+  year    = {2017},
+}
+
 @Comment{jabref-meta: databaseType:biblatex;}
