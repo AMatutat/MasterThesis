@@ -74,14 +74,6 @@ Das Level ist der Spielplatz für den Spieler, in dem er die verschiedenen Mecha
 
 ### Risk and Reward
 
-### Storytelling
-
-Es gibt viele Möglichkeiten in einem Spiel eine Geschichte zu erzählen. Üblicherweise werden Dialoge und Texte wie Bücher oder Notizen verwendet, um die Geschichte voranzutreiben. Aber auch die Gestaltung der Level kann genutzt werden, um Geschichten zu erzählen, man spricht von Environmental Storytelling.
-
-> Environmental storytelling is the art of arranging a careful selection of the objects available in a game world so that they suggest a story to the player who sees them. [@Stewart2015]
-
-Durch diese Art der Erzählung können kleine Geschichten erzählt werden, ohne den Gameplayfluss zu unterbrechen.[@Brown2020] Eine Hütte im Wald in der eine alte Frau mit Hut an einem Kessel ein Gebräu zubereitet. Auf den Tisch liegen einige Pilze und andere Pflanzen. Ohne weitere Erklärung wird dem Spieler klar sein, dass es sich wohl um eine Hexe handelt, die grade einen Zaubertrank zubereitet. Environmental Storytelling kann so genutzt werden, um die Spielwelt glaubwürdiger und interessante zu machen.
-
 ### Einzigartigkeit
 
 Die einzelnen Level sollten sich stark voneinander unterscheiden. Auch wenn das überliegende Designkonzept über den gesamten Spielverlauf konstant sein sollte. 
@@ -109,6 +101,32 @@ Eine besonders Effiziente Art um Level zu erstellen ist die Verwendung eines pro
 
 
 ## Bewertungsmatrix
+
+Um im weiteren Verlauf der Arbeit die verschiedenen Algorithmen zur  prozeduralen Generierung Bewerten und miteinander vergleichen zu können, wird Anhand der Vorgestellten Regeln eine Bewertungsmatrix erstellt. 
+
+- Lösbarkeit und Fehlerfreiht
+  - MUSS erfüllt sein
+- Driven by games Mechanik
+  - Unterstützten die Level die Gameplaymechaniken der Anwendungsumgebung? 
+    - Hauptmechaniken
+    - Weitere Mechaniken
+    - Konfigurierbar für neue Mechaniken
+- Balacing
+  - Kann ich Monster und Items nach bestimmten kriterien Platzieren?
+- Pacing
+  - Kann ich die Struktur des Levels bestimmen?
+- Risk and Reward
+  - Sind alternative Pfade möglich?
+    - Kann ich gezielt Items und Monster auf alternativen Pfaden platzieren?
+- Einzigartigkeit
+  - Unterscheiden sich die Level vom
+    - Aufbau/Struktur
+    - Optik
+    - Inhalt (monter,Items etc.)
+- Effizienz
+  - für alle PCG nach Definition erfüllt
+
+
 
 ## Die Anwendungsumgebung  PM-Dungeon
 
