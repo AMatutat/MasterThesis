@@ -1,8 +1,8 @@
 # Grundlagen
 
-<span style="color:red"> **ToDo Kapitel Einleitung** </span>
+In diesem Kapitel werden die benötigten Grundlagen für die Arbeit geschaffen. Es wird das PM-Dungeon und das Genre Rouge-Like als Anwendungsumgebung beschrieben. Danach wird die Graphendarstellung für Level eingeführt und anschließend sechs Regeln für gutes Level Design erläutert. Der Begriff der Prozeduralen Generierung wird umfangreicher definiert und mit Beispielen erläutert. Mithilfe der vorgestellten Regeln werden dann Bewertungskriterien für prozedurale Level-Generatoren für Rouge-Like Spiele aufgestellt. Das Kapitel endet mit der Analyse und Bewertung der aktuellen Level des PM-Dungeons. 
 
-## Rouge Like
+## Rouge-Like
 
 *Rogue: Exploring the Dungeons of Doom*, ist ein in den 1980er entwickeltes Dungeoncrawler-Rollenspiel. Dungeoncrawler sind Spiele, indem sich der Spieler durch ein Labyrinth gefüllt mit Gegnern und Rätseln kämpft und meist über mehrere Ebenen versucht das Spielziel (z .B. den Ausgang oder einen Schatz) zu erreichen.[@qrpg2020] In Rogue bewegt sich der Spieler rundenbasiert durch ein, durch ASCII-Zeichen dargestelltes, Levelsystem und versucht sich mithilfe von Gegenständen und Zaubersprüchen bis in die tiefste Ebene des Dungeons vorzukämpfen, um dort das Amulett von Yendor zu erlangen.[@MattBarton2009]
 
@@ -14,7 +14,7 @@ Bei jedem Neustart von Rogue werden die Level neu generiert. Das bedeutet der Au
 
 Rogue konnte sich schnell an einiger Beliebtheit erfreuen und es dauert nicht lange bis andere Entwickler ähnliche Spiele mit prozedural generierten Inhalten veröffentlichten. [@MattBarton2009] Es entwickelte sich das Genre der Rogue-Likes.
 
-> [... ] Roguelikes are called Roguelikes, because the games are literally like Rogue [... ] [@Brown2017]
+> [... ] Rogue likes are called Rogue likes, because the games are literally like Rogue [... ] [@Brown2017]
 
 In den Jahren haben viele Entwickler versucht Regeln für das Genre aufzustellen, also Bedingungen, die ein Spiel erfüllen muss, um sich als Rogue-Like bezeichnen zu dürfen. 2008 wurde auf der Internationalen Rogue-Like Entwickler Konferenz eine Liste mit verschiedenen Faktoren veröffentlicht. Diese Liste ist als Berliner Interpretation bekannt. [@Conference2008] Über die Jahre wurde die Interpretation harsch kritisiert und sogar als *downright nonsense* bezeichnet. [@Grey2013] Die Berliner Interpretation schade der kreativen Freiheit.
 
@@ -170,7 +170,7 @@ $$
 
 Aktuell besitzt das PM-Dungeon keinen eigenen Level-Generator und die zur Verfügung gestellten Level sind in Anzahl und Abwechslung stark begrenzt. Die Level greifen auf einen gemeinsamen Texturenpool zu und unterscheiden sich daher optisch kaum voneinander. Auch bieten die generierten Level keine Schnittstelle, um die Struktur des Levels dynamisch im Code abzufragen. Die Studenten haben daher keine Möglichkeit ihre implementieren Inhalte strategisch im Level zu platzieren oder die Struktur der Level zu bestimmen. Inhalte wie Monster und Items wurden daher von den Studenten zufällig im Level verteilt. Dadurch das die Level nicht neu generiert werden, ist das PM-Dungeon streng genommen auch kein Rouge-Like.
 
-![Ausschnitt aus dem PM-Dungeon in Graphendarstellung \label{pmdAsGraph}](figs/chapter2/PMDExampleLevel1.png){width=100%}
+![Ausschnitt aus dem PM-Dungeon in Graphendarstellung \label{pmdAsGraph}](figs/chapter2/PMDExampleLevel1.png){width=40%}
 
 Abbildung \ref{pmdAsGraph} zeigt das Level aus Abbidlung \ref{pmd} in Graphendarstellung. 
 
