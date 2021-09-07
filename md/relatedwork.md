@@ -117,15 +117,38 @@ Spieleentwicklung ist ein kostspieliges Unterfangen und bereits kleinere Produkt
 
 **Regel 7: Gute Level sind effizient in der Herstellung.** 
 
-
 ## Prozedurale Generierung
 
-- Begrifferläuterung
-- Anwendungsfälle und Beispiele
-- Anwendung zur Level generierung
-- Beispiele welche NICHT im Kapitel Analyse verwendet werden, daher auch kurz und knall (z.B Random Walk)
-- Granzen und Probleme
-- Vor und Nachteile
+Der Begriff prozedurale Generierung, auch prozedurale Synthese genannt (https://de.wikipedia.org/wiki/Prozedurale_Synthese) beschreibt im Kontext der Videospielentwicklung die Kombination aus Handgebauten Inhalten und Algorithmen um verfahrensmäßig verschiedene Inhalte zu generieren. Prozedurale Generierung kann unteranderem genutzt werden um Texturen, Items, Musik und Soundeffekte oder Level zu erzeugen. Dabei erzeugen die Algorithmen die Inhalte nicht vollständig selbst sondern werden mit Input-Daten ausgestattet, welche dann je nach Implementierung miteinander kombiniert werden. Laut Definition sind prozedurale Algorithmen deterministisch. Bei gleicher Eingabe erzeugen sie daher immer die gleiche Ausgabe. Prozedurale Algorithmen lassen sich aber auch um Zufallselemente erweitern um aus den selben Input-Daten viele unterschiedliche Inhalte zu erzeugen.  https://www.gamedeveloper.com/design/procedural-generation-a-primer-for-game-devs https://www.makeuseof.com/tag/procedural-generation-took-gaming-industry/  https://www.gamedeveloper.com/pc/migs-i-far-cry-2-i-s-guay-on-the-importance-of-procedural-content
+
+> In general computing terms, procedural generation is any technique that
+> creates data algorithmically as opposed to manually. It may also be called
+> random generation, but this is an over-simplification: although procedural
+> algorithms incorporate random numbers, they are never truly random, or
+> at least not as random as that term implies. (https://www.gamedeveloper.com/design/procedural-generation-a-primer-for-game-devs)
+
+Die Umsetzung von prozeduralen Algorithmen zur Erzeugung von Level ist allerdings ein komplexes unterfangen. Viele Aspekte die beim manuellen erstellen von Level einfach zu überprüfen sind, wie die Lösbarkeit, müssen gewährleistet und automatisch getestet werden. Das finden und beheben von Fehlern erschwert sich dadurch, dass ein Fehler unter Umständen nur in einen bestimmten Level aufkommt, dieses aber nicht wieder aufrufbar ist oder ein Fehler ist zwar in den getesteten Level behoben, tritt aber in nicht getesteten Level wieder auf. Prozedurale Algorithmen können durch die verwendeten Muster schnell repetitiv wirken, bei der Implementierung ist also auch darauf zu achten, dass die Muster gut verändert werden und es eine Vielzahl an unterschiedlichen Zufallsvariablen gibt. Außerdem ist es durch den hohen Zufall schwierig eine stabile Schwierigkeitskurve zu gewährleisten. (https://www.gamedeveloper.com/design/procedural-generation-a-primer-for-game-devs)
+
+Ein gut konzeptionierter prozedurale Algorithmus kann auf Knopfdruck hunderte verschiedener Level ausspucken, wodurch die Wiederspielbarkeit nahezu unendlich ist. Da die Entwicklung und Konzeptionierung eines solchen Algorithmus komplex ist, lohnt er sich vor allem bei Spielen die auf viel Abwechslung bei zeitgleichen großen Spielumfang wert legen um die kosten zu reduzieren.  www.gamecareerguide.com/features/336/procedural_content.php?page=1)
+
+Ein simpler prozeduraler Algorithmus zur Erzeugung von Leveln ist der *Random Walk* oder auch *Drunkard's Walk*. Eigentlich wird dieser zur Generierung nicht deterministischer Zeitreihen, wie Aktienkurse in der Finanzmathematik, verwendet kann aber auch Höhlenartige Level erzeugen.  https://de.wikipedia.org/wiki/Drunkard%E2%80%99s_Walk ref{imdrunk} zeigt den Algoritmus als Pseudocode. Das Level wird als 2D-Array dargestellt und jeder index im Array ist ein Feld im Level. Es gibt nichtbetretbare Felder (Wände) und betretbare Felder (Böden). Zu beginn wird ein zufälliges Feld als Startpunkt ausgewählt und zu einen Bodenfeld gemacht. Von diesem Feld aus wird nun in eine zufällige Richtung gegangen und das neue Feld wird wieder zu einem Bodenfeld gemacht. Dieser prozess wird solange wiederholt, bis die gewünschte Anzahl an Bodenfeldern vorhanden ist.  Der Vorteil des Random Walk Algorithmus liegt darin, dass sichergestellt werden kann, dass alle Bodenfelder auch erreichbar sind, da sie gezwungenermaßen alle miteieinander verbunden sind. Allerdings bietete der Algoritmus abseits der gewünschen Bodenfelder keine Konfigurationsmöglichkeiten und die erzeugten Level ähneln sich von der Struktur sehr. \ref{drunkexample} zeigt ein Beispiel wie ein Dungeon aussehen könnte welches durch den Random Walk erzeugt wurde.
+
+```
+erstelle ein Level in dem alle Felder Wände sind
+wähle ein Feld als Startpunkt aus
+verwandel das gewählte Feld in einen Boden
+solange noch nicht genügen Boden im Level existiert
+    mache ein Schritt in eine zufällige Richtung
+    wenn das neue Feld eine Wand ist
+        verwandel das Feld in einen Boden
+	
+```
+
+: Pseudocode für den Random Walk Algorithmus  http://www.roguebasin.com/index.php?title=Random_Walk_Cave_Generation \label{imdrunk}
+
+![Beispielergebnis eines Random Walk \label{drunkexample}](drunk.png){width=100%}
+
+https://users.informatik.haw-hamburg.de/~schumann/BachelorArbeitKevinHagen.pdf
 
 
 
