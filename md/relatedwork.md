@@ -1,5 +1,6 @@
 # Grundlagen
 
+
 <span style="color:red"> **ToDo Kapitel Einleitung** </span>
 
 ## Rouge Like
@@ -122,31 +123,41 @@ Spieleentwicklung ist ein kostspieliges Unterfangen und bereits kleinere Produkt
 
 
 
-## Bewertungsmatrix
+## Bewertungsschema
+Um im weiteren Verlauf der Arbeit die verschiedenen Algorithmen zur prozeduralen Generierung bewerten und miteinander vergleichen zu können, wird anhand der vorgestellten Regeln eine Bewertungsschema erstellt. Für jede Regel werden verschiedene Kriterien aufgestellt die angeben ob und in wie fern diese erfüllt sind. Die Kriterien werden so gewählt, dass sie auf das Anwendungsszenario optimiert sind. Die Tabelle \ref{bkt} listet die Kriterien auf. Für jedes erfüllte Kriterium wird ein Punkt verteilt, die Summe der Punkte gibt die Güte des Algorithmus im vergleich zu den anderen Algorithmen an (vgl. \ref{bkfk). 
 
-Um im weiteren Verlauf der Arbeit die verschiedenen Algorithmen zur  prozeduralen Generierung bewerten und miteinander vergleichen zu können, wird anhand der vorgestellten Regeln eine Bewertungsmatrix erstellt. 
 
-- Lösbarkeit und Fehlerfreiht
-  - MUSS erfüllt sein
-- Driven by games Mechanik
-  - Unterstützten die Level die Gameplaymechaniken der Anwendungsumgebung? 
-    - Hauptmechaniken
-    - Weitere Mechaniken
-    - Konfigurierbar für neue Mechaniken
-- Balacing
-  - Kann ich Monster und Items nach bestimmten kriterien Platzieren?
-- Pacing
-  - Kann ich die Struktur des Levels bestimmen?
-- Risk and Reward
-  - Sind alternative Pfade möglich?
-    - Kann ich gezielt Items und Monster auf alternativen Pfaden platzieren?
-- Einzigartigkeit
-  - Unterscheiden sich die Level vom
-    - Aufbau/Struktur
-    - Optik
-    - Inhalt (monter,Items etc.)
-- Effizienz
-  - für alle PCG nach Definition erfüllt
+
+| Regel                   | Kriterium                                           | Anmerkung                                                    |
+| ----------------------- | --------------------------------------------------- | ------------------------------------------------------------ |
+| Gute Level sind lösbar. | Sind alle Orte und Gegenstände im Level erreichbar? | Kritische Anforderung. Level die dieses Kriterium nicht erfüllen sind inakzeptable und mit null Punkten zu bewerten. |
+| Gute Level fordern die Mechaniken des Spiels. | ||
+|  | ||
+|  | ||
+| Gute Level sind gut gebalanced | ||
+|  | ||
+|  | ||
+| Gute Level haben Risk and Reward Momente | ||
+|  | ||
+| | ||
+| Gute Level steuern das Pacing des Spiels | ||
+|  | ||
+| Gute Level sind einzigartig | ||
+| | ||
+|  | ||
+| Gute Level sind effizient in der Herstellung. | ||
+| | ||
+
+: Tabelle mit den Bewertungskriterien für prozedurale Algorithmen. \label{bkt}
+
+
+
+
+$$
+\label{bkfk}
+\text{Die Güte G eines Level lässt sich durch die Summe aller vergebenen Punkte P$\backslash$ L multipliziert mit dem Bewertungspunkt Lösbarkeit L der Bewertungskriterien berechnen.}
+G = L * ( \sum P_{i})
+$$
 
 
 
