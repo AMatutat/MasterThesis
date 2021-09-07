@@ -26,7 +26,7 @@ Im praktischen Anteil des Moduls Programmiermethoden sollen die Studenten das ge
 
 ![Ausschnitt aus dem PM-Dungeon \label{pmd}](figs/chapter2/pmd.png){width=100%}
 
-Abbildung \ref{pmd} zeigt einen Ausschnitt aus dem Startlevel einer Beispielimplementierung des PM-Dungeons. Die Spielfigur (grüner Kreis) muss mithilfe der Leiter (blauer Kreis) in die nächste Ebene gebracht werden. Auf den Weg dorthin kann der Spieler die Monster (roter Kreis) töten, um Erfahrungspunkte zu sammeln oder Items zu finden. Sowohl die Spielerposition als auch die Position der Monster und der Leiter werden zu Beginn des Levels zufällig bestimmt. 
+Abbildung \ref{pmd} zeigt einen Ausschnitt aus dem Startlevel einer Beispielimplementierung des PM-Dungeons. Die Spielfigur (grüner Kreis) muss mithilfe der Leiter (blauer Kreis) in die nächste Ebene gebracht werden. Auf den Weg dorthin kann der Spieler die Monster (roter Kreis) töten, um Erfahrungspunkte zu sammeln oder Items zu finden. Sowohl die Spielerposition als auch die Position der Monster werden zu Beginn des Levels zufällig bestimmt. 
 
 ## Graphen zur Darstellung von Level
 
@@ -168,13 +168,37 @@ $$
 
 ## Analyse der Ausgangssituation 
 
-Aktuell besitzt das PM-Dungeon keinen eigenen Level-Generator und die zur Verfügung gestellten Level sind in Anzahl und Abwechslung stark begrenzt. Die Level greifen auf einen gemeinsamen Texturenpool zu und unterscheiden sich daher optisch kaum voneinander. Auch bieten die generierten Level keine Schnittstelle, um die Struktur des Levels dynamisch im Code abzufragen. Die Studenten haben daher keine Möglichkeit ihre implementieren Inhalte strategisch im Level zu platzieren oder die Struktur der Level zu bestimmen. Inhalte wie Monster und Items wurden daher von den Studenten zufällig im Level verteilt. Dadurch das die Level nicht neu generiert werden, ist das PM-Dungeon streng genommen auch kein Rouge-Like.
+Aktuell besitzt das PM-Dungeon keinen eigenen Level-Generator stattdessen werden vier Level mitgeliefert. Um die Notwendigkeit eines eigenen prozeduralen Generators für das PM-Dungeon zu begründen, wird im folgenden die Güte der aktuellen Level Situation bewertet. 
 
-![Ausschnitt aus dem PM-Dungeon in Graphendarstellung \label{pmdAsGraph}](figs/chapter2/PMDExampleLevel1.png){width=40%}
+Kriterium: Sind alle Orte und Gegenstände im Level erreichbar? <br/>Begründung:  In allen Level kann jeder Raum betreten werden. Objekte werden im Raum verteilt und sind daher auch erreichbar.<br/>Bewertung: 1
 
-Abbildung \ref{pmdAsGraph} zeigt das Level aus Abbidlung \ref{pmd} in Graphendarstellung. 
+Kriterium: Sind die Level für die grundlegenden Spielmechaniken der Anwendungsumgebung ausgelegt?<br/>Begründung: Die Level können mit Monstern und Gegenständen gefüllt werden. Die Level haben alle einen Ausgang. Bewertung: 1
 
-<span style="color:red"> **ToDo Matrix mit Anforderungen an Level für das PM-Dungeon und ob diese Erfüllt sind. PM-Dungeon level als Graph. Erläutern der Probleme** </span>
+Kriterium: Sind die Level für weitere Mechaniken ausgelegt?<br/>Begründung: Das Dungeon unterscheidet nicht zwischen unterschiedlichen Objekten, daher können auch Händler, Hebel etc. zufällig im Level platziert werden. <br/>Bewertung: 1
+
+Kriterium: Können die Level manipuliert werden?<br/>Begründung: Die Level sind statisch und sind nicht zur Manipulation gedacht.<br/>Bewertung: 0
+
+Kriterium: Kann das Balancing vom Entwickler angepasst werden?<br/>Begründung: Objekte und Monster werden nach dem laden des Level platziert. Entwickler platzieren diese selber und können daher verschiedenen Parameter beim verteilen berücksichtigen. <br/>Bewertung: 1 
+
+Kriterium: Sind Nebenpfade möglich?<br/>Begründung: Einige Level bieten Nebenpfade.<br/>Bewertung: 1
+
+Kriterium:   Können Items und Monster gezielt platziert werden?<br/>Begründung: Entwickler können die Struktur des Dungeons nicht abfragen. Objekte können nur zufällig im Level platziert werden.<br/>Bewertung: 0 
+
+Kriterium: Erzeugt der Algorithmus Level mit abwechslungsreichen Pacing?<br/>Begründung: Kein eigener Generator vorhanden.<br/>Bewertung: 0
+
+Kriterium:   Kann das Pacing kontrolliert werden?<br/>Begründung: Die Level sind fest vorgegeben und können nicht verändert werden.<br/>Bewertung: 0
+
+Kriterium: Unterscheiden die Level sich ausreichend im Aufbau?<br/>Begründung: Die einzelnen Level unterscheiden sich im Aufbau, sind aber bei jeden Spieldurchlauf gleich und können daher nicht als einzigartig bezeichnet werden.<br/>Bewertung: 0
+
+Kriterium: Unterscheiden die Level sich ausreichend im Aussehen?<br/>Begründung: Die Level greifen alle auf den selben Texturenpool zu und unterscheiden sich optisch nicht voneinander. Bewertung: 0
+
+Kriterium: Kann Backtracking vermieden werden?<br/>Begründung: Die zur Verfügung gestellten Level sind klein genug, so das Backtracking kein Problem ist. <br/>Bewertung: 1
+
+Kriterium: Kommt der Algorithmus ohne Input-Daten aus?<br/>Begründung: Die Level müssen im JSON Format vorliegen.<br/>Bewertung: 0
+
+Kriterium:   Können verschiedene einzigartige Level aus denselben Input-Daten generiert werden?<br/>Begründung: Die Levelstruktur ist durch die JSON Datei fest vorgegeben. Die selbe Datei erzeugt immer das selbe Level.<br/>Bewertung: 0
+
+Nach \ref{bkfk} ergibt sich daher eine Güte von **5**. 
 
 Zwar genügen die bereitgestellten Level zum Erfüllen des Lernzieles, jedoch könnte ein eigener Generator die Studenten weiter motivieren ihr Spiel im inhaltlichen Teil auszubauen. Am Ende des Semesters würde so ein eigenes fertiges Spiel entstehen und nicht nur ein Prototyp eines Spiels. 
 
