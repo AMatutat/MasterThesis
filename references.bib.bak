@@ -142,4 +142,52 @@
   year    = {2017},
 }
 
+@Online{Brown2016,
+  author  = {Mark Brown},
+  title   = {Sollte Dark Souls einen leichten Modus haben? | Game Maker's Toolkit},
+  url     = {https://www.youtube.com/watch?v=K5tPJDZv_VE},
+  urldate = {2021-09-06},
+  year    = {2016},
+}
+
+@Online{Brown2015,
+  author  = {Mark Brown},
+  title   = {What Capcom Didn't Tell You About Resident Evil 4},
+  url     = {https://www.youtube.com/watch?v=zFv6KAdQ5SE},
+  urldate = {2021-09-06},
+  year    = {2015},
+}
+
+@Online{DevPlay2019a,
+  author  = {DevPlay},
+  title   = {DevPlay - Die Balancing-Tricks der Entwickler},
+  url     = {https://www.youtube.com/watch?v=1zhr7UKEflc},
+  urldate = {2021-09-06},
+  year    = {2019},
+}
+
+@Online{Brown2016a,
+  author  = {Mark Brown},
+  title   = {How Games Do Health},
+  url     = {https://www.youtube.com/watch?v=4AEKbBF3URE},
+  urldate = {2021-09-06},
+  year    = {2016},
+}
+
+@Online{Wesolowski2009,
+  author  = {Jacek Wesolowski},
+  title   = {Beyond Pacing: Games Aren't Hollywood},
+  url     = {https://www.gamedeveloper.com/design/beyond-pacing-games-aren-t-hollywood},
+  urldate = {2021-09-06},
+  year    = {2009},
+}
+
+@Online{Brown2018,
+  author  = {Mark Brown},
+  title   = {How to Keep Players Engaged (Without Being Evil)},
+  url     = {https://www.youtube.com/watch?v=hbzGO_Qonu0},
+  urldate = {2021-09-06},
+  year    = {2018},
+}
+
 @Comment{jabref-meta: databaseType:biblatex;}

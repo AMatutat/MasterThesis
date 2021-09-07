@@ -119,44 +119,35 @@ Spieleentwicklung ist ein kostspieliges Unterfangen und bereits kleinere Produkt
 
 ## Prozedurale Generierung
 
-Der Begriff prozedurale Generierung, auch prozedurale Synthese genannt (https://de.wikipedia.org/wiki/Prozedurale_Synthese) beschreibt im Kontext der Videospielentwicklung die Kombination aus Handgebauten Inhalten und Algorithmen um verfahrensmäßig verschiedene Inhalte zu generieren. Prozedurale Generierung kann unteranderem genutzt werden um Texturen, Items, Musik und Soundeffekte oder Level zu erzeugen. Dabei erzeugen die Algorithmen die Inhalte nicht vollständig selbst sondern werden mit Input-Daten ausgestattet, welche dann je nach Implementierung miteinander kombiniert werden. Laut Definition sind prozedurale Algorithmen deterministisch. Bei gleicher Eingabe erzeugen sie daher immer die gleiche Ausgabe. Prozedurale Algorithmen lassen sich aber auch um Zufallselemente erweitern um aus den selben Input-Daten viele unterschiedliche Inhalte zu erzeugen.  https://www.gamedeveloper.com/design/procedural-generation-a-primer-for-game-devs https://www.makeuseof.com/tag/procedural-generation-took-gaming-industry/  https://www.gamedeveloper.com/pc/migs-i-far-cry-2-i-s-guay-on-the-importance-of-procedural-content
+Der Begriff prozedurale Generierung, auch prozedurale Synthese genannt, beschreibt im Kontext der Videospielentwicklung die Kombination aus handgebauten Inhalten und Algorithmen, um verfahrensmäßig verschiedene Inhalte zu generieren.[@Wikipedia2019] Prozedurale Generierung kann unter anderem genutzt werden, um Texturen, Items, Musik und Soundeffekte oder Level zu erzeugen. Dabei erzeugen die Algorithmen die Inhalte nicht vollständig selbst, sondern werden mit Input-Daten ausgestattet, welche dann je nach Implementierung miteinander kombiniert werden. Laut Definition sind prozedurale Algorithmen deterministisch. Bei gleicher Eingabe erzeugen sie daher immer die gleiche Ausgabe. Prozedurale Algorithmen lassen sich aber auch um Zufallselemente erweitern, um aus denselben Input-Daten viele unterschiedliche Inhalte zu erzeugen.[@Beca2017] [@Lee2014] [@Remo2008]
 
 > In general computing terms, procedural generation is any technique that
 > creates data algorithmically as opposed to manually. It may also be called
 > random generation, but this is an over-simplification: although procedural
 > algorithms incorporate random numbers, they are never truly random, or
-> at least not as random as that term implies. (https://www.gamedeveloper.com/design/procedural-generation-a-primer-for-game-devs)
+> at least not as random as that term implies.[@Beca2017]
 
-Die Umsetzung von prozeduralen Algorithmen zur Erzeugung von Level ist allerdings ein komplexes unterfangen. Viele Aspekte die beim manuellen erstellen von Level einfach zu überprüfen sind, wie die Lösbarkeit, müssen gewährleistet und automatisch getestet werden. Das finden und beheben von Fehlern erschwert sich dadurch, dass ein Fehler unter Umständen nur in einen bestimmten Level aufkommt, dieses aber nicht wieder aufrufbar ist oder ein Fehler ist zwar in den getesteten Level behoben, tritt aber in nicht getesteten Level wieder auf. Prozedurale Algorithmen können durch die verwendeten Muster schnell repetitiv wirken, bei der Implementierung ist also auch darauf zu achten, dass die Muster gut verändert werden und es eine Vielzahl an unterschiedlichen Zufallsvariablen gibt. Außerdem ist es durch den hohen Zufall schwierig eine stabile Schwierigkeitskurve zu gewährleisten. (https://www.gamedeveloper.com/design/procedural-generation-a-primer-for-game-devs)
+Die Umsetzung von prozeduralen Algorithmen zur Erzeugung von Level ist allerdings ein komplexes Unterfangen. Viele Aspekte, die beim manuellen Erstellen von Level einfach zu überprüfen sind, wie die Lösbarkeit, müssen gewährleistet und automatisch getestet werden. Das Finden und beheben von Fehlern erschwert sich dadurch, dass ein Fehler unter Umständen nur in einen bestimmten Level aufkommt, dieses aber nicht wieder aufrufbar ist oder ein Fehler ist zwar in den getesteten Level behoben, tritt aber in nicht getesteten Level wieder auf. Prozedurale Algorithmen können durch die verwendeten Muster schnell repetitiv wirken, bei der Implementierung ist also auch darauf zu achten, dass die Muster gut verändert werden und es eine Vielzahl an unterschiedlichen Zufallsvariablen gibt. Außerdem ist es durch den hohen Zufall schwierig eine stabile Schwierigkeitskurve zu gewährleisten.[@Beca2017]
 
-Ein gut konzeptionierter prozedurale Algorithmus kann auf Knopfdruck hunderte verschiedener Level ausspucken, wodurch die Wiederspielbarkeit nahezu unendlich ist. Da die Entwicklung und Konzeptionierung eines solchen Algorithmus komplex ist, lohnt er sich vor allem bei Spielen die auf viel Abwechslung bei zeitgleichen großen Spielumfang wert legen um die kosten zu reduzieren.  www.gamecareerguide.com/features/336/procedural_content.php?page=1)
+Ein gut konzeptionierter prozedurale Algorithmus kann auf Knopfdruck hunderte verschiedener Level ausspucken, wodurch die Wiederspielbarkeit nahezu unendlich ist. Da die Entwicklung und Konzeptionierung eines solchen Algorithmus komplex ist, lohnt er sich vor allem bei Spielen die auf viel Abwechslung bei zeitgleichen großen Spielumfang wert legen um die Kosten und den Zeitaufwand zu reduzieren.[@Software2007] 
 
-Ein simpler prozeduraler Algorithmus zur Erzeugung von Leveln ist der *Random Walk* oder auch *Drunkard's Walk*. Eigentlich wird dieser zur Generierung nicht deterministischer Zeitreihen, wie Aktienkurse in der Finanzmathematik, verwendet kann aber auch Höhlenartige Level erzeugen.  https://de.wikipedia.org/wiki/Drunkard%E2%80%99s_Walk ref{imdrunk} zeigt den Algoritmus als Pseudocode. Das Level wird als 2D-Array dargestellt und jeder index im Array ist ein Feld im Level. Es gibt nichtbetretbare Felder (Wände) und betretbare Felder (Böden). Zu beginn wird ein zufälliges Feld als Startpunkt ausgewählt und zu einen Bodenfeld gemacht. Von diesem Feld aus wird nun in eine zufällige Richtung gegangen und das neue Feld wird wieder zu einem Bodenfeld gemacht. Dieser prozess wird solange wiederholt, bis die gewünschte Anzahl an Bodenfeldern vorhanden ist.  Der Vorteil des Random Walk Algorithmus liegt darin, dass sichergestellt werden kann, dass alle Bodenfelder auch erreichbar sind, da sie gezwungenermaßen alle miteieinander verbunden sind. Allerdings bietete der Algoritmus abseits der gewünschen Bodenfelder keine Konfigurationsmöglichkeiten und die erzeugten Level ähneln sich von der Struktur sehr. \ref{drunkexample} zeigt ein Beispiel wie ein Dungeon aussehen könnte welches durch den Random Walk erzeugt wurde.
+Ein simpler prozeduraler Algorithmus zur Erzeugung von Level ist der *Random Walk* oder auch *Drunkard's Walk*. Eigentlich wird dieser zur Generierung nicht deterministischer Zeitreihen, wie Aktienkurse in der Finanzmathematik verwendet, kann aber auch höhlenartige Level erzeugen.[@Wikipedia2020b] \ref{imdrunk} zeigt den Algorithmus als Pseudocode. Das Level wird als 2D-Array dargestellt und jeder Index im Array ist ein Feld im Level. Es gibt nicht betretbare Felder (Wände) und betretbare Felder (Böden). Zu Beginn wird ein zufälliges Feld als Startpunkt ausgewählt und zu einem Bodenfeld gemacht. Von diesem Feld aus wird nun in eine zufällige Richtung gegangen und das neue Feld wird wieder zu einem Bodenfeld gemacht. Dieser Prozess wird so lange wiederholt, bis die gewünschte Anzahl an Bodenfeldern vorhanden ist.  Der Vorteil des Random Walk Algorithmus liegt darin, dass sichergestellt werden kann, dass alle Bodenfelder auch erreichbar sind, da sie gezwungenermaßen alle miteinander verbunden sind. Allerdings bietet der Algorithmus abseits der gewünschten Bodenfelder keine Konfigurationsmöglichkeiten und die erzeugten Level ähneln sich von der Struktur sehr. \ref{drunkexample} zeigt ein Beispiel wie ein Dungeon aussehen könnte welches durch den Random Walk erzeugt wurde.
 
-```
-erstelle ein Level in dem alle Felder Wände sind
-wähle ein Feld als Startpunkt aus
-verwandel das gewählte Feld in einen Boden
-solange noch nicht genügen Boden im Level existiert
-    mache ein Schritt in eine zufällige Richtung
-    wenn das neue Feld eine Wand ist
-        verwandel das Feld in einen Boden
-	
-```
+\begin{lstlisting}[language=python, label=imdrunk, caption={Pseudocode Random Walk [@roguebasin2014]}  ]
+	erstelle ein Level in dem alle Felder Wände sind
+	wähle ein Feld als Startpunkt aus
+	verwandel das gewählte Feld in einen Boden
+	solange noch nicht genügen Boden im Level existiert
+    	mache ein Schritt in eine zufällige Richtung
+    	wenn das neue Feld eine Wand ist
+        	verwandel das Feld in einen Boden
+\end{lstlisting}
 
-: Pseudocode für den Random Walk Algorithmus  http://www.roguebasin.com/index.php?title=Random_Walk_Cave_Generation \label{imdrunk}
-
-![Beispielergebnis eines Random Walk \label{drunkexample}](drunk.png){width=100%}
-
-https://users.informatik.haw-hamburg.de/~schumann/BachelorArbeitKevinHagen.pdf
-
-
+![Beispielergebnis eines Random Walk. Schwarze Flächen sind Wände, weiße Flächen sind Böden. [@Hagen2019] \label{drunkexample}](figs/chapter2/drunk.png){width=100%}
 
 ## Bewertungsschema
 
 Um im weiteren Verlauf der Arbeit die verschiedenen Algorithmen zur prozeduralen Generierung bewerten und miteinander vergleichen zu können, wird anhand der vorgestellten Regeln ein Bewertungsschema erstellt. Für jede Regel werden verschiedene Kriterien aufgestellt, die angeben, ob und inwiefern diese erfüllt sind. Die Kriterien werden so gewählt, dass sie auf das Anwendungsszenario optimiert sind. Die Tabelle \ref{bkt} listet die Kriterien auf. Für jedes erfüllte Kriterium wird ein Punkt verteilt, die Summe der Punkte gibt die Güte des Algorithmus im Vergleich zu den anderen Algorithmen an (vgl. \ref{bkfk). 
-
-
 
 | Regel                   | Kriterium                                           | Anmerkung                                                    |
 | ----------------------- | --------------------------------------------------- | ------------------------------------------------------------ |
@@ -177,49 +168,45 @@ Um im weiteren Verlauf der Arbeit die verschiedenen Algorithmen zur prozeduralen
 
 : Tabelle mit den Bewertungskriterien für prozedurale Algorithmen. \label{bkt}
 
-
-
-
+Die Güte $G$ eines Level lässt sich durch die Summe aller vergebenen Punkte
+$P\backslash L$ multipliziert mit dem Bewertungspunkt Lösbarkeit $L$ der Bewertungskriterien berechnen. 
 $$
-\label{bkfk}
-\text{Die Güte G eines Level lässt sich durch die Summe aller vergebenen Punkte}\\
-\text{P$\backslash$ L multipliziert mit dem Bewertungspunkt Lösbarkeit L der Bewertungskriterien berechnen.}\\
+\label{bkfk} 
+\caption {Formel zur Berechnung der Güte eines Level. }
 G = L * ( \sum P_{i})
 $$
 
-: Formel zur Berechnung der Güte eines Level. 
-
 ## Analyse der Ausgangssituation 
 
-Aktuell besitzt das PM-Dungeon keinen eigenen Level-Generator stattdessen werden vier Level mitgeliefert. Um die Notwendigkeit eines eigenen prozeduralen Generators für das PM-Dungeon zu begründen, wird im folgenden die Güte der aktuellen Level Situation bewertet. 
+Aktuell besitzt das PM-Dungeon keinen eigenen Level-Generator, stattdessen werden vier Level mitgeliefert. Um die Notwendigkeit eines eigenen prozeduralen Generators für das PM-Dungeon zu begründen, wird im Folgenden die Güte der aktuellen Level Situation bewertet. 
 
-Kriterium: Sind alle Orte und Gegenstände im Level erreichbar? <br/>Begründung:  In allen Level kann jeder Raum betreten werden. Objekte werden im Raum verteilt und sind daher auch erreichbar.<br/>Bewertung: 1
+Kriterium: Sind alle Orte und Gegenstände im Level erreichbar? $\newline$Begründung:  In allen Level kann jeder Raum betreten werden. Objekte werden im Raum verteilt und sind daher auch erreichbar.$\newline$Bewertung: 1
 
-Kriterium: Sind die Level für die grundlegenden Spielmechaniken der Anwendungsumgebung ausgelegt?<br/>Begründung: Die Level können mit Monstern und Gegenständen gefüllt werden. Die Level haben alle einen Ausgang. Bewertung: 1
+Kriterium: Sind die Level für die grundlegenden Spielmechaniken der Anwendungsumgebung ausgelegt?$\newline$Begründung: Die Level können mit Monstern und Gegenständen gefüllt werden. Die Level haben alle einen Ausgang.<br>Bewertung: 1
 
-Kriterium: Sind die Level für weitere Mechaniken ausgelegt?<br/>Begründung: Das Dungeon unterscheidet nicht zwischen unterschiedlichen Objekten, daher können auch Händler, Hebel etc. zufällig im Level platziert werden. <br/>Bewertung: 1
+Kriterium: Sind die Level für weitere Mechaniken ausgelegt?$\newline$Begründung: Das Dungeon unterscheidet nicht zwischen unterschiedlichen Objekten, daher können auch Händler, Hebel etc. zufällig im Level platziert werden. Bewertung: 1
 
-Kriterium: Können die Level manipuliert werden?<br/>Begründung: Die Level sind statisch und sind nicht zur Manipulation gedacht.<br/>Bewertung: 0
+Kriterium: Können die Level manipuliert werden?$\newline$Begründung: Die Level sind statisch und sind nicht zur Manipulation gedacht.$\newline$Bewertung: 0
 
-Kriterium: Kann das Balancing vom Entwickler angepasst werden?<br/>Begründung: Objekte und Monster werden nach dem laden des Level platziert. Entwickler platzieren diese selber und können daher verschiedenen Parameter beim verteilen berücksichtigen. <br/>Bewertung: 1 
+Kriterium: Kann das Balancing vom Entwickler angepasst werden?$\newline$Begründung: Objekte und Monster werden nach dem laden des Level platziert. Entwickler platzieren diese selber und können daher verschiedenen Parameter beim Verteilen berücksichtigen. $\newline$Bewertung: 1 
 
-Kriterium: Sind Nebenpfade möglich?<br/>Begründung: Einige Level bieten Nebenpfade.<br/>Bewertung: 1
+Kriterium: Sind Nebenpfade möglich?$\newline$Begründung: Einige Level bieten Nebenpfade.$\newline$Bewertung: 1
 
-Kriterium:   Können Items und Monster gezielt platziert werden?<br/>Begründung: Entwickler können die Struktur des Dungeons nicht abfragen. Objekte können nur zufällig im Level platziert werden.<br/>Bewertung: 0 
+Kriterium:   Können Items und Monster gezielt platziert werden?$\newline$Begründung: Entwickler können die Struktur des Dungeons nicht abfragen. Objekte können nur zufällig im Level platziert werden.$\newline$Bewertung: 0 
 
-Kriterium: Erzeugt der Algorithmus Level mit abwechslungsreichen Pacing?<br/>Begründung: Kein eigener Generator vorhanden.<br/>Bewertung: 0
+Kriterium: Erzeugt der Algorithmus Level mit abwechslungsreichen Pacing?$\newline$Begründung: Kein eigener Generator vorhanden.$\newline$Bewertung: 0
 
-Kriterium:   Kann das Pacing kontrolliert werden?<br/>Begründung: Die Level sind fest vorgegeben und können nicht verändert werden.<br/>Bewertung: 0
+Kriterium:   Kann das Pacing kontrolliert werden?$\newline$Begründung: Die Level sind fest vorgegeben und können nicht verändert werden.$\newline$Bewertung: 0
 
-Kriterium: Unterscheiden die Level sich ausreichend im Aufbau?<br/>Begründung: Die einzelnen Level unterscheiden sich im Aufbau, sind aber bei jeden Spieldurchlauf gleich und können daher nicht als einzigartig bezeichnet werden.<br/>Bewertung: 0
+Kriterium: Unterscheiden die Level sich ausreichend im Aufbau?$\newline$Begründung: Die einzelnen Level unterscheiden sich im Aufbau, sind aber bei jeden Spieldurchlauf gleich und können daher nicht als einzigartig bezeichnet werden.$\newline$Bewertung: 0
 
-Kriterium: Unterscheiden die Level sich ausreichend im Aussehen?<br/>Begründung: Die Level greifen alle auf den selben Texturenpool zu und unterscheiden sich optisch nicht voneinander. Bewertung: 0
+Kriterium: Unterscheiden die Level sich ausreichend im Aussehen?$\newline$Begründung: Die Level greifen alle auf denselben Texturenpool zu und unterscheiden sich optisch nicht voneinander. $\newline$Bewertung: 0
 
-Kriterium: Kann Backtracking vermieden werden?<br/>Begründung: Die zur Verfügung gestellten Level sind klein genug, so das Backtracking kein Problem ist. <br/>Bewertung: 1
+Kriterium: Kann Backtracking vermieden werden?$\newline$Begründung: Die zur Verfügung gestellten Level sind klein genug, so das Backtracking kein Problem ist. $\newline$Bewertung: 1
 
-Kriterium: Kommt der Algorithmus ohne Input-Daten aus?<br/>Begründung: Die Level müssen im JSON Format vorliegen.<br/>Bewertung: 0
+Kriterium: Kommt der Algorithmus ohne Input-Daten aus?$\newline$Begründung: Die Level müssen im JSON Format vorliegen.$\newline$Bewertung: 0
 
-Kriterium:   Können verschiedene einzigartige Level aus denselben Input-Daten generiert werden?<br/>Begründung: Die Levelstruktur ist durch die JSON Datei fest vorgegeben. Die selbe Datei erzeugt immer das selbe Level.<br/>Bewertung: 0
+Kriterium:   Können verschiedene einzigartige Level aus denselben Input-Daten generiert werden?$\newline$Begründung: Die Levelstruktur ist durch die JSON Datei fest vorgegeben. Dieselbe Datei erzeugt immer dasselbe Level.  $\newline$ Bewertung: 0
 
 Nach \ref{bkfk} ergibt sich daher eine Güte von **5**. 
 
