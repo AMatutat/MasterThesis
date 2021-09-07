@@ -1,18 +1,8 @@
 # Grundlagen
 
-<!--
-
-*   Was ist Prozedurale Generierung
-*   Was ist das PM Dungeon
-*   Was ist gutes Level Design
-*   Warum sind Graphen gut zur Analyse 
-
-geschätzter Umfang 15% - 20%
--->
-
 <span style="color:red"> **ToDo Kapitel Einleitung** </span>
 
-## Rouge und Rouge Like
+## Rouge Like
 
 *Rogue: Exploring the Dungeons of Doom*, ist ein in den 1980er entwickeltes Dungeoncrawler-Rollenspiel. Dungeoncrawler sind Spiele, indem sich der Spieler durch ein Labyrinth gefüllt mit Gegnern und Rätseln kämpft und meist über mehrere Ebenen versucht das Spielziel (z .B. den Ausgang oder einen Schatz) zu erreichen.[@qrpg2020] In Rogue bewegt sich der Spieler rundenbasiert durch ein, durch ASCII-Zeichen dargestelltes, Levelsystem und versucht sich mithilfe von Gegenständen und Zaubersprüchen bis in die tiefste Ebene des Dungeons vorzukämpfen, um dort das Amulett von Yendor zu erlangen.[@MattBarton2009]
 
@@ -51,6 +41,8 @@ Die Grundlagen der Regeln stammen aus Dan Taylors *Ten Principles of Good Level 
 
 Ein Level muss lösbar sein. Es darf keine Fehler geben, die das Voranschreiten verhindern. Es sollte zusätzlich darauf geachtet werden, dass Spieler nicht in Sackgassen geraten könne. Braucht der Spieler beispielsweise ein bestimmtes Item, um weiterzukommen, sollte er das Item an diesem Punkt immer noch erreichen können. Bei Spielen, die Lebensenergie verwenden, sollte das Level gelöst werden können, ohne Lebensenergie zu verlieren, so bleiben Spieler, die im vorherigen Abschnitt viel Schaden bekommen haben, nicht stecken. Gibt es im Spiel optionale Wege oder Ziele, müssen auch diese lösbar sein und dürfen nicht durch einen Fehler unlösbar werden. Bei optionalen Inhalten liegt es in der kreativen Entscheidungsfreiheit des Entwicklers, ob diese auch immer erreichbar sein müssen oder ob zum Beispiel ein optionales Item benötigt wird, welches nicht mehr erreichbar ist. Zusätzlich sollten die Level frei von Fehlern sein, die Spielern Möglichkeiten wie das ungewollte Überspringen von Abschnitten erlauben.
 
+**Regel 1: Gute Level sind lösbar und fehlerfrei.** 
+
 ### Driven by  game’s mechanics
 
 > Always remember that interactivity is what makes videogames different from any other form of entertainment: books have stories, movies have visuals, games have interaction. If your level design isn’t showcasing your game mechanics, your players might as well be watching a movie or reading a book. [@Taylor2013]
@@ -58,6 +50,8 @@ Ein Level muss lösbar sein. Es darf keine Fehler geben, die das Voranschreiten 
 > Above all else, great level design is driven by interaction - the game’s mechanics. Game levels don’t just provide context for mechanics, they provide the very reality in which they exist. [@Taylor2013]
 
 Das Level ist der Spielplatz für den Spieler, in dem er die verschiedenen Mechaniken des Spiels anwenden kann. Daher müssen alle Level so gebaut werden, dass sie die Mechaniken beanspruchen und es Spaß macht sie zu verwenden. Die Kernmechaniken des Spiels sollten in jedem Level gefordert sein. Ein Shooter braucht gute Kampfareale, ein Rennspiel spaßige Rennstrecken und ein Platformer gute Hindernisse. Gute Level bieten den Spieler verschiedene Möglichkeiten die Herausforderungen auf unterschiedliche Weise unter Einbeziehung der Mechaniken zu lösen.
+
+**Regel 2: Gute Level fordern die Mechaniken des Spiels.** 
 
 ### Balancing
 
@@ -73,11 +67,15 @@ Eine andere Möglichkeit zum balancen ist die Verwendung von dynamischen Schwier
 
 Es sollte beachtet werden, dass Spieler mit voranschreiten immer besser werden, daher sollten frühe Level deutlich einfacher sein als Level gegen Ende des Spiels. Dabei muss die Schwierigkeit der Level nicht linear steigen, es bietet sich an nach einem besonders schweren Level ein einfacheres Level einzubauen, um den Spieler Zeit zum Aufatmen zu lassen.
 
+**Regel 3: Gute Level sind gut gebalanced.** 
+
 ### Risk and Reward
 
 Risk and Reward beschreibt Momente im Spiel, bei den der Spieler eine besonders schwere Herausforderung lösen muss, dafür aber auch entsprechend belohnt wird. Diese stets optionalen Momente sollten in regelmäßigen Abständen auftauchen, um den Spieler vor eine interessante Entscheidung zu stellen, ob sie die Herausforderung annehmen oder lieber ablehnen möchten.
 
 Vor allem bei Rouge Like Spielen sollte es ständig zu solchen Momenten kommen, da diese hier einen erhöhten Nervenkitzel bieten. Jede Herausforderung könnte den Tod bedeuten und damit den permanenten Verlust des Fortschrittes. Die Frage, ob sich der Kampf wirklich lohnt und ob man das Risiko eingehen sollte, fällt hier umso schwerer. 
+
+**Regel 4: Gute Level haben Risk and Reward Momente.** 
 
 ### Pacing
 
@@ -94,6 +92,7 @@ Auch Videospiele sollten darauf achten ihre Spannungskurve zu kontrollieren. Gut
 
 ![Wüstenpalast aus Zelda 3 in Graphendarstellung \label{zelda3}](figs/chapter2/Zelda3Dungeon.png){width=100%}
 
+**Regel 5: Gute Level steuern das Pacing des Spiels.** 
 
 ### Einzigartigkeit
 
@@ -101,13 +100,15 @@ Die einzelnen Level sollten sich stark voneinander unterscheiden. Auch wenn das 
 
 > [...] people don’t like playing the same level twice.[@Ryan1999]
 
-Variation in Gegner, Texturen und Strukturen helfen dabei die Abwechslung im Level zu gewährleisten und keine Langeweile aufkommen zu lassen.
+Variation in Gegner, Texturen und Strukturen helfen dabei die Abwechslung im Level zu gewährleisten und keine Langeweile aufkommen zu lassen. Wenn es längere Nebenpfade gibt, sollten es vermieden werden den Spieler dazu zu zwingen den gesamten Pfad zurückzulaufen (Backtracking), stattdessen sollte das Ende des Nebenpfades eine Abkürzung zurück zum Hauptpfad bieten. 
+
+**Regel 6: Gute Level sind einzigartig.** 
 
 ### Effizienz 
 
 Spieleentwicklung ist ein kostspieliges Unterfangen und bereits kleinere Produktionen können mehrere Millionen Dollar kosten. [@DevPlay2017] Daher ist die effiziente Nutzung von Ressourcen unabdingbar. Gute Level-Designer erstellen ein Set aus Modulen, verschiedenen Assets und Events. Diese Module können dann miteinander kombiniert und bei Bedarf angepasst werden. Aus einer Handvoll solcher Module lassen sich bereits viele verschiedene Level und Situationen erzeugen. 
 
-Eine besonders effiziente Art um Level zu erstellen ist die Verwendung eines prozeduralen Level Generators. 
+**Regel 7: Gute Level sind effizient in der Herstellung.** 
 
 
 ## Prozedurale Generierung
