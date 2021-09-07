@@ -1,6 +1,5 @@
 # Grundlagen
 
-
 <span style="color:red"> **ToDo Kapitel Einleitung** </span>
 
 ## Rouge Like
@@ -21,6 +20,13 @@ In den Jahren haben viele Entwickler versucht Regeln für das Genre aufzustellen
 
 Heute muss ein Spiel nur zwei wichtige Features implementieren, um *like* Rogue zu sein, prozedural generierte Level und Permadeath. [@Brown2019] Das Genre ist daher nicht nur noch auf Rollenspiele in Labyrinthen begrenzt, sondern umfasst mittlerweile Spiele aus den unterschiedlichsten Genres wie Plattformer, Shooter oder Action-Adventures und vielen mehr. [@Wikipedia2020]
 
+## Die Anwendungsumgebung 
+
+Im praktischen Anteil des Moduls Programmiermethoden sollen die Studenten das gelernte Wissen aus dem theoretischen Anteil anwenden und vertiefen, dafür bekommen sie in regelmäßigen Abständen Aufgaben gestellt. Um die Aufgaben in einen gemeinsamen Kontext zu bringen und zeitgleich die Motivation der Studenten zu steigern, wurde 2021 das PM-Dungeon eingeführt. Über den Verlauf des Semesters entwickeln die Studenten ihr eigenes Rouge-Like Rollenspiel. Zwar stehen weiterhin die Lehrinhalte im Fokus, dennoch haben die Studenten viele Freiheiten um ihr Spiel nach ihren Wünschen zu gestalten. Sie konzeptionieren eigenständig das Verhalten von Monstern, implementieren Schatztruhen und Items sowie unterschiedliche Fähigkeiten, die der Spieler im Laufe des Spiels freischalten kann. Für die Entwicklung des Spiels bekommen die Studenten ein extra dafür entwickeltes Framework zur Verfügung gestellt, das PM-Dungeon-Framework. Das PM-Dungeon-Framework erweitert das libGDX-Framework \footnote{libGDX: https://libgdx.com} um vereinfachte Schnittstellen zur grafischen Darstellung. Die Studenten können sich daher rein auf die Implementierung der Spielfeatures konzentrieren.
+
+![Ausschnitt aus dem PM-Dungeon \label{pmd}](figs/chapter2/pmd.png){width=100%}
+
+Abbildung \ref{pmd} zeigt einen Ausschnitt aus dem Startlevel einer Beispielimplementierung des PM-Dungeons. Die Spielfigur (grüner Kreis) muss mithilfe der Leiter (blauer Kreis) in die nächste Ebene gebracht werden. Auf den Weg dorthin kann der Spieler die Monster (roter Kreis) töten, um Erfahrungspunkte zu sammeln oder Items zu finden. Sowohl die Spielerposition als auch die Position der Monster und der Leiter werden zu Beginn des Levels zufällig bestimmt. 
 
 ## Graphen zur Darstellung von Level
 
@@ -124,29 +130,27 @@ Spieleentwicklung ist ein kostspieliges Unterfangen und bereits kleinere Produkt
 
 
 ## Bewertungsschema
-Um im weiteren Verlauf der Arbeit die verschiedenen Algorithmen zur prozeduralen Generierung bewerten und miteinander vergleichen zu können, wird anhand der vorgestellten Regeln eine Bewertungsschema erstellt. Für jede Regel werden verschiedene Kriterien aufgestellt die angeben ob und in wie fern diese erfüllt sind. Die Kriterien werden so gewählt, dass sie auf das Anwendungsszenario optimiert sind. Die Tabelle \ref{bkt} listet die Kriterien auf. Für jedes erfüllte Kriterium wird ein Punkt verteilt, die Summe der Punkte gibt die Güte des Algorithmus im vergleich zu den anderen Algorithmen an (vgl. \ref{bkfk). 
+
+Um im weiteren Verlauf der Arbeit die verschiedenen Algorithmen zur prozeduralen Generierung bewerten und miteinander vergleichen zu können, wird anhand der vorgestellten Regeln ein Bewertungsschema erstellt. Für jede Regel werden verschiedene Kriterien aufgestellt, die angeben, ob und inwiefern diese erfüllt sind. Die Kriterien werden so gewählt, dass sie auf das Anwendungsszenario optimiert sind. Die Tabelle \ref{bkt} listet die Kriterien auf. Für jedes erfüllte Kriterium wird ein Punkt verteilt, die Summe der Punkte gibt die Güte des Algorithmus im Vergleich zu den anderen Algorithmen an (vgl. \ref{bkfk). 
 
 
 
 | Regel                   | Kriterium                                           | Anmerkung                                                    |
 | ----------------------- | --------------------------------------------------- | ------------------------------------------------------------ |
-| Gute Level sind lösbar. | Sind alle Orte und Gegenstände im Level erreichbar? | Kritische Anforderung. Level die dieses Kriterium nicht erfüllen sind inakzeptable und mit null Punkten zu bewerten. |
-| Gute Level fordern die Mechaniken des Spiels. | ||
-|  | ||
-|  | ||
-| Gute Level sind gut gebalanced | ||
-|  | ||
-|  | ||
-| Gute Level haben Risk and Reward Momente | ||
-|  | ||
-| | ||
-| Gute Level steuern das Pacing des Spiels | ||
-|  | ||
-| Gute Level sind einzigartig | ||
-| | ||
-|  | ||
-| Gute Level sind effizient in der Herstellung. | ||
-| | ||
+| Gute Level sind lösbar. | Sind alle Orte und Gegenstände im Level erreichbar? | Dies ist eine kritische Anforderung. Level, die dieses Kriterium nicht erfüllen, sind inakzeptable und mit null Punkten zu bewerten. |
+| Gute Level fordern die Mechaniken des Spiels. | Sind die Level für die grundlegenden Spielmechaniken der Anwendungsumgebung ausgelegt? |Monster und Items müssen im Dungeon platzierbar sein.|
+|  | Sind die Level für weitere Mechaniken ausgelegt? |Können Türen, Hebel, Schlüssel, Schlösser, Rätsel, Shops o.ä platziert werden?|
+|  | Können die Level manipuliert werden? |Kann die Struktur des Levels im Spiel manipuliert werden, zum Beispiel durch Bomben?|
+| Gute Level sind gut gebalanced | Kann das Balancing vom Entwickler angepasst werden? |Kann der Entwickler im laufenden Spiel bestimmen wie schwer das Level sein soll?|
+| Gute Level haben Risk and Reward Momente | Sind Nebenpfade möglich? |Erzeugt der Generator Level, die Wege abseits des kritischen Pfades haben?|
+|  | Können Items und Monster gezielt platziert werden? |Nebenpfade und kritische Pfade müssen für den Entwickler unterscheidbar sein.|
+| Gute Level steuern das Pacing des Spiels | Erzeugt der Algorithmus Level mit abwechslungsreichen Pacing? |Haben die Level unterschiedliche Strukturen, die das Pacing beeinflusse (vgl. \ref{zelda3})?|
+|  | Kann das Pacing kontrolliert werden? |Kann der Entwickler gezielt bestimmte Strukturen konfigurieren?|
+| Gute Level sind einzigartig | Unterscheiden die Level sich ausreichend im Aufbau? ||
+| | Unterscheiden die Level sich ausreichend im Aussehen? ||
+|  | Kann Backtracking vermieden werden? ||
+| Gute Level sind effizient in der Herstellung. | Kommt der Algorithmus ohne Input Daten aus? |Input Daten sind in diesem Sinne Graphen oder Layouts für Räume.|
+| | Können verschiedene einzigartige Level aus denselben Input Daten generiert werden? |Wenn keine Input-Daten benötigt werden, 1 Punkt.|
 
 : Tabelle mit den Bewertungskriterien für prozedurale Algorithmen. \label{bkt}
 
@@ -155,19 +159,14 @@ Um im weiteren Verlauf der Arbeit die verschiedenen Algorithmen zur prozeduralen
 
 $$
 \label{bkfk}
-\text{Die Güte G eines Level lässt sich durch die Summe aller vergebenen Punkte P$\backslash$ L multipliziert mit dem Bewertungspunkt Lösbarkeit L der Bewertungskriterien berechnen.}
+\text{Die Güte G eines Level lässt sich durch die Summe aller vergebenen Punkte}\\
+\text{P$\backslash$ L multipliziert mit dem Bewertungspunkt Lösbarkeit L der Bewertungskriterien berechnen.}\\
 G = L * ( \sum P_{i})
 $$
 
 
 
-## Die Anwendungsumgebung  PM-Dungeon
-
-Im praktischen Anteil des Moduls Programmiermethoden sollen die Studenten das gelernte Wissen aus dem theoretischen Anteil anwenden und vertiefen, dafür bekommen sie in regelmäßigen Abständen Aufgaben gestellt. Um die Aufgaben in einen gemeinsamen Kontext zu bringen und zeitgleich die Motivation der Studenten zu steigern, wurde 2021 das PM-Dungeon eingeführt. Über den Verlauf des Semesters entwickeln die Studenten ihr eigenes Rouge-Like Rollenspiel. Zwar stehen weiterhin die Lehrinhalte im Fokus, dennoch haben die Studenten viele Freiheiten um ihr Spiel nach ihren Wünschen zu gestalten. Sie konzeptionieren eigenständig das Verhalten von Monstern, implementieren Schatztruhen und Items sowie unterschiedliche Fähigkeiten, die der Spieler im Laufe des Spiels freischalten kann. Für die Entwicklung des Spiels bekommen die Studenten ein extra dafür entwickeltes Framework zur Verfügung gestellt, das PM-Dungeon-Framework. Das PM-Dungeon-Framework erweitert das libGDX-Framework \footnote{libGDX: https://libgdx.com} um vereinfachte Schnittstellen zur grafischen Darstellung. Die Studenten können sich daher rein auf die Implementierung der Spielfeatures konzentrieren.
-
-![Ausschnitt aus dem PM-Dungeon \label{pmd}](figs/chapter2/pmd.png){width=100%}
-
-Abbildung \ref{pmd} zeigt einen Ausschnitt aus dem Startlevel einer Beispielimplementierung des PM-Dungeons. Die Spielfigur (grüner Kreis) muss mithilfe der Leiter (blauer Kreis) in die nächste Ebene gebracht werden. Auf den Weg dorthin kann der Spieler die Monster (roter Kreis) töten, um Erfahrungspunkte zu sammeln oder Items zu finden. Sowohl die Spielerposition als auch die Position der Monster und der Leiter werden zu Beginn des Levels zufällig bestimmt. 
+## Analyse der Ausgangssituation 
 
 Aktuell besitzt das PM-Dungeon keinen eigenen Level-Generator und die zur Verfügung gestellten Level sind in Anzahl und Abwechslung stark begrenzt. Die Level greifen auf einen gemeinsamen Texturenpool zu und unterscheiden sich daher optisch kaum voneinander. Auch bieten die generierten Level keine Schnittstelle, um die Struktur des Levels dynamisch im Code abzufragen. Die Studenten haben daher keine Möglichkeit ihre implementieren Inhalte strategisch im Level zu platzieren oder die Struktur der Level zu bestimmen. Inhalte wie Monster und Items wurden daher von den Studenten zufällig im Level verteilt. Dadurch das die Level nicht neu generiert werden, ist das PM-Dungeon streng genommen auch kein Rouge-Like.
 
@@ -176,12 +175,6 @@ Aktuell besitzt das PM-Dungeon keinen eigenen Level-Generator und die zur Verfü
 Abbildung \ref{pmdAsGraph} zeigt das Level aus Abbidlung \ref{pmd} in Graphendarstellung. 
 
 <span style="color:red"> **ToDo Matrix mit Anforderungen an Level für das PM-Dungeon und ob diese Erfüllt sind. PM-Dungeon level als Graph. Erläutern der Probleme** </span>
-
-
-
-
-
-
 
 Zwar genügen die bereitgestellten Level zum Erfüllen des Lernzieles, jedoch könnte ein eigener Generator die Studenten weiter motivieren ihr Spiel im inhaltlichen Teil auszubauen. Am Ende des Semesters würde so ein eigenes fertiges Spiel entstehen und nicht nur ein Prototyp eines Spiels. 
 
