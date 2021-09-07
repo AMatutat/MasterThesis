@@ -1,6 +1,6 @@
 # Grundlagen
 
-In diesem Kapitel werden die benötigten Grundlagen für die Arbeit geschaffen. Es wird das PM-Dungeon und das Genre Rouge-Like als Anwendungsumgebung beschrieben. Danach wird die Graphendarstellung für Level eingeführt und anschließend sechs Regeln für gutes Level Design erläutert. Der Begriff der Prozeduralen Generierung wird umfangreicher definiert und mit Beispielen erläutert. Mithilfe der vorgestellten Regeln werden dann Bewertungskriterien für prozedurale Level-Generatoren für Rouge-Like Spiele aufgestellt. Das Kapitel endet mit der Analyse und Bewertung der aktuellen Level des PM-Dungeons. 
+In diesem Kapitel werden die benötigten Grundlagen für die Arbeit vermittelt. Es wird das PM-Dungeon und das Genre Rouge-Like als Anwendungsumgebung beschrieben. Danach wird die Graphendarstellung für Level eingeführt und anschließend sechs Regeln für gutes Level Design erläutert. Der Begriff der Prozeduralen Generierung wird umfangreicher definiert und mit Beispielen erläutert. Mithilfe der vorgestellten Regeln werden dann Bewertungskriterien für prozedurale Level-Generatoren für Rouge-Like Spiele aufgestellt. Das Kapitel endet mit der Analyse und Bewertung der aktuellen Level des PM-Dungeons. 
 
 ## Rouge-Like
 
@@ -10,13 +10,13 @@ Dieses Spielkonzept ist zu dieser Zeit kein unbekanntes, was Rogue hingegen bis 
 
 > But I think Rogue’s biggest contribution, and one that still stands out to this day, is that the computer itself generated the adventure in Rogue. Every time you played, you got a new adventure. That’s really what made it so popular for all those years in the early eighties.[@Wichman1997]
 
-Bei jedem Neustart von Rogue werden die Level neu generiert. Das bedeutet der Aufbau der Level, die Anzahl und Positionierung von Monstern und Items unterscheiden sich mit jedem Spieldurchlauf. Man spielt also niemals zweimal dieselbe Partie von Rogue. Zusätzlich setzt Rogue auf dem sogenannten Permadeath. Stirbt der Spieler im Dungeon, verliert er all seinen Fortschritt und muss das Spiel von vorne beginnen, mit neu generiertem Level. Rogue zeichnet sich also vor allem dadurch aus, dass jeder Spieldurchlauf anders als der andere ist und dadurch ein besonders hohes Maß an Abwechslung und damit Wiederspielwert gegeben war.  
+Bei jedem Neustart von Rogue werden die Level neu generiert. Das bedeutet der Aufbau der Level, die Anzahl und Positionierung von Monstern und Items unterscheiden sich mit jedem Spieldurchlauf. Man spielt also niemals zweimal dieselbe Partie von Rogue. Zusätzlich setzt Rogue auf dem sogenannten Permadeath. Stirbt der Spieler im Dungeon, verliert er all seinen Fortschritt und muss das Spiel von vorne beginnen, mit neu generiertem Level. Rogue zeichnet sich also vor allem dadurch aus, dass jeder Spieldurchlauf anders als der andere ist und dadurch ein besonders hohes Maß an Abwechslung und damit Wiederspielwert gegeben ist.  
 
 Rogue konnte sich schnell an einiger Beliebtheit erfreuen und es dauert nicht lange bis andere Entwickler ähnliche Spiele mit prozedural generierten Inhalten veröffentlichten. [@MattBarton2009] Es entwickelte sich das Genre der Rogue-Likes.
 
 > [... ] Rogue likes are called Rogue likes, because the games are literally like Rogue [... ] [@Brown2017]
 
-In den Jahren haben viele Entwickler versucht Regeln für das Genre aufzustellen, also Bedingungen, die ein Spiel erfüllen muss, um sich als Rogue-Like bezeichnen zu dürfen. 2008 wurde auf der Internationalen Rogue-Like Entwickler Konferenz eine Liste mit verschiedenen Faktoren veröffentlicht. Diese Liste ist als Berliner Interpretation bekannt. [@Conference2008] Über die Jahre wurde die Interpretation harsch kritisiert und sogar als *downright nonsense* bezeichnet. [@Grey2013] Die Berliner Interpretation schade der kreativen Freiheit.
+In den Jahren haben viele Entwickler versucht Regeln für das Genre aufzustellen, also Bedingungen, die ein Spiel erfüllen muss, um sich als Rogue-Like bezeichnen zu dürfen. 2008 wurde auf der Internationalen Rogue-Like Entwickler Konferenz eine Liste mit verschiedenen Faktoren veröffentlicht. Diese Liste ist als *Berliner Interpretation* bekannt. [@Conference2008] Über die Jahre wurde die Interpretation harsch kritisiert und sogar als "downright nonsense"  bezeichnet. [@Grey2013] Die Berliner Interpretation schade der kreativen Freiheit.
 
 Heute muss ein Spiel nur zwei wichtige Features implementieren, um *like* Rogue zu sein, prozedural generierte Level und Permadeath. [@Brown2019] Das Genre ist daher nicht nur noch auf Rollenspiele in Labyrinthen begrenzt, sondern umfasst mittlerweile Spiele aus den unterschiedlichsten Genres wie Plattformer, Shooter oder Action-Adventures und vielen mehr. [@Wikipedia2020]
 
@@ -38,9 +38,9 @@ Abbildung \ref{pmd} zeigt einen Ausschnitt aus dem Startlevel einer Beispielimpl
 
 ## Regeln für gutes Level Design
 
-Der Begriff Level Design kann unterschiedlich interpretiert werden. Im Allgemeinen beschreibt der Begriff die Erstellung und Bearbeitungen von Spielwelten für Videospiele. [@Wikipedia2020a] Es gibt keine festen vorgaben dafür, welche Aspekte Teil des Level-Designs sind und welche bereits darüber hinausgehen. [@DevPlay2019] Im Rahmen dieser Arbeit beschreibt Level Design den örtlichen Aufbau der Spielwelt, die Platzierung von Gegnern, Items und anderen Objekten sowie die optische Gestaltung der Level, dabei ist nicht das Erstellen von Texturen gemeint ist, sondern die Verwendung dieser. 
+Der Begriff Level Design kann unterschiedlich interpretiert werden. Im Allgemeinen beschreibt der Begriff die Erstellung und Bearbeitungen von Spielwelten für Videospiele. [@Wikipedia2020a] Es gibt keine festen vorgaben dafür, welche Aspekte Teil des Level-Designs sind und welche bereits darüber hinausgehen. [@DevPlay2019] Im Rahmen dieser Arbeit beschreibt Level Design den örtlichen Aufbau der Spielwelt, die Platzierung von Gegnern, Items und anderen Objekten sowie die optische Gestaltung der Level, dabei ist nicht das Erstellen von Texturen gemeint, sondern die Verwendung dieser. 
 
-Auch wenn es viel Diskussion darüber gibt, ob Videospiele Kunst sind oder nicht, muss man den kreativen Schaffensprozess eingestehen.[@Petzold2019] Daher lassen sich für Videospiele auch keine festen Regeln definieren, wie bestimmte Designelemente zu sein haben. In diesem Abschnitt werden Regeln für gutes Level Design präsentiert. Sie sollten weder als objektive Maßstäbe noch als verpflichtende Gesetzte betrachtet werden, sondern vielmehr als Leitpfaden. Die Liste erhebt keinen Anspruch auf Allgemeingültigkeit, Korrektheit oder Vollständigkeit Sie wurde gezielt für die in dieser Arbeit betrachteten Probleme zusammengestellt. Zwar beschäftigt sich die Wissenschaft sehr wohl mit Videospielen und deren Level, jedoch nicht auf die Ausarbeitung objektiver Bewertungskriterien, daher basieren die Regeln dieser Liste auf Aussagen verschiedener Persönlichkeiten der Videospielbranche. Dabei ist zu bedenken, dass diese Branche dazu neigt einen Personenkult, um einige Entwickler aufzubauen. Auch wenn sich bei der Aufarbeitung der Regeln bemüht wurde, Aspekte zu wählen, die von unterschiedlichen Entwicklern als relevant betrachtet werden, muss in Betracht gezogen werden, dass viele Entwickler sich von den bekannten Persönlichkeiten beeinflusst haben lassen.
+Auch wenn es viel Diskussion darüber gibt, ob Videospiele Kunst sind oder nicht, muss man den kreativen Schaffensprozess respektieren.[@Petzold2019] Daher lassen sich für Videospiele auch keine festen Regeln definieren, wie bestimmte Designelemente zu sein haben. In diesem Abschnitt werden Regeln für gutes Level Design präsentiert. Sie sollten weder als objektive Maßstäbe noch als verpflichtende Gesetzte betrachtet werden, sondern vielmehr als Leitpfaden. Die Liste erhebt keinen Anspruch auf Allgemeingültigkeit, Korrektheit oder Vollständigkeit Sie wurde gezielt für die in dieser Arbeit betrachteten Probleme zusammengestellt. Zwar beschäftigt sich die Wissenschaft sehr wohl mit Videospielen und deren Level, jedoch nicht auf die Ausarbeitung objektiver Bewertungskriterien, daher basieren die Regeln dieser Liste auf Aussagen verschiedener Persönlichkeiten der Videospielbranche. Dabei ist zu bedenken, dass diese Branche dazu neigt einen Personenkult, um einige Entwickler aufzubauen. Auch wenn sich bei der Aufarbeitung der Regeln bemüht wurde, Aspekte zu wählen, die von unterschiedlichen Entwicklern als relevant betrachtet werden, muss in Betracht gezogen werden, dass viele Entwickler sich von den bekannten Persönlichkeiten beeinflusst haben lassen.
 
 Die Grundlagen der Regeln stammen aus Dan Taylors *Ten Principles of Good Level Design* [@Taylor2013] [@Taylor2018] und Tim Ryans *Beginning Level Design* [@Ryan1999] und wurden bei Bedarf um weitere Aspekte, Meinungen und Beispielen ergänzt. 
 
@@ -70,7 +70,7 @@ Da nicht jeder Spieler gleich gut beim spielen ist und die Vorlieben der Spieler
 
 > [... ] they (the players) might pick the easier option even though they could handle more challenge, and rob themselves of the best, and designer-intended experience [@Brown2016]
 
-Eine andere Möglichkeit zum balancen ist die Verwendung von dynamischen Schwierigkeitsgraden. Im Spiel *Resident Evil 4* werden mehr oder weniger Gegner platziert, abhängig davon ob der Spieler bisher besonders gut durch die Level gekommen ist oder oft gestorben ist und viel daneben schießt. [@Brown2015] Im Spiel Half-Life werden mehr Medikits platziert, wenn der Gegner wenig Lebenspunkte hat. [@Brown2016a] 
+Eine andere Möglichkeit zum balancen ist die Verwendung von dynamischen Schwierigkeitsgraden. Im Spiel *Resident Evil 4* werden mehr oder weniger Gegner platziert, abhängig davon ob der Spieler bisher besonders gut durch die Level gekommen ist oder oft gestorben. [@Brown2015] Im Spiel Half-Life werden mehr Medikits platziert, wenn der Spieler wenig Lebenspunkte hat. [@Brown2016a] 
 
 Es sollte beachtet werden, dass Spieler mit voranschreiten immer besser werden, daher sollten frühe Level deutlich einfacher sein als Level gegen Ende des Spiels. Dabei muss die Schwierigkeit der Level nicht linear steigen, es bietet sich an nach einem besonders schweren Level ein einfacheres Level einzubauen, um den Spieler Zeit zum Aufatmen zu lassen.
 
@@ -80,7 +80,7 @@ Es sollte beachtet werden, dass Spieler mit voranschreiten immer besser werden, 
 
 Risk and Reward beschreibt Momente im Spiel, bei den der Spieler eine besonders schwere Herausforderung lösen muss, dafür aber auch entsprechend belohnt wird. Diese stets optionalen Momente sollten in regelmäßigen Abständen auftauchen, um den Spieler vor eine interessante Entscheidung zu stellen, ob sie die Herausforderung annehmen oder lieber ablehnen möchten.
 
-Vor allem bei Rouge Like Spielen sollte es ständig zu solchen Momenten kommen, da diese hier einen erhöhten Nervenkitzel bieten. Jede Herausforderung könnte den Tod bedeuten und damit den permanenten Verlust des Fortschrittes. Die Frage, ob sich der Kampf wirklich lohnt und ob man das Risiko eingehen sollte, fällt hier umso schwerer. 
+Vor allem bei Rouge-Like Spielen sollte es ständig zu solchen Momenten kommen, da diese hier einen erhöhten Nervenkitzel bieten. Jede Herausforderung könnte den Tod bedeuten und damit den permanenten Verlust des Fortschrittes. Die Frage, ob sich der Kampf wirklich lohnt und ob man das Risiko eingehen sollte, fällt hier umso schwerer. 
 
 **Regel 4: Gute Level haben Risk and Reward Momente.** 
 
@@ -94,7 +94,7 @@ Der Begriff Pacing entstammt der Filmbranche und beschreibt die Spannungskurve d
 
 Auch Videospiele sollten darauf achten ihre Spannungskurve zu kontrollieren. Gutes Pacing sorgt dafür, dass ein Spiel nicht langweilig oder repetitiv wird.  [@Brown2018]
 
-\ref{zelda3} zeigt den Wüstenpalast aus dem Spiel *Zelda: A Link to the past*, wobei jeder Knoten ein eigener Raum ist. Um das Level zu bestehen, muss der Spieler den Boss im letzten Raum besiegen. Um zum Boss zu gelangen benötigt der Spieler das Item aus der großen Truhe die sich im Raum 'BigChest' befindet, um diese Truhe zu öffnen braucht er den großen Schlüssel aus dem 'BigKey' Raum. Das Level beginnt am Eingang. Das Level startet mit einem kurzen linearen Abschnitt (Knoten A und A1) um die Neugier des Spielers zu wecken. Danach folgt ein größeres Areal, in dem der Spieler sich frei bewegen und den Palast erkunden kann. (Knoten die mit B oder C gelabelt sind). Während dieser Erkundungsphase ist der Spannungsstechnische Tiefpunkt dieses Levels. Wenn der Spieler das Item aus der Truhe genommen hat, uns sich auf dem Weg zum Boss macht, muss er durch den Raum D gehen. Von nun an gibt es keine Abzweigungen mehr, die Räume sind kleiner und die Spannung nährt sich ihrem Höhepunkt an, bis sie schlussendlich beim Bosskampf ihren Peak erreicht und nach dem bezwingen des Bosses abfällt. 
+\ref{zelda3} zeigt den Wüstenpalast aus dem Spiel *Zelda: A Link to the past*. Um das Level zu bestehen, muss der Spieler den Boss im letzten Raum besiegen. Um zum Boss zu gelangen benötigt der Spieler das Item aus der großen Truhe die sich im Raum 'BigChest' befindet, um diese Truhe zu öffnen braucht er den großen Schlüssel aus dem 'BigKey' Raum. Das Level beginnt am 'Eingang'. Das Level startet mit einem kurzen linearen Abschnitt (Knoten A und A1) um die Neugier des Spielers zu wecken. Danach folgt ein größeres Areal, in dem der Spieler sich frei bewegen und den Palast erkunden kann. (Knoten die mit B oder C gelabelt sind). Während dieser Erkundungsphase ist der Spannungsstechnische Tiefpunkt dieses Levels. Wenn der Spieler das Item aus der Truhe genommen hat, uns sich auf dem Weg zum Boss macht, muss er durch den Raum D gehen. Von nun an gibt es keine Abzweigungen mehr, die Räume sind kleiner und die Spannung nährt sich ihrem Höhepunkt an, bis sie schlussendlich beim Bosskampf ihren Peak erreicht und nach dem bezwingen des Bosses abfällt. 
 
 
 ![Wüstenpalast aus Zelda 3 in Graphendarstellung \label{zelda3}](figs/chapter2/Zelda3Dungeon.png){width=100%}
@@ -107,13 +107,13 @@ Die einzelnen Level sollten sich stark voneinander unterscheiden. Auch wenn das 
 
 > [...] people don’t like playing the same level twice.[@Ryan1999]
 
-Variation in Gegner, Texturen und Strukturen helfen dabei die Abwechslung im Level zu gewährleisten und keine Langeweile aufkommen zu lassen. Wenn es längere Nebenpfade gibt, sollten es vermieden werden den Spieler dazu zu zwingen den gesamten Pfad zurückzulaufen (Backtracking), stattdessen sollte das Ende des Nebenpfades eine Abkürzung zurück zum Hauptpfad bieten. 
+Variation in Gegner, Texturen und Strukturen helfen dabei die Abwechslung im Level zu gewährleisten und keine Langeweile aufkommen zu lassen. Dies gilt auch wenn der Spieler einen Abschnitt im Spiel erneut ablaufen muss, sogenanntes Backtracking. Wenn es längere Nebenpfade gibt, sollte das Ende des Nebenpfades eine Abkürzung zurück zum Hauptpfad bieten. 
 
 **Regel 6: Gute Level sind einzigartig.** 
 
 ### Effizienz 
 
-Spieleentwicklung ist ein kostspieliges Unterfangen und bereits kleinere Produktionen können mehrere Millionen Dollar kosten. [@DevPlay2017] Daher ist die effiziente Nutzung von Ressourcen unabdingbar. Gute Level-Designer erstellen ein Set aus Modulen, verschiedenen Assets und Events. Diese Module können dann miteinander kombiniert und bei Bedarf angepasst werden. Aus einer Handvoll solcher Module lassen sich bereits viele verschiedene Level und Situationen erzeugen. 
+Spieleentwicklung ist ein kostspieliges Unterfangen und bereits kleinere Produktionen können mehrere Millionen Dollar kosten. [@DevPlay2017] Daher ist die effiziente Nutzung von Ressourcen unabdingbar. Gute Level-Designer erstellen ein Set aus Modulen, mit verschiedenen Assets und Events. Diese Module können dann miteinander kombiniert und bei Bedarf angepasst werden. Aus einer Handvoll solcher Module lassen sich bereits viele verschiedene Level und Situationen erzeugen. 
 
 **Regel 7: Gute Level sind effizient in der Herstellung.** 
 
@@ -143,14 +143,14 @@ Um im weiteren Verlauf der Arbeit die verschiedenen Algorithmen zur prozeduralen
 |  | Können die Level manipuliert werden? |Kann die Struktur des Levels im Spiel manipuliert werden, zum Beispiel durch Bomben?|
 | Gute Level sind gut gebalanced | Kann das Balancing vom Entwickler angepasst werden? |Kann der Entwickler im laufenden Spiel bestimmen wie schwer das Level sein soll?|
 | Gute Level haben Risk and Reward Momente | Sind Nebenpfade möglich? |Erzeugt der Generator Level, die Wege abseits des kritischen Pfades haben?|
-|  | Können Items und Monster gezielt platziert werden? |Nebenpfade und kritische Pfade müssen für den Entwickler unterscheidbar sein.|
+|  | Können Items und Monster gezielt platziert werden? |Nebenpfade und kritische Pfade müssen für den Entwickler unterscheidbar sein. Jeder Knoten muss gezielt ansprechbar sein.|
 | Gute Level steuern das Pacing des Spiels | Erzeugt der Algorithmus Level mit abwechslungsreichen Pacing? |Haben die Level unterschiedliche Strukturen, die das Pacing beeinflusse (vgl. \ref{zelda3})?|
 |  | Kann das Pacing kontrolliert werden? |Kann der Entwickler gezielt bestimmte Strukturen konfigurieren?|
 | Gute Level sind einzigartig | Unterscheiden die Level sich ausreichend im Aufbau? ||
 | | Unterscheiden die Level sich ausreichend im Aussehen? ||
 |  | Kann Backtracking vermieden werden? ||
-| Gute Level sind effizient in der Herstellung. | Kommt der Algorithmus ohne Input Daten aus? |Input Daten sind in diesem Sinne Graphen oder Layouts für Räume.|
-| | Können verschiedene einzigartige Level aus denselben Input Daten generiert werden? |Wenn keine Input-Daten benötigt werden, 1 Punkt.|
+| Gute Level sind effizient in der Herstellung. | Kommt der Algorithmus ohne Input-Daten aus? |Input Daten sind in diesem Sinne Graphen oder Layouts für Räume.|
+| | Können verschiedene einzigartige Level aus denselben Input-Daten generiert werden? |Wenn keine Input-Daten benötigt werden, 1 Punkt.|
 
 : Tabelle mit den Bewertungskriterien für prozedurale Algorithmen. \label{bkt}
 
@@ -164,7 +164,7 @@ $$
 G = L * ( \sum P_{i})
 $$
 
-
+: Formel zur Berechnung der Güte eines Level. 
 
 ## Analyse der Ausgangssituation 
 
