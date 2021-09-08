@@ -12,7 +12,7 @@ Der Begriff prozedurale Generierung, auch prozedurale Synthese genannt, beschrei
 > algorithms incorporate random numbers, they are never truly random, or
 > at least not as random as that term implies.[@Beca2017]
 
-Die Umsetzung von prozeduralen Algorithmen zur Erzeugung von Level ist allerdings ein komplexes Unterfangen. Viele Aspekte, die beim manuellen Erstellen von Level einfach zu überprüfen sind, wie die Lösbarkeit der Level, müssen gewährleistet und automatisch getestet werden. Das Finden und beheben von Fehlern erschwert sich dadurch, dass ein Fehler unter Umständen nur in einen bestimmten Level aufkommt oder ein Fehler ist zwar in den getesteten Level behoben, tritt aber in nicht getesteten Level wieder auf. Prozedurale Algorithmen können durch die verwendeten Muster schnell repetitiv wirken, bei der Implementierung ist also auch darauf zu achten, dass die Muster gut verändert werden und es eine Vielzahl an unterschiedlichen Zufallsvariablen gibt. [@Beca2017]
+Die Umsetzung von prozeduralen Algorithmen zur Erzeugung von Level ist allerdings ein komplexes Unterfangen. Viele Aspekte, die beim manuellen Erstellen von Level einfach zu überprüfen sind, wie die Lösbarkeit der Level, müssen gewährleistet und automatisch getestet werden. Das Finden und beheben von Fehlern erschwert sich dadurch, dass ein Fehler unter Umständen nur in einen bestimmten Level aufkommt oder ein Fehler ist zwar in den getesteten Level behoben, tritt aber in nicht getesteten Level wieder auf. Fehler müssen daher nicht im Level behoben werden sondern im Algorithmus. Prozedurale Algorithmen können durch die verwendeten Muster schnell repetitiv wirken, bei der Implementierung ist also auch darauf zu achten, dass die Muster gut verändert werden und es eine Vielzahl an unterschiedlichen Zufallsvariablen gibt. [@Beca2017]
 
 Ein gut konzeptionierter prozedurale Algorithmus kann auf Knopfdruck hunderte verschiedener Level ausspucken, wodurch die Wiederspielbarkeit nahezu unendlich ist. Da die Entwicklung und Konzeptionierung eines solchen Algorithmus komplex ist, lohnt er sich vor allem bei Spielen die auf viel Abwechslung bei zeitgleichen großen Spielumfang wert legen um die Kosten und den Zeitaufwand zu reduzieren.[@Software2007] 
 
@@ -34,11 +34,23 @@ Ein simpler prozeduraler Algorithmus zur Erzeugung von Level ist der *Random Wal
 
 ## Graphen zur Darstellung von Level
 
-- Wie verwendet man Graphen zur darstellung von Level?
-- Warum ist das gut?
-- Welche Vortiele bietet das?
-- Welche Nachteile und Grenzen gibt es?
-- Warum mach ich das in dieser arbeit so?
+In dieser Arbeit werden Level mithilfe von Graphen dargestellt. Daher werden in diesen Abschnitt alle Annahmen und Definitionen präsentiert, welche, so nicht expliziert erwähnt, für alle Level-Graphen dieser Arbeit gelten.
+
+Ein Level-Graph $G$ besteht aus einer Menge an Knoten $V(G)$ und Kanten zwischen diesen Knoten $E(G)$. Knoten sind Räume, dabei spielt die Größe, der Inhalt und die Geometrie des Raumes keine Rolle. Kanten zeigen Verbindungen zwischen Räume, diese können entweder dadurch entstehen, dass die Räume aneinander anliegen und mit einer Tür verbunden sind oder die Kanten können Flure sein, welche die beiden Räume miteinander verbindet. Sofern die Art und Weise wie die Verbindung auftritt nicht expliziert benannt wird, spielt sie keine weitere Rolle. Verbindungen können entweder gerichtet sein, dann kann ein Weg zwar von einem Raum in den anderen Raum führen, aber nicht zurück oder ungerichtet, dann kann ein Weg beidseitig passiert werden. Gerichtete Verbindungen werden durch einen Pfeil dargestellt, ungerichtete durch eine blanke Linie. Level ist also eine Menge an Räumen, die miteinander verbunden sind. 
+
+Da diese Arbeit sich auf 2D-Level konzentriert, müssen alle Level-Graphen planar sein. Sich kreuzende Kanten stellen im zweidimensionalen Raum Verbindungen der Kanten da. 
+
+\ref{dam} zeigt ein Level aus dem Spiel *Dragon Age: Origins* in der Kartenansicht aus dem Spiel. Dieses Level wurde in \ref{dag} in Graphendarstellung gebracht. Da das Themenfeld der Graphentheorie besonders gut erforscht ist, können nun viele der bekannten Verfahren genutzt werden, um den Level-Graph zu analysieren.
+
+**TODO: evlt verfahren benennen? Andererseits werden die vermutlich auch in der Modellierung zum tragen kommen und da passen die dann irgendwie besser hin** 
+
+Die roten Kanten in \ref{dag} zeigen den kritischen Pfad. Der kritische Pfad ist der Weg, den der Spieler vom Start des Level (Knoten 1) bis zum Ende des Level (Knoten 20) gehen muss. Alle Knoten, die der kritische Pfad passiert, werden also vom Spieler betreten werden müssen. Durch dies Wissen können Entscheidungen im Design getroffen werden, welche Inhalte der Spieler passieren muss und welche Hindernisse ihn auf den kritischen Pfad erwarten. Daraus ergibt sich auch, dass alle anderen Knoten optional sind, entsprechend können auch hier Designentscheidungen getroffen werden. Anhand des Graphen lässt sich auch feststellen, ob ein bestimmter Raum erreichbar ist ohne einen anderen zu betreten. So könnte der Zugang zu Raum 6 verschlossen sein und der Schlüssel in Raum 3 liegen. Mittels der Grafen-Analyse kann nur geschaut werden, ob Raum 3 betreten werden kann, ohne dabei Raum 6 zu passieren. Die Pfadlänge kann auch ermittelt werden, so können besonders lange Nebenpfade erkannt werden, bei Bedarf vermieden werden oder durch Abkürzungen wieder mit dem Hauptpfad verbunden werden. [Mourato2013]
+
+![Level aus dem Spiel Dragon Age: Origins. [@Ma2014] \label{dam}](figs/chapter2/damap.png){width=100%}
+
+![\ref{dam} in Graphendarstellung \label{dag}](figs/chapter2/dragonageasgraph.png){width=100%}
+
+Diese Art der Darstellung eignet sich vor allem für zweidimensionale Spiele, da auch der Graph zweidimensional ist. Zwar lassen sich auch 3D-Level mit Graphen darstellen, dies erhöht jedoch die Komplexität und verliert an Übersicht. Auch zu beachten ist, dass der Graph nur die Struktur des Levels darstellt, jedoch nicht die Geometrie oder das Aussehen.
 
 ## Rouge-Like
 

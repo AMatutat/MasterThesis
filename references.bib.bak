@@ -190,4 +190,68 @@
   year    = {2018},
 }
 
+@Online{Wikipedia2019,
+  author  = {Wikipedia},
+  title   = {Prozedurale Synthese},
+  url     = {https://de.wikipedia.org/wiki/Prozedurale_Synthese},
+  urldate = {2021-09-08},
+  year    = {2019},
+}
+
+@Online{Beca2017,
+  author  = {Scott Beca},
+  title   = {Procedural generation: a primer for game devs},
+  url     = {https://www.gamedeveloper.com/design/procedural-generation-a-primer-for-game-devs},
+  urldate = {2021-09-07},
+  year    = {2017},
+}
+
+@Online{Lee2014,
+  author  = {Joel Lee},
+  title   = {How Procedural Generation Took Over The Gaming Industry},
+  url     = {https://www.makeuseof.com/tag/procedural-generation-took-gaming-industry/},
+  urldate = {2021-09-07},
+  year    = {2014},
+}
+
+@Online{Remo2008,
+  author  = {Chris Remo},
+  title   = {MIGS: Far Cry 2's Guay On The Importance Of Procedural Content},
+  url     = {https://www.gamedeveloper.com/pc/migs-i-far-cry-2-i-s-guay-on-the-importance-of-procedural-content},
+  urldate = {2021-09-08},
+  year    = {2008},
+}
+
+@Online{Software2007,
+  author  = {Introversion Software},
+  title   = {Procedural Content Generation},
+  url     = {https://www.gamecareerguide.com/features/336/procedural_content.php?page=1},
+  urldate = {2021-09-08},
+  year    = {2007},
+}
+
+@Online{Wikipedia2020b,
+  author  = {Wikipedia},
+  title   = {Drunkard’s Walk},
+  url     = {https://de.wikipedia.org/wiki/Drunkard’s_Walk},
+  urldate = {2021-09-08},
+  year    = {2020},
+}
+
+@Online{roguebasin2014,
+  author  = {roguebasin},
+  title   = {Random Walk Cave Generation},
+  url     = {http://www.roguebasin.com/index.php?title=Random_Walk_Cave_Generation},
+  urldate = {2021-09-08},
+  year    = {2014},
+}
+
+@Online{Hagen2019,
+  author  = {Kevin Hagen},
+  title   = {Synthese generierter und handgebauterWelten mittels WaveFunctionCollapse},
+  url     = {https://users.informatik.haw-hamburg.de/~schumann/BachelorArbeitKevinHagen.pdf},
+  urldate = {2021-09-08},
+  year    = {2019},
+}
+
 @Comment{jabref-meta: databaseType:biblatex;}
