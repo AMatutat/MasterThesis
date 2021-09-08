@@ -1,6 +1,6 @@
 # Grundlagen
 
-In diesem Kapitel werden die benötigten Grundlagen für die Arbeit vermittelt. Es wird das PM-Dungeon und das Genre Rouge-Like als Anwendungsumgebung beschrieben. Danach wird die Graphendarstellung für Level eingeführt und anschließend sechs Regeln für gutes Level Design erläutert. Der Begriff der Prozeduralen Generierung wird umfangreicher definiert und mit Beispielen erläutert. Mithilfe der vorgestellten Regeln werden dann Bewertungskriterien für prozedurale Level-Generatoren für Rouge-Like Spiele aufgestellt. Das Kapitel endet mit der Analyse und Bewertung der aktuellen Level des PM-Dungeons. 
+**TODO EINLEITUNG** 
 
 ## Rouge-Like
 
@@ -22,11 +22,43 @@ Heute muss ein Spiel nur zwei wichtige Features implementieren, um *like* Rogue 
 
 ## Die Anwendungsumgebung 
 
-Im praktischen Anteil des Moduls Programmiermethoden sollen die Studenten das gelernte Wissen aus dem theoretischen Anteil anwenden und vertiefen, dafür bekommen sie in regelmäßigen Abständen Aufgaben gestellt. Um die Aufgaben in einen gemeinsamen Kontext zu bringen und zeitgleich die Motivation der Studenten zu steigern, wurde 2021 das PM-Dungeon eingeführt. Über den Verlauf des Semesters entwickeln die Studenten ihr eigenes Rouge-Like Rollenspiel. Zwar stehen weiterhin die Lehrinhalte im Fokus, dennoch haben die Studenten viele Freiheiten um ihr Spiel nach ihren Wünschen zu gestalten. Sie konzeptionieren eigenständig das Verhalten von Monstern, implementieren Schatztruhen und Items sowie unterschiedliche Fähigkeiten, die der Spieler im Laufe des Spiels freischalten kann. Für die Entwicklung des Spiels bekommen die Studenten ein extra dafür entwickeltes Framework zur Verfügung gestellt, das PM-Dungeon-Framework. Das PM-Dungeon-Framework erweitert das libGDX-Framework \footnote{libGDX: https://libgdx.com} um vereinfachte Schnittstellen zur grafischen Darstellung. Die Studenten können sich daher rein auf die Implementierung der Spielfeatures konzentrieren.
+Im praktischen Anteil des Moduls Programmiermethoden sollen die Studenten das gelernte Wissen aus dem theoretischen Anteil anwenden und vertiefen, dafür bekommen sie in regelmäßigen Abständen Aufgaben gestellt. Um die Aufgaben in einen gemeinsamen Kontext zu bringen und zeitgleich die Motivation der Studenten zu steigern, wurde 2021 das PM-Dungeon eingeführt. Über den Verlauf des Semesters entwickeln die Studenten ihr eigenes Rouge-Like Rollenspiel. Zwar stehen weiterhin die Lehrinhalte im Fokus, dennoch haben die Studenten viele Freiheiten um ihr Spiel nach ihren Wünschen zu gestalten. 
+
+Sie konzeptionieren eigenständig das Verhalten von Monstern, implementieren Schatztruhen und Items sowie unterschiedliche Fähigkeiten, die der Spieler im Laufe des Spiels freischalten kann. Für die Entwicklung des Spiels bekommen die Studenten ein extra dafür entwickeltes Framework zur Verfügung gestellt, das PM-Dungeon-Framework. Das PM-Dungeon-Framework erweitert das libGDX-Framework \footnote{libGDX: https://libgdx.com} um vereinfachte Schnittstellen zur grafischen Darstellung. Die Studenten können sich daher rein auf die Implementierung der Spielfeatures konzentrieren.
 
 ![Ausschnitt aus dem PM-Dungeon \label{pmd}](figs/chapter2/pmd.png){width=100%}
 
 Abbildung \ref{pmd} zeigt einen Ausschnitt aus dem Startlevel einer Beispielimplementierung des PM-Dungeons. Die Spielfigur (grüner Kreis) muss mithilfe der Leiter (blauer Kreis) in die nächste Ebene gebracht werden. Auf den Weg dorthin kann der Spieler die Monster (roter Kreis) töten, um Erfahrungspunkte zu sammeln oder Items zu finden. Sowohl die Spielerposition als auch die Position der Monster werden zu Beginn des Levels zufällig bestimmt. 
+
+## Prozedurale Generierung
+
+Der Begriff prozedurale Generierung, auch prozedurale Synthese genannt, beschreibt im Kontext der Videospielentwicklung die Kombination aus handgebauten Inhalten und Algorithmen, um verfahrensmäßig verschiedene Inhalte zu generieren.[@Wikipedia2019] Prozedurale Generierung kann unter anderem genutzt werden, um Texturen, Items, Musik und Soundeffekte oder Level zu erzeugen. Dabei erzeugen die Algorithmen die Inhalte nicht zufällig, sondern greifen auf Daten und Parameter zurück, welche dann miteinander kombiniert werden um den Inhalt zu generieren. Laut Definition sind prozedurale Algorithmen deterministisch. Bei gleicher Eingabe erzeugen sie immer die gleiche Ausgabe. [@Beca2017] [@Lee2014] [@Remo2008]
+
+> In general computing terms, procedural generation is any technique that
+> creates data algorithmically as opposed to manually. It may also be called
+> random generation, but this is an over-simplification: although procedural
+> algorithms incorporate random numbers, they are never truly random, or
+> at least not as random as that term implies.[@Beca2017]
+
+Die Umsetzung von prozeduralen Algorithmen zur Erzeugung von Level ist allerdings ein komplexes Unterfangen. Viele Aspekte, die beim manuellen Erstellen von Level einfach zu überprüfen sind, wie die Lösbarkeit, müssen gewährleistet und automatisch getestet werden. Das Finden und beheben von Fehlern erschwert sich dadurch, dass ein Fehler unter Umständen nur in einen bestimmten Level aufkommt, dieses aber nicht wieder aufrufbar ist oder ein Fehler ist zwar in den getesteten Level behoben, tritt aber in nicht getesteten Level wieder auf. Prozedurale Algorithmen können durch die verwendeten Muster schnell repetitiv wirken, bei der Implementierung ist also auch darauf zu achten, dass die Muster gut verändert werden und es eine Vielzahl an unterschiedlichen Zufallsvariablen gibt. Außerdem ist es durch den hohen Zufall schwierig eine stabile Schwierigkeitskurve zu gewährleisten.[@Beca2017]
+
+Ein gut konzeptionierter prozedurale Algorithmus kann auf Knopfdruck hunderte verschiedener Level ausspucken, wodurch die Wiederspielbarkeit nahezu unendlich ist. Da die Entwicklung und Konzeptionierung eines solchen Algorithmus komplex ist, lohnt er sich vor allem bei Spielen die auf viel Abwechslung bei zeitgleichen großen Spielumfang wert legen um die Kosten und den Zeitaufwand zu reduzieren.[@Software2007] 
+
+Ein simpler prozeduraler Algorithmus zur Erzeugung von Level ist der *Random Walk* oder auch *Drunkard's Walk*. Eigentlich wird dieser zur Generierung nicht deterministischer Zeitreihen, wie Aktienkurse in der Finanzmathematik verwendet, kann aber auch höhlenartige Level erzeugen.[@Wikipedia2020b] \ref{imdrunk} zeigt den Algorithmus als Pseudocode. Das Level wird als 2D-Array dargestellt und jeder Index im Array ist ein Feld im Level. Es gibt nicht betretbare Felder (Wände) und betretbare Felder (Böden). Zu Beginn wird ein zufälliges Feld als Startpunkt ausgewählt und zu einem Bodenfeld gemacht. Von diesem Feld aus wird nun in eine zufällige Richtung gegangen und das neue Feld wird wieder zu einem Bodenfeld gemacht. Dieser Prozess wird so lange wiederholt, bis die gewünschte Anzahl an Bodenfeldern vorhanden ist.  Der Vorteil des Random Walk Algorithmus liegt darin, dass sichergestellt werden kann, dass alle Bodenfelder auch erreichbar sind, da sie gezwungenermaßen alle miteinander verbunden sind. Allerdings bietet der Algorithmus abseits der gewünschten Bodenfelder keine Konfigurationsmöglichkeiten und die erzeugten Level ähneln sich von der Struktur sehr. \ref{drunkexample} zeigt ein Beispiel wie ein Dungeon aussehen könnte welches durch den Random Walk erzeugt wurde.
+
+\begin{lstlisting}[language=python, label=imdrunk, caption={Pseudocode Random Walk}  ]
+	erstelle ein Level in dem alle Felder Wände sind
+	wähle ein Feld als Startpunkt aus
+	verwandel das gewählte Feld in einen Boden
+	solange noch nicht genügen Boden im Level existiert
+    	mache ein Schritt in eine zufällige Richtung
+    	wenn das neue Feld eine Wand ist
+        	verwandel das Feld in einen Boden
+\end{lstlisting}
+
+**TODO QUELLE  [@roguebasin2014] **
+
+![Beispielergebnis eines Random Walk. Schwarze Flächen sind Wände, weiße Flächen sind Böden. [@Hagen2019] \label{drunkexample}](figs/chapter2/drunk.png){width=100%}
 
 ## Graphen zur Darstellung von Level
 
@@ -96,8 +128,9 @@ Auch Videospiele sollten darauf achten ihre Spannungskurve zu kontrollieren. Gut
 
 \ref{zelda3} zeigt den Wüstenpalast aus dem Spiel *The Legend of Zelda: A Link to the past*. Um das Level zu bestehen, muss der Spieler den Boss im letzten Raum besiegen. Um zum Boss zu gelangen benötigt der Spieler das Item aus der großen Truhe die sich im Raum 'BigChest' befindet, um diese Truhe zu öffnen braucht er den großen Schlüssel aus dem 'BigKey' Raum. Das Level beginnt am 'Eingang'. Das Level startet mit einem kurzen linearen Abschnitt (Knoten A und A1) um die Neugier des Spielers zu wecken. Danach folgt ein größeres Areal, in dem der Spieler sich frei bewegen und den Palast erkunden kann. (Knoten die mit B oder C gelabelt sind). Während dieser Erkundungsphase ist der Spannungsstechnische Tiefpunkt dieses Levels. Wenn der Spieler das Item aus der Truhe genommen hat, uns sich auf dem Weg zum Boss macht, muss er durch den Raum D gehen. Von nun an gibt es keine Abzweigungen mehr, die Räume sind kleiner und die Spannung nährt sich ihrem Höhepunkt an, bis sie schlussendlich beim Bosskampf ihren Peak erreicht und nach dem bezwingen des Bosses abfällt. 
 
-
 ![Wüstenpalast aus The Legend of Zelda 3 in Graphendarstellung \label{zelda3}](figs/chapter2/Zelda3Dungeon.png){width=100%}
+
+**TODO Besser Darstellen, evtl mit farblicne Kreisen o.ä** 
 
 **Regel 5: Gute Level steuern das Pacing des Spiels.** 
 
@@ -116,36 +149,6 @@ Variation in Gegner, Texturen und Strukturen helfen dabei die Abwechslung im Lev
 Spieleentwicklung ist ein kostspieliges Unterfangen und bereits kleinere Produktionen können mehrere Millionen Dollar kosten. [@DevPlay2017] Daher ist die effiziente Nutzung von Ressourcen unabdingbar. Gute Level-Designer erstellen ein Set aus Modulen, mit verschiedenen Assets und Events. Diese Module können dann miteinander kombiniert und bei Bedarf angepasst werden. Aus einer Handvoll solcher Module lassen sich bereits viele verschiedene Level und Situationen erzeugen. 
 
 **Regel 7: Gute Level sind effizient in der Herstellung.** 
-
-## Prozedurale Generierung
-
-Der Begriff prozedurale Generierung, auch prozedurale Synthese genannt, beschreibt im Kontext der Videospielentwicklung die Kombination aus handgebauten Inhalten und Algorithmen, um verfahrensmäßig verschiedene Inhalte zu generieren.[@Wikipedia2019] Prozedurale Generierung kann unter anderem genutzt werden, um Texturen, Items, Musik und Soundeffekte oder Level zu erzeugen. Dabei erzeugen die Algorithmen die Inhalte nicht vollständig selbst, sondern werden mit Input-Daten ausgestattet, welche dann je nach Implementierung miteinander kombiniert werden. Laut Definition sind prozedurale Algorithmen deterministisch. Bei gleicher Eingabe erzeugen sie daher immer die gleiche Ausgabe. Prozedurale Algorithmen lassen sich aber auch um Zufallselemente erweitern, um aus denselben Input-Daten viele unterschiedliche Inhalte zu erzeugen.[@Beca2017] [@Lee2014] [@Remo2008]
-
-> In general computing terms, procedural generation is any technique that
-> creates data algorithmically as opposed to manually. It may also be called
-> random generation, but this is an over-simplification: although procedural
-> algorithms incorporate random numbers, they are never truly random, or
-> at least not as random as that term implies.[@Beca2017]
-
-Die Umsetzung von prozeduralen Algorithmen zur Erzeugung von Level ist allerdings ein komplexes Unterfangen. Viele Aspekte, die beim manuellen Erstellen von Level einfach zu überprüfen sind, wie die Lösbarkeit, müssen gewährleistet und automatisch getestet werden. Das Finden und beheben von Fehlern erschwert sich dadurch, dass ein Fehler unter Umständen nur in einen bestimmten Level aufkommt, dieses aber nicht wieder aufrufbar ist oder ein Fehler ist zwar in den getesteten Level behoben, tritt aber in nicht getesteten Level wieder auf. Prozedurale Algorithmen können durch die verwendeten Muster schnell repetitiv wirken, bei der Implementierung ist also auch darauf zu achten, dass die Muster gut verändert werden und es eine Vielzahl an unterschiedlichen Zufallsvariablen gibt. Außerdem ist es durch den hohen Zufall schwierig eine stabile Schwierigkeitskurve zu gewährleisten.[@Beca2017]
-
-Ein gut konzeptionierter prozedurale Algorithmus kann auf Knopfdruck hunderte verschiedener Level ausspucken, wodurch die Wiederspielbarkeit nahezu unendlich ist. Da die Entwicklung und Konzeptionierung eines solchen Algorithmus komplex ist, lohnt er sich vor allem bei Spielen die auf viel Abwechslung bei zeitgleichen großen Spielumfang wert legen um die Kosten und den Zeitaufwand zu reduzieren.[@Software2007] 
-
-Ein simpler prozeduraler Algorithmus zur Erzeugung von Level ist der *Random Walk* oder auch *Drunkard's Walk*. Eigentlich wird dieser zur Generierung nicht deterministischer Zeitreihen, wie Aktienkurse in der Finanzmathematik verwendet, kann aber auch höhlenartige Level erzeugen.[@Wikipedia2020b] \ref{imdrunk} zeigt den Algorithmus als Pseudocode. Das Level wird als 2D-Array dargestellt und jeder Index im Array ist ein Feld im Level. Es gibt nicht betretbare Felder (Wände) und betretbare Felder (Böden). Zu Beginn wird ein zufälliges Feld als Startpunkt ausgewählt und zu einem Bodenfeld gemacht. Von diesem Feld aus wird nun in eine zufällige Richtung gegangen und das neue Feld wird wieder zu einem Bodenfeld gemacht. Dieser Prozess wird so lange wiederholt, bis die gewünschte Anzahl an Bodenfeldern vorhanden ist.  Der Vorteil des Random Walk Algorithmus liegt darin, dass sichergestellt werden kann, dass alle Bodenfelder auch erreichbar sind, da sie gezwungenermaßen alle miteinander verbunden sind. Allerdings bietet der Algorithmus abseits der gewünschten Bodenfelder keine Konfigurationsmöglichkeiten und die erzeugten Level ähneln sich von der Struktur sehr. \ref{drunkexample} zeigt ein Beispiel wie ein Dungeon aussehen könnte welches durch den Random Walk erzeugt wurde.
-
-\begin{lstlisting}[language=python, label=imdrunk, caption={Pseudocode Random Walk}  ]
-	erstelle ein Level in dem alle Felder Wände sind
-	wähle ein Feld als Startpunkt aus
-	verwandel das gewählte Feld in einen Boden
-	solange noch nicht genügen Boden im Level existiert
-    	mache ein Schritt in eine zufällige Richtung
-    	wenn das neue Feld eine Wand ist
-        	verwandel das Feld in einen Boden
-\end{lstlisting}
-
-**TODO QUELLE  [@roguebasin2014] **
-
-![Beispielergebnis eines Random Walk. Schwarze Flächen sind Wände, weiße Flächen sind Böden. [@Hagen2019] \label{drunkexample}](figs/chapter2/drunk.png){width=100%}
 
 ## Bewertungsschema
 
@@ -182,6 +185,8 @@ $$
 
 
 ## Analyse der Ausgangssituation 
+
+**TODO Besser erklären, wirkt noch total "ja ist halt so"** 
 
 Aktuell besitzt das PM-Dungeon keinen eigenen Level-Generator, stattdessen werden vier Level mitgeliefert. Um die Notwendigkeit eines eigenen prozeduralen Generators für das PM-Dungeon zu begründen, wird im Folgenden die Güte der aktuellen Level Situation bewertet. 
 
