@@ -254,4 +254,19 @@
   year    = {2019},
 }
 
+@Online{Ma2014,
+  author  = {Chongyang Ma},
+  title   = {Game Level Layout from Design Specification},
+  url     = {http://chongyangma.com/publications/gl/2014_gl_preprint.pdf},
+  urldate = {2021-09-08},
+  year    = {2014},
+}
+
+@Article{Mourato2013,
+  author       = {Fausto Mourato},
+  date         = {2013},
+  journaltitle = {International Journal of Creative Interfaces and Computer Graphics},
+  title        = {Using Graph-Based Analysis to Enhance Automatic Level Generation for Platform Videogames},
+}
+
 @Comment{jabref-meta: databaseType:biblatex;}
