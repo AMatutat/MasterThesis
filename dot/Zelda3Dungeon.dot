@@ -1,11 +1,20 @@
 digraph Zelda3Dungeon {
-    subgraph Anfang {   
+    subgraph cluster_0 {   
         edge [dir=none]
-
+        color=blue    
+        
+        Eingang [label="Eingang"]
+        A [label=""]
+        A1 [label=""]
         Eingang -> A 
- 
-        ## Anfang und oben 
-         A -> A1
+        A -> A1
+    }
+    subgraph cluster_1 {
+        edge [dir=none]
+        color=green
+        node[label=""]
+
+        
          A1 -> B
          A1 -> C
          A1 -> A2
@@ -28,7 +37,17 @@ digraph Zelda3Dungeon {
 
     } 
       
-    subgraph BossRush{
+    subgraph cluster_2{
+        color=red
+        D [label=""]
+        D1 [label=""]
+        D2 [label=""]
+        D3 [label=""]
+        D4 [label=""]
+        D5 [label=""]
+        D6 [label=""]
+        
+        
         D -> D1 -> D2 -> D3 -> D4 -> D5 -> D6 -> Boss
  
     }
