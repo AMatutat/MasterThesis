@@ -1,6 +1,6 @@
 # Grundlagen
 
-**TODO EINLEITUNG** 
+In diesem Kapitel werden die verschiedenen Grundlagen zum Verstehen dieser Arbeit erläutert. Zuerst wird der Begriff der Prozeduralen Generierung weiter ausgeführt und im Kontext dieser Arbeit spezifiziert. Es folgt eine Erklärung der grapahenbasierten Darstellung von Videospiellevel sowie deren Vorteile. Um den Anwendungsfall für diese Arbeit besser nachvollziehen zu können, wird danach das Genre der Rogue-Like Videospiele und das PM-Dungeon als Vertreter dieses Genres vorgestellt. Da sich diese Arbeit auf die Generierung von Level fokussiert, werden in diesem Kapitel verschiedene Regeln für gutes Level-Design aufgestellt, welche dann genutzt werden, um Bewertungskriterien abzuleiten, die im weiteren Verlauf der Arbeit genutzt werden, um die verschiedenen Algorithmen miteinander vergleichen zu können. Das Kapitel endet mit einer Analyse des aktuellen Standes der Level im PM-Dungeon. 
 
 ## Prozedurale Generierung
 
