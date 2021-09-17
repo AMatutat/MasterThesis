@@ -16,7 +16,7 @@ Die Umsetzung von prozeduralen Algorithmen zur Erzeugung von Level ist ein kompl
 
 Ein gut konzeptionierter prozedurale Algorithmus kann auf Knopfdruck hunderte verschiedener Level erzeugen, wodurch die Wiederspielbarkeit nahezu unendlich ist. Da die Entwicklung und Konzeptionierung eines solchen Algorithmus komplex ist, lohnt er sich vor allem bei Spielen die auf viel Abwechslung bei zeitgleichen großen Spielumfang wert legen um die Kosten und den Zeitaufwand zu reduzieren.[@Software2007] 
 
-Ein simpler prozeduraler Algorithmus zur Erzeugung von Level ist der *Random Walk* oder auch *Drunkard's Walk*. Eigentlich wird dieser zur Generierung nicht deterministischer Zeitreihen, wie Aktienkurse in der Finanzmathematik verwendet, kann aber auch höhlenartige Level erzeugen.[@Wikipedia2020b] **\ref{imdrunk}** zeigt den Algorithmus als Pseudocode. Das Level wird als 2D-Array dargestellt und jeder Index im Array ist ein Feld im Level. Es gibt nicht betretbare Felder (Wände) und betretbare Felder (Böden). Zu Beginn wird ein zufälliges Feld als Startpunkt ausgewählt und zu einem Bodenfeld gemacht. Von diesem Feld aus wird nun in eine zufällige Richtung gegangen und das neue Feld wird wieder zu einem Bodenfeld umgewandelt. Dieser Prozess wird so lange wiederholt, bis die gewünschte Anzahl an Bodenfeldern vorhanden ist.  Der Vorteil des Random Walk Algorithmus liegt darin, dass sichergestellt werden kann, dass alle Bodenfelder auch erreichbar sind, da sie gezwungenermaßen alle miteinander verbunden sind. Allerdings bietet der Algorithmus abseits der gewünschten Bodenfelder keine Konfigurationsmöglichkeiten und die erzeugten Level ähneln sich von der Struktur sehr. \ref{drunkexample} zeigt ein Beispiel wie ein Dungeon aussehen könnte welches durch den Random Walk erzeugt wurde.
+Ein simpler prozeduraler Algorithmus zur Erzeugung von Level ist der *Random Walk* oder auch *Drunkard's Walk*. Eigentlich wird dieser zur Generierung nicht deterministischer Zeitreihen, wie Aktienkurse in der Finanzmathematik verwendet, kann aber auch höhlenartige Level erzeugen.[@Wikipedia2020b] Listing **\ref{imdrunk}** zeigt den Algorithmus als Pseudocode. Das Level wird als 2D-Array dargestellt und jeder Index im Array ist ein Feld im Level. Es gibt nicht betretbare Felder (Wände) und betretbare Felder (Böden). Zu Beginn wird ein zufälliges Feld als Startpunkt ausgewählt und zu einem Bodenfeld gemacht. Von diesem Feld aus wird nun in eine zufällige Richtung gegangen und das neue Feld wird wieder zu einem Bodenfeld umgewandelt. Dieser Prozess wird so lange wiederholt, bis die gewünschte Anzahl an Bodenfeldern vorhanden ist.  Der Vorteil des Random Walk Algorithmus liegt darin, dass sichergestellt werden kann, dass alle Bodenfelder auch erreichbar sind, da sie gezwungenermaßen alle miteinander verbunden sind. Allerdings bietet der Algorithmus abseits der gewünschten Bodenfelder keine Konfigurationsmöglichkeiten und die erzeugten Level ähneln sich von der Struktur sehr. Abbildung \ref{drunkexample} zeigt ein Beispiel wie ein Dungeon aussehen könnte welches durch den Random Walk erzeugt wurde.
 
 \begin{lstlisting}[language=python, label=imdrunk, caption={Pseudocode Random Walk}  ]
 	erstelle ein Level in dem alle Felder Wände sind
@@ -40,11 +40,11 @@ Ein Level-Graph $G$ besteht aus einer Menge an Knoten $V(G)$ und Kanten zwischen
 
 Da diese Arbeit sich auf 2D-Level konzentriert, müssen alle Level-Graphen planar sein. Ist ein Graph nicht planar, können die Räume nicht auf einer zweidimensionalen Fläche angeordnet werden ohne neue, nicht dargestellte, Verbindungen zu erzeugen. 
 
-\ref{dam} zeigt ein Level aus dem Spiel *Dragon Age: Origins* in der Kartenansicht aus dem Spiel. Dieses Level wurde in \ref{dag} in Graphendarstellung gebracht. Da das Themenfeld der Graphentheorie besonders gut erforscht ist, können nun viele der bekannten Verfahren genutzt werden, um den Level-Graph zu analysieren.
+Abbildung \ref{dam} zeigt ein Level aus dem Spiel *Dragon Age: Origins* in der Kartenansicht aus dem Spiel. Dieses Level wurde in Abbildung \ref{dag} in Graphendarstellung gebracht. Da das Themenfeld der Graphentheorie besonders gut erforscht ist, können nun viele der bekannten Verfahren genutzt werden, um den Level-Graph zu analysieren.
 
 **TODO: evlt verfahren benennen? Andererseits werden die vermutlich auch in der Modellierung zum tragen kommen und da passen die dann irgendwie besser hin** 
 
-Die roten Kanten in \ref{dag} zeigen den kritischen Pfad. Der kritische Pfad ist der Weg, den der Spieler vom Start des Level (Knoten 1) bis zum Ende des Level (Knoten 20) gehen muss. Alle Knoten, die der kritische Pfad passiert, müssen also vom Spieler passiert werden. Mit diesem Wissen können Entscheidungen im Design getroffen werden, welche Inhalte der Spieler passieren muss und welche Hindernisse ihn auf den kritischen Pfad erwarten. Daraus ergibt sich auch, dass alle anderen Knoten optional sind, entsprechend können auch hier Designentscheidungen getroffen werden. Anhand des Graphen lässt sich auch feststellen, ob ein bestimmter Raum erreichbar ist ohne einen anderen zu betreten. So könnte der Zugang zu Raum 6 verschlossen sein und der Schlüssel in Raum 3 liegen. Mittels der Graphen-Analyse kann geschaut werden, ob Raum 3 betreten werden kann, ohne dabei Raum 6 zu passieren. Die Pfadlänge kann auch ermittelt werden, so können besonders lange Nebenpfade erkannt werden, bei Bedarf vermieden werden oder durch Abkürzungen wieder mit dem Hauptpfad verbunden werden. [@Mourato2013]
+Die roten Kanten in Abbildung \ref{dag} zeigen den kritischen Pfad. Der kritische Pfad ist der Weg, den der Spieler vom Start des Level (Knoten 1) bis zum Ende des Level (Knoten 20) gehen muss. Alle Knoten, die der kritische Pfad passiert, müssen also vom Spieler passiert werden. Mit diesem Wissen können Entscheidungen im Design getroffen werden, welche Inhalte der Spieler passieren muss und welche Hindernisse ihn auf den kritischen Pfad erwarten. Daraus ergibt sich auch, dass alle anderen Knoten optional sind, entsprechend können auch hier Designentscheidungen getroffen werden. Anhand des Graphen lässt sich auch feststellen, ob ein bestimmter Raum erreichbar ist ohne einen anderen zu betreten. So könnte der Zugang zu Raum 6 verschlossen sein und der Schlüssel in Raum 3 liegen. Mittels der Graphen-Analyse kann geschaut werden, ob Raum 3 betreten werden kann, ohne dabei Raum 6 zu passieren. Die Pfadlänge kann auch ermittelt werden, so können besonders lange Nebenpfade erkannt werden, bei Bedarf vermieden werden oder durch Abkürzungen wieder mit dem Hauptpfad verbunden werden. [@Mourato2013]
 
 ![Level aus dem Spiel Dragon Age: Origins. [@Ma2014] \label{dam}](figs/chapter2/damap.png){width=100%}
 
@@ -82,7 +82,7 @@ Abbildung \ref{pmd} zeigt einen Ausschnitt aus dem Startlevel einer Beispielimpl
 
 ## Regeln für gutes Level-Design
 
-Der Begriff Level-Design kann unterschiedlich interpretiert werden. Im Allgemeinen beschreibt der Begriff die Erstellung und Bearbeitungen von Spielwelten für Videospiele. [@Wikipedia2020a] Es gibt keine festen vorgaben dafür, welche Aspekte Teil des Level-Designs sind und welche bereits darüber hinausgehen. [@DevPlay2019] Im Rahmen dieser Arbeit beschreibt Level-Design den örtlichen Aufbau der Spielwelt, die Platzierung von Gegnern, Items und anderen Objekten sowie die optische Gestaltung der Level, dabei ist nicht das Erstellen von Texturen gemeint, sondern die Verwendung dieser. 
+Der Begriff Level-Design kann unterschiedlich interpretiert werden. Im Allgemeinen beschreibt der Begriff die Erstellung und Bearbeitungen von Spielwelten für Videospiele. [@Wikipedia2020a] Es gibt keine festen Vorgaben dafür, welche Aspekte Teil des Level-Designs sind und welche bereits darüber hinausgehen. [@DevPlay2019] Im Rahmen dieser Arbeit beschreibt Level-Design den örtlichen Aufbau der Spielwelt, die Platzierung von Gegnern, Items und anderen Objekten sowie die optische Gestaltung der Level, dabei ist nicht das Erstellen von Texturen gemeint, sondern die Verwendung dieser. 
 
 Auch wenn es viel Diskussion darüber gibt, ob Videospiele Kunst sind oder nicht, muss man den kreativen Schaffensprozess respektieren.[@Petzold2019] Daher lassen sich für Videospiele auch keine festen Regeln definieren, wie bestimmte Designelemente zu sein haben. 
 
@@ -116,7 +116,7 @@ Da nicht jeder Spieler gleich gut beim spielen ist und die Vorlieben der Spieler
 
 > [... ] they (the players) might pick the easier option even though they could handle more challenge, and rob themselves of the best, and designer-intended experience [@Brown2016]
 
-Eine andere Möglichkeit zum balancen ist die Verwendung von dynamischen Schwierigkeitsgraden. Im Spiel *Resident Evil 4*\footnote{Resident Evil 4 Homepage https://www.residentevil.com/4/} werden mehr oder weniger Gegner platziert, abhängig davon ob der Spieler bisher besonders gut durch die Level gekommen ist oder oft gestorben. [@Brown2015] Im Spiel *Half-Life* \footnote{Half-Life on Wikipedia https://de.wikipedia.org/wiki/Half-Life} werden mehr Medikits platziert, wenn der Spieler wenig Lebenspunkte hat. [@Brown2016a] 
+Eine andere Möglichkeit zum Balancen ist die Verwendung von dynamischen Schwierigkeitsgraden. Im Spiel *Resident Evil 4*\footnote{Resident Evil 4 Homepage https://www.residentevil.com/4/} werden mehr oder weniger Gegner platziert, abhängig davon ob der Spieler bisher besonders gut durch die Level gekommen ist oder oft gestorben. [@Brown2015] Im Spiel *Half-Life* \footnote{Half-Life on Wikipedia https://de.wikipedia.org/wiki/Half-Life} werden mehr Medikits platziert, wenn der Spieler wenig Lebenspunkte hat. [@Brown2016a] 
 
 Es sollte beachtet werden, dass Spieler mit voranschreiten immer besser werden, daher sollten frühe Level deutlich einfacher sein als Level gegen Ende des Spiels. Dabei muss die Schwierigkeit der Level nicht linear steigen, es bietet sich an nach einem besonders schweren Level ein einfacheres Level einzubauen, um den Spieler Zeit zum Aufatmen zu lassen.
 
@@ -134,8 +134,6 @@ Vor allem bei Rogue-Like Spielen sollte es ständig zu solchen Momenten kommen, 
 
 ![Pacing im Wüstenpalast. \label{zelda3pacing}](figs/chapter2/Zelda3Pacing.png){width=100%} 
 
-**TODO \ref{zelda3pacing} in schön** 
-
 Der Begriff Pacing entstammt der Filmbranche und beschreibt die Spannungskurve des Films. Aus dem Film lassen sich drei Regeln für gutes Pacing ableiten, welche auch für Videospiele Anwendung finden können.[@Wesowski2009]
 
 1. Pacing verläuft nicht linear, nach Hochpunkten sollte ein Tiefpunkt folgen 
@@ -144,13 +142,13 @@ Der Begriff Pacing entstammt der Filmbranche und beschreibt die Spannungskurve d
 
 Auch Videospiele sollten darauf achten ihre Spannungskurve zu kontrollieren. Gutes Pacing sorgt dafür, dass ein Spiel nicht langweilig oder repetitiv wird.  [@Brown2018]
 
-\ref{zelda3} zeigt den Level-Graph für den Wüstenpalast aus dem Spiel *The Legend of Zelda: A Link to the past* \footnote{A Link to the past on Zeldachronicles https://zeldachronicles.de/spiele/alttp/}. Um das Level zu bestehen, muss der Spieler den Boss im letzten Raum besiegen. 
+Abbildung \ref{zelda3} zeigt den Level-Graph für den Wüstenpalast aus dem Spiel *The Legend of Zelda: A Link to the past* \footnote{A Link to the past on Zeldachronicles https://zeldachronicles.de/spiele/alttp/}. Um das Level zu bestehen, muss der Spieler den Boss im letzten Raum besiegen. 
 
 Das Level startet mit einem kurzen linearen Abschnitt (blau).Der Spieler sieht zum ersten mal wie das Dungeon von innen gestalten ist, hört die extra für das Level komponierte Musik und wir mit einen neuen Gegner Typ, den Lastertürmen konfrontiert. Die Neugier des Spielers ist geweckt. 
 
 Im nächsten Abschnitt (grün) werden keine neuen Gegner eingeführt. Dieser Abschnitt ist zum Erkunden gedacht. Der Spieler muss den Weg zum Boss finden, kann aber zeitgleich verschiedene Nebenpfade erkunden um Schätze zu finden. Einige Bereiche sind mit Türen verschlossen für die der Spieler die Schlüssel in anderen Räumen finden muss. Die anfänglich aufgebaute Spannung fällt hier etwas ab, steigt aber dann wieder, wenn der Spieler sich auf den finalen Weg zum Boss macht. 
 
-Der letzte Abschnitt (rot) ist maximal linear. Betritt der Spieler diesen Weg werden sich die Türen hinter ihn schließen und der Weg führt nur noch nach vorne, es gibt kein zurück mehr. Die Musik wird schneller und es tauchen deutlich mehr Gegner als vorher auf. Es geht nicht mehr darum das Level zu erkunden sondern darum sich zum Boss vorzukämpfen. Rätsel oder verschlossen Türen gibt es keine mehr. Je nähr der Spieler den Boss kommt, desto näher neigt sich auch die Spannungskurve ihrem Höhepunkt. Im letzten Raum vor den Boss befinden sich noch Items um die Lebensenergie aufzufüllen, die Tür zum Endgegner ist deutlich markiert und der Spieler weiß, dass es jetzt soweit ist. In den Moment in dem der Spieler den Bossraum betritt und diesen zum ersten mal sieht hat die Spannungskurve ihren Höhepunkt erreicht und wird diesen bis zum Ende des Kampes auch nicht mehr verlassen. Der Boss ist besiegt, der Spieler hat gesiegt und die Spannungskurve fällt ab. Das Level wurde erfolgreich absolviert. \ref{zelda3pacing} zeigt eine exemplarische Darstellung der Spannungskurve für dieses Level. Die einzelnen Abschnitte sind passen zu \ref{zelda3} gefärbt. 
+Der letzte Abschnitt (rot) ist maximal linear. Betritt der Spieler diesen Weg werden sich die Türen hinter ihn schließen und der Weg führt nur noch nach vorne, es gibt kein zurück mehr. Die Musik wird schneller und es tauchen deutlich mehr Gegner als vorher auf. Es geht nicht mehr darum das Level zu erkunden sondern darum sich zum Boss vorzukämpfen. Rätsel oder verschlossen Türen gibt es keine mehr. Je näher der Spieler den Boss kommt, desto näher neigt sich auch die Spannungskurve ihrem Höhepunkt. Im letzten Raum vor den Boss befinden sich noch Items um die Lebensenergie aufzufüllen, die Tür zum Endgegner ist deutlich markiert und der Spieler weiß, dass es jetzt soweit ist. In den Moment in dem der Spieler den Bossraum betritt und diesen zum ersten mal sieht hat die Spannungskurve ihren Höhepunkt erreicht und wird diesen bis zum Ende des Kampes auch nicht mehr verlassen. Der Boss ist besiegt, der Spieler hat gesiegt und die Spannungskurve fällt ab. Das Level wurde erfolgreich absolviert. Abbildung \ref{zelda3pacing} zeigt eine exemplarische Darstellung der Spannungskurve für dieses Level. Die einzelnen Abschnitte sind passen zu Abbildung \ref{zelda3} gefärbt. 
 
 ![Wüstenpalast aus The Legend of Zelda 3 in Graphendarstellung \label{zelda3}](figs/chapter2/Zelda3Dungeon.png){width=100%}
 
@@ -176,24 +174,24 @@ Spieleentwicklung ist ein kostspieliges Unterfangen und bereits kleinere Produkt
 
 ## Bewertungsschema
 
-Um im weiteren Verlauf der Arbeit die verschiedenen Algorithmen zur prozeduralen Generierung bewerten und miteinander vergleichen zu können, wird anhand der vorgestellten Regeln ein Bewertungsschema erstellt. Für jede Regel werden verschiedene Kriterien aufgestellt, die angeben, ob und inwiefern diese erfüllt sind. Die Kriterien werden so gewählt, dass sie auf das Anwendungsszenario optimiert sind. Die Tabelle \ref{bkt} listet die Kriterien auf. Für jedes erfüllte Kriterium wird ein Punkt verteilt, die Summe der Punkte gibt die Güte des Algorithmus im Vergleich zu den anderen Algorithmen an (vgl. \ref{bkfk}). 
+Um im weiteren Verlauf der Arbeit die verschiedenen Algorithmen zur prozeduralen Generierung bewerten und miteinander vergleichen zu können, wird anhand der vorgestellten Regeln ein Bewertungsschema erstellt. Für jede Regel werden verschiedene Kriterien aufgestellt, die angeben, ob und inwiefern diese erfüllt sind. Die Kriterien werden so gewählt, dass sie auf das Anwendungsszenario optimiert sind. Die Tabelle \ref{bkt} listet die Kriterien auf. Für jedes erfüllte Kriterium wird ein Punkt verteilt, die Summe der Punkte gibt die Güte des Algorithmus im Vergleich zu den anderen Algorithmen an (vgl. Formel \ref{bkfk}). 
 
-| Regel                   | Kriterium                                           | Anmerkung                                                    |
-| ----------------------- | --------------------------------------------------- | ------------------------------------------------------------ |
-| Gute Level sind lösbar. | Sind alle Orte und Gegenstände im Level erreichbar? | Dies ist eine kritische Anforderung. Level, die dieses Kriterium nicht erfüllen, sind inakzeptable und mit null Punkten zu bewerten. |
-| Gute Level fordern die Mechaniken des Spiels. | Sind die Level für die grundlegenden Spielmechaniken der Anwendungsumgebung ausgelegt? |Monster und Items müssen im Dungeon platzierbar sein.|
-|  | Sind die Level für weitere Mechaniken ausgelegt? |Können Türen, Hebel, Schlüssel, Schlösser, Rätsel, Shops o.ä platziert werden?|
-|  | Können die Level manipuliert werden? |Kann die Struktur des Levels im Spiel manipuliert werden, zum Beispiel durch Bomben?|
-| Gute Level sind gut gebalanced | Kann das Balancing vom Entwickler angepasst werden? |Kann der Entwickler im laufenden Spiel bestimmen wie schwer das Level sein soll?|
-| Gute Level haben Risk and Reward Momente | Sind Nebenpfade möglich? |Erzeugt der Generator Level, die Wege abseits des kritischen Pfades haben?|
-|  | Können Items und Monster gezielt platziert werden? |Nebenpfade und kritische Pfade müssen für den Entwickler unterscheidbar sein. Jeder Knoten muss gezielt ansprechbar sein.|
-| Gute Level steuern das Pacing des Spiels | Erzeugt der Algorithmus Level mit abwechslungsreichen Pacing? |Haben die Level unterschiedliche Strukturen, die das Pacing beeinflusse (vgl. \ref{zelda3})?|
-|  | Kann das Pacing kontrolliert werden? |Kann der Entwickler gezielt bestimmte Strukturen konfigurieren?|
-| Gute Level sind einzigartig | Unterscheiden die Level sich ausreichend im Aufbau? ||
-| | Unterscheiden die Level sich ausreichend im Aussehen? ||
-|  | Kann Backtracking vermieden werden? ||
-| Gute Level sind effizient in der Herstellung. | Kommt der Algorithmus ohne Input-Daten aus? |Input Daten sind in diesem Sinne Graphen oder Layouts für Räume.|
-| | Können verschiedene einzigartige Level aus denselben Input-Daten generiert werden? |Wenn keine Input-Daten benötigt werden, 1 Punkt.|
+| Regel                                         | Kriterium                                                    | Anmerkung                                                    |
+| --------------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| Gute Level sind lösbar.                       | Sind alle Orte und Gegenstände im Level erreichbar?          | Dies ist eine kritische Anforderung. Level, die dieses Kriterium nicht erfüllen, sind inakzeptable und mit null Punkten zu bewerten. |
+| Gute Level fordern die Mechaniken des Spiels. | Sind die Level für die grundlegenden Spielmechaniken der Anwendungsumgebung ausgelegt? | Monster und Items müssen im Dungeon platzierbar sein.        |
+|                                               | Sind die Level für weitere Mechaniken ausgelegt?             | Können Türen, Hebel, Schlüssel, Schlösser, Rätsel, Shops o.ä platziert werden? |
+|                                               | Können die Level manipuliert werden?                         | Kann die Struktur des Levels im Spiel manipuliert werden, zum Beispiel durch Bomben? |
+| Gute Level sind gut gebalanced                | Kann das Balancing vom Entwickler angepasst werden?          | Kann der Entwickler im laufenden Spiel bestimmen wie schwer das Level sein soll? |
+| Gute Level haben Risk and Reward Momente      | Sind Nebenpfade möglich?                                     | Erzeugt der Generator Level, die Wege abseits des kritischen Pfades haben? |
+|                                               | Können Items und Monster gezielt platziert werden?           | Nebenpfade und kritische Pfade müssen für den Entwickler unterscheidbar sein. Jeder Knoten muss gezielt ansprechbar sein. |
+| Gute Level steuern das Pacing des Spiels      | Erzeugt der Algorithmus Level mit abwechslungsreichen Pacing? | Haben die Level unterschiedliche Strukturen, die das Pacing beeinflusse (vgl. Abb. \ref{zelda3})? |
+|                                               | Kann das Pacing kontrolliert werden?                         | Kann der Entwickler gezielt bestimmte Strukturen konfigurieren? |
+| Gute Level sind einzigartig                   | Unterscheiden die Level sich ausreichend im Aufbau?          |                                                              |
+|                                               | Unterscheiden die Level sich ausreichend im Aussehen?        |                                                              |
+|                                               | Kann Backtracking vermieden werden?                          |                                                              |
+| Gute Level sind effizient in der Herstellung. | Kommt der Algorithmus ohne Input-Daten aus?                  | Input Daten sind in diesem Sinne Graphen oder Layouts für Räume. |
+|                                               | Können verschiedene einzigartige Level aus denselben Input-Daten generiert werden? | Wenn keine Input-Daten benötigt werden, 1 Punkt.             |
 
 : Tabelle mit den Bewertungskriterien für prozedurale Algorithmen. \label{bkt}
 
@@ -242,11 +240,7 @@ Kriterium: Kommt der Algorithmus ohne Input-Daten aus?$\newline$Begründung: Die
 
 Kriterium:   Können verschiedene einzigartige Level aus denselben Input-Daten generiert werden?$\newline$Begründung: Die Levelstruktur ist durch die JSON Datei fest vorgegeben. Dieselbe Datei erzeugt immer dasselbe Level.  $\newline$ Bewertung: 0
 
-Nach \ref{bkfk} ergibt sich daher eine Güte von **5**. 
+Nach der Formel \ref{bkfk} ergibt sich daher eine Güte von **5**. 
 
 Zwar genügen die bereitgestellten Level zum Erfüllen des Lernzieles, jedoch könnte ein eigener Generator die Studenten weiter motivieren ihr Spiel im inhaltlichen Teil auszubauen. Am Ende des Semesters würde so ein eigenes fertiges Spiel entstehen und nicht nur ein Prototyp eines Spiels. 
-
-
-
-
 
