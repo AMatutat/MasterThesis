@@ -332,4 +332,10 @@
   year    = {2021},
 }
 
-@Comment{jabref-meta: databaseType:biblatex;}
+@Book{Yu2016,
+  author    = {Derek Yu},
+  publisher = {Boss Fight Books},
+  title     = {Spelunky},
+  year      = {2016},
+  isbn      = {9781940535111},
+}
