@@ -1,0 +1,54 @@
+digraph Zelda3Dungeon {
+    subgraph cluster_0 {   
+        edge [dir=none]
+        color=blue    
+        
+        Eingang [label="Eingang"]
+        A [label=""]
+        A1 [label=""]
+        Eingang -> A 
+        A -> A1
+    }
+    subgraph cluster_1 {
+        edge [dir=none]
+        color=green
+        node[label=""]
+
+        
+         A1 -> B
+         A1 -> C
+         A1 -> A2
+         
+        ##Links
+         B -> B1
+         B -> B2
+         B2 -> BigChest
+         B1 -> B3
+         B3 -> B4
+         B4 -> B5
+         B4 -> D
+        
+        ## Rechts
+         C -> C1
+         C -> C2
+         C2 -> C3
+         C3 -> BigKey
+         C2 -> C4
+
+    } 
+      
+    subgraph cluster_2{
+        color=red
+        D [label=""]
+        D1 [label=""]
+        D2 [label=""]
+        D3 [label=""]
+        D4 [label=""]
+        D5 [label=""]
+        D6 [label=""]
+        
+        
+        D -> D1 -> D2 -> D3 -> D4 -> D5 -> D6 -> Boss
+ 
+    }
+}

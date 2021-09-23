@@ -332,12 +332,4 @@
   year    = {2021},
 }
 
-@Online{Batchelor2017,
-  author  = {James Batchelor},
-  title   = {GamesIndustry.biz presents... The Year In Numbers 2017},
-  url     = {https://www.gamesindustry.biz/articles/2017-12-20-gamesindustry-biz-presents-the-year-in-numbers-2017},
-  urldate = {2021-09-09},
-  year    = {2017},
-}
-
 @Comment{jabref-meta: databaseType:biblatex;}
