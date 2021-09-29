@@ -369,12 +369,4 @@
   year    = {2018},
 }
 
-@Online{Nepozitek2019,
-  author  = {Ondřej Nepožitek},
-  title   = {Dungeon Generator (Part 2) – Implementation},
-  url     = {https://ondra.nepozitek.cz/blog/238/dungeon-generator-part-2-implementation/},
-  urldate = {2021-09-29},
-  year    = {2019},
-}
-
 @Comment{jabref-meta: databaseType:biblatex;}

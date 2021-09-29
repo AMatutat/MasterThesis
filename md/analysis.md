@@ -1,6 +1,7 @@
 # Analyse
 
 <!--
+
 *   Analysieren und vergleichen verschiedener Algorithmen
 *   Ableiten von Algorithmen aus Spielen
 
@@ -68,11 +69,70 @@ Derek Yu schrieb in seinen Buch:
 
 
 
-## Edgar DotNet 
+# Edgar-DotNet 
 
-https://ondra.nepozitek.cz/blog/42/dungeon-generator-part-1-node-based-approach/
+Zwar kann das Layout eines Level mithilfe eines Graphen dargestellt werden, schlussendlich muss aus diesen Graphen aber eine physische Anordnung von Räumen und Strukturen generiert werden, die dann das eigentliche Level im Spiel ist. Die Arbeit von Ma et al stellt einen effizienten Algorithmus vor, um diese Umwandlung durchzuführen. [@Ma2014] 
 
-http://chongyangma.com/publications/gl/2014_gl_preprint.pdf
+- Als input gibt es einen planaren Graphen und ein set aus 2D polygonale blöcke/räume
+
+- Aufteilen des Graphen in Subgraphen (Chains) da diese einfacher zu lösen sind
+
+  - zerbricht das komplexe Problem in viele kleine
+
+  - in der chain hat jeder knoten max zwei kinder
+
+  - kreise werden zuerst aufgelöst, weil sie mehr Bedingungen haben => schwerer zu lösen, wenn die erst spät erstellt werden muss man vermutlich viel backtracken
+
+  - Wie
+
+    - faces (cylces) finden (Faces of a planar graph are **regions bounded by a set of edges and which contain no other vertex or edge**)
+    - erste chain ist das kleinste face
+    - dann weitere Faces in breadth-first search hinzufüge
+    - Wenn keine faces mehr da, alle acyclical components hinzufügen
+
+    
+
+- Erste Chain lösen
+
+  - ein Block wird fest positioniert, dann werden die nächsten blöcke mithilfe von bewegung angeselegt bis chain gelöst ist
+    - "For a pair of polygons, one fixed and one free, a configuration space is a set of such positions of the free polygon that the two polygons do not overlap and can be connected by doors. "
+      - Grafik mit den Roten Linien, wenn der referenz Punkt des bewegbaren Polygon auf der Linie ist, ist es gültig => configuration space
+      - wenn mehrere Feste blöcke existieren, für jeden Blck den configuration space zeichnen die überlappungen sind gültige punkte
+  - evtl. backtracking falls es keine lösung gibt
+  - mehrere Lösungen erstellen
+
+- Nächste chain anlegen (Incemental)
+
+  - nicht chains einzeln lösen,
+    -  weil das lange dauert und ggf. dann die einzelnen lösungen nicht kompatibel sind
+    - im dungeon sind die konstrukte eh alle miteinander verbunden, daher gibt es auch keine vorteile die chains einzeln zu lösen
+  - evtl. backtracking falls es keine lösung gibt und andere Lösung vom vorschritt nehmen
+  - mehrere Lösungen erstellen
+
+- Repeat until done
+
+- Vorteil daran mehrere Lösungen zu bauen: 1. backtracking 2. es können schneller mehrere Lösungen generiert werden, ich änder einfach in der Mitte die Lösung der Chain und guck was passiert
+
+- optimierierung mit simulated annealing (glaub das sprengt den rahmen aber erwähnen kann man das mal)
+
+
+
+
+
+**Evtl brauch ich edgar gar nit**
+
+Edgar-DotNet ist eine Implementierung und Weiterentwicklung dieses Algorithmus in DotNet. [@Nepozitek2018] Es verbessert  
+
+Edagar
+
+- Conference-Paper [@Nepozitek2018]
+- Blog: [@Nepozitek2018a], [@Nepozitek2019]
+
+
+
+
+
+
 
 
 
