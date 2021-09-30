@@ -28,7 +28,7 @@ Spelunky ist ein 2D-Rogue-Like Plattformer. Es verbindet das klassische Gameplay
 
 Die Aufgabe des Spielers in Spelunky ist es, vom Start des Levels bis zum Ausgang zu gelangen, dabei kann er zusätzlich Schätze sammeln, um Bonuspunkte zu erhalten. Auf dem Weg lauern verschiedene Gegner und Fallen. 
 
-Alle Level von Spelunky werden auf einem 4x4 Grid-System erzeugt. Jedes Feld im Grid stellt einen 10x8 Felder großen Raum dar. Zu Beginn der Generierung wird ein zufälliger Raum aus der obersten Reihe ausgewählt und als Startraum markiert. Von diesem Startraum aus wird in eine zufällige Richtung gegangen, dazu wird eine Zufallszahl von 1 bis 5 genutzt. Bei 1 oder 2 wird der Raum links vom aktuellen Raum ausgewählt, bei 3 oder 4 der Raum rechts vom aktuellen Raum. Bei einer 5 oder wenn es nicht möglich ist, in die entsprechende Richtung (links oder rechts) zu gehen, weil das Ende des Grids erreicht wurde, wird stattdessen der Raum unterhalb des aktuellen Raums ausgewählt. Wenn die unterste Reihe erreicht ist und versucht wird eine weitere Reihe nach unten zu gehen, wird der aktuelle Raum als Ausgang markiert und der Algorithmus endet. 
+Alle  Level von Spelunky werden auf einem 4x4 Grid-System erzeugt. Jedes Feld im Grid stellt einen 10x8 Felder großen Raum dar. Zu Beginn der Generierung wird ein zufälliger Raum aus der obersten Reihe ausgewählt und als Startraum markiert. Von diesem Startraum aus wird in eine zufällige Richtung gegangen, dazu wird eine Zufallszahl von 1 bis 5 genutzt. Bei 1 oder 2 wird der Raum links vom aktuellen Raum ausgewählt, bei 3 oder 4 der Raum rechts vom aktuellen Raum. Bei einer 5 oder wenn es nicht möglich ist, in die entsprechende Richtung (links oder rechts) zu gehen, weil das Ende des Grids erreicht wurde, wird stattdessen der Raum unterhalb des aktuellen Raums ausgewählt. Wenn die unterste Reihe erreicht ist und versucht wird eine weitere Reihe nach unten zu gehen, wird der aktuelle Raum als Ausgang markiert und der Algorithmus endet. 
 
 Jeder Raum im Grid ist mit einer Nummer markiert. Der Initialstatus jeden Raums ist 0 und gibt an, dass der Raum beim Erzeugen des kritischen Pfades nicht betreten wurde, er also optional ist. Beim Durchlaufen des Algorithmus werden die Markierungen entsprechend angepasst. Wenn ein Raum nach links oder rechts verlassen wird, wird er mit der Nummer 1 markiert, dieser Raum braucht daher einen Ausgang nach links und rechts (Minus-Form). Wird ein Raum nach unten verlassen, wird er mit einer 2 markiert und benötigt einen Ausgang nach links, rechts und unten (T-Kreuzung nach unten). Ist der darüberliegende Raum auch mit einer 2 markiert, so wird auch ein Ausgang nach oben benötigt (Kreuzung).  Wird ein Raum von oben betreten und nach links oder rechts verlassen, wird er mit einer 3 markiert und braucht einen Ausgang nach links, rechts und nach oben (T-Kreuzung nach oben). 
 
@@ -71,10 +71,22 @@ Derek Yu schrieb in seinen Buch:
 
 ## Edgar-DotNet 
 
+Zwar kann das Layout eines Level mithilfe eines Graphen dargestellt werden, schlussendlich muss aus diesen Graphen aber eine physische Anordnung von Räumen und Strukturen generiert werden, die dann das eigentliche Level im Spiel ist. Die Arbeit von Ma et al stellt einen effizienten Algorithmus vor, um diese Umwandlung durchzuführen. [@Ma2014] 
 
-war kann das Layout eines Level mithilfe eines Graphen dargestellt werden, schlussendlich muss aus diesen Graphen aber eine physische Anordnung von Räumen und Strukturen generiert werden, die dann das eigentliche Level im Spiel ist. Die Arbeit von Ma et al stellt einen effizienten Algorithmus vor, um diese Umwandlung durchzuführen. [@Ma2014] 
+Als Input werden dem Algorithmus zu einem der planare Level-Graph $G$ übergeben sowie ein Set aus 2D-Polygonalen Blöcken $S$. Diese Blöcke können als Räume des Level betrachtet werden und werden im Verlaufe des Algorithmus genutzt, um die Knoten im Graphen aufzulösen. Dabei ist zu beachten, dass der Algorithmus die Blöcke zufällig und mehrfach auswählt. Der Algorithmus erlaubt es nicht Bedingungen festzulegen, wie dass ein spezifischer Knoten durch einen spezifischen Block aufgelöst werden soll oder ein Block nur einmal verwendet werden soll. So lässt sich zum Beispiel kein spezifischer Bossraum mit einem einzigartigen Layout bestimmen. Wenn eine mögliche Lösung für $G$ mit $S$ gibt, ist diese der Output des Algorithmus. Durch sein iteratives Vorgehen, welches im weiteren Verlauf des Abschnittes beschrieben wird, ist der Algorithmus effizient in der Lage auch mehrere Lösungen für ein Input $G$ und $S$ zu finden. 
 
-- Als input gibt es einen planaren Graphen und ein set aus 2D polygonale blöcke/räume
+Der Algorithmus besteht im Wesentlichen aus zwei Schritten:
+
+1. Zerlegen von $G$ in Subgraphen
+2. Iteratives Auflösen der Knoten in den Subgraphen
+
+Auflösung von Knoten meint, dass in der Darstellung von $G$ in physischer Anordnung der Blöcke aus $S$, also dem spielbaren Level, die Blöcke so platziert sind, dass die in $G$ dargestellten Verbindungen existieren, ohne dass sich die Blöcke überschneiden. Eine Verbindung existiert dann, wenn zwei Blöcke sich an einer Kante schneiden, ohne sich zu überlappen, und zusätzlich die Schnittlänge groß genug ist, um einen Durchgang zu erzeugen. Dazu wird ein *configuration Space* definiert. 
+
+Abbildung \ref{confspace} a) zeigt wie der configuration space für eine Verbindung von zwei Blöcken aussehen könnte. Beim Auflösen einer solchen Verbindung ist ein Block statisch, kann also nicht bewegt oder rotiert werden und der andere Block ist dynamisch, kann also bewegt und rotiert werden. In diesem Fall ist der mittlere (umgedrehtes L) Block statisch und der quadratische Block dynamisch. Im dynamischen Block wird ein Referenzpunkt bestimmt, in diesen Fall das Zentrum des Blocks. Die rote Linie ist der configuration space und zeigt nun alle möglichen Positionen, die der Referenzpunkt einnehmen kann, um die Verbindung gültig zu lösen. Abbildung \ref{confspace} b) zeigt wie eine Verbindung mit zwei statischen und einem dynamischen Block aufgelöst wird. Zuerst wird für jeden statischen Block der configuration space bestimmt, die Schnittpunkte beider configuration spaces (gelbe Punkte) sind die gültigen Positionen für den Referenzpunkt des dynamischen Blocks.
+
+
+
+
 
 - Aufteilen des Graphen in Subgraphen (Chains) da diese einfacher zu lösen sind
 
@@ -135,9 +147,9 @@ Edagar
 
 ![Beispiel: Output für einen Graphen und Strukturen. \label{graph2level}[@Ma2014]](figs/chapter3/fromgraphtolevel.PNG)
 
-![Beispiel: Unterschiedliche Teillösungen führen zu unterschiedlichen Gesamtlösungen. \label{graphsolution}[@Ma2014]](figs/chapter3/graphsolution.PNG)
-
 ![Beispiel: Unterschiedliche Teillösungen für die selbe Chain. \label{graphpartsolution}[@Ma2014]](figs/chapter3/graphpatrsol.PNG)
+
+![Beispiel: Unterschiedliche Teillösungen führen zu unterschiedlichen Gesamtlösungen. \label{graphsolution}[@Ma2014]](figs/chapter3/graphsolution.PNG)
 
 ![Beispiel: Aufteilen eines Graphen in Chains. \label{how2chain}[@Nepozitek2019]](figs/chapter3/howtochain.PNG)
 
