@@ -22,6 +22,73 @@ geschätzter Umfang ca: 40%
 
 In diesem Kapitel werden verschiedene Algorithmen zur prozeduralen Generierung vorgestellt und mithilfe der in Kapitel 2 präsentierten Bewertungskriterien analysiert und miteinander verglichen. Nicht alle vorgestellten Algorithmen sind speziell für die Generierung von Level vorgesehen, können aber mit Anpassungen oder durch Kombination dazu genutzt werden. Ziel dieses Kapitel ist es, Bausteine aus verschiedenen Algorithmen herauszufiltern, um im nächsten Kapitel daraus einen neuen Algorithmus zur Generierung von Level für das PM-Dungeon zu konzeptionieren.  
 
+## Graph of Game Worlds
+
+https://folk.idi.ntnu.no/alfw/publications/gwg-acm-cie-2012.pdf
+
+## Fast generation of planar graphs
+
+https://users.cecs.anu.edu.au/~bdm/papers/plantri-full.pdf
+
+## Cycle Dungeon
+
+https://ctrl500.com/tech/handcrafted-feel-dungeon-generation-unexplored-explores-cyclic-dungeon-generation/
+
+
+## Vom Graph zum Level
+
+Zwar kann das Layout eines Level mithilfe eines Graphen dargestellt werden, schlussendlich muss aus diesen Graphen aber eine physische Anordnung von Räumen und Strukturen generiert werden, die dann das eigentliche Level im Spiel ist. Die Arbeit von Ma et al stellt einen effizienten Algorithmus vor, um diese Umwandlung durchzuführen. [@Ma2014] 
+
+![Beispiel: Output für einen Graphen und Strukturen. \label{graph2level}[@Ma2014]]()
+
+Als Input werden dem Algorithmus zu einem der planare Level-Graph $G$ übergeben sowie ein Set aus 2D-Polygonalen Blöcken $S$ (vgl. Abbildung \ref{graph2level}(. Diese Blöcke können als Räume des Level betrachtet werden und werden im Verlaufe des Algorithmus genutzt, um die Knoten im Graphen aufzulösen. Dabei ist zu beachten, dass der Algorithmus die Blöcke zufällig und mehrfach auswählt. Der Algorithmus erlaubt es nicht Bedingungen festzulegen, wie dass ein spezifischer Knoten durch einen spezifischen Block aufgelöst werden soll oder ein Block nur einmal verwendet werden soll. So lässt sich zum Beispiel kein spezifischer Bossraum mit einem einzigartigen Layout bestimmen. Wenn eine mögliche Lösung für $G$ mit $S$ gibt, ist diese der Output des Algorithmus. Durch sein inkrementelles Vorgehen, welches im weiteren Verlauf des Abschnittes beschrieben wird, ist der Algorithmus effizient in der Lage auch mehrere Lösungen für ein Input $G$ und $S$ zu finden. 
+
+Der Algorithmus besteht im Wesentlichen aus zwei Schritten:
+
+1. Zerlegen von $G$ in Subgraphen
+2. Iteratives Auflösen der Knoten in den Subgraphen
+
+Auflösung von Knoten meint, dass in der Darstellung von $G$ in physischer Anordnung der Blöcke aus $S$, also dem spielbaren Level, die Blöcke so platziert sind, dass die in $G$ dargestellten Verbindungen existieren, ohne dass sich die Blöcke überschneiden. Eine Verbindung existiert dann, wenn zwei Blöcke sich an einer Kante schneiden, ohne sich zu überlappen, und zusätzlich die Schnittlänge groß genug ist, um einen Durchgang zu erzeugen. Dazu wird ein *configuration Space* definiert. 
+
+![Beispiel: configuration space. \label{confspace}[@Ma2014]](figs/chapter3/configurationspace.PNG)
+
+Abbildung \ref{confspace} a) zeigt wie der configuration space für eine Verbindung von zwei Blöcken aussehen könnte. Beim Auflösen einer solchen Verbindung ist ein Block statisch, kann also nicht bewegt oder rotiert werden und der andere Block ist dynamisch, kann also bewegt und rotiert werden. In diesem Fall ist der mittlere (umgedrehtes L) Block statisch und der quadratische Block dynamisch. Im dynamischen Block wird ein Referenzpunkt bestimmt, in diesen Fall das Zentrum des Blocks. Die rote Linie ist der configuration space und zeigt nun alle möglichen Positionen, die der Referenzpunkt einnehmen kann, um die Verbindung gültig zu lösen. Abbildung \ref{confspace} b) zeigt wie eine Verbindung mit zwei statischen und einem dynamischen Block aufgelöst wird. Zuerst wird für jeden statischen Block der configuration space bestimmt, die Schnittpunkte beider configuration spaces (gelbe Punkte) sind die gültigen Positionen für den Referenzpunkt des dynamischen Blocks.
+
+Das Berechnen des configuration spaces reduziert den lokalen Suchraum für die individuellen Knoten, jedoch ist der Suchraum für den gesamten Graphen weiterhin zu groß um zuverlässig in einer angebrachten Zeit eine Lösung zu finden. Daher wird das Problem in kleinere, einfacher zu lösende, Teilprobleme aufteilt. Es hat sich herausgestellt, dass Graphen, in den jeder Knoten maximal zwei Nachbarn besitzt, einfacher aufzulösen sind, da die Anzahl der Kanten der Blöcke immer größer ist als die Anzahl der Kanten des Knotens im Graph.  
+
+![Beispiel: Aufteilen eines Graphen in Chains. \label{how2chain}[@Nepozitek2019]](figs/chapter3/howtochain.PNG)
+
+Der Input Graph wird daher in kleinere Subgraphen aufteilt, sogenannten Chains. In einer Chain hat jeder Knoten maximal zwei Nachbarn. Abbildung \ref{howtochain} zeigt wie ein Graph in Chains aufgeteilt werden kann. Knoten mit derselben Nummerierung gehören zu einer Chain. Zuerst werden alle Faces im Graphen gesucht, da diese Kreise im Leveldesign darstellen. Da solche Kreise mehr Bedingungen haben als eine lineare Folge von Knoten, ist die Auflösung dieser komplexer. Daher werden Kreise bevorzugt am Anfang des Algorithmus aufgelöst, um späteres Backtracking zu vermeiden. Die erste Chain ist das kleinste Face im Graphen (Label "0"). Die weiteren Chains werden gebildet, indem per Breitensuche die weiteren Faces gesucht werden **??** '(Label "1"). Stehen mehrere Faces zur Auswahl, wird zuerst das kleinere genommen. Wenn keine Faces mehr vorhanden sind, werden die restlichen Knoten hinzugefügt (Label "2","3","4").  
+
+Nachdem der Graph in Chains aufgeteilt wurde, können die einzelnen Chains inkrementell gelöst werden. Zuerst wird die erste Chain genommen und mit dem oben beschriebenen Verfahren aufgelöst. Der Algorithmus erzeugt jedoch nicht nur eine Lösung für die Chain, sondern mehrere Lösungen und speichert diese ab (vgl. Abbildung \ref{graphpartsolution}). Im nächsten Schritt wird die nächste Chain aus der Liste genommen, mit einer der Lösungen aus dem Vorschritt verbunden und aufgelöst. Sollte es keine Möglichkeit geben die Chain aufzulösen, wird per Backtracking eine andere Lösung aus dem Vorschritt ausgewählt und erneut versucht eine Lösung zu finden. Dieses Vorgehen wird wiederholt, bis alle Chains aufgelöst sind und dadurch eine Lösung für das vollständige Problem gefunden wurde. 
+
+```python
+Input: Planar graph G, building blocks B, layout stack S
+1: procedure INCREMENTALLAYOUT(G, B, S)
+2: Push empty layout into S
+3: repeat
+4: s ← S.pop()
+5: Get the next chain c to add to s
+6: AddChain(c, s) //extend the layout to contain c
+7: if extended partial layouts were generated then
+8: Push new partial layouts into S
+9: end if
+10: until target # of full layouts is generated or S is empty
+11: end procedure
+```
+Peseudocode für das inkrementelle Erstellen des Level. 
+Quelle [@Ma2014]
+
+Zwar könnten die Chains auch separat aufgelöst werden und dann versucht werde die Teillösungen miteinander zu verbinden, jedoch würden dabei Lösungen erzeugt werden, die zwar die Chain auflösen aber nicht mit den gesamten Graphen kompatibel sind und daher unbrauchbar wären. Zusätzlich sind im Level alle miteinander verbunden, daher gibt es auch keine Vorteile die Chains einzeln zu lösen. 
+
+Das Erstellen von mehren Lösungen für eine Chain hat mehrere Vorteile. Zu einem ermöglicht und erleichtert es das schrittweise Backtracking, falls eine Chain nicht in der aktuellen Lösung angeschlossen werden kann und zusätzlich können schneller mehrere gültige Lösungen für ein Graph gefunden werden, indem beispielsweise nach der dritten Chain eine andere Teillösungen verwendet wird. Abbildung \ref{graphsolution} zeigt wie aus verschieden Teillösungen unterschiedliche Gesamtlösungen entstehen. Dies unterstreicht noch einmal die Effizienz des Algorithmus, da bereits aus einem einzigen Inputgraphen viele vollkommen unterschiedliche Level entstehen könne.
+
+![Beispiel: Unterschiedliche Teillösungen für die selbe Chain. \label{graphpartsolution}[@Ma2014]](figs/chapter3/graphpatrsol.PNG)
+
+![Beispiel: Unterschiedliche Teillösungen führen zu unterschiedlichen Gesamtlösungen. \label{graphsolution}[@Ma2014]](figs/chapter3/graphsolution.PNG)
+
+### Analyse
+
 ## Spelunky
 
 Spelunky ist ein 2D-Rogue-Like Plattformer. Es verbindet das klassische Gameplay von Plattformern und erweitert sie um prozedural generierte Level und Permadeath aus dem Rogue-Like Genre. Derek Yu, der Entwickler von Spelunky beschreibt im gleichnamigen Buch "Spelunky" unter anderem wie die Level im Spiel generiert werden. [@Yu2016]
@@ -57,115 +124,9 @@ Derek Yu schrieb in seinen Buch:
 
 > This system doesn‘t create the most natural-looking caves ever, and players will quickly begin to recognize certain repeating landmarks and perhaps even sense that the levels are generated on a grid. But with enough templates and random mutations, there’s still plenty of variability. More importantly, it creates fun and engaging levels that the player can’t easily get stuck in, something much more valuable than realism when it comes to making an immersive experience. [@Yu2016] 
 
-
-
 ![Beispiellevel aus Spelunky mit kritischem Pfad-Layout (rot) und Raum Nummerierung \label{spelunkylevel}[@Kezemi]](figs/chapter3/spelunky.png)
-
-
-
-
 
 ### Analyse 
 
 
-
-## Edgar-DotNet 
-
-Zwar kann das Layout eines Level mithilfe eines Graphen dargestellt werden, schlussendlich muss aus diesen Graphen aber eine physische Anordnung von Räumen und Strukturen generiert werden, die dann das eigentliche Level im Spiel ist. Die Arbeit von Ma et al stellt einen effizienten Algorithmus vor, um diese Umwandlung durchzuführen. [@Ma2014] 
-
-Als Input werden dem Algorithmus zu einem der planare Level-Graph $G$ übergeben sowie ein Set aus 2D-Polygonalen Blöcken $S$. Diese Blöcke können als Räume des Level betrachtet werden und werden im Verlaufe des Algorithmus genutzt, um die Knoten im Graphen aufzulösen. Dabei ist zu beachten, dass der Algorithmus die Blöcke zufällig und mehrfach auswählt. Der Algorithmus erlaubt es nicht Bedingungen festzulegen, wie dass ein spezifischer Knoten durch einen spezifischen Block aufgelöst werden soll oder ein Block nur einmal verwendet werden soll. So lässt sich zum Beispiel kein spezifischer Bossraum mit einem einzigartigen Layout bestimmen. Wenn eine mögliche Lösung für $G$ mit $S$ gibt, ist diese der Output des Algorithmus. Durch sein iteratives Vorgehen, welches im weiteren Verlauf des Abschnittes beschrieben wird, ist der Algorithmus effizient in der Lage auch mehrere Lösungen für ein Input $G$ und $S$ zu finden. 
-
-Der Algorithmus besteht im Wesentlichen aus zwei Schritten:
-
-1. Zerlegen von $G$ in Subgraphen
-2. Iteratives Auflösen der Knoten in den Subgraphen
-
-Auflösung von Knoten meint, dass in der Darstellung von $G$ in physischer Anordnung der Blöcke aus $S$, also dem spielbaren Level, die Blöcke so platziert sind, dass die in $G$ dargestellten Verbindungen existieren, ohne dass sich die Blöcke überschneiden. Eine Verbindung existiert dann, wenn zwei Blöcke sich an einer Kante schneiden, ohne sich zu überlappen, und zusätzlich die Schnittlänge groß genug ist, um einen Durchgang zu erzeugen. Dazu wird ein *configuration Space* definiert. 
-
-Abbildung \ref{confspace} a) zeigt wie der configuration space für eine Verbindung von zwei Blöcken aussehen könnte. Beim Auflösen einer solchen Verbindung ist ein Block statisch, kann also nicht bewegt oder rotiert werden und der andere Block ist dynamisch, kann also bewegt und rotiert werden. In diesem Fall ist der mittlere (umgedrehtes L) Block statisch und der quadratische Block dynamisch. Im dynamischen Block wird ein Referenzpunkt bestimmt, in diesen Fall das Zentrum des Blocks. Die rote Linie ist der configuration space und zeigt nun alle möglichen Positionen, die der Referenzpunkt einnehmen kann, um die Verbindung gültig zu lösen. Abbildung \ref{confspace} b) zeigt wie eine Verbindung mit zwei statischen und einem dynamischen Block aufgelöst wird. Zuerst wird für jeden statischen Block der configuration space bestimmt, die Schnittpunkte beider configuration spaces (gelbe Punkte) sind die gültigen Positionen für den Referenzpunkt des dynamischen Blocks.
-
-
-
-
-
-- Aufteilen des Graphen in Subgraphen (Chains) da diese einfacher zu lösen sind
-
-  - zerbricht das komplexe Problem in viele kleine
-
-  - in der chain hat jeder knoten max zwei kinder
-
-  - kreise werden zuerst aufgelöst, weil sie mehr Bedingungen haben => schwerer zu lösen, wenn die erst spät erstellt werden muss man vermutlich viel backtracken
-
-  - Wie
-
-    - faces (cylces) finden (Faces of a planar graph are **regions bounded by a set of edges and which contain no other vertex or edge**)
-    - erste chain ist das kleinste face
-    - dann weitere Faces in breadth-first search hinzufüge
-    - Wenn keine faces mehr da, alle acyclical components hinzufügen
-
-    
-
-- Erste Chain lösen
-
-  - ein Block wird fest positioniert, dann werden die nächsten blöcke mithilfe von bewegung angeselegt bis chain gelöst ist
-    - "For a pair of polygons, one fixed and one free, a configuration space is a set of such positions of the free polygon that the two polygons do not overlap and can be connected by doors. "
-      - Grafik mit den Roten Linien, wenn der referenz Punkt des bewegbaren Polygon auf der Linie ist, ist es gültig => configuration space
-      - wenn mehrere Feste blöcke existieren, für jeden Blck den configuration space zeichnen die überlappungen sind gültige punkte
-  - evtl. backtracking falls es keine lösung gibt
-  - mehrere Lösungen erstellen
-
-- Nächste chain anlegen (Incemental)
-
-  - nicht chains einzeln lösen,
-    -  weil das lange dauert und ggf. dann die einzelnen lösungen nicht kompatibel sind
-    - im dungeon sind die konstrukte eh alle miteinander verbunden, daher gibt es auch keine vorteile die chains einzeln zu lösen
-  - evtl. backtracking falls es keine lösung gibt und andere Lösung vom vorschritt nehmen
-  - mehrere Lösungen erstellen
-
-- Repeat until done
-
-- Vorteil daran mehrere Lösungen zu bauen: 1. backtracking 2. es können schneller mehrere Lösungen generiert werden, ich änder einfach in der Mitte die Lösung der Chain und guck was passiert
-
-- optimierierung mit simulated annealing (glaub das sprengt den rahmen aber erwähnen kann man das mal)
-
-
-
-
-
-**Evtl brauch ich edgar gar nit**
-
-Edgar-DotNet ist eine Implementierung und Weiterentwicklung dieses Algorithmus in DotNet. [@Nepozitek2018] Es verbessert  
-
-Edagar
-
-- Conference-Paper [@Nepozitek2018]
-- Blog: [@Nepozitek2018a], [@Nepozitek2019]
-
-
-
-![Beispiel: configuration space. \label{confspace}[@Ma2014]](figs/chapter3/configurationspace.PNG)
-
-![Beispiel: Output für einen Graphen und Strukturen. \label{graph2level}[@Ma2014]](figs/chapter3/fromgraphtolevel.PNG)
-
-![Beispiel: Unterschiedliche Teillösungen für die selbe Chain. \label{graphpartsolution}[@Ma2014]](figs/chapter3/graphpatrsol.PNG)
-
-![Beispiel: Unterschiedliche Teillösungen führen zu unterschiedlichen Gesamtlösungen. \label{graphsolution}[@Ma2014]](figs/chapter3/graphsolution.PNG)
-
-![Beispiel: Aufteilen eines Graphen in Chains. \label{how2chain}[@Nepozitek2019]](figs/chapter3/howtochain.PNG)
-
-## Cycle Dungeon
-
-https://ctrl500.com/tech/handcrafted-feel-dungeon-generation-unexplored-explores-cyclic-dungeon-generation/
-
-## Fast generation of planar graphs
-
-https://users.cecs.anu.edu.au/~bdm/papers/plantri-full.pdf
-
-## Graph of Game Worlds
-
-https://folk.idi.ntnu.no/alfw/publications/gwg-acm-cie-2012.pdf
-
-## Vergleich der Algorithmen
-
-- als Matrix?
 
