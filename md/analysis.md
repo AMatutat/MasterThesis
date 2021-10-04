@@ -20,7 +20,7 @@
 geschätzter Umfang ca: 40%
 -->
 
-In diesem Kapitel werden verschiedene Algorithmen zur prozeduralen Generierung vorgestellt und mithilfe der in Kapitel 2 präsentierten Bewertungskriterien analysiert und miteinander verglichen. Nicht alle vorgestellten Algorithmen sind speziell für die Generierung von Level vorgesehen, können aber mit Anpassungen oder durch Kombination dazu genutzt werden. Ziel dieses Kapitel ist es, Bausteine aus verschiedenen Algorithmen herauszufiltern, um im nächsten Kapitel daraus einen neuen Algorithmus zur Generierung von Level für das PM-Dungeon zu konzeptionieren.  
+In diesem Kapitel werden Algorithmen vorgestellt, die verschiedene Aspekte der prozeduralen Levelgenerierung abdecken. Nicht jeder vorgestellter Algorithmus ist für die Generierung von Level konzeptioniert, kann aber für Teilaspekte verwendet werden. Es werden Algorithmen zur Generierung und Modifikation von planaren Graphen, Erzeugen von Level aus diesen Graphen sowie zum Erstellen von einzelnen Räumen vorgestellt. Ziel ist es, die einzelne Elemente der Algorithmen so zu kombinieren, dass das Resultat die in Kapitel 2 aufgestellten Anforderungen bestmöglich erfüllt. Dieses Kapitel fokussiert sich auf die Vorstellungen der Bausteine und präsentiert nur ein theoretisches Konzept der Kombination, das nächste Kapitel stellt ein konkretes, technisches Konzept vor. 
 
 ## Graph of Game Worlds
 
