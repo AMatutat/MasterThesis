@@ -40,9 +40,7 @@ Ein Level-Graph $G$ besteht aus einer Menge an Knoten $V(G)$ und Kanten zwischen
 
 Da diese Arbeit sich auf 2D-Level konzentriert, müssen alle Level-Graphen planar sein. Ist ein Graph nicht planar, können die Räume nicht auf einer zweidimensionalen Fläche angeordnet werden ohne neue, nicht dargestellte, Verbindungen zu erzeugen. 
 
-Abbildung \ref{dam} zeigt ein Level aus dem Spiel *Dragon Age: Origins* in der Kartenansicht aus dem Spiel. Dieses Level wurde in Abbildung \ref{dag} in Graphendarstellung gebracht. Da das Themenfeld der Graphentheorie besonders gut erforscht ist, können nun viele der bekannten Verfahren genutzt werden, um den Level-Graph zu analysieren.
-
-**TODO: evlt verfahren benennen? Andererseits werden die vermutlich auch in der Modellierung zum tragen kommen und da passen die dann irgendwie besser hin** 
+Abbildung \ref{dam} zeigt ein Level aus dem Spiel *Dragon Age: Origins* in der Kartenansicht aus dem Spiel. Dieses Level wurde in Abbildung \ref{dag} in Graphendarstellung gebracht. Da das Themenfeld der Graphentheorie besonders gut erforscht ist, können nun viele der bekannten Verfahren genutzt werden, um den Level-Graph zu analysieren. Im nächsten Abschnitt werden die für diese Arbeit relevanten Anlgorithmen der Graphenanalyse erläutert. 
 
 Die roten Kanten in Abbildung \ref{dag} zeigen den kritischen Pfad. Der kritische Pfad ist der Weg, den der Spieler vom Start des Level (Knoten 1) bis zum Ende des Level (Knoten 20) gehen muss. Alle Knoten, die der kritische Pfad passiert, müssen also vom Spieler passiert werden. Mit diesem Wissen können Entscheidungen im Design getroffen werden, welche Inhalte der Spieler passieren muss und welche Hindernisse ihn auf den kritischen Pfad erwarten. Daraus ergibt sich auch, dass alle anderen Knoten optional sind, entsprechend können auch hier Designentscheidungen getroffen werden. Anhand des Graphen lässt sich auch feststellen, ob ein bestimmter Raum erreichbar ist ohne einen anderen zu betreten. So könnte der Zugang zu Raum 6 verschlossen sein und der Schlüssel in Raum 3 liegen. Mittels der Graphen-Analyse kann geschaut werden, ob Raum 3 betreten werden kann, ohne dabei Raum 6 zu passieren. Die Pfadlänge kann auch ermittelt werden, so können besonders lange Nebenpfade erkannt werden, bei Bedarf vermieden werden oder durch Abkürzungen wieder mit dem Hauptpfad verbunden werden. [@Mourato2013]
 
@@ -51,6 +49,10 @@ Die roten Kanten in Abbildung \ref{dag} zeigen den kritischen Pfad. Der kritisch
 ![\ref{dam} in Graphendarstellung \label{dag}](figs/chapter2/dragonageasgraph.png){width=100%}
 
 Diese Art der Darstellung eignet sich vor allem für zweidimensionale Spiele, da auch der Graph zweidimensional ist. Zwar lassen sich auch 3D-Level mit Graphen darstellen, dies erhöht jedoch die Komplexität und erschwert die Übersicht. Auch zu beachten ist, dass der Graph nur die Struktur des Levels darstellt, jedoch nicht die Geometrie, das Aussehen oder den Inhalt.
+
+## Graphenanalyse 
+	- Welche Alogrithmen gibt es um Graphen zu analyisieren?
+	- Was bringen die im kontext dieser arbeit?
 
 ## Rogue-Like
 
@@ -180,17 +182,31 @@ In diesem Abschnitt werden aus den vorgestellten Regeln Kriterien abgeleitet, di
 
 ### Regel 1: Gute Level sind lösbar
 
+Dies ist eine krtische Anforderungen, Level die nicht gelöst werden können sind nicht akzeptabel. Ein Generator muss daher gewährleisten können, dass alle Level die generiert werden lösbar sind. Da theoretisch unendlich viele Level generiert werden können, ist es nicht ausreichend wenn die manuell getesteten Level lösbar sind. Daher muss der Generator verfahren zur Sicherstellung der Lösbarkeit implementieren. Dies kann entweder in Form einer Analyse nach der Generierung geschehen oder durch andere Möglichkeiten die das erzeugen von nicht lösbaren Level unmöglich machen.
+
 ### Regel 2: Gute Level fordern die Mechanik des Spiels
+
+Es ist wichtig, dass die erzeugten Level für das Spiel verwendbar sind. Ein guter Generator bietet Schnittstellen um neben den standart Elementen (Wände, Böden, Türen) auch andere Elemente in den generierungsprozess einfießen zu lassen (Fallen, Sprengbare Wände etc.). 
 
 ### Regel 3: Gute Level sind gut gebalanced
 
-### Regel 4: Gute Level haben Risk and Reward momente
+Das Balancing im Spiel wird stark von den Gamedesign Entscheidungen gesteuert und hat daher nur indirekt mit den Generator zu tun. Ein guter Generator bietet jedoch Schnittstellen für den Designer um die Anzahl, Stärke und Position von Monstern und Hindernisse zu bestimmen. 
 
-### Regel 5:Gute Level steuern das Pacing des Spiels
+### Regel 4: Gute Level haben Risk and Reward Momente
+
+Um Riks and Reward Momente zu erzeugen, müssen alternative Pfade vom Generator erstellt werden können. Ein guter Generator bietet Schnittstellen für den Designer um gezielt auf alternative Pfade zugreifen zu können um dort ein besonders schweres Hinderniss und eine entsprechende Belohnung zu platzieren. Die Anzahl der alternaitven Pfade sollte vom Designer konfigurierbar sein 
+
+### Regel 5: Gute Level steuern das Pacing des Spiels
+
+Das Pacing wird durch das Layout der Level bestimmt. Ein guter Generator erzeugt Level mit abwechlsunsgreichen Layout, implementiert verfahren um Backtracking zu vermeiden und bietet Schnittstellen für dne Designer um das Layout des Levels zu manipulieren oder sogar ganz zu bestimmen.
 
 ### Regel 6: Gute Level sind einzigartig
 
-### Regel 7: Gute Level sind effizient in der Hrestellung
+Die Einzigaritgkeit der Level entsteht durch das Layout, ein guter Generator erzeugt daher Level die sich vom Layout unterscheiden. Auch das aussehen der Level ist entscheidend ob die Level als einzigartig Wahrgenommen werden, daher verwendet ein guter Generator verschiedene Texturen für die Level. Konfigurationsmöglichkeiten für verschiedene Layouts oder Texturen sind wünschenswert. 
+
+### Regel 7: Gute Level sind effizient in der Herstellung
+
+Die prozedurale Generierung ist ein effizienter Weg zur Erstellung von Level. Alle funktionsfähigen Generatoren erfüllen dieses Kriterium. Die meisten Algorithmen benötigen Inputdaten um Level zu erzeugen, ein besonders effizienter Generator kann aus wenigen Inputdaten eine vielzahl an unterschiedlichen Level erzeugen.
 
 
 
