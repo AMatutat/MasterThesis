@@ -1,6 +1,6 @@
 # Grundlagen
 
-In diesem Kapitel werden die verschiedenen Grundlagen zum Verstehen dieser Arbeit erläutert. Zuerst wird der Begriff der Prozeduralen Generierung weiter ausgeführt und im Kontext dieser Arbeit spezifiziert. Es folgt eine Erklärung der grapahenbasierten Darstellung von Videospiellevel sowie deren Vorteile. Um den Anwendungsfall für diese Arbeit besser nachvollziehen zu können, wird danach das Genre der Rogue-Like Videospiele und das PM-Dungeon als Vertreter dieses Genres vorgestellt. Da sich diese Arbeit auf die Generierung von Level fokussiert, werden in diesem Kapitel verschiedene Regeln für gutes Level-Design aufgestellt, welche dann genutzt werden, um Bewertungskriterien abzuleiten, die im weiteren Verlauf der Arbeit genutzt werden, um die verschiedenen Algorithmen miteinander vergleichen zu können. Das Kapitel endet mit einer Analyse des aktuellen Standes der Level im PM-Dungeon. 
+In diesem Kapitel werden die verschiedenen Grundlagen zum Verstehen dieser Arbeit erläutert. Zuerst wird der Begriff der Prozeduralen Generierung weiter ausgeführt und im Kontext dieser Arbeit spezifiziert. Es folgt eine Erklärung der grapahenbasierten Darstellung von Videospiellevel sowie deren Vorteile. Um den Anwendungsfall für diese Arbeit besser nachvollziehen zu können, wird danach das Genre der Rogue-Like Videospiele und das PM-Dungeon als Vertreter dieses Genres vorgestellt. Da sich diese Arbeit auf die Generierung von Level fokussiert, werden in diesem Kapitel verschiedene Regeln für gutes Level-Design aufgestellt. Aus diesen Regeln werden Kriterien für Levelgeneratoren abgeleitet, die im weiteren Verlauf der Arbeit genutzt werden, um Aspekte verschiedener Algorithmen im Kontext der prozeduralen Levelgenerierung zu bewerten, außerdem dienen sie als Anforderungen für den in dieser Arbeit erstellten Generator. 
 
 ## Prozedurale Generierung
 
@@ -79,6 +79,7 @@ Sie konzeptionieren eigenständig das Verhalten von Monstern, implementieren Sch
 ![Ausschnitt aus dem PM-Dungeon \label{pmd}](figs/chapter2/pmd.png){width=100%}
 
 Abbildung \ref{pmd} zeigt einen Ausschnitt aus dem Startlevel einer Beispielimplementierung des PM-Dungeons. Die Spielfigur (grüner Kreis) muss mithilfe der Leiter (blauer Kreis) in die nächste Ebene gebracht werden. Auf den Weg dorthin kann der Spieler die Monster (roter Kreis) töten, um Erfahrungspunkte zu sammeln oder Items zu finden. Sowohl die Spielerposition als auch die Position der Monster werden zu Beginn des Levels zufällig bestimmt. Das Spielziel des PM-Dungeon ist an den Highscore-Automaten angelehnt, es geht also nicht darum ein bestimmten Boss zu besiegen oder ein Item zu sichern sondern darum möglichst tief in das endlose Dungeon vorzudringen und mit jedem durchlauf seinen persönlichen Rekord zu brechen. Jedoch kann auch das Spielziel kann von den Studenten frei verändert werden.
+Zum aktuellen Zeitpunkt ist kein eigener Levelgenerator im PM-Dungeon integriert. Das Dungeon wird mit einer Handvoll vorgenerierten Level ausgeliefert- Die Studenten haben keine direkte Möglichkeit die Level zu verändern oder eigene Level zu erstellen. 
 
 ## Regeln für gutes Level-Design
 
@@ -172,75 +173,24 @@ Spieleentwicklung ist ein kostspieliges Unterfangen und bereits kleinere Produkt
 
 **Regel 7: Gute Level sind effizient in der Herstellung.** 
 
-## Bewertungsschema
+## Anforderungen an einen Levelgenerator 
 
-Um im weiteren Verlauf der Arbeit die verschiedenen Algorithmen zur prozeduralen Generierung bewerten und miteinander vergleichen zu können, wird anhand der vorgestellten Regeln ein Bewertungsschema erstellt. Für jede Regel werden verschiedene Kriterien aufgestellt, die angeben, ob und inwiefern diese erfüllt sind. Die Kriterien werden so gewählt, dass sie auf das Anwendungsszenario optimiert sind. Die Tabelle \ref{bkt} listet die Kriterien auf. Für jedes erfüllte Kriterium wird ein Punkt verteilt, die Summe der Punkte gibt die Güte des Algorithmus im Vergleich zu den anderen Algorithmen an (vgl. Formel \ref{bkfk}). 
+Dir vorgestellten Regeln geben zwar eine Idee dafür, wie gute Level aufzusehen haben, sie geben aber keine klaren Kriterien vor, die ein Levelgenerator erfüllen sollte.
+In diesem Abschnitt werden aus den vorgestellten Regeln Kriterien abgeleitet, die ein Levelgenerator erfüllen sollte, um gute Level zu erzeugen. Dabei stellen die Kriterien sowohl Anforderungen an die erzeugten Level als auch an den Algorithmus und seine Input sowie Output Daten. Die Kriterien sollen dabei helfen, festzustellen, ob die obengenannten Regeln eingehalten wurden. Sie dienen als Anforderung für den in dieser Arbeit erzeugten Generator und werden in Kapitel 3 genutzt, um einzelne Bausteine aus anderen Algorithmen zu bewerten. 
 
-| Regel                                         | Kriterium                                                    | Anmerkung                                                    |
-| --------------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| Gute Level sind lösbar.                       | Sind alle Orte und Gegenstände im Level erreichbar?          | Dies ist eine kritische Anforderung. Level, die dieses Kriterium nicht erfüllen, sind inakzeptable und mit null Punkten zu bewerten. |
-| Gute Level fordern die Mechaniken des Spiels. | Sind die Level für die grundlegenden Spielmechaniken der Anwendungsumgebung ausgelegt? | Monster und Items müssen im Dungeon platzierbar sein.        |
-|                                               | Sind die Level für weitere Mechaniken ausgelegt?             | Können Türen, Hebel, Schlüssel, Schlösser, Rätsel, Shops o.ä platziert werden? |
-|                                               | Können die Level manipuliert werden?                         | Kann die Struktur des Levels im Spiel manipuliert werden, zum Beispiel durch Bomben? |
-| Gute Level sind gut gebalanced                | Kann das Balancing vom Entwickler angepasst werden?          | Kann der Entwickler im laufenden Spiel bestimmen wie schwer das Level sein soll? |
-| Gute Level haben Risk and Reward Momente      | Sind Nebenpfade möglich?                                     | Erzeugt der Generator Level, die Wege abseits des kritischen Pfades haben? |
-|                                               | Können Items und Monster gezielt platziert werden?           | Nebenpfade und kritische Pfade müssen für den Entwickler unterscheidbar sein. Jeder Knoten muss gezielt ansprechbar sein. |
-| Gute Level steuern das Pacing des Spiels      | Erzeugt der Algorithmus Level mit abwechslungsreichen Pacing? | Haben die Level unterschiedliche Strukturen, die das Pacing beeinflusse (vgl. Abb. \ref{zelda3})? |
-|                                               | Kann das Pacing kontrolliert werden?                         | Kann der Entwickler gezielt bestimmte Strukturen konfigurieren? |
-| Gute Level sind einzigartig                   | Unterscheiden die Level sich ausreichend im Aufbau?          |                                                              |
-|                                               | Unterscheiden die Level sich ausreichend im Aussehen?        |                                                              |
-|                                               | Kann Backtracking vermieden werden?                          |                                                              |
-| Gute Level sind effizient in der Herstellung. | Kommt der Algorithmus ohne Input-Daten aus?                  | Input Daten sind in diesem Sinne Graphen oder Layouts für Räume. |
-|                                               | Können verschiedene einzigartige Level aus denselben Input-Daten generiert werden? | Wenn keine Input-Daten benötigt werden, 1 Punkt.             |
+### Regel 1: Gute Level sind lösbar
 
-: Tabelle mit den Bewertungskriterien für prozedurale Algorithmen. \label{bkt}
+### Regel 2: Gute Level fordern die Mechanik des Spiels
 
-Die Güte $G$ eines Level lässt sich durch die Summe aller vergebenen Punkte
-$P\backslash L$ multipliziert mit dem Bewertungspunkt Lösbarkeit $L$ der Bewertungskriterien berechnen. 
-$$
-\label{bkfk} 
-G = L * ( \sum P_{i})
-$$
+### Regel 3: Gute Level sind gut gebalanced
 
-**TODO CAPTION Formel zur Berechnung der Güte eines Level.**  
+### Regel 4: Gute Level haben Risk and Reward momente
+
+### Regel 5:Gute Level steuern das Pacing des Spiels
+
+### Regel 6: Gute Level sind einzigartig
+
+### Regel 7: Gute Level sind effizient in der Hrestellung
 
 
-
-## Analyse der Ausgangssituation 
-
-**TODO Besser erklären, wirkt noch total "ja ist halt so"** 
-
-Aktuell besitzt das PM-Dungeon keinen eigenen Level-Generator, stattdessen werden vier Level mitgeliefert. Um die Notwendigkeit eines eigenen prozeduralen Generators für das PM-Dungeon zu begründen, wird im Folgenden die Güte der aktuellen Level Situation bewertet. 
-
-Kriterium: Sind alle Orte und Gegenstände im Level erreichbar? $\newline$Begründung:  In allen Level kann jeder Raum betreten werden. Objekte werden im Raum verteilt und sind daher auch erreichbar.$\newline$Bewertung: 1
-
-Kriterium: Sind die Level für die grundlegenden Spielmechaniken der Anwendungsumgebung ausgelegt?$\newline$Begründung: Die Level können mit Monstern und Gegenständen gefüllt werden. Die Level haben alle einen Ausgang.<br>Bewertung: 1
-
-Kriterium: Sind die Level für weitere Mechaniken ausgelegt?$\newline$Begründung: Das Dungeon unterscheidet nicht zwischen unterschiedlichen Objekten, daher können auch Händler, Hebel etc. zufällig im Level platziert werden. Bewertung: 1
-
-Kriterium: Können die Level manipuliert werden?$\newline$Begründung: Die Level sind statisch und sind nicht zur Manipulation gedacht.$\newline$Bewertung: 0
-
-Kriterium: Kann das Balancing vom Entwickler angepasst werden?$\newline$Begründung: Objekte und Monster werden nach dem laden des Level platziert. Entwickler platzieren diese selber und können daher verschiedenen Parameter beim Verteilen berücksichtigen. $\newline$Bewertung: 1 
-
-Kriterium: Sind Nebenpfade möglich?$\newline$Begründung: Einige Level bieten Nebenpfade.$\newline$Bewertung: 1
-
-Kriterium:   Können Items und Monster gezielt platziert werden?$\newline$Begründung: Entwickler können die Struktur des Dungeons nicht abfragen. Objekte können nur zufällig im Level platziert werden.$\newline$Bewertung: 0 
-
-Kriterium: Erzeugt der Algorithmus Level mit abwechslungsreichen Pacing?$\newline$Begründung: Kein eigener Generator vorhanden.$\newline$Bewertung: 0
-
-Kriterium:   Kann das Pacing kontrolliert werden?$\newline$Begründung: Die Level sind fest vorgegeben und können nicht verändert werden.$\newline$Bewertung: 0
-
-Kriterium: Unterscheiden die Level sich ausreichend im Aufbau?$\newline$Begründung: Die einzelnen Level unterscheiden sich im Aufbau, sind aber bei jeden Spieldurchlauf gleich und können daher nicht als einzigartig bezeichnet werden.$\newline$Bewertung: 0
-
-Kriterium: Unterscheiden die Level sich ausreichend im Aussehen?$\newline$Begründung: Die Level greifen alle auf denselben Texturenpool zu und unterscheiden sich optisch nicht voneinander. $\newline$Bewertung: 0
-
-Kriterium: Kann Backtracking vermieden werden?$\newline$Begründung: Die zur Verfügung gestellten Level sind klein genug, so das Backtracking kein Problem ist. $\newline$Bewertung: 1
-
-Kriterium: Kommt der Algorithmus ohne Input-Daten aus?$\newline$Begründung: Die Level müssen im JSON Format vorliegen.$\newline$Bewertung: 0
-
-Kriterium:   Können verschiedene einzigartige Level aus denselben Input-Daten generiert werden?$\newline$Begründung: Die Levelstruktur ist durch die JSON Datei fest vorgegeben. Dieselbe Datei erzeugt immer dasselbe Level.  $\newline$ Bewertung: 0
-
-Nach der Formel \ref{bkfk} ergibt sich daher eine Güte von **5**. 
-
-Zwar genügen die bereitgestellten Level zum Erfüllen des Lernzieles, jedoch könnte ein eigener Generator die Studenten weiter motivieren ihr Spiel im inhaltlichen Teil auszubauen. Am Ende des Semesters würde so ein eigenes fertiges Spiel entstehen und nicht nur ein Prototyp eines Spiels. 
 
