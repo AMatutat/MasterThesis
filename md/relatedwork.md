@@ -56,6 +56,9 @@ Diese Art der Darstellung eignet sich vor allem für zweidimensionale Spiele, da
 	- Faces
 		- Was sind Faces?
 		- Wie können Faces erkannt werden
+	- Zyklus und Pfade
+	- Kürzester Weg im Pfade
+	
 
 ## Rogue-Like
 

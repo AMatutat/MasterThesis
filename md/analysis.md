@@ -1,32 +1,11 @@
-# Analyse
+# Theoretisches Konzept
 
 <!--
-
-*   Analysieren und vergleichen verschiedener Algorithmen
-*   Ableiten von Algorithmen aus Spielen
-
-*Für jeden Algo*rithmus
-
-- Wie funktioniert der Algorithmus?
-  - evtl. Technologie erklären (hier oder wo anders?)
-- Zeigen von Beispielen
-- Bewerten das Algorithmus anhand der Kriterien
-  - Was macht der Algo gut?
-  - Was macht der Algo schlecht?
-  - Welche grenzen gibt es?
 
 geschätzter Umfang ca: 40%
 -->
 
 In diesem Kapitel werden Algorithmen vorgestellt, die verschiedene Aspekte der prozeduralen Levelgenerierung abdecken. Nicht jeder vorgestellter Algorithmus ist für die Generierung von Level konzeptioniert, kann aber für Teilaspekte verwendet werden. Es werden Algorithmen zur Generierung und Modifikation von planaren Graphen, Erzeugen von Level aus diesen Graphen sowie zum Erstellen von einzelnen Räumen vorgestellt. Ziel ist es, die einzelne Elemente der Algorithmen so zu kombinieren, dass das Resultat die in Kapitel 2 aufgestellten Anforderungen bestmöglich erfüllt. Dieses Kapitel fokussiert sich auf die Vorstellungen der Bausteine und präsentiert nur ein theoretisches Konzept der Kombination, das nächste Kapitel stellt ein konkretes, technisches Konzept vor. 
-
-## Fast generation of planar graphs
-
-https://users.cecs.anu.edu.au/~bdm/papers/plantri-full.pdf
-
-## Cycle Dungeon
-
-https://ctrl500.com/tech/handcrafted-feel-dungeon-generation-unexplored-explores-cyclic-dungeon-generation/
 
 
 ## Vom Graph zum Level
@@ -75,13 +54,44 @@ Quelle [@Ma2014]
 
 Zwar könnten die Chains auch separat aufgelöst werden und dann versucht werde die Teillösungen miteinander zu verbinden, jedoch würden dabei Lösungen erzeugt werden, die zwar die Chain auflösen aber nicht mit den gesamten Graphen kompatibel sind und daher unbrauchbar wären. Zusätzlich sind im Level alle miteinander verbunden, daher gibt es auch keine Vorteile die Chains einzeln zu lösen. 
 
-Das Erstellen von mehren Lösungen für eine Chain hat mehrere Vorteile. Zu einem ermöglicht und erleichtert es das schrittweise Backtracking, falls eine Chain nicht in der aktuellen Lösung angeschlossen werden kann und zusätzlich können schneller mehrere gültige Lösungen für ein Graph gefunden werden, indem beispielsweise nach der dritten Chain eine andere Teillösungen verwendet wird. Abbildung \ref{graphsolution} zeigt wie aus verschieden Teillösungen unterschiedliche Gesamtlösungen entstehen. Dies unterstreicht noch einmal die Effizienz des Algorithmus, da bereits aus einem einzigen Inputgraphen viele vollkommen unterschiedliche Level entstehen könne.
+Das Erstellen von mehren Lösungen für eine Chain hat mehrere Vorteile. Zu einem ermöglicht und erleichtert es das schrittweise Backtracking, falls eine Chain nicht in der aktuellen Lösung angeschlossen werden kann und zusätzlich können schneller mehrere gültige Lösungen für ein Graph gefunden werden, indem beispielsweise nach der dritten Chain eine andere Teillösungen verwendet wird. Abbildung \ref{graphsolution} zeigt wie aus verschieden Teillösungen unterschiedliche Gesamtlösungen entstehen. Dies unterstreicht noch einmal die Effizienz des Algorithmus, da bereits aus einem einzigen Inputgraphen viele vollkommen unterschiedliche Level entstehen könne. 
 
 ![Beispiel: Unterschiedliche Teillösungen für die selbe Chain. \label{graphpartsolution}[@Ma2014]](figs/chapter3/graphpatrsol.PNG)
 
 ![Beispiel: Unterschiedliche Teillösungen führen zu unterschiedlichen Gesamtlösungen. \label{graphsolution}[@Ma2014]](figs/chapter3/graphsolution.PNG)
 
 ### Analyse
+
+- Gute Level sind lösbar
+- einzigartig
+  - layout ist immer schön unterschiedlich
+  - formen der räume sind statisch, das doof
+- effizienz
+  - geht aber besser
+- Kontrolliert nicht das Pacing des Spiels, dies wird vom Graph vorgegeben
+- Riks and Reward Momente, der algo kann zwar alternative Pfade legen, müssen aber im graphen eingezeichnet sein
+- Grundsätzlich bietet der Algorithmus keine Schnittstellen um eigene anapassungen zu machen, dies müsste bei den input daten geschehen
+
+
+
+## Fast generation of planar graphs
+
+https://users.cecs.anu.edu.au/~bdm/papers/plantri-full.pdf
+
+### Analyse
+
+- erzeugt Graphen die als input genutzt werden könne, steigert daher die effizienz des gesamten generators
+- Bietet Schnittstellen um die Anzahl der Knoten/ größe der Level zu bestimmen
+- Kann alternative Pfade erzeugen für Risk and Reward momente
+- Durch ergänzungne von Graphanalyse verfahren können Schnittstellen zur verfügugng gestellt werden (balancing)
+
+## Cycle Dungeon
+
+https://ctrl500.com/tech/handcrafted-feel-dungeon-generation-unexplored-explores-cyclic-dungeon-generation/
+
+### Analyse
+
+- Hilft dabei das pacing zu steuern indem backtracking vermieden wird
 
 ## Spelunky
 
@@ -120,7 +130,36 @@ Derek Yu schrieb in seinen Buch:
 
 ![Beispiellevel aus Spelunky mit kritischem Pfad-Layout (rot) und Raum Nummerierung \label{spelunkylevel}[@Kezemi]](figs/chapter3/spelunky.png)
 
-### Analyse 
+### 
 
+### Analyse
 
+- Level im gesamten sind nicht einzigartig da das Grid gut erkennbar ist
+- Die einzelnen Räume sind effizient in der Herstellung, da aus ein paar Handgebaute level durch mutationen viele unterschiedliche Level entstehen
+- Diesen Aspekt nehme ich um die Inout Blöcke im Dungeon zu mutieren und mehr abwechslung zu haben
+- Räume ermöglichen unterschiedliche Texturen etc. um das aussehen einzigartig zu machen
+- Durch die verwendung von Platzhaltern im Raum können sowas wie Fallen relativ einfach integriert werden, "Gute Level fordern die Mechaniken des Spiels"
 
+## Zusammenfassung des Konzeptes
+
+- Graph 2 Level wird als basis genommen
+
+- Planarer Graph wird automatisch generiert
+
+  - hat parameter um die größe des Levels anzugeben
+  - wird mithilfe von mutationen verändert um pacing zu omptimieren
+  - Knoten werden gelabelt
+    - unterschiedliche Label sind unterschiedliche input blöcke und texturen
+  - Hat Schnittstellen um Graphen zu analysieren
+    - get CriticalPath
+    - get OptionalPath
+    - get end of Path
+    - etc.
+
+- Set aus Input Blöcke wird manuell konzeptioniert
+
+  - besteht aber aus template räume die spelunky style aufgebaut sind
+
+  - hat schnittstellen um die ersetzung anzupassen (z.B alle '5' können Fallen sein)
+
+    
