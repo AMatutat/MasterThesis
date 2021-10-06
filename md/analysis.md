@@ -140,11 +140,19 @@ Derek Yu schrieb in seinen Buch:
 
 ### Vor- und Nachteile
 
-- Level im gesamten sind nicht einzigartig da das Grid gut erkennbar ist
-- Die einzelnen Räume sind effizient in der Herstellung, da aus ein paar Handgebaute level durch mutationen viele unterschiedliche Level entstehen
-- Diesen Aspekt nehme ich um die Inout Blöcke im Dungeon zu mutieren und mehr abwechslung zu haben
-- Räume ermöglichen unterschiedliche Texturen etc. um das aussehen einzigartig zu machen
-- Durch die verwendung von Platzhaltern im Raum können sowas wie Fallen relativ einfach integriert werden, "Gute Level fordern die Mechaniken des Spiels"
+Vorteile: Die erzeugten Level sind immer lösbar, da sichergestellt wird, dass der kritische Pfad immer begehbar ist und keine Items voraussetzt. 
+
+Vorteil: Die einzelnen Räume sind effizient der Herstellung. Zwar müssen die Raumtemplates per Hand gebaut werden, danach können aber durch die Mutationen viele verschiedene, einzigartige Räume erstellt werden.
+
+Vorteil: Die Räume unterstützten verschiedene Texturen, so kann die optische Abwechslung gewährleistet werden.
+
+Vorteil: Die Räume unterstützen viele verschiedene Spielinhalte. Neue Inhalte wie Fallen können schnell und einfach hinzugefügt werden, indem die Ersetzungstabelle erweitert oder verändert wird. Dies erlaubt es die Räume für die Mechaniken des Spiels anzupassen.
+
+Nachteil: Durch das Grid ist das Level-Layout nicht einzigartig.
+
+Lösungsansatz: Das erstellen das Level-Layout kann von einem anderen Algorithmus übernommen werden. Die Lösbarkeit der Level muss dann vom neuen Algorithmus sichergestellt werden. 
+
+
 
 ## Zusammenfassung des Konzeptes
 
