@@ -8,7 +8,7 @@ geschätzter Umfang ca: 40%
 In diesem Kapitel werden Algorithmen vorgestellt, die verschiedene Aspekte der prozeduralen Levelgenerierung abdecken. Nicht jeder vorgestellter Algorithmus ist für die Generierung von Level konzeptioniert, kann aber für Teilaspekte verwendet werden. Es werden Algorithmen zur Generierung und Modifikation von planaren Graphen, Erzeugen von Level aus diesen Graphen sowie zum Erstellen von einzelnen Räumen vorgestellt. Ziel ist es, die einzelne Elemente der Algorithmen so zu kombinieren, dass das Resultat die in Kapitel 2 aufgestellten Anforderungen bestmöglich erfüllt. Dieses Kapitel fokussiert sich auf die Vorstellungen der Bausteine und präsentiert nur ein theoretisches Konzept der Kombination, das nächste Kapitel stellt ein konkretes, technisches Konzept vor. 
 
 
-## Vom Graph zum Level
+## Vom Graph zum Level 
 
 Zwar kann das Layout eines Level mithilfe eines Graphen dargestellt werden, schlussendlich muss aus diesen Graphen aber eine physische Anordnung von Räumen und Strukturen generiert werden, die dann das eigentliche Level im Spiel ist. Die Arbeit von Ma et al stellt einen effizienten Algorithmus vor, um diese Umwandlung durchzuführen. [@Ma2014] 
 
@@ -60,17 +60,25 @@ Das Erstellen von mehren Lösungen für eine Chain hat mehrere Vorteile. Zu eine
 
 ![Beispiel: Unterschiedliche Teillösungen führen zu unterschiedlichen Gesamtlösungen. \label{graphsolution}[@Ma2014]](figs/chapter3/graphsolution.PNG)
 
-### Analyse
+### Vor- und Nachteile
 
-- Gute Level sind lösbar
-- einzigartig
-  - layout ist immer schön unterschiedlich
-  - formen der räume sind statisch, das doof
-- effizienz
-  - geht aber besser
-- Kontrolliert nicht das Pacing des Spiels, dies wird vom Graph vorgegeben
-- Riks and Reward Momente, der algo kann zwar alternative Pfade legen, müssen aber im graphen eingezeichnet sein
-- Grundsätzlich bietet der Algorithmus keine Schnittstellen um eigene anapassungen zu machen, dies müsste bei den input daten geschehen
+Vorteil: Der Algorithmus kann viele Level aus einem Graphen und Set aus Räumen erstellen und ist daher sehr effizient in der Nutzung der Inputs.
+
+Vorteil: Sofern der Input Graph einen kritischen Pfad zwischen Start und Ziel hat, kann der Algorithmus gewährleisten, dass alle ausgegebenen Level auch lösbar sind.
+
+Vorteil: Die Level-Layouts unterscheiden sich selbst bei gleichen Input-Daten stark voneinander und können als einzigartig bezeichnet werden.
+
+Nachteil: Der Algorithmus funktioniert nicht ohne Input Daten, sowohl Graph als auch das Set aus Räumen müssen vorher erstellt werden, dies senkt die Effizienz des Algorithmus. 
+
+Lösungsansatz: Ein weiterer Algorithmus zur Generierung planarer Graphen kann genutzt werden, um den Input Grafen automatisch erstellen zu lassen. Auch ein Algorithmus zur automatischen Generierung von Input Räumen wäre denkbar. Die vollständige automatisierte Generierung von Räumen stellt allerdings ein eigenes komplexes Problem dar, welches im Rahmen dieser Arbeit nicht besprochen wird. 
+
+Nachteil: Es werden immer dieselben Räume verwendet, bei wenigen Input-Räumen oder einen Spieler der viel Zeit im spiel verbringt wird diese sichtbar und die Einzigartigkeit der Level ist nicht mehr gegeben. 
+
+Lösungsansatz: Auch hier könnte ein Algorithmus zur vollständigen Generierung von Räumen genutzt werden. Eine andere Möglichkeit wäre ein Algorithmus, der die Input-Räume anhand verschiedener Kriterien mutiert und so bereits aus wenigen Räume eine Vielzahl unterschiedlicher Räume erzeugt werden können.
+
+Nachteil: Der Algorithmus bietet keine Möglichkeit, um das Pacing zu kontrollieren, Risk and Reward Momente zu erzeugen oder das Spiel zu balancen. Es gibt keine Schnittstelle um das Aussehen der Level oder das Level Layout abseits des Input-Graphen anzupassen.
+
+Lösungsansatz: Der Algorithmus kann als Grundlage für die Konzeptionierung eines Level Generators genutzt werden. Die Konfiguration der einzelnen Aspekte findet dann bei der Erstellung des Graphen bzw. bei der Mutation der Räume statt. 
 
 
 
@@ -78,7 +86,7 @@ Das Erstellen von mehren Lösungen für eine Chain hat mehrere Vorteile. Zu eine
 
 https://users.cecs.anu.edu.au/~bdm/papers/plantri-full.pdf
 
-### Analyse
+### Vor- und Nachteile
 
 - erzeugt Graphen die als input genutzt werden könne, steigert daher die effizienz des gesamten generators
 - Bietet Schnittstellen um die Anzahl der Knoten/ größe der Level zu bestimmen
@@ -89,7 +97,7 @@ https://users.cecs.anu.edu.au/~bdm/papers/plantri-full.pdf
 
 https://ctrl500.com/tech/handcrafted-feel-dungeon-generation-unexplored-explores-cyclic-dungeon-generation/
 
-### Analyse
+### Vor- und Nachteile
 
 - Hilft dabei das pacing zu steuern indem backtracking vermieden wird
 
@@ -130,9 +138,7 @@ Derek Yu schrieb in seinen Buch:
 
 ![Beispiellevel aus Spelunky mit kritischem Pfad-Layout (rot) und Raum Nummerierung \label{spelunkylevel}[@Kezemi]](figs/chapter3/spelunky.png)
 
-### 
-
-### Analyse
+### Vor- und Nachteile
 
 - Level im gesamten sind nicht einzigartig da das Grid gut erkennbar ist
 - Die einzelnen Räume sind effizient in der Herstellung, da aus ein paar Handgebaute level durch mutationen viele unterschiedliche Level entstehen
