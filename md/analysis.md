@@ -2,7 +2,7 @@
 
 <!--
 
-geschätzter Umfang ca: 40%
+geschätzter Umfang ca: 40% (naja oder auch nicht ^^)
 -->
 
 In diesem Kapitel werden Algorithmen vorgestellt, die verschiedene Aspekte der prozeduralen Levelgenerierung abdecken. Nicht jeder vorgestellter Algorithmus ist für die Generierung von Level konzeptioniert, kann aber für Teilaspekte verwendet werden. Es werden Algorithmen zur Generierung und Modifikation von planaren Graphen, Erzeugen von Level aus diesen Graphen sowie zum Erstellen von einzelnen Räumen vorgestellt. Ziel ist es, die einzelne Elemente der Algorithmen so zu kombinieren, dass das Resultat die in Kapitel 2 aufgestellten Anforderungen bestmöglich erfüllt. Dieses Kapitel fokussiert sich auf die Vorstellungen der Bausteine und präsentiert nur ein theoretisches Konzept der Kombination, das nächste Kapitel stellt ein konkretes, technisches Konzept vor. 
@@ -82,9 +82,21 @@ Lösungsansatz: Der Algorithmus kann als Grundlage für die Konzeptionierung ein
 
 
 
-## Fast generation of planar graphs
+## Planare Graphen generieren
 
-https://users.cecs.anu.edu.au/~bdm/papers/plantri-full.pdf
+- https://users.cecs.anu.edu.au/~bdm/papers/plantri-full.pdf
+  - Kurze erläuterung wie das geht
+  - was für graphen kommen da raus?
+  - evtl. die graphen auch mal durch edgar hauen und beispiel level zeigen
+  - warum sind die für level nicht optimal?
+- Eigenen Algorithmus erklären
+  - Erläuterung des Kuratowski Theorem
+  - Wie komm ich dadurch drauf das ein graph mit maximal 4 knoten die mehr als 2 nachbarn haben immer planar ist?
+  - erzeugt nicht alle möglichen planaren graphen
+  - Die erzeugten Graphen können an einer beliebigen stelle miteinander verbunden werden und bleiben planar
+  - Warum sind diese Graphen besser
+  - Graphen zeigen?
+  - evtl. durch edgar hauen?
 
 ### Vor- und Nachteile
 
@@ -93,9 +105,9 @@ https://users.cecs.anu.edu.au/~bdm/papers/plantri-full.pdf
 - Kann alternative Pfade erzeugen für Risk and Reward momente
 - Durch ergänzungne von Graphanalyse verfahren können Schnittstellen zur verfügugng gestellt werden (balancing)
 
-## Cycle Dungeon
+## Graphen optimieren
 
-https://ctrl500.com/tech/handcrafted-feel-dungeon-generation-unexplored-explores-cyclic-dungeon-generation/
+- https://ctrl500.com/tech/handcrafted-feel-dungeon-generation-unexplored-explores-cyclic-dungeon-generation/
 
 ### Vor- und Nachteile
 

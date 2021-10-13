@@ -38,6 +38,8 @@ In dieser Arbeit werden Level mithilfe von Graphen dargestellt, daher erläutert
 
 Ein Level-Graph $G$ besteht aus einer Menge an Knoten $V(G)$ und Kanten zwischen diesen Knoten $E(G)$. Knoten sind Räume, dabei spielt die Größe, der Inhalt und die Geometrie des Raumes keine Rolle. Eine Kante zwischen zwei Knotne gibt an, dass die Räume aneinander anliegend sind und mit einen Durchgang verbunden sind. Kanten können entweder gerichtet sein, dann kann ein Weg zwar von einem Raum in den anderen Raum führen, aber nicht zurück oder ungerichtet, dann kann ein Weg beidseitig passiert werden. Gerichtete Verbindungen werden durch einen Pfeil dargestellt, ungerichtete durch eine blanke Linie. Ein Level ist also eine Menge an Räumen, die miteinander verbunden sind. 
 
+**warum planar? weiter ausführen** 
+
 Da diese Arbeit sich auf 2D-Level konzentriert, müssen alle Level-Graphen planar sein. Ist ein Graph nicht planar, können die Räume nicht auf einer zweidimensionalen Fläche angeordnet werden ohne sich zu überschneiden und neue, nicht dargestellte, Verbindungen zu erzeugen. 
 
 Abbildung \ref{dam} zeigt ein Level aus dem Spiel *Dragon Age: Origins* in der Kartenansicht aus dem Spiel. Dieses Level wurde in Abbildung \ref{dag} in Graphendarstellung gebracht. Da das Themenfeld der Graphentheorie besonders gut erforscht ist, können nun viele der bekannten Verfahren genutzt werden, um den Level-Graph zu analysieren. Im nächsten Abschnitt werden die für diese Arbeit relevanten Anlgorithmen der Graphenanalyse erläutert. 
@@ -58,7 +60,7 @@ Diese Art der Darstellung eignet sich vor allem für zweidimensionale Spiele, da
 		- Wie können Faces erkannt werden
 	- Zyklus und Pfade
 	- Kürzester Weg im Pfade
-	
+
 
 ## Rogue-Like
 
