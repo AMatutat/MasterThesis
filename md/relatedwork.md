@@ -38,9 +38,7 @@ In dieser Arbeit werden Level mithilfe von Graphen dargestellt, daher erläutert
 
 Ein Level-Graph $G$ besteht aus einer Menge an Knoten $V(G)$ und Kanten zwischen diesen Knoten $E(G)$. Knoten sind Räume, dabei spielt die Größe, der Inhalt und die Geometrie des Raumes keine Rolle. Eine Kante zwischen zwei Knoten gibt an, dass die Räume aneinander anliegend sind und mit einem Durchgang verbunden sind. Kanten können entweder gerichtet sein, dann kann ein Weg zwar von einem Raum in den anderen Raum führen, aber nicht zurück oder ungerichtet, dann kann ein Weg beidseitig passiert werden. Gerichtete Verbindungen werden durch einen Pfeil dargestellt, ungerichtete durch eine blanke Linie. Ein Level ist also eine Menge an Räumen, die miteinander verbunden sind.
 
-**warum planar? weiter ausführen** 
-
-Da diese Arbeit sich auf 2D-Level konzentriert, müssen alle Level-Graphen planar sein. Ist ein Graph nicht planar, können die Räume nicht auf einer zweidimensionalen Fläche angeordnet werden, ohne sich zu überschneiden und neue, nicht dargestellte, Verbindungen zu erzeugen.
+Da diese Arbeit 2D-Level betrachtet, müssen alle Level-Graphen planar sein. Ist ein Graph nicht planar, können die Räume nicht auf einer zweidimensionalen Fläche angeordnet werden, ohne sich zu überschneiden und neue, im Graphen nicht dargestellte, Verbindungen zu erzeugen. Für die Darstellung von 3D-Level ist es nicht nötigt, dass der Level-Graph planar ist, da hier Räume und Verbindungen auch übereinander oder untereinander liegen können.
 
 Abbildung \ref{dam} zeigt ein Level aus dem Spiel *Dragon Age: Origins* in der Kartenansicht aus dem Spiel. Dieses Level wurde in Abbildung \ref{dag} in Graphendarstellung gebracht. Da das Themenfeld der Graphentheorie besonders gut erforscht ist, können nun viele der bekannten Verfahren genutzt werden, um den Level-Graph zu analysieren. Im nächsten Abschnitt werden die für diese Arbeit relevanten Algorithmen der Graphenanalyse erläutert. 
 
@@ -50,9 +48,7 @@ Die roten Kanten in Abbildung \ref{dag} zeigen den kritischen Pfad. Der kritisch
 
 ![\ref{dam} in Graphendarstellung \label{dag}](figs/chapter2/dragonageasgraph.png){width=100%}
 
-**Erhöht es wirklich die komplexität?**
-
-Diese Art der Darstellung eignet sich vor allem für zweidimensionale Spiele, da auch der Graph zweidimensional ist. Zwar lassen sich auch 3D-Level mit Graphen darstellen, dies erhöht jedoch die Komplexität und erschwert die Übersicht. Auch zu beachten ist, dass der Graph nur die Struktur des Levels darstellt, jedoch nicht die Geometrie, das Aussehen oder den Inhalt.
+Diese Art der Darstellung eignet sich vor allem für zweidimensionale Spiele, da auch der Graph zweidimensional ist. Zu beachten ist, dass der Graph nur die Struktur des Levels darstellt, jedoch nicht die Geometrie, das Aussehen oder den Inhalt.
 
 ## Graphenanalyse 
 	- Welche Alogrithmen gibt es um Graphen zu analyisieren?
