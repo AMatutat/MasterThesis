@@ -84,26 +84,49 @@ Lösungsansatz: Der Algorithmus kann als Grundlage für die Konzeptionierung ein
 
 ## Planare Graphen generieren
 
-- https://users.cecs.anu.edu.au/~bdm/papers/plantri-full.pdf
-  - Kurze erläuterung wie das geht
-  - was für graphen kommen da raus?
-  - evtl. die graphen auch mal durch edgar hauen und beispiel level zeigen
-  - warum sind die für level nicht optimal?
-- Eigenen Algorithmus erklären
-  - Erläuterung des Kuratowski Theorem
-  - Wie komm ich dadurch drauf das ein graph mit maximal 4 knoten die mehr als 2 nachbarn haben immer planar ist?
-  - erzeugt nicht alle möglichen planaren graphen
-  - Die erzeugten Graphen können an einer beliebigen stelle miteinander verbunden werden und bleiben planar
-  - Warum sind diese Graphen besser
-  - Graphen zeigen?
-  - evtl. durch edgar hauen?
+Bekannte Verfahren zur Generierung von planaren Graphen wie das *plantri* Programm nutzen Triangulation oder Quadrangulation.[https://users.cecs.anu.edu.au/~bdm/papers/plantri-full.pdf] Die erzeugten Graphen zeichnen sich dadurch aus, dass jedes Face im Graph ein Dreieck bzw.. ein Quadrat ist. Dieses Verfahren ist zwar besonders effizient unter Betrachtung der Rechenleistung, die erzeugten Graphen eignen sich aber kaum um gute Videospiellevel darzustellen.
+
+Abbildung \ref{plantri} zeigt zwei verschiedene Graphen die mithilfe von *plantri* erzeugt werden können, einmal durch Triangulation und einmal durch Quadrangulation. Die Graphen zeichnen sich vor allem durch ihre zyklische Struktur aus, jeder Knoten kann auf mehrere Wege erreicht werden und es gibt keine klaren Endpunkte. Würde man zwei zufällige Punkte im Graphen als Start- und Endpunkt bestimmen und alle kritischen Pfade einzeichnen, wäre jede Kante markiert. Der Endpunkt kann daher durch viele verschiedenen Pfade erreicht werden. Was zu nächst nach einen Vorteil klingt, da der Spieler so maximale Freiheit bei der Wahl seines Weges hat, stellt sich als Nachteil für das Pacing und Balancing heraus. Da (fast) jeder Knoten als Kritisch und Optional gleichzeitig betrachtet werden kann, ist es schwer Risk and Reward Momente zu platzieren, Monster gezielt auf kritischen bzw. optionalen Pfade zu platzieren oder sicherzustellen dass der Spieler an kritischen Events vorbei muss. Zusätzlich unterscheiden sich die Teilaspekte der Graphen im Grunde gar nicht, jedes Teilstück besteht entweder aus einen Dreieck oder einen Quadrat, daher würden die erzeugten Level sich überwiegend in der Größe der Level unterscheiden und nur wenig Variation im Layout aufweisen.
+
+  ![Planare Graphen erzeugt durch Triangulation (links) und Quadrangulation) rechts) \label{plantri}](figs/chapter3/plantriexample.png)
+
+**Todo quelle: https://users.cecs.anu.edu.au/~bdm/papers/plantri-full.pdf** 
+
+Eine andere Möglichkeit zur Generierung von Planaren Graphen ist die kontrollierte Zufallssuche. Ein Algorithmus der vollkommen Zufällig einen Graphen erzeugt, würde auch planare Graphen erzeugen. Da dies weder ein zuverlässiger noch effizienter Weg zur Generierung ist, muss der Zufall so eingeschränkt werden, dass die Generierung von nicht planaren Graphen unmöglich wird.
+
+Das Satz von Kuratowski sagt, dass ein Graph genau dann planar ist, wenn er keinen Teilgraph besitzt der ein Unterteilungsgraph des $K5$ oder $K3,3$ ist. $K5$ und $K3,3$ sind zwei Graphen für die es keine planare Darstellung gibt (vgl. Abbildung **TODO** und **TODO**).
+
+Bei der Generierung eines planaren Graphen muss also darauf geachtet werden, dass weder $K5$ noch $K3,3$ enthalten sind. Da es ein NP-Schweres Problem ist, einen bestimmten Teilgraph in einen ungerichteten Graphen zu finden, ist es nicht effizient den Graphen während jeden Schrittes des Generierungsprozesses nach diesen Graphen zu durchsuchen. **TODO QUELLE**. Es ist aber möglich, die Erzeugung von $K5$ oder $K3,3$ zu verhindern. 
+
+$K5$ besteht aus fünf Knoten mit jeweils vier Kanten. Ein Graph indem es maximal vier Knoten mit vier oder mehr Kanten gibt, kann $K5$ daher nicht enthalten. 
+
+$K3,3$ besteht aus sechs Knoten mit jeweils drei Kanten, Ein Graph indem es maximal fünf Knoten mit drei oder mehr Kanten gibt, kann $K3,3$ daher nicht enthalten.
+
+Daraus lässt sich ableiten, dass ein Graph der maximal vier Knoten mit drei oder mehr Kanten hat, weder $K5$ noch $K3,3$ enthalten kann und daher planar ist. 
+
+**TODO Beispiel einfügen** 
+
+- [Kazimierz Kuratowski](https://de.wikipedia.org/wiki/Kazimierz_Kuratowski): [Sur le problème des courbes gauches en topologie.](http://matwbn.icm.edu.pl/ksiazki/fm/fm15/fm15126.pdf) In: Fund. Math.. 15, 1930, S. 271–283.
 
 ### Vor- und Nachteile
 
-- erzeugt Graphen die als input genutzt werden könne, steigert daher die effizienz des gesamten generators
-- Bietet Schnittstellen um die Anzahl der Knoten/ größe der Level zu bestimmen
-- Kann alternative Pfade erzeugen für Risk and Reward momente
-- Durch ergänzungne von Graphanalyse verfahren können Schnittstellen zur verfügugng gestellt werden (balancing)
+Vorteil: Planare Graphen können effizient und ohne Inputdaten erzeugt werden.
+
+Vorteil: Die Graphen unterscheiden sich merklich voneinander. 
+
+Vorteil: Die Graphen können optionale Pfade für Risk and Reward Momente enthalten. 
+
+Vorteil: Der Algorithmus kann um Schnittstellen ergänzt werden um Levelgröße, Pfadlänge etc. zu bestimmen und so das Pacing zu kontrollieren.
+
+Vorteil: Die erzeugten Graphen können mit anderen planaren Graphen an genau einer zufälligen Stelle verbunden werden und behalten ihre planare Eigenschaft. Dies kann genutzt werden um bei bedarf manuell erzeugte Graphen einzubinden oder die erzeugten Graphen miteinander zu kombinieren. Dies steigert zusätzlich die Effizienz, da aus einer Handvoll Graphen durch verschiedene Kombination wieder neue Graphen erzeugt werden können ohne große Berechnungen durchführen zu müssen.
+
+Nachteil: Der Algorithmus kann nicht jeden möglichen planaren Graphen erzeugen. Es gibt planare Graphen mit mehr als vier Knoten die mehr als drei Nachbarn haben.
+
+Lösungsansatz: Wie oben beschrieben können die erzeugten Graphen miteinander verbunden werden um die Vielfalt der Graphen zu erhöhen. 
+
+Nachteil: Die Struktur des Graphen ist größtenteils zufällig.
+
+Lösungsansatz: Verschiedene Verfahren zur Graphenanalyse können genutzt werden um Schwachstellen im Graphen zu erkennen und diese durch Veränderungen zu verbessern. 
 
 ## Graphen optimieren
 
