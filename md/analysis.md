@@ -88,7 +88,7 @@ Bekannte Verfahren zur Generierung von planaren Graphen wie das *plantri* Progra
 
 Abbildung \ref{plantri} zeigt zwei verschiedene Graphen, die mithilfe von *plantri* erzeugt werden können, einmal durch Triangulation und einmal durch Quadrangulation. Die Graphen zeichnen sich vor allem durch ihre zyklische Struktur aus, jeder Knoten kann auf mehrere Wege erreicht werden und es gibt keine klaren Endpunkte. Würde man zwei zufällige Punkte im Graphen als Start- und Endpunkt bestimmen und alle kritischen Pfade einzeichnen, wäre jede Kante markiert. Der Endpunkt kann daher durch viele verschiedenen Pfade erreicht werden. Was zunächst nach einem Vorteil klingt, da der Spieler so maximale Freiheit bei der Wahl seines Weges hat, stellt sich als Nachteil für das Pacing und Balancing heraus. Da (fast) jeder Knoten als kritisch und optional gleichzeitig betrachtet werden kann, ist es schwer Risk and Reward Momente zu platzieren, Monster gezielt auf kritischen bzw. optionalen Pfade zu platzieren oder sicherzustellen, dass der Spieler an kritischen Events vorbeimuss. Zusätzlich unterscheiden sich die Teilaspekte der Graphen im Grunde gar nicht, jedes Teilstück besteht entweder aus einem Dreieck oder einem Quadrat, daher würden die erzeugten Level sich überwiegend in der Größe der Level unterscheiden und nur wenig Variation im Layout aufweisen.
 
-  ![Planare Graphen erzeugt durch Triangulation (links) und Quadrangulation) rechts) \label{plantri} [@Brinkmann] ](figs/chapter3/plantriexample.png)
+  ![Planare Graphen erzeugt durch Triangulation (links) und Quadrangulation (rechts) \label{plantri} [@Brinkmann] ](figs/chapter3/plantriexample.png)
 
 Eine andere Möglichkeit zur Generierung von Planaren Graphen ist die kontrollierte Zufallssuche. Ein Algorithmus, der vollkommen zufällig einen Graphen erzeugt, würde auch planare Graphen erzeugen. Da dies weder ein zuverlässiger noch effizienter Weg zur Generierung ist, muss der Zufall so eingeschränkt werden, dass die Generierung von nicht planaren Graphen unmöglich wird.
 
@@ -102,13 +102,13 @@ $K3,3$ besteht aus sechs Knoten mit jeweils drei Kanten. Ein Graph, indem es max
 
 Daraus lässt sich ableiten, dass ein Graph, der maximal vier Knoten mit drei oder mehr Kanten hat, weder $K5$ noch $K3,3$ enthalten kann und daher planar ist. 
 
-   ![Der Graph $K5$ ) \label{k5} [@wikipedia2021] ](figs/chapter3/k5.png)
+   ![Der Graph $K5$  \label{k5} [@wikipedia2021] ](figs/chapter3/k5.png)
 
-  ![Der Graph $K3,3$ ) \label{k3} [@wikipedia2021] ](figs/chapter3/k33.png)
+  ![Der Graph $K3,3$ \label{k3} [@wikipedia2021] ](figs/chapter3/k33.png)
 
-**TODO Beispiel einfügen** 
+Abbildung \ref{mygenexample} zeigt einen Graphen, der nach den oben genannten Regeln generiert wurde. Die Knoten A und G wurden zufällig als Start- und Endpunkt festgelegt, die roten Kanten zeigen den kritischen Pfad, grüne Kanten optionale Pfade. Dieser Graph bietet im Vergleich zu den Graphen aus Abbildung \ref{plantri} einen klaren kritischen und mehrere klar optionale Pfade, wodurch die Platzierung von Risk and Reward Momenten, Monstern und anderen Elemente vereinfacht und kontrollierbarer macht. Negativ fällt auf, dass der Graph Backtracking enthält, Knoten K kann nur durch die Knoten A, H und J erreicht werden entsprechend nur über diese Knoten verlassen werden. Eine Kante zwischen K und I könnte dieses Problem beheben, da so ein Zyklus zwischen den Knoten entsteht.
 
-
+  ![Graphen generiert nach dem Satz von Kuratowski. \label{mygenexample}](figs/chapter3/mygenexample.png)
 
 ### Vor- und Nachteile
 
