@@ -1,0 +1,403 @@
+% Encoding: UTF-8
+
+@Manual{Prüfungsordnung,
+  title   = {Studiengangsprüfungsordnung für den BachelorstudiengangInformatikan der Fachhochschule Bielefeld(University of Applied Sciences)vom 20. September 2018 in der Fassung der Änderungvom 05. Juni 2019},
+  edition = {2019},
+  year    = {2018},
+}
+
+@Online{qrpg2020,
+  author  = {qrpg},
+  title   = {Bedeutung: Was bedeutet Dungeon Crawler?},
+  url     = {https://www.qrpg.de/dungeon-crawler-bedeutung/},
+  urldate = {01.09.2021},
+  year    = {2020},
+}
+
+@Online{Wichman1997,
+  author  = {Glenn R. Wichman},
+  title   = {A Brief History of Rogue},
+  url     = {http://www.digital-eel.com/deep/A_Brief_History_of_Rogue.htm},
+  urldate = {01.09.2021},
+  year    = {1997},
+}
+
+@Online{Brown2017,
+  author  = {Mark Brown},
+  title   = {Do We need a Soulslike Genre? | Game Makers Toolkit},
+  url     = {https://www.youtube.com/watch?v=Lx7BWayWu08},
+  urldate = {01.09.2021},
+  year    = {2017},
+}
+
+@Online{MattBarton2009,
+  author  = {Matt Barton, Bill Loguidice},
+  title   = {The History of Rogue: Have @ You, You Deadly Zs},
+  url     = {https://www.gamasutra.com/view/feature/4013/the_history_of_rogue_have__you_.php?print=1},
+  urldate = {01.09.2021},
+  year    = {2009},
+}
+
+@Online{Conference2008,
+  author  = {I. R. D. Conference},
+  title   = {Berlin Interpretation},
+  url     = {http://roguebasin.com/?title=Berlin_Interpretation},
+  urldate = {01.09.2021},
+  year    = {2008},
+}
+
+@Online{Grey2013,
+  author  = {Darren Grey},
+  title   = {Screw the Berlin Interpretation!},
+  url     = {http://www.gamesofgrey.com/blog/?p=403},
+  urldate = {01.09.2021},
+  year    = {2013},
+}
+
+@Online{Wikipedia2020,
+  author  = {Wikipedia},
+  title   = {List of roguelikes},
+  url     = {https://en.wikipedia.org/wiki/List_of_roguelikes},
+  urldate = {01.09.2021},
+  year    = {2020},
+}
+
+@Online{Brown2019,
+  author  = {Mark Brown},
+  title   = {Roguelikes, Persistency, and Progression | Game Maker’s Toolkit},
+  url     = {https://www.youtube.com/watch?v=G9FB5R4wVno&t=1s},
+  urldate = {01.09.2021},
+  year    = {2019},
+}
+
+@Online{Petzold2019,
+  author  = {Sara Petzold},
+  title   = {Sind Videospiele Kunst? Experten sind sich einig: Es ist kompliziert},
+  url     = {https://www.gamestar.de/artikel/sind-videospiele-kunst-bestandsaufnahme-einer-debatte,3339958.html},
+  urldate = {2021-09-04},
+  year    = {2019},
+}
+
+@Online{Taylor2018,
+  author  = {Dan Taylor},
+  title   = {Ten Principles for Good Level Design | GDC},
+  url     = {https://www.youtube.com/watch?v=iNEe3KhMvXM},
+  urldate = {2021-09-04},
+  year    = {2018},
+}
+
+@Online{Taylor2013,
+  author  = {Dan Taylor},
+  title   = {Ten Principles of Good Level Design (Part 1)},
+  url     = {https://www.gamedeveloper.com/design/ten-principles-of-good-level-design-part-1-},
+  urldate = {2021-09-04},
+  year    = {2013},
+}
+
+@Online{Ryan1999,
+  author  = {Tim Ryan},
+  title   = {Beginning Level Design, Part 1},
+  url     = {https://www.gamedeveloper.com/design/beginning-level-design-part-1},
+  urldate = {2021-09-04},
+  year    = {1999},
+}
+
+@Online{DevPlay2019,
+  author  = {DevPlay},
+  title   = {So sieht gutes Level Design aus! - DevPlay},
+  url     = {https://www.youtube.com/watch?v=k2mjPLbQuzA},
+  urldate = {2021-09-06},
+  year    = {2019},
+}
+
+@Online{Wikipedia2020a,
+  author  = {Wikipedia},
+  title   = {Leveldesign},
+  url     = {https://de.wikipedia.org/wiki/Leveldesign},
+  urldate = {2021-09-06},
+  year    = {2020},
+}
+
+@Online{Stewart2015,
+  author  = {Bart Stewart},
+  title   = {Environmental Storytelling},
+  url     = {https://www.gamedeveloper.com/design/environmental-storytelling},
+  urldate = {2021-09-06},
+  year    = {2015},
+}
+
+@Online{Brown2020,
+  author  = {Mark Brown},
+  title   = {How Level Design Can Tell a Story},
+  url     = {https://www.youtube.com/watch?v=RwlnCn2EB9o},
+  urldate = {2021-09-06},
+  year    = {2020},
+}
+
+@Online{DevPlay2017,
+  author  = {DevPlay},
+  title   = {DevPlay - Was kosten unsere Spiele und woher bekommen wir das Geld dafür?},
+  url     = {https://www.youtube.com/watch?v=JZrsYp6kCLw},
+  urldate = {2021-09-06},
+  year    = {2017},
+}
+
+@Online{Brown2016,
+  author  = {Mark Brown},
+  title   = {Sollte Dark Souls einen leichten Modus haben? | Game Maker's Toolkit},
+  url     = {https://www.youtube.com/watch?v=K5tPJDZv_VE},
+  urldate = {2021-09-06},
+  year    = {2016},
+}
+
+@Online{Brown2015,
+  author  = {Mark Brown},
+  title   = {What Capcom Didn't Tell You About Resident Evil 4},
+  url     = {https://www.youtube.com/watch?v=zFv6KAdQ5SE},
+  urldate = {2021-09-06},
+  year    = {2015},
+}
+
+@Online{DevPlay2019a,
+  author  = {DevPlay},
+  title   = {DevPlay - Die Balancing-Tricks der Entwickler},
+  url     = {https://www.youtube.com/watch?v=1zhr7UKEflc},
+  urldate = {2021-09-06},
+  year    = {2019},
+}
+
+@Online{Brown2016a,
+  author  = {Mark Brown},
+  title   = {How Games Do Health},
+  url     = {https://www.youtube.com/watch?v=4AEKbBF3URE},
+  urldate = {2021-09-06},
+  year    = {2016},
+}
+
+@Online{Wesolowski2009,
+  author  = {Jacek Wesolowski},
+  title   = {Beyond Pacing: Games Aren't Hollywood},
+  url     = {https://www.gamedeveloper.com/design/beyond-pacing-games-aren-t-hollywood},
+  urldate = {2021-09-06},
+  year    = {2009},
+}
+
+@Online{Brown2018,
+  author  = {Mark Brown},
+  title   = {How to Keep Players Engaged (Without Being Evil)},
+  url     = {https://www.youtube.com/watch?v=hbzGO_Qonu0},
+  urldate = {2021-09-06},
+  year    = {2018},
+}
+
+@Online{Wikipedia2019,
+  author  = {Wikipedia},
+  title   = {Prozedurale Synthese},
+  url     = {https://de.wikipedia.org/wiki/Prozedurale_Synthese},
+  urldate = {2021-09-08},
+  year    = {2019},
+}
+
+@Online{Beca2017,
+  author  = {Scott Beca},
+  title   = {Procedural generation: a primer for game devs},
+  url     = {https://www.gamedeveloper.com/design/procedural-generation-a-primer-for-game-devs},
+  urldate = {2021-09-07},
+  year    = {2017},
+}
+
+@Online{Lee2014,
+  author  = {Joel Lee},
+  title   = {How Procedural Generation Took Over The Gaming Industry},
+  url     = {https://www.makeuseof.com/tag/procedural-generation-took-gaming-industry/},
+  urldate = {2021-09-07},
+  year    = {2014},
+}
+
+@Online{Remo2008,
+  author  = {Chris Remo},
+  title   = {MIGS: Far Cry 2's Guay On The Importance Of Procedural Content},
+  url     = {https://www.gamedeveloper.com/pc/migs-i-far-cry-2-i-s-guay-on-the-importance-of-procedural-content},
+  urldate = {2021-09-08},
+  year    = {2008},
+}
+
+@Online{Software2007,
+  author  = {Introversion Software},
+  title   = {Procedural Content Generation},
+  url     = {https://www.gamecareerguide.com/features/336/procedural_content.php?page=1},
+  urldate = {2021-09-08},
+  year    = {2007},
+}
+
+@Online{Wikipedia2020b,
+  author  = {Wikipedia},
+  title   = {Drunkard’s Walk},
+  url     = {https://de.wikipedia.org/wiki/Drunkard’s_Walk},
+  urldate = {2021-09-08},
+  year    = {2020},
+}
+
+@Online{roguebasin2014,
+  author  = {roguebasin},
+  title   = {Random Walk Cave Generation},
+  url     = {http://www.roguebasin.com/index.php?title=Random_Walk_Cave_Generation},
+  urldate = {2021-09-08},
+  year    = {2014},
+}
+
+@Online{Hagen2019,
+  author  = {Kevin Hagen},
+  title   = {Synthese generierter und handgebauterWelten mittels WaveFunctionCollapse},
+  url     = {https://users.informatik.haw-hamburg.de/~schumann/BachelorArbeitKevinHagen.pdf},
+  urldate = {2021-09-08},
+  year    = {2019},
+}
+
+@Article{Mourato2013,
+  author       = {Fausto Mourato},
+  date         = {2013},
+  journaltitle = {International Journal of Creative Interfaces and Computer Graphics},
+  title        = {Using Graph-Based Analysis to Enhance Automatic Level Generation for Platform Videogames},
+}
+
+@Online{Wesowski2009,
+  author  = {Jacek Wesowski},
+  title   = {Beyond Pacing: Games Aren't Hollywood},
+  url     = {https://www.gamedeveloper.com/design/beyond-pacing-games-aren-t-hollywood},
+  urldate = {2021-09-08},
+  year    = {2009},
+}
+
+@Online{Wikipedia2021,
+  author  = {Wikipedia},
+  title   = {List of most expensive video games to develop},
+  url     = {https://en.wikipedia.org/wiki/List_of_most_expensive_video_games_to_develop},
+  urldate = {2021-09-09},
+  year    = {2021},
+}
+
+@Online{Clement2021a,
+  author  = {J. Clement},
+  title   = {Distribution of video gamers in the United States in 2021, by age group},
+  url     = {https://www.statista.com/statistics/189582/age-of-us-video-game-players/},
+  urldate = {2021-09-09},
+  year    = {2021},
+}
+
+@Online{Clement2021,
+  author  = {J. Clement},
+  title   = {Video game market revenue worldwide in 2021, by segment},
+  url     = {https://www.statista.com/statistics/292751/mobile-gaming-revenue-worldwide-device/},
+  urldate = {2021-09-09},
+  year    = {2021},
+}
+
+@Online{Clement2021b,
+  author  = {J. Clement},
+  title   = {Number of indie games released on Steam worldwide from 2015 to 2017},
+  url     = {https://www.statista.com/statistics/809258/number-indie-games-steam/},
+  urldate = {2021-09-09},
+  year    = {2021},
+}
+
+@Online{USK,
+  author  = {USK},
+  title   = {Indie},
+  url     = {https://usk.de/alle-lexikonbegriffe/indie/},
+  urldate = {2021-09-09},
+}
+
+@Online{Roth2021,
+  author  = {Emma Roth},
+  title   = {6 Reasons Why Indie Games Are Better Than AAA Games},
+  url     = {https://whatnerd.com/why-indie-games-surpassing-aaa-titles/},
+  urldate = {2021-09-09},
+  year    = {2021},
+}
+
+@Online{Somerscales2021,
+  author  = {Molly Somerscales},
+  title   = {The death and rebirth of video game genres},
+  url     = {https://wireframe.raspberrypi.org/articles/the-death-and-rebirth-of-video-game-genres},
+  urldate = {2021-09-09},
+  year    = {2021},
+}
+
+@Online{Batchelor2017,
+  author  = {James Batchelor},
+  title   = {GamesIndustry.biz presents... The Year In Numbers 2017},
+  url     = {https://www.gamesindustry.biz/articles/2017-12-20-gamesindustry-biz-presents-the-year-in-numbers-2017},
+  urldate = {2021-09-09},
+  year    = {2017},
+}
+
+@Book{Yu2016,
+  author    = {Derek Yu},
+  publisher = {Boss Fight Books},
+  title     = {Spelunky},
+  year      = {2016},
+  isbn      = {9781940535111},
+}
+
+@Online{Kezemi,
+  author  = {Darius Kezemi},
+  title = {Spelunky Generator Lessons},
+  urldate = {2021-09-17},
+  url = {http://tinysubversions.com/spelunkyGen/},
+}
+
+@InProceedings{Ma2014,
+  author    = {Chongyang Ma and Nicholas Vining and Sylcain Lefebvre and Alla Sheffer},
+  booktitle = {Computer Graphics Forum, Volume 33, Issue 2 (Eurographics 2014 Papers)},
+  date      = {2014},
+  title     = {Game Level Layout from Design Specification},
+}
+
+@Conference{Nepozitek2018,
+  author    = {Ondřej Nepožitek and Jakub Gemrot},
+  booktitle = {FAST CONFIGURABLE TILE-BASED DUNGEON LEVEL GENERATOR},
+  date      = {2018},
+  title     = {Game On 2018},
+}
+
+@Online{Nepozitek2018a,
+  author  = {Ondřej Nepožitek},
+  title   = {Dungeon Generator (Part 1) – Graph-Based Approach},
+  url     = {https://ondra.nepozitek.cz/blog/42/dungeon-generator-part-1-node-based-approach/},
+  urldate = {2021-09-29},
+  year    = {2018},
+}
+
+@Online{Nepozitek2019,
+  author  = {Ondřej Nepožitek},
+  title   = {Dungeon Generator (Part 2) – Implementation},
+  url     = {https://ondra.nepozitek.cz/blog/238/dungeon-generator-part-2-implementation/},
+  urldate = {2021-09-29},
+  year    = {2019},
+}
+
+@Online{Brinkmann,
+  author  = {Gunnar Brinkmann and Brendan D. McKay},
+  title   = {Fast generation of planar graphs(expanded version)},
+  url     = {https://users.cecs.anu.edu.au/~bdm/papers/plantri-full.pdf},
+  urldate = {2021-10-18},
+}
+
+@Online{wikipedia2021,
+  author  = {wikipedia},
+  title   = {Satz von Kuratowski},
+  url     = {https://de.wikipedia.org/wiki/Satz_von_Kuratowski},
+  urldate = {2021-10-18},
+  year    = {2021},
+}
+
+@Book{Diestel2010,
+  author = {Reinhard Diestel},
+  date   = {2010},
+  title  = {Graphentheorie},
+  isbn   = {978-3-642-14911-5},
+  pages  = {354},
+}
+
+@Comment{jabref-meta: databaseType:biblatex;}

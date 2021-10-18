@@ -31,7 +31,7 @@ Das Berechnen des configuration spaces reduziert den lokalen Suchraum für die i
 
 ![Beispiel: Aufteilen eines Graphen in Chains. \label{how2chain}[@Nepozitek2019]](figs/chapter3/howtochain.PNG)
 
-Der Input-Graph wird daher in kleinere Subgraphen aufteilt, sogenannten Chains. In einer Chain hat jeder Knoten maximal zwei Nachbarn. Abbildung \ref{howtochain} zeigt wie ein Graph in Chains aufgeteilt werden kann. Knoten mit derselben Nummerierung gehören zu einer Chain. Zuerst werden alle Faces im Graphen gesucht, da diese Kreise im Leveldesign darstellen. Da solche Kreise mehr Bedingungen haben als eine lineare Folge von Knoten, ist die Auflösung dieser komplexer. Daher werden Kreise bevorzugt am Anfang des Algorithmus aufgelöst, um späteres Backtracking zu vermeiden. Die erste Chain ist das kleinste Face im Graphen (Label "0"). Die weiteren Chains werden gebildet, indem per Breitensuche die weiteren Faces gesucht werden **??** '(Label "1"). Stehen mehrere Faces zur Auswahl, wird zuerst das kleinere genommen. Wenn keine Faces mehr vorhanden sind, werden die restlichen Knoten hinzugefügt (Label "2","3","4").  
+Der Input-Graph wird daher in kleinere Subgraphen aufteilt, sogenannten Chains. In einer Chain hat jeder Knoten maximal zwei Nachbarn. Abbildung \ref{howtochain} zeigt wie ein Graph in Chains aufgeteilt werden kann. Knoten mit derselben Nummerierung gehören zu einer Chain. Zuerst werden alle Faces im Graphen gesucht, da diese Kreise im Leveldesign darstellen. Da solche Kreise mehr Bedingungen haben als eine lineare Folge von Knoten, ist die Auflösung dieser komplexer. Daher werden Kreise bevorzugt am Anfang des Algorithmus aufgelöst, um späteres Backtracking zu vermeiden. Die erste Chain ist das kleinste Face im Graphen (Label "0"). Die weiteren Chains werden gebildet, indem per Breitensuche die weiteren Faces gesucht werden '(Label "1"). Stehen mehrere Faces zur Auswahl, wird zuerst das kleinere genommen. Wenn keine Faces mehr vorhanden sind, werden die restlichen Knoten hinzugefügt (Label "2","3","4").  
 
 Nachdem der Graph in Chains aufgeteilt wurde, können die einzelnen Chains inkrementell gelöst werden. Zuerst wird die erste Chain genommen und mit dem oben beschriebenen Verfahren aufgelöst. Der Algorithmus erzeugt jedoch nicht nur eine Lösung für die Chain, sondern mehrere Lösungen und speichert diese ab (vgl. Abbildung \ref{graphpartsolution}). Im nächsten Schritt wird die nächste Chain aus der Liste genommen, mit einer der Lösungen aus dem Vorschritt verbunden und aufgelöst. Sollte es keine Möglichkeit geben die Chain aufzulösen, wird per Backtracking eine andere Lösung aus dem Vorschritt ausgewählt und erneut versucht eine Lösung zu finden. Dieses Vorgehen wird wiederholt, bis alle Chains aufgelöst sind und dadurch eine Lösung für das vollständige Problem gefunden wurde. 
 
@@ -84,29 +84,31 @@ Lösungsansatz: Der Algorithmus kann als Grundlage für die Konzeptionierung ein
 
 ## Planare Graphen generieren
 
-Bekannte Verfahren zur Generierung von planaren Graphen wie das *plantri* Programm nutzen Triangulation oder Quadrangulation.[https://users.cecs.anu.edu.au/~bdm/papers/plantri-full.pdf] Die erzeugten Graphen zeichnen sich dadurch aus, dass jedes Face im Graph ein Dreieck bzw.. ein Quadrat ist. Dieses Verfahren ist zwar besonders effizient unter Betrachtung der Rechenleistung, die erzeugten Graphen eignen sich aber kaum um gute Videospiellevel darzustellen.
+Bekannte Verfahren zur Generierung von planaren Graphen wie das *plantri* Programm nutzen Triangulation oder Quadrangulation. [@Brinkmann] Die erzeugten Graphen zeichnen sich dadurch aus, dass jedes Face im Graph ein Dreieck bzw. ein Quadrat ist. Dieses Verfahren ist zwar besonders effizient unter Betrachtung der Rechenleistung, die erzeugten Graphen eignen sich aber kaum, um gute Videospiellevel darzustellen.
 
-Abbildung \ref{plantri} zeigt zwei verschiedene Graphen die mithilfe von *plantri* erzeugt werden können, einmal durch Triangulation und einmal durch Quadrangulation. Die Graphen zeichnen sich vor allem durch ihre zyklische Struktur aus, jeder Knoten kann auf mehrere Wege erreicht werden und es gibt keine klaren Endpunkte. Würde man zwei zufällige Punkte im Graphen als Start- und Endpunkt bestimmen und alle kritischen Pfade einzeichnen, wäre jede Kante markiert. Der Endpunkt kann daher durch viele verschiedenen Pfade erreicht werden. Was zu nächst nach einen Vorteil klingt, da der Spieler so maximale Freiheit bei der Wahl seines Weges hat, stellt sich als Nachteil für das Pacing und Balancing heraus. Da (fast) jeder Knoten als Kritisch und Optional gleichzeitig betrachtet werden kann, ist es schwer Risk and Reward Momente zu platzieren, Monster gezielt auf kritischen bzw. optionalen Pfade zu platzieren oder sicherzustellen dass der Spieler an kritischen Events vorbei muss. Zusätzlich unterscheiden sich die Teilaspekte der Graphen im Grunde gar nicht, jedes Teilstück besteht entweder aus einen Dreieck oder einen Quadrat, daher würden die erzeugten Level sich überwiegend in der Größe der Level unterscheiden und nur wenig Variation im Layout aufweisen.
+Abbildung \ref{plantri} zeigt zwei verschiedene Graphen, die mithilfe von *plantri* erzeugt werden können, einmal durch Triangulation und einmal durch Quadrangulation. Die Graphen zeichnen sich vor allem durch ihre zyklische Struktur aus, jeder Knoten kann auf mehrere Wege erreicht werden und es gibt keine klaren Endpunkte. Würde man zwei zufällige Punkte im Graphen als Start- und Endpunkt bestimmen und alle kritischen Pfade einzeichnen, wäre jede Kante markiert. Der Endpunkt kann daher durch viele verschiedenen Pfade erreicht werden. Was zunächst nach einem Vorteil klingt, da der Spieler so maximale Freiheit bei der Wahl seines Weges hat, stellt sich als Nachteil für das Pacing und Balancing heraus. Da (fast) jeder Knoten als kritisch und optional gleichzeitig betrachtet werden kann, ist es schwer Risk and Reward Momente zu platzieren, Monster gezielt auf kritischen bzw. optionalen Pfade zu platzieren oder sicherzustellen, dass der Spieler an kritischen Events vorbeimuss. Zusätzlich unterscheiden sich die Teilaspekte der Graphen im Grunde gar nicht, jedes Teilstück besteht entweder aus einem Dreieck oder einem Quadrat, daher würden die erzeugten Level sich überwiegend in der Größe der Level unterscheiden und nur wenig Variation im Layout aufweisen.
 
-  ![Planare Graphen erzeugt durch Triangulation (links) und Quadrangulation) rechts) \label{plantri}](figs/chapter3/plantriexample.png)
+  ![Planare Graphen erzeugt durch Triangulation (links) und Quadrangulation) rechts) \label{plantri} [@Brinkmann] ](figs/chapter3/plantriexample.png)
 
-**Todo quelle: https://users.cecs.anu.edu.au/~bdm/papers/plantri-full.pdf** 
+Eine andere Möglichkeit zur Generierung von Planaren Graphen ist die kontrollierte Zufallssuche. Ein Algorithmus, der vollkommen zufällig einen Graphen erzeugt, würde auch planare Graphen erzeugen. Da dies weder ein zuverlässiger noch effizienter Weg zur Generierung ist, muss der Zufall so eingeschränkt werden, dass die Generierung von nicht planaren Graphen unmöglich wird.
 
-Eine andere Möglichkeit zur Generierung von Planaren Graphen ist die kontrollierte Zufallssuche. Ein Algorithmus der vollkommen Zufällig einen Graphen erzeugt, würde auch planare Graphen erzeugen. Da dies weder ein zuverlässiger noch effizienter Weg zur Generierung ist, muss der Zufall so eingeschränkt werden, dass die Generierung von nicht planaren Graphen unmöglich wird.
+Das Satz von Kuratowski sagt, dass ein Graph genau dann planar ist, wenn er keinen Teilgraph besitzt, der ein Unterteilungsgraph des $K5$ oder $K3,3$ ist. $K5$ und $K3,3$ sind zwei Graphen für die es keine planare Darstellung gibt (vgl. Abbildung \ref{k5} und Abbildung {k3}). [@Diestel2010]
 
-Das Satz von Kuratowski sagt, dass ein Graph genau dann planar ist, wenn er keinen Teilgraph besitzt der ein Unterteilungsgraph des $K5$ oder $K3,3$ ist. $K5$ und $K3,3$ sind zwei Graphen für die es keine planare Darstellung gibt (vgl. Abbildung **TODO** und **TODO**).
+Bei der Generierung eines planaren Graphen muss also darauf geachtet werden, dass weder $K5$ noch $K3,3$ enthalten sind. Da es ein NP-Schweres Problem ist, einen bestimmten Teilgraph in einem ungerichteten Graphen zu finden, ist es nicht effizient den Graphen während jeden Schrittes des Generierungsprozesses nach diesen Graphen zu durchsuchen. **TODO QUELLE**. Es ist aber möglich, die Erzeugung von $K5$ oder $K3,3$ zu verhindern.
 
-Bei der Generierung eines planaren Graphen muss also darauf geachtet werden, dass weder $K5$ noch $K3,3$ enthalten sind. Da es ein NP-Schweres Problem ist, einen bestimmten Teilgraph in einen ungerichteten Graphen zu finden, ist es nicht effizient den Graphen während jeden Schrittes des Generierungsprozesses nach diesen Graphen zu durchsuchen. **TODO QUELLE**. Es ist aber möglich, die Erzeugung von $K5$ oder $K3,3$ zu verhindern. 
+$K5$ besteht aus fünf Knoten mit jeweils vier Kanten. Ein Graph, indem es maximal vier Knoten mit vier oder mehr Kanten gibt, kann $K5$ daher nicht enthalten. 
 
-$K5$ besteht aus fünf Knoten mit jeweils vier Kanten. Ein Graph indem es maximal vier Knoten mit vier oder mehr Kanten gibt, kann $K5$ daher nicht enthalten. 
+$K3,3$ besteht aus sechs Knoten mit jeweils drei Kanten. Ein Graph, indem es maximal fünf Knoten mit drei oder mehr Kanten gibt, kann $K3,3$ daher nicht enthalten.
 
-$K3,3$ besteht aus sechs Knoten mit jeweils drei Kanten, Ein Graph indem es maximal fünf Knoten mit drei oder mehr Kanten gibt, kann $K3,3$ daher nicht enthalten.
+Daraus lässt sich ableiten, dass ein Graph, der maximal vier Knoten mit drei oder mehr Kanten hat, weder $K5$ noch $K3,3$ enthalten kann und daher planar ist. 
 
-Daraus lässt sich ableiten, dass ein Graph der maximal vier Knoten mit drei oder mehr Kanten hat, weder $K5$ noch $K3,3$ enthalten kann und daher planar ist. 
+   ![Der Graph $K5$ ) \label{k5} [@wikipedia2021] ](figs/chapter3/k5.png)
+
+  ![Der Graph $K3,3$ ) \label{k3} [@wikipedia2021] ](figs/chapter3/k33.png)
 
 **TODO Beispiel einfügen** 
 
-- [Kazimierz Kuratowski](https://de.wikipedia.org/wiki/Kazimierz_Kuratowski): [Sur le problème des courbes gauches en topologie.](http://matwbn.icm.edu.pl/ksiazki/fm/fm15/fm15126.pdf) In: Fund. Math.. 15, 1930, S. 271–283.
+
 
 ### Vor- und Nachteile
 
@@ -120,13 +122,13 @@ Vorteil: Der Algorithmus kann um Schnittstellen ergänzt werden um Levelgröße,
 
 Vorteil: Die erzeugten Graphen können mit anderen planaren Graphen an genau einer zufälligen Stelle verbunden werden und behalten ihre planare Eigenschaft. Dies kann genutzt werden um bei bedarf manuell erzeugte Graphen einzubinden oder die erzeugten Graphen miteinander zu kombinieren. Dies steigert zusätzlich die Effizienz, da aus einer Handvoll Graphen durch verschiedene Kombination wieder neue Graphen erzeugt werden können ohne große Berechnungen durchführen zu müssen.
 
-Nachteil: Der Algorithmus kann nicht jeden möglichen planaren Graphen erzeugen. Es gibt planare Graphen mit mehr als vier Knoten die mehr als drei Nachbarn haben.
+Nachteil: Der Algorithmus kann nicht jeden möglichen planaren Graphen erzeugen. Es gibt planare Graphen mit mehr als vier Knoten, die mehr als drei Nachbarn haben.
 
-Lösungsansatz: Wie oben beschrieben können die erzeugten Graphen miteinander verbunden werden um die Vielfalt der Graphen zu erhöhen. 
+Lösungsansatz: Wie oben beschrieben können die erzeugten Graphen miteinander verbunden werden, um die Vielfalt der Graphen zu erhöhen. 
 
 Nachteil: Die Struktur des Graphen ist größtenteils zufällig.
 
-Lösungsansatz: Verschiedene Verfahren zur Graphenanalyse können genutzt werden um Schwachstellen im Graphen zu erkennen und diese durch Veränderungen zu verbessern. 
+Lösungsansatz: Verschiedene Verfahren zur Graphenanalyse können genutzt werden, um Schwachstellen im Graphen zu erkennen und diese durch Veränderungen zu verbessern. 
 
 ## Graphen optimieren
 
