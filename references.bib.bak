@@ -254,14 +254,6 @@
   year    = {2019},
 }
 
-@Online{Ma2014,
-  author  = {Chongyang Ma},
-  title   = {Game Level Layout from Design Specification},
-  url     = {http://chongyangma.com/publications/gl/2014_gl_preprint.pdf},
-  urldate = {2021-09-08},
-  year    = {2014},
-}
-
 @Article{Mourato2013,
   author       = {Fausto Mourato},
   date         = {2013},
@@ -330,6 +322,51 @@
   url     = {https://wireframe.raspberrypi.org/articles/the-death-and-rebirth-of-video-game-genres},
   urldate = {2021-09-09},
   year    = {2021},
+}
+
+@Online{Batchelor2017,
+  author  = {James Batchelor},
+  title   = {GamesIndustry.biz presents... The Year In Numbers 2017},
+  url     = {https://www.gamesindustry.biz/articles/2017-12-20-gamesindustry-biz-presents-the-year-in-numbers-2017},
+  urldate = {2021-09-09},
+  year    = {2017},
+}
+
+@Book{Yu2016,
+  author    = {Derek Yu},
+  publisher = {Boss Fight Books},
+  title     = {Spelunky},
+  year      = {2016},
+  isbn      = {9781940535111},
+}
+
+@Online{Kezemi,
+  author  = {Darius Kezemi},
+  title = {Spelunky Generator Lessons},
+  urldate = {2021-09-17},
+  url = {http://tinysubversions.com/spelunkyGen/},
+}
+
+@InProceedings{Ma2014,
+  author    = {Chongyang Ma and Nicholas Vining and Sylcain Lefebvre and Alla Sheffer},
+  booktitle = {Computer Graphics Forum, Volume 33, Issue 2 (Eurographics 2014 Papers)},
+  date      = {2014},
+  title     = {Game Level Layout from Design Specification},
+}
+
+@Conference{Nepozitek2018,
+  author    = {Ondřej Nepožitek and Jakub Gemrot},
+  booktitle = {FAST CONFIGURABLE TILE-BASED DUNGEON LEVEL GENERATOR},
+  date      = {2018},
+  title     = {Game On 2018},
+}
+
+@Online{Nepozitek2018a,
+  author  = {Ondřej Nepožitek},
+  title   = {Dungeon Generator (Part 1) – Graph-Based Approach},
+  url     = {https://ondra.nepozitek.cz/blog/42/dungeon-generator-part-1-node-based-approach/},
+  urldate = {2021-09-29},
+  year    = {2018},
 }
 
 @Comment{jabref-meta: databaseType:biblatex;}

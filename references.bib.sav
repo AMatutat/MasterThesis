@@ -254,19 +254,150 @@
   year    = {2019},
 }
 
-@Online{Ma2014,
-  author  = {Chongyang Ma},
-  title   = {Game Level Layout from Design Specification},
-  url     = {http://chongyangma.com/publications/gl/2014_gl_preprint.pdf},
-  urldate = {2021-09-08},
-  year    = {2014},
-}
-
 @Article{Mourato2013,
   author       = {Fausto Mourato},
   date         = {2013},
   journaltitle = {International Journal of Creative Interfaces and Computer Graphics},
   title        = {Using Graph-Based Analysis to Enhance Automatic Level Generation for Platform Videogames},
+}
+
+@Online{Wesowski2009,
+  author  = {Jacek Wesowski},
+  title   = {Beyond Pacing: Games Aren't Hollywood},
+  url     = {https://www.gamedeveloper.com/design/beyond-pacing-games-aren-t-hollywood},
+  urldate = {2021-09-08},
+  year    = {2009},
+}
+
+@Online{Wikipedia2021,
+  author  = {Wikipedia},
+  title   = {List of most expensive video games to develop},
+  url     = {https://en.wikipedia.org/wiki/List_of_most_expensive_video_games_to_develop},
+  urldate = {2021-09-09},
+  year    = {2021},
+}
+
+@Online{Clement2021a,
+  author  = {J. Clement},
+  title   = {Distribution of video gamers in the United States in 2021, by age group},
+  url     = {https://www.statista.com/statistics/189582/age-of-us-video-game-players/},
+  urldate = {2021-09-09},
+  year    = {2021},
+}
+
+@Online{Clement2021,
+  author  = {J. Clement},
+  title   = {Video game market revenue worldwide in 2021, by segment},
+  url     = {https://www.statista.com/statistics/292751/mobile-gaming-revenue-worldwide-device/},
+  urldate = {2021-09-09},
+  year    = {2021},
+}
+
+@Online{Clement2021b,
+  author  = {J. Clement},
+  title   = {Number of indie games released on Steam worldwide from 2015 to 2017},
+  url     = {https://www.statista.com/statistics/809258/number-indie-games-steam/},
+  urldate = {2021-09-09},
+  year    = {2021},
+}
+
+@Online{USK,
+  author  = {USK},
+  title   = {Indie},
+  url     = {https://usk.de/alle-lexikonbegriffe/indie/},
+  urldate = {2021-09-09},
+}
+
+@Online{Roth2021,
+  author  = {Emma Roth},
+  title   = {6 Reasons Why Indie Games Are Better Than AAA Games},
+  url     = {https://whatnerd.com/why-indie-games-surpassing-aaa-titles/},
+  urldate = {2021-09-09},
+  year    = {2021},
+}
+
+@Online{Somerscales2021,
+  author  = {Molly Somerscales},
+  title   = {The death and rebirth of video game genres},
+  url     = {https://wireframe.raspberrypi.org/articles/the-death-and-rebirth-of-video-game-genres},
+  urldate = {2021-09-09},
+  year    = {2021},
+}
+
+@Online{Batchelor2017,
+  author  = {James Batchelor},
+  title   = {GamesIndustry.biz presents... The Year In Numbers 2017},
+  url     = {https://www.gamesindustry.biz/articles/2017-12-20-gamesindustry-biz-presents-the-year-in-numbers-2017},
+  urldate = {2021-09-09},
+  year    = {2017},
+}
+
+@Book{Yu2016,
+  author    = {Derek Yu},
+  publisher = {Boss Fight Books},
+  title     = {Spelunky},
+  year      = {2016},
+  isbn      = {9781940535111},
+}
+
+@Online{Kezemi,
+  author  = {Darius Kezemi},
+  title = {Spelunky Generator Lessons},
+  urldate = {2021-09-17},
+  url = {http://tinysubversions.com/spelunkyGen/},
+}
+
+@InProceedings{Ma2014,
+  author    = {Chongyang Ma and Nicholas Vining and Sylcain Lefebvre and Alla Sheffer},
+  booktitle = {Computer Graphics Forum, Volume 33, Issue 2 (Eurographics 2014 Papers)},
+  date      = {2014},
+  title     = {Game Level Layout from Design Specification},
+}
+
+@Conference{Nepozitek2018,
+  author    = {Ondřej Nepožitek and Jakub Gemrot},
+  booktitle = {FAST CONFIGURABLE TILE-BASED DUNGEON LEVEL GENERATOR},
+  date      = {2018},
+  title     = {Game On 2018},
+}
+
+@Online{Nepozitek2018a,
+  author  = {Ondřej Nepožitek},
+  title   = {Dungeon Generator (Part 1) – Graph-Based Approach},
+  url     = {https://ondra.nepozitek.cz/blog/42/dungeon-generator-part-1-node-based-approach/},
+  urldate = {2021-09-29},
+  year    = {2018},
+}
+
+@Online{Nepozitek2019,
+  author  = {Ondřej Nepožitek},
+  title   = {Dungeon Generator (Part 2) – Implementation},
+  url     = {https://ondra.nepozitek.cz/blog/238/dungeon-generator-part-2-implementation/},
+  urldate = {2021-09-29},
+  year    = {2019},
+}
+
+@Online{Brinkmann,
+  author  = {Gunnar Brinkmann and Brendan D. McKay},
+  title   = {Fast generation of planar graphs(expanded version)},
+  url     = {https://users.cecs.anu.edu.au/~bdm/papers/plantri-full.pdf},
+  urldate = {2021-10-18},
+}
+
+@Online{wikipedia2021,
+  author  = {wikipedia},
+  title   = {Satz von Kuratowski},
+  url     = {https://de.wikipedia.org/wiki/Satz_von_Kuratowski},
+  urldate = {2021-10-18},
+  year    = {2021},
+}
+
+@Book{Diestel2010,
+  author = {Reinhard Diestel},
+  date   = {2010},
+  title  = {Graphentheorie},
+  isbn   = {978-3-642-14911-5},
+  pages  = {354},
 }
 
 @Comment{jabref-meta: databaseType:biblatex;}
