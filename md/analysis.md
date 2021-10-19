@@ -92,9 +92,11 @@ Abbildung \ref{plantri} zeigt zwei verschiedene Graphen, die mithilfe von *plant
 
 Eine andere Möglichkeit zur Generierung von Planaren Graphen ist die kontrollierte Zufallssuche. Ein Algorithmus, der vollkommen zufällig einen Graphen erzeugt, würde auch planare Graphen erzeugen. Da dies weder ein zuverlässiger noch effizienter Weg zur Generierung ist, muss der Zufall so eingeschränkt werden, dass die Generierung von nicht planaren Graphen unmöglich wird.
 
-Das Satz von Kuratowski sagt, dass ein Graph genau dann planar ist, wenn er keinen Teilgraph besitzt, der ein Unterteilungsgraph des $K5$ oder $K3,3$ ist. $K5$ und $K3,3$ sind zwei Graphen für die es keine planare Darstellung gibt (vgl. Abbildung \ref{k5} und Abbildung {k3}). [@Diestel2010]
+Das Satz von Kuratowski sagt, dass ein Graph genau dann planar ist, wenn er keinen Teilgraph besitzt, der ein Unterteilungsgraph des $K5$ oder $K3,3$ ist. Ein Untereilungsgraph ist ein Graph, der dadurch entsteht, dass in einen Graphen $G$ neue Knoten durch Kantenunterteilung hinzugefügt werden. $K5$ und $K3,3$ sind zwei Graphen für die es keine planare Darstellung gibt (vgl. Abbildung \ref{k5} und Abbildung {k3}). [@Diestel2010]
 
-Bei der Generierung eines planaren Graphen muss also darauf geachtet werden, dass weder $K5$ noch $K3,3$ enthalten sind. Da es ein NP-Schweres Problem ist, einen bestimmten Teilgraph in einem ungerichteten Graphen zu finden, ist es nicht effizient den Graphen während jeden Schrittes des Generierungsprozesses nach diesen Graphen zu durchsuchen. **TODO QUELLE**. Es ist aber möglich, die Erzeugung von $K5$ oder $K3,3$ zu verhindern.
+Bei der Generierung eines planaren Graphen muss also darauf geachtet werden, dass weder $K5$ noch $K3,3$ enthalten sind. 
+
+Die Untersuchung eines Graphen $G$ nach einem Teilgraphen der isomorph zu einem Graphen $H$ ist, ist ein NP-Vollständiges Problem.[@Cook1971] Besitzen $G$ und $H$ isomorphe Unterteilungsgraphen heißen diese homöomorph.[@wikipedia2016] Einen Graphen nach einem Teilgraphen zu durchsuchen der homöomorph zu $K5$ oder $K3,3$ ist, ist daher auch ein NP-Vollständiges Problem. Bei der Generierung des Graphen eine Untersuchung nach $K5$ oder $K3,3$ homöomorphen Teilgraphen durchzuführen ist daher kein effizientes Vorgehen. Es ist aber möglich, die Erzeugung von $K5$ oder $K3,3$ zu verhindern.
 
 $K5$ besteht aus fünf Knoten mit jeweils vier Kanten. Ein Graph, indem es maximal vier Knoten mit vier oder mehr Kanten gibt, kann $K5$ daher nicht enthalten. 
 
