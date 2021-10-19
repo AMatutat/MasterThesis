@@ -1,11 +1,11 @@
-# Theoretisches Konzept
+# Algorithmen zur prozeduralen Generierung
 
 <!--
 
 geschätzter Umfang ca: 40% (naja oder auch nicht ^^)
 -->
 
-In diesem Kapitel werden Algorithmen vorgestellt, die verschiedene Aspekte der prozeduralen Level-Generierung abdecken. Nicht jeder vorgestellter Algorithmus ist für die Generierung von Level konzeptioniert, kann aber für Teilaspekte verwendet werden. Es werden Algorithmen zur Generierung und Modifikation von planaren Graphen, Erzeugen von Level aus diesen Graphen sowie zum Erstellen von einzelnen Räumen vorgestellt. Ziel ist es, die einzelnen Elemente der Algorithmen so zu kombinieren, dass das Resultat die in Kapitel 2 aufgestellten Anforderungen bestmöglich erfüllt. Dieses Kapitel fokussiert sich auf die Vorstellungen der Bausteine und präsentiert nur ein theoretisches Konzept der Kombination, das nächste Kapitel stellt ein konkretes, technisches Konzept vor.
+In diesem Kapitel werden Algorithmen vorgestellt, die verschiedene Aspekte der prozeduralen Level-Generierung abdecken. Nicht jeder vorgestellter Algorithmus ist für die Generierung von Level konzeptioniert, kann aber für Teilaspekte verwendet werden. Es werden Algorithmen zur Generierung und Modifikation von planaren Graphen, Erzeugen von Level aus diesen Graphen sowie zum Erstellen von einzelnen Räumen vorgestellt. Ziel ist es, im nächsten Kapitel, die einzelnen Elemente der Algorithmen so zu kombinieren, dass das Resultat die in Kapitel 2 aufgestellten Anforderungen bestmöglich erfüllt. 
 
 
 ## Vom Graph zum Level 
@@ -190,29 +190,3 @@ Vorteil: Die Räume unterstützen viele verschiedene Spielinhalte. Neue Inhalte 
 Nachteil: Durch das Grid ist das Level-Layout nicht einzigartig.
 
 Lösungsansatz: Das Erstellen das Level-Layout kann von einem anderen Algorithmus übernommen werden. Die Lösbarkeit der Level muss dann vom neuen Algorithmus sichergestellt werden. 
-
-
-
-## Zusammenfassung des Konzeptes
-
-- Graph 2 Level wird als basis genommen
-
-- Planarer Graph wird automatisch generiert
-
-  - hat parameter um die größe des Levels anzugeben
-  - wird mithilfe von mutationen verändert um pacing zu omptimieren
-  - Knoten werden gelabelt
-    - unterschiedliche Label sind unterschiedliche input blöcke und texturen
-  - Hat Schnittstellen um Graphen zu analysieren
-    - get CriticalPath
-    - get OptionalPath
-    - get end of Path
-    - etc.
-
-- Set aus Input Blöcke wird manuell konzeptioniert
-
-  - besteht aber aus template räume die spelunky style aufgebaut sind
-
-  - hat schnittstellen um die ersetzung anzupassen (z.B alle '5' können Fallen sein)
-
-    
