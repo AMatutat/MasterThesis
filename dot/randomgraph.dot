@@ -1,0 +1,15 @@
+digraph G {
+edge [overlap = false]
+edge [dir=none]
+
+B->A [color=red]
+C->B [color=red]
+H->A [color=green]
+I->H [color=green]
+J->H [color=green]
+K->J [color=green]
+D->C [color=red]
+F->D [color=red]
+E->D [color=green]
+G->F [color=red]
+}
