@@ -1,22 +1,40 @@
 package graph;
 
-public class Edge {
+/**
+ * Represents an undirected connection between two nodes
+ *
+ * @author André Matutat
+ */
+public final class Edge {
 
-    private Node a;
-    private Node b;
-    private int hash;
+    private final Node firstNode;
+    private final Node secondNode;
+    private final int hashValue;
 
-    public Edge (Node a, Node b) {
-        this.a=a;
-        this.b=b;
-        hash= a.hashCode()+b.hashCode();
+    /**
+     * Creates an undirected edge between the two nodes and calculates the combined hash value
+     * @param firstNode
+     * @param secondNode
+     */
+    public Edge (final Node firstNode, final Node secondNode) {
+        this.firstNode =firstNode;
+        this.secondNode =secondNode;
+        hashValue = firstNode.hashCode()+secondNode.hashCode();
     }
 
+    /**
+     *
+     * @return The ConnectionHash is the sum of the hash values of both nodes
+     */
     public int getConnectionHash(){
-        return hash;
+        return hashValue;
     }
 
+    /**
+     *
+     * @return Edge in .dot representation
+     */
     public String toDot(){
-        return a.getName()+"->"+b.getName();
+        return firstNode.getNodeName()+"->"+ secondNode.getNodeName();
     }
 }
