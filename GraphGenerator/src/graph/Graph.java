@@ -1,6 +1,4 @@
 package graph;
-import javax.sound.midi.SysexMessage;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -34,7 +32,7 @@ public final class Graph {
      * @param labels List with names for the nodes
      * @throws IllegalArgumentException
      */
-    public Graph(final int nodeNumber, final int extraEdges, final String [] labels) throws Exception {
+    public Graph(final int nodeNumber, final int extraEdges, final String [] labels) throws CantBePlanarExcpetion, IllegalArgumentException, NoSolutionExcpetion {
         if (nodeNumber<=1) throw new IllegalArgumentException("A graph must consist of at least two nodes");
         if (extraEdges<0) throw new IllegalArgumentException("Number of additional edges cannot be negative");
         if (labels.length<nodeNumber) throw new IllegalArgumentException("The list of names for the nodes must not be smaller than the number of nodes");
@@ -43,7 +41,7 @@ public final class Graph {
         //e≤3v-6 must hold
         int minimumEdges = nodeNumber-1+extraEdges;
         int leftTerm= 3*nodeNumber-6;
-        if (minimumEdges>leftTerm) throw new IllegalArgumentException("e<=3V-6 does not hold");
+        if (minimumEdges>leftTerm) throw new CantBePlanarExcpetion("e<=3V-6 does not hold");
 
         ArrayList<Node> nodes = new ArrayList<>();
 
@@ -104,14 +102,14 @@ public final class Graph {
 
 
 
-    private void addMoreEdges(final int connections, final ArrayList <Node> nodes) throws Exception {
+    private void addMoreEdges(final int connections, final ArrayList <Node> nodes) throws NoSolutionExcpetion {
         if(debug) System.out.println("Start addMoreEdges");
 
         Node node1, node2;
 
         for (int i = 0; i < connections; i++) {
             untilBreak--;
-            if (untilBreak==0) throw new Exception("cant find solution!");
+            if (untilBreak==0) throw new NoSolutionExcpetion("Cant find solution!");
             if(debug) System.out.println(i+" edges created");
             //Pick two random nodes
             node1 = nodes.get((int) (Math.random() * nodes.size()));
