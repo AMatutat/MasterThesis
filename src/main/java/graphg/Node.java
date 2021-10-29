@@ -7,24 +7,19 @@ package graphg;
  */
 public final class Node {
     // Number of nodes connected to these nodes
-    private int neighbourCount =0;
+    private int neighbourCount = 0;
     private String nodeName;
 
     public Node(final String name) {
         this.nodeName = name;
     }
 
-    /**
-     * Decrease the neighbor counter.
-     * Cannot be less than 0
-     */
-    public void removeNeighbour(){
-        this.neighbourCount = Math.max(0,this.neighbourCount -1);
+    /** Decrease the neighbor counter. Cannot be less than 0 */
+    public void removeNeighbour() {
+        this.neighbourCount = Math.max(0, this.neighbourCount - 1);
     }
 
-    /**
-     * Increase the neighbor counter
-     */
+    /** Increase the neighbor counter */
     public void addNeighbour() {
         this.neighbourCount++;
     }

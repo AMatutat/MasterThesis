@@ -5,13 +5,12 @@ package graphg;
  *
  * @author Andre Matutat
  */
-public class NoSolutionException extends Exception{
+public class NoSolutionException extends Exception {
     // Parameterless Constructor
     public NoSolutionException() {}
 
     // Constructor that accepts a message
-    public NoSolutionException(String message)
-    {
+    public NoSolutionException(String message) {
         super(message);
     }
 }

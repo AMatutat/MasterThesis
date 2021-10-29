@@ -13,28 +13,23 @@ public final class Edge {
 
     /**
      * Creates an undirected edge between the two nodes and calculates the combined hash value
+     *
      * @param firstNode
      * @param secondNode
      */
-    public Edge (final Node firstNode, final Node secondNode) {
-        this.firstNode =firstNode;
-        this.secondNode =secondNode;
-        hashValue = firstNode.hashCode()+secondNode.hashCode();
+    public Edge(final Node firstNode, final Node secondNode) {
+        this.firstNode = firstNode;
+        this.secondNode = secondNode;
+        hashValue = firstNode.hashCode() + secondNode.hashCode();
     }
 
-    /**
-     *
-     * @return The ConnectionHash is the sum of the hash values of both nodes
-     */
-    public int getConnectionHash(){
+    /** @return The ConnectionHash is the sum of the hash values of both nodes */
+    public int getConnectionHash() {
         return hashValue;
     }
 
-    /**
-     *
-     * @return Edge in .dot representation
-     */
-    public String toDot(){
-        return firstNode.getNodeName()+"->"+ secondNode.getNodeName();
+    /** @return Edge in .dot representation */
+    public String toDot() {
+        return firstNode.getNodeName() + "->" + secondNode.getNodeName();
     }
 }
