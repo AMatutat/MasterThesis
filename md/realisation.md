@@ -9,6 +9,13 @@
 geschätzer umfang ca 20%
 -->
 
+## Projekt Konfiguration
+- Build Script und targets
+- github workflows/settings
+- github actions
+- package struktur
+
+
 ## Umsetzten der Bausteine
 
 - Wie?
