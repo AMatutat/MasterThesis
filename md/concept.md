@@ -11,8 +11,6 @@
 geschätzter  ca. 20% ... 30% der Arbeit
 -->
 
-
-
 ## Zielsetzung und Anforderungen an das Projekt
 
 - Fokussiert auf die Anforderungen an das Programm, nicht auf die Anforderungen der Level
@@ -29,18 +27,19 @@ geschätzter  ca. 20% ... 30% der Arbeit
 
 - Umfrage bei Studenten (Zeitplanung?)
 
-
-## Bausteine
-
-- Auflisten der der Bausteine aus Kapitel 3 
-- Begründen warum diese verwendet werden
-
 ## Abgrenzung zu den anderen Algorithmen
 
 - Warum ist dieser Algo besser für das PM-Dungeon als die anderen?
 - Welche Grenzen wird dieser Algo haben im vergleich zu den anderen?
 
 ## Darstellung des Konzeptes
+
+Der Dungeongenerator *DungeonG* wird mithilfe der im vorherigen Kapitel vorgestellten Algorithmen umgesetzt und besteht im Wesentlichen aus drei Bausteinen.
+Baustein eins ist der Graphgenerator **GraphG**, welcher einen planaren Graphen generiert.
+Baustein zwei ist der Raumgenerator **RoomG**, welcher verschiedene Räume aus vorgegebenen Templates erzeugt. 
+Baustein drei ist der Levelgenerator **LevelG**, welcher den von GraphG erzeugten Graphen nimmt und diesen mithilfe der Räume von RoomG in ein spielbares Level verwandelt. 
+
+Im Folgenden werden die konkreten Konzepte zur Umsetzung der einzelnen Bausteine und deren Kombination miteinander beschrieben. Ebenso wird beschrieben, wie DungeonG in das PM-Dungeon integriert werden kann und welche Änderungen am bisherigen PM-Dungeon dafür notwendig sind. Da den Studierenden verschiedene Optionen zur Interaktion mit den erzeugten Level ermöglicht werden soll, wird auch eine umfangreiche Schnittstelle hierfür definiert. 
 
 ### GraphG
 
