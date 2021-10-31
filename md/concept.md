@@ -29,7 +29,6 @@ geschätzter  ca. 20% ... 30% der Arbeit
 
 - Umfrage bei Studenten (Zeitplanung?)
 
-  
 
 ## Bausteine
 
@@ -43,10 +42,16 @@ geschätzter  ca. 20% ... 30% der Arbeit
 
 ## Darstellung des Konzeptes
 
-- WIe werden die Bausteine kombiniert?
-- Welche Probleme treten dabei auf?
-- Welche anpassungen müssen daher gemacht werden?
-- Zusätzliche Features die NICHT aus den Algorithmen stammen (vermutlich die API für die Studenten)
+### GraphG
+
+### RoomG
+
+### LevelG
+
+### Integration in das PM-Dungeon
+
+### Schnittstellen
+
 
 
 
