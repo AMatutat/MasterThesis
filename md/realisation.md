@@ -15,21 +15,15 @@ geschätzer umfang ca 20%
 - github actions
 - package struktur
 
+## Umsetzung GraphG
 
-## Umsetzten der Bausteine
+## Umsetzung RoomG
 
-- Wie?
-- Welche Probleme?
+## Umsetzung LevelG
 
-## Umsetzten der Verbindungen
+## Anbindung an das PM-Dungeon
 
-- Wie?
-- Welche Probleme?
-
-## Umsetzten der API
-
-- Wie?
-- Welche Probleme?
+## Implementieren der Schnittstellen
 
 # Evaluierung 
 
