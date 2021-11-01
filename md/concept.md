@@ -38,6 +38,60 @@ Im Folgenden werden die konkreten Aufgaben und Konzepte zur Umsetzung der einzel
 
 ### GraphG
 
+- Aufgaben und Anforderungen: 
+
+  - Planaren graphen Generieren
+    - durch einhalten des theorem
+
+  - Anzahl der Knoten und Kanten soll teilweise bestimmbar sein
+  - Knoten solle gelabelt werden können
+  - ausgabe nach dot zur visualisierung und abspeicherung
+
+- Konzept:
+
+  - Class Edge:
+
+    - gibt die verbindungen an
+    - warum eigene Klasse für die Kanten und nicht einfach eine Liste Nachbarn <Knoten> in Class Knoten
+    - Hashvalue: WAIT theortisch könnte die SUmme beider Hashwerte ja nochmal auftreten. Idee also okay aber anders berechnen
+  - Class Knoten
+
+    - name des Knoten
+
+    - anzahl der Nachbarn
+  - Graph
+    - Bekommt die Parameter übergeben
+    - Erzeugt die Knoten
+    - ConnectUnconnected
+      - 1. Nimm die erten beiden Knoten und verbinde diese
+        2. Nimm einen unverbunden Knoten und verbinde ihn mit einen zufälligen bereits verbunden Knoten
+           1. achte darauf, dass nicht zuviele Knoten mit zuvielen Kanten erzeugt werden (Liste führen)
+        3. repeat
+    - addExtraEdges
+      - solange noch edges erstellt werden sollen
+        - nimm zwei zufällige Knoten
+        - prüfe ob die Knoten gleich sein
+          - ja: nächster durchlauf
+          - nein: weiter
+        - prüfe ob die Knoten bereits verbunden sind:
+          - ja: nächter durchlauf
+          - nein: weiter
+        - prüfe ob das Theorem hält, wenn die Knoten verbunden werden
+          - Prüfe für beide Knoten
+            - würde eine weitere Verbindung die Anzahl der Nachbarn über den Schwellwert bringen?
+              - nein: verbinde
+              - ja: ist der Knoten bereits in der Liste?
+                - ja: verbinde
+                - nein: wäre die Liste überfüllt wenn er hinzugefügt wird:
+                  - ja: nächster durchlauf
+                  - nein: müsste der nächste Knoten auch in die Liste hinzugefügt werden 
+                    - ja: wäre die liste dann überfüllt?
+                      - ja: nächster durchlauf
+                      - nein: verbinden 
+                    - nein: verbinde
+
+  ​    
+
 ### RoomG
 
 ### LevelG
