@@ -1,8 +1,5 @@
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-
 import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -12,11 +9,16 @@ public class MyExcelWriter {
     private Workbook workbook;
     private Sheet sheet;
     private String path;
-    private int rowCount=1;
+    private int rowCount = 1;
 
-    public MyExcelWriter(String path){
-        this.path=path;
-        SimpleDateFormat formatter= new SimpleDateFormat("MM-dd 'at' HH-mm-ss z");
+    /**
+     * creats or read in a csv sheet
+     * creats a new sheet to work with
+     * @param path
+     */
+    public MyExcelWriter(String path) {
+        this.path = path;
+        SimpleDateFormat formatter = new SimpleDateFormat("MM-dd 'at' HH-mm-ss z");
         Date date = new Date(System.currentTimeMillis());
         //wenn ein file existiert, lade dies
         try {
@@ -46,9 +48,20 @@ public class MyExcelWriter {
         c7.setCellValue("Max loops fuer Loesung");
         Cell c8 = row.createCell(8);
         c8.setCellValue("Avg. loops fuer Loesung");
-        }
+    }
 
-    public synchronized void addEntry(int nodes, int edges, int runs, int sol, int fails, int min, int max, double avg){
+    /**
+     * add data to the worksheet
+     * @param nodes
+     * @param edges
+     * @param runs
+     * @param sol
+     * @param fails
+     * @param min
+     * @param max
+     * @param avg
+     */
+    public synchronized void addEntry(int nodes, int edges, int runs, int sol, int fails, int min, int max, double avg) {
         Row row = sheet.createRow(rowCount++);
         Cell c1 = row.createCell(1);
         c1.setCellValue(nodes);
@@ -68,7 +81,11 @@ public class MyExcelWriter {
         c8.setCellValue(avg);
     }
 
-    public void save(){
+    /**
+     * writes the sheet/workbook via fileoutputstream
+     */
+    public void save() {
+        System.out.println("Saving to file");
         try (FileOutputStream outputStream = new FileOutputStream(path)) {
             workbook.write(outputStream);
         } catch (IOException e) {

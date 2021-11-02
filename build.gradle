@@ -25,6 +25,10 @@ ext {
    javaMainClass = "Main"
 }
 
+run {
+    standardInput = System.in
+}
+
 application {
     mainClassName = javaMainClass
 }
