@@ -21,8 +21,19 @@ public final class Graph {
     // enable for some debug outputs
     public boolean debug = false;
 
-    public static final int breakAfter = 10000000;
-    public static int untilBreak = breakAfter;
+    private final int breakAfter = 100000;
+    private int untilBreak = breakAfter;
+
+    public void resetUntilBreak(){
+        this.untilBreak=breakAfter;
+    }
+    public int getUntilBreak(){
+        return this.untilBreak;
+    }
+    public int getBreakAfter(){
+        return this.breakAfter;
+    }
+
 
     /**
      * Creates a graph with the desired number of nodes. Initially, each node is connected to a
