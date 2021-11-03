@@ -5,7 +5,7 @@ package graphg;
  *
  * @author André Matutat
  */
-public final class Edge{
+public final class Edge {
 
     private final Node firstNode;
     private final Node secondNode;
@@ -18,7 +18,8 @@ public final class Edge{
      * @throws IllegalArgumentException Loops are not supported.
      */
     public Edge(final Node firstNode, final Node secondNode) throws IllegalArgumentException {
-        if (firstNode.equals(secondNode)) throw new IllegalArgumentException ("Loops are not supported.");
+        if (firstNode.equals(secondNode))
+            throw new IllegalArgumentException("Loops are not supported.");
         this.firstNode = firstNode;
         this.secondNode = secondNode;
     }
@@ -32,17 +33,20 @@ public final class Edge{
         return this.firstNode;
     }
 
-    public Node getSecondNode(){
+    public Node getSecondNode() {
         return this.secondNode;
     }
 
     /**
      * Checks if two edges connect the same two nodes
+     *
      * @param e
      * @return whether the edges are the same
      */
     public boolean equals(Edge e) {
-       return ((e.getFirstNode().equals(getFirstNode()) || e.getFirstNode().equals(this.getSecondNode())) &&
-              (e.getSecondNode().equals(getFirstNode()) || e.getSecondNode().equals(this.getSecondNode())));
+        return ((e.getFirstNode().equals(getFirstNode())
+                        || e.getFirstNode().equals(this.getSecondNode()))
+                && (e.getSecondNode().equals(getFirstNode())
+                        || e.getSecondNode().equals(this.getSecondNode())));
     }
 }
