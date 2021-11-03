@@ -23,7 +23,7 @@ public class Main {
         int edgecounter = 0;
         int endNodeCounter = 32;
         int endEdgeCounter = 10;
-        int wantedruns = 1;
+        int wantedruns = 10;
 
         //setup threads
         for (int i = nodecounter; i < endNodeCounter; i++)

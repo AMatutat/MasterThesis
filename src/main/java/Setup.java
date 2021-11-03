@@ -99,6 +99,6 @@ public class Setup implements Runnable {
     }
 
     private void printResult() {
-        ex.addEntry(nodes, edges, wantedRuns, solutions, fails, maximalLoops, maximalLoops, averageLoops);
+        ex.addEntry(nodes, edges, wantedRuns, solutions, fails, minimalLoops, maximalLoops, averageLoops);
     }
 }
