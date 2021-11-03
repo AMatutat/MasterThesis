@@ -125,10 +125,9 @@ public final class Graph {
             boolean connect = true;
 
             if (!node1.equals(node2) && canConnect(node1, node2)) {
-
                 Edge edge = new Edge(node1, node2);
                 for (Edge ed : edges) {
-                    if (edge.getConnectionHash() == ed.getConnectionHash()) {
+                    if (ed.equals(edge)) {
                         connect = false;
                     }
                 }
