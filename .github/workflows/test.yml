@@ -1,0 +1,26 @@
+name: Java CI
+
+on: [ pull_request ]
+  branches:
+    - codeBase
+jobs:
+    build-and-test:
+        name: Build and Test
+        runs-on: ubuntu-latest
+        steps:
+            -   name: Checkout
+                uses: actions/checkout@v2
+            -   name: Set up JDK 11
+                uses: actions/setup-java@v2
+                with:
+                    java-version: '11'
+                    distribution: 'adopt'
+            -   name: Validate Gradle wrapper
+                uses: gradle/wrapper-validation-action@v1
+            -   name: Build with Gradle
+                run: ./gradlew build                
+            -   name: Publish Test Report
+                uses: mikepenz/action-junit-report@v2
+                if: always() # always run even if the previous step fails
+                with:
+                    report_paths: '**/build/test-results/test/TEST-*.xml'
