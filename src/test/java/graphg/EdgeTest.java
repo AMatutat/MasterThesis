@@ -22,7 +22,7 @@ public class EdgeTest {
 
     @Test
     public void equals_sameEdge_True() {
-        assertFalse(e.equals(e));
+        assertTrue(e.equals(e));
     }
 
     @Test
