@@ -6,9 +6,7 @@ import stuff.DesignLabels;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-/**
- * @author Andre Matutat
- */
+/** @author Andre Matutat */
 public class EdgeTest {
 
     private Edge e;
@@ -29,7 +27,9 @@ public class EdgeTest {
 
     @Test
     public void equals_differentNodes_False() {
-        Edge e2 = new Edge(new Node("n1", DesignLabels.DEFAULT), new Node("n2", DesignLabels.DEFAULT));
+        Edge e2 =
+                new Edge(
+                        new Node("n1", DesignLabels.DEFAULT), new Node("n2", DesignLabels.DEFAULT));
         assertFalse(e.equals(e2));
     }
 

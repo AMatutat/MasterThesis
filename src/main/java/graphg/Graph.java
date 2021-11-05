@@ -33,10 +33,15 @@ public final class Graph {
      * @param nodeNumber Number of desired nodes in the graph
      * @param extraEdges number of additional edges requested
      * @param names List with names for the nodes
-     * @param label specifies which textures and layouts should be used for the rooms. all nodes will have the same label.
+     * @param label specifies which textures and layouts should be used for the rooms. all nodes
+     *     will have the same label.
      * @throws IllegalArgumentException
      */
-    public Graph(final int nodeNumber, final int extraEdges, final String[] names, final DesignLabels label)
+    public Graph(
+            final int nodeNumber,
+            final int extraEdges,
+            final String[] names,
+            final DesignLabels label)
             throws CantBePlanarException, IllegalArgumentException, NoSolutionException {
         if (nodeNumber <= 1)
             throw new IllegalArgumentException("A graph must consist of at least two nodes");
@@ -55,7 +60,7 @@ public final class Graph {
 
         // Create nodes with names and add them to the list
         for (int i = 0; i < nodeNumber; i++) {
-            nodes.add(new Node(names[i],label));
+            nodes.add(new Node(names[i], label));
         }
         connectUnconnectedNodes(nodes);
         if (extraEdges > 0) addMoreEdges(extraEdges, nodes);

@@ -15,11 +15,12 @@ public final class Node {
 
     /**
      * Creats a Node
+     *
      * @param name name of the node
      * @param label specifies which textures and layouts should be used for the room.
      */
     public Node(final String name, final DesignLabels label) {
-        this.label=label;
+        this.label = label;
         this.nodeName = name;
     }
 
@@ -41,7 +42,7 @@ public final class Node {
         return nodeName;
     }
 
-    public DesignLabels getDesignLabel(){
+    public DesignLabels getDesignLabel() {
         return this.label;
     }
 }

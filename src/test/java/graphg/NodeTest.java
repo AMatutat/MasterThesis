@@ -7,9 +7,7 @@ import stuff.DesignLabels;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-/**
- * @author Andre Matutat
- */
+/** @author Andre Matutat */
 public class NodeTest {
 
     private Node n;

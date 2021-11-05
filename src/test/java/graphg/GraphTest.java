@@ -18,50 +18,64 @@ public class GraphTest {
 
     @BeforeEach
     public void init() {
-        labels = new String[]{"A", "B", "C"};
+        labels = new String[] {"A", "B", "C"};
     }
 
     @Test
     public void constructor_noNodes_throwsIllegalArgumentException() {
         Throwable exception =
-                assertThrows(IllegalArgumentException.class, () -> new Graph(0, 2, labels, DesignLabels.DEFAULT));
+                assertThrows(
+                        IllegalArgumentException.class,
+                        () -> new Graph(0, 2, labels, DesignLabels.DEFAULT));
     }
 
     @Test
     public void constructor_oneNode_throwsIllegalArgumentException() {
         Throwable exception =
-                assertThrows(IllegalArgumentException.class, () -> new Graph(1, 2, labels, DesignLabels.DEFAULT));
+                assertThrows(
+                        IllegalArgumentException.class,
+                        () -> new Graph(1, 2, labels, DesignLabels.DEFAULT));
     }
 
     @Test
     public void constructor_negativeNodes_throwsIllegalArgumentException() {
         Throwable exception =
-                assertThrows(IllegalArgumentException.class, () -> new Graph(-1, 2, labels, DesignLabels.DEFAULT));
+                assertThrows(
+                        IllegalArgumentException.class,
+                        () -> new Graph(-1, 2, labels, DesignLabels.DEFAULT));
     }
 
     @Test
     public void constructor_negativeExtraEdges_throwsIllegalArgumentException() {
         Throwable exception =
-                assertThrows(IllegalArgumentException.class, () -> new Graph(2, -1, labels, DesignLabels.DEFAULT));
+                assertThrows(
+                        IllegalArgumentException.class,
+                        () -> new Graph(2, -1, labels, DesignLabels.DEFAULT));
     }
 
     @Test
     public void constructor_emptyLabels_throwsIllegalArgumentException() {
         String[] l = new String[0];
         Throwable exception =
-                assertThrows(IllegalArgumentException.class, () -> new Graph(3, 2, l, DesignLabels.DEFAULT));
+                assertThrows(
+                        IllegalArgumentException.class,
+                        () -> new Graph(3, 2, l, DesignLabels.DEFAULT));
     }
 
     @Test
     public void constructor_notEnoughLabels_throwsIllegalArgumentException() {
-        String[] l = new String[]{"A"};
+        String[] l = new String[] {"A"};
         Throwable exception =
-                assertThrows(IllegalArgumentException.class, () -> new Graph(3, 2, l, DesignLabels.DEFAULT));
+                assertThrows(
+                        IllegalArgumentException.class,
+                        () -> new Graph(3, 2, l, DesignLabels.DEFAULT));
     }
 
     @Test
     public void constructor_e3v6NotHold_throwsCantBePlanarException() {
         Throwable exception =
-                assertThrows(CantBePlanarException.class, () -> new Graph(3, 25, labels, DesignLabels.DEFAULT));
+                assertThrows(
+                        CantBePlanarException.class,
+                        () -> new Graph(3, 25, labels, DesignLabels.DEFAULT));
     }
 }
