@@ -2,9 +2,13 @@ package graphg;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import static org.junit.Assert.assertEquals;
+import stuff.DesignLabels;
 
-/** @author Andre Matutat */
+import static org.junit.jupiter.api.Assertions.*;
+
+/**
+ * @author Andre Matutat
+ */
 public class EdgeTest {
 
     private Edge e;
@@ -13,18 +17,48 @@ public class EdgeTest {
 
     @BeforeEach
     public void init() {
-        n1 = new Node("node1");
-        n2 = new Node("node2");
+        n1 = new Node("node1", DesignLabels.DEFAULT);
+        n2 = new Node("node2", DesignLabels.DEFAULT);
         e = new Edge(n1, n2);
     }
 
     @Test
-    public void getConnectionHash_equalsNodeHashesSum() {
-        assertEquals(n1.hashCode() + n2.hashCode(), e.getConnectionHash());
+    public void equals_sameEdge_True() {
+        assertTrue(e.equals(e));
     }
 
     @Test
-    public void toDot_equalsNodeNamesWithArrow() {
+    public void equals_differentNodes_False() {
+        Edge e2 = new Edge(new Node("n1", DesignLabels.DEFAULT), new Node("n2", DesignLabels.DEFAULT));
+        assertFalse(e.equals(e2));
+    }
+
+    @Test
+    public void equals_sameNodes_True() {
+        Edge e2 = new Edge(n1, n2);
+        assertTrue(e.equals(e2));
+    }
+
+    @Test
+    public void equals_sameNodesChangesDirection_True() {
+        Edge e2 = new Edge(n2, n1);
+        assertTrue(e.equals(e2));
+    }
+
+    @Test
+    public void equals_differentFirstNode_False() {
+        Edge e2 = new Edge(new Node("n1", DesignLabels.DEFAULT), n2);
+        assertFalse(e.equals(e2));
+    }
+
+    @Test
+    public void equals_differentSecondNode_False() {
+        Edge e2 = new Edge(n1, new Node("n2", DesignLabels.DEFAULT));
+        assertFalse(e.equals(e2));
+    }
+
+    @Test
+    public void toDot_equalsNodeNamesWithArrow_True() {
         assertEquals("node1->node2", e.toDot());
     }
 }

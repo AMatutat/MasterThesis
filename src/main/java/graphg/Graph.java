@@ -1,5 +1,7 @@
 package graphg;
 
+import stuff.DesignLabels;
+
 import java.util.ArrayList;
 
 /**
@@ -30,16 +32,17 @@ public final class Graph {
      *
      * @param nodeNumber Number of desired nodes in the graph
      * @param extraEdges number of additional edges requested
-     * @param labels List with names for the nodes
+     * @param names List with names for the nodes
+     * @param label specifies which textures and layouts should be used for the rooms. all nodes will have the same label.
      * @throws IllegalArgumentException
      */
-    public Graph(final int nodeNumber, final int extraEdges, final String[] labels)
+    public Graph(final int nodeNumber, final int extraEdges, final String[] names, final DesignLabels label)
             throws CantBePlanarException, IllegalArgumentException, NoSolutionException {
         if (nodeNumber <= 1)
             throw new IllegalArgumentException("A graph must consist of at least two nodes");
         if (extraEdges < 0)
             throw new IllegalArgumentException("Number of additional edges cannot be negative");
-        if (labels.length < nodeNumber)
+        if (names.length < nodeNumber)
             throw new IllegalArgumentException(
                     "The list of names for the nodes must not be smaller than the number of nodes");
 
@@ -52,7 +55,7 @@ public final class Graph {
 
         // Create nodes with names and add them to the list
         for (int i = 0; i < nodeNumber; i++) {
-            nodes.add(new Node(labels[i]));
+            nodes.add(new Node(names[i],label));
         }
         connectUnconnectedNodes(nodes);
         if (extraEdges > 0) addMoreEdges(extraEdges, nodes);
