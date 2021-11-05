@@ -1,5 +1,7 @@
 package graphg;
 
+import stuff.DesignLabels;
+
 /**
  * Node in graph. Represents rooms in the level
  *
@@ -9,8 +11,15 @@ public final class Node {
     // Number of nodes connected to these nodes
     private int neighbourCount = 0;
     private String nodeName;
+    private DesignLabels label;
 
-    public Node(final String name) {
+    /**
+     * Creats a Node
+     * @param name name of the node
+     * @param label specifies which textures and layouts should be used for the room.
+     */
+    public Node(final String name, final DesignLabels label) {
+        this.label=label;
         this.nodeName = name;
     }
 
@@ -30,5 +39,9 @@ public final class Node {
 
     public String getNodeName() {
         return nodeName;
+    }
+
+    public DesignLabels getDesignLabel(){
+        return this.label;
     }
 }
