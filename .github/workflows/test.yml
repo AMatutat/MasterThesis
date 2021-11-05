@@ -1,8 +1,9 @@
 name: Java CI
 
-on: [ pull_request ]
-  branches:
-    - codeBase
+on: 
+  pull_request:
+    branches:
+      - codeBase
 jobs:
     build-and-test:
         name: Build and Test
