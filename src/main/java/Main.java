@@ -7,9 +7,9 @@ import java.util.Scanner;
 public class Main {
     //used by the scanner to end program
     public static boolean end = false;
-
+    public static boolean backupSave = false;
     public static void main(String[] args) {
-        MyScanner sc = new MyScanner("exit");
+        MyScanner sc = new MyScanner("exit","save");
         String path = "analyse/graphg.csv";
         MyExcelWriter ex = new MyExcelWriter(path);
         //the threads
@@ -39,11 +39,20 @@ public class Main {
         new Thread(sc).start();
 
         boolean calculating = true;
+        long time =System.currentTimeMillis();
+        long autosave=60000*60*2; //1min*60*2 = 2h
+
         //run until exit command or all calculations are finished
         while (calculating && !end) {
             calculating = false;
             for (Setup s : setups)
                 if (!s.getDone()) calculating = true;
+
+            if(backupSave || System.currentTimeMillis()-time>autosave){
+                ex.save();
+                backupSave=false;
+                time=System.currentTimeMillis();
+            }
         }
 
         //if end via shell, interrupt all threads
