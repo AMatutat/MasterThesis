@@ -1,5 +1,11 @@
+import new_graphg.GraphG;
+import new_graphg.Node;
+import new_graphg.Tree;
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello World");
+        new GraphG(10,0);
+
+
     }
 }
