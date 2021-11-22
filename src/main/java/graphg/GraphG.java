@@ -8,8 +8,18 @@ import java.util.List;
  */
 public class GraphG {
 
-
-    public List<Graph> getGraphs(int nodes, int edges) throws CantBePlanarException, IllegalArgumentException, NoSolutionException {
+    /**
+     * Calculate a list of planar graphs.
+     * Generate all possible trees and then draw extra edges.
+     *
+     * @param nodes number of nodes
+     * @param edges number of extra edges that get drawn into the generated tree
+     * @return a list of all solutions
+     * @throws CantBePlanarException
+     * @throws IllegalArgumentException
+     * @throws NoSolutionException
+     */
+    public List<Graph> generateGraphs(int nodes, int edges) throws CantBePlanarException, IllegalArgumentException, NoSolutionException {
         if (nodes <= 1)
             throw new IllegalArgumentException("A graph must consist of at least two nodes");
         if (edges < 0)
@@ -37,6 +47,7 @@ public class GraphG {
             for (Graph t : trees)
                 for (Node n : t.getNodes()) {
                     Graph newTree = t.copy();
+                    //have to get the copy of 'n', the index of the copy is always the index of the original
                     if (newTree.connectNewNode(n.getIndex()))
                         newTrees.add(newTree);
                 }
@@ -52,6 +63,7 @@ public class GraphG {
                 for (Node n1 : g.getNodes())
                     for (Node n2 : g.getNodes()) {
                         Graph newGraph = g.copy();
+                        //same as in tree, have to get the copys of n and n2
                         if (n1.getIndex() != n2.getIndex() && newGraph.connectNodes(n1.getIndex(), n2.getIndex())) {
                             newGraphs.add(newGraph);
                         }

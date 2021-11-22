@@ -1,9 +1,9 @@
-import graphg.*;
+import graphg.CantBePlanarException;
+import graphg.GraphG;
+import graphg.NoSolutionException;
 
 public class Main {
     public static void main(String[] args) throws CantBePlanarException, NoSolutionException {
-        new GraphG().getGraphs(5,2);
-
-
+        new GraphG().generateGraphs(5, 2);
     }
 }

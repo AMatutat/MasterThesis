@@ -12,7 +12,9 @@ public class Graph {
     private final int MAX_NODES = 4;
     private final int MAX_NEIGHBOURS = 2;
 
-
+    /**
+     * Create a Graph with two connected nodes.
+     */
     public Graph() {
         Node n1 = new Node();
         Node n2 = new Node();
@@ -41,7 +43,12 @@ public class Graph {
         return new Graph(nodesCopy);
     }
 
-
+    /**
+     * Try to connect a existing node with a new node
+     *
+     * @param index index of the node the new node should be connect with
+     * @return true if connection was successfully
+     */
     public boolean connectNewNode(int index) {
         Node n = nodes.get(index);
         if (canConnect(n)) {
@@ -54,6 +61,14 @@ public class Graph {
         } else return false;
     }
 
+
+    /**
+     * Try to connect two existing nodes with eachother
+     *
+     * @param index1 index of the first node
+     * @param index2 index of the second node
+     * @return true if connection was successfully
+     */
     public boolean connectNodes(int index1, int index2) {
         Node n1 = nodes.get(index1);
         Node n2 = nodes.get(index2);
@@ -87,7 +102,6 @@ public class Graph {
     public List<Node> getNodes() {
         return nodes;
     }
-
 
     public String toDot() {
         String dot = "digraph G {\nedge [dir=none]\n";
