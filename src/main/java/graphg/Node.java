@@ -1,48 +1,46 @@
 package graphg;
 
-import stuff.DesignLabels;
-
+import java.util.ArrayList;
+import java.util.List;
 /**
- * Node in graph. Represents rooms in the level
- *
- * @author André Matutat
+ * @author Andre Matutat
  */
-public final class Node {
-    // Number of nodes connected to these nodes
-    private int neighbourCount = 0;
-    private String nodeName;
-    private DesignLabels label;
+public class Node {
+    private List<Node> neighbours = new ArrayList<>();
+    private int index;
+
+    public void connect(Node n) {
+        neighbours.add(n);
+    }
 
     /**
-     * Creats a Node
+     * only copys index not the neighbour list
      *
-     * @param name name of the node
-     * @param label specifies which textures and layouts should be used for the room.
+     * @return
      */
-    public Node(final String name, final DesignLabels label) {
-        this.label = label;
-        this.nodeName = name;
+    public Node copy() {
+        Node copy = new Node();
+        copy.setIndex(getIndex());
+        return copy;
     }
 
-    /** Decrease the neighbor counter. Cannot be less than 0 */
-    public void removeNeighbour() {
-        this.neighbourCount = Math.max(0, this.neighbourCount - 1);
+    public List<Node> getNeighbours() {
+        return neighbours;
     }
 
-    /** Increase the neighbor counter */
-    public void addNeighbour() {
-        this.neighbourCount++;
+    public void setIndex(int i) {
+        index = i;
     }
 
-    public int getNeighbourCount() {
-        return this.neighbourCount;
+    public int getIndex() {
+        return index;
     }
 
-    public String getNodeName() {
-        return nodeName;
-    }
-
-    public DesignLabels getDesignLabel() {
-        return this.label;
+    public String toDot() {
+        String dot = "";
+        for (Node n : getNeighbours())
+            if (getIndex() < n.getIndex())
+                dot += getIndex() + "->" + n.getIndex() + "\n";
+        return dot;
     }
 }
