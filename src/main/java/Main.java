@@ -4,7 +4,7 @@ import new_graphg.Tree;
 
 public class Main {
     public static void main(String[] args) {
-        new GraphG(10,0);
+        new GraphG(5,2);
 
 
     }

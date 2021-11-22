@@ -1,7 +1,5 @@
 package new_graphg;
 
-import graphg.Edge;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,7 +40,7 @@ public class Tree {
 
 
     public boolean connectNewNode(int index) {
-        Node n= nodes.get(index);
+        Node n = nodes.get(index);
         if (canConnect(n)) {
             Node n2 = new Node();
             nodes.add(n2);
@@ -54,9 +52,10 @@ public class Tree {
     }
 
     public boolean connectNodes(int index1, int index2) {
-        Node n1= nodes.get(index1);
-        Node n2= nodes.get(index2);
-        if (canConnect(n1, n2)) {
+        Node n1 = nodes.get(index1);
+        Node n2 = nodes.get(index2);
+
+        if (!n1.getNeighbours().contains(n2) && canConnect(n1, n2)) {
             n1.connect(n2);
             n2.connect(n1);
             return true;
@@ -72,7 +71,14 @@ public class Tree {
     }
 
     private boolean canConnect(Node n1, Node n2) {
-        return false;
+        List<Node> manyNeighbour = new ArrayList<>(nodes);
+        manyNeighbour.removeIf(node -> node.getNeighbours().size() <= MAX_NEIGHBOURS);
+        boolean addN1 =
+                (n1.getNeighbours().size() >= MAX_NEIGHBOURS && !manyNeighbour.contains(n1));
+        boolean addN2 =
+                (n2.getNeighbours().size() >= MAX_NEIGHBOURS && !manyNeighbour.contains(n2));
+
+        return (manyNeighbour.size() + (addN1 ? 1 : 0) + (addN2 ? 1 : 0) < MAX_NODES);
     }
 
     public List<Node> getNodes() {

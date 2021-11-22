@@ -13,6 +13,7 @@ public class Node {
 
     /**
      * only copys index not the neighbour list
+     *
      * @return
      */
     public Node copy() {
@@ -22,21 +23,22 @@ public class Node {
     }
 
     public List<Node> getNeighbours() {
-        return this.neighbours;
+        return neighbours;
     }
 
-    public void setIndex(int i){
-        index=i;
+    public void setIndex(int i) {
+        index = i;
     }
 
-    public int getIndex(){
+    public int getIndex() {
         return index;
     }
 
-    public String toDot(){
-        String dot="";
-        for(Node n: neighbours)
-            dot+=getIndex()+"->"+n.getIndex()+"\n";
+    public String toDot() {
+        String dot = "";
+        for (Node n : getNeighbours())
+            if (getIndex() < n.getIndex())
+                dot += getIndex() + "->" + n.getIndex() + "\n";
         return dot;
     }
 }

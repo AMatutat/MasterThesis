@@ -10,7 +10,8 @@ public class GraphG {
         Tree tree = new Tree();
         List<Tree> trees = new ArrayList<>();
         trees.add(tree);
-        trees=calculateTrees(trees,nodes-2);
+        trees = calculateTrees(trees, nodes - 2);
+        trees=calculateGraphs(trees,edges);
         for (Tree t : trees) {
             System.out.println("------------");
             System.out.println(t.toDot());
@@ -35,18 +36,15 @@ public class GraphG {
         if (edgesLeft <= 0) return graphs;
         else {
             List<Tree> newGraphs = new ArrayList<>();
-            for (Tree g : graphs) {
-                for (Node n1 : g.getNodes()) {
-                    Tree newGraph = g.copy();
-                    for (Node n2 : newGraph.getNodes()) {
-                        //if(!n1.equals(n2) && g.connectNodes())
+            for (Tree g : graphs)
+                for (Node n1 : g.getNodes())
+                    for (Node n2 : g.getNodes()){
+                        Tree newGraph = g.copy();
+                        if (n1.getIndex() != n2.getIndex() && newGraph.connectNodes(n1.getIndex(), n2.getIndex())){
+                            newGraphs.add(newGraph);
+                        }
                     }
-                }
-            }
-
-
+            return calculateGraphs(newGraphs, edgesLeft - 1);
         }
-
-        return null;
     }
 }
