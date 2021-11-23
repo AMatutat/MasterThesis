@@ -1,48 +1,68 @@
 package graphg;
 
-import stuff.DesignLabels;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * Node in graph. Represents rooms in the level
- *
- * @author André Matutat
+ * @author Andre Matutat
  */
-public final class Node {
-    // Number of nodes connected to these nodes
-    private int neighbourCount = 0;
-    private String nodeName;
-    private DesignLabels label;
+public class Node {
+    private List<Integer> neighbours = new ArrayList<>();
+    private int index;
 
     /**
-     * Creats a Node
+     * Add this node as neighbour
      *
-     * @param name name of the node
-     * @param label specifies which textures and layouts should be used for the room.
+     * @param n
      */
-    public Node(final String name, final DesignLabels label) {
-        this.label = label;
-        this.nodeName = name;
+    public void connect(Node n) {
+        neighbours.add(n.index);
     }
 
-    /** Decrease the neighbor counter. Cannot be less than 0 */
-    public void removeNeighbour() {
-        this.neighbourCount = Math.max(0, this.neighbourCount - 1);
+    public boolean notConnectedWith(Node n) {
+        if (!neighbours.contains(n.getIndex())) return true;
+        else return false;
     }
 
-    /** Increase the neighbor counter */
-    public void addNeighbour() {
-        this.neighbourCount++;
+    /**
+     * only copys index not the neighbour list
+     *
+     * @return
+     */
+    public Node copy() {
+        Node copy = new Node();
+        copy.setIndex(getIndex());
+        return copy;
     }
 
-    public int getNeighbourCount() {
-        return this.neighbourCount;
+    public List<Integer> getNeighbours() {
+        return neighbours;
     }
 
-    public String getNodeName() {
-        return nodeName;
+    /**
+     * If two nodes have the same index, they are a copy of another
+     * Sets the index.
+     *
+     * @param i
+     */
+    public void setIndex(int i) {
+        index = i;
     }
 
-    public DesignLabels getDesignLabel() {
-        return this.label;
+    /**
+     * If two nodes have the same index, they are a copy of another
+     *
+     * @return
+     */
+    public int getIndex() {
+        return index;
+    }
+
+    public String toDot() {
+        String dot = "";
+        for (Integer n : getNeighbours())
+            if (getIndex() < n)
+                dot += getIndex() + "->" + n + "\n";
+        return dot;
     }
 }
