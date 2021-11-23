@@ -1,10 +1,11 @@
 package graphg;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.google.gson.stream.JsonReader;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -43,8 +44,6 @@ public class GraphG {
         trees = calculateTrees(trees, nodes - 2);
         List<Graph> solutions = calculateGraphs(trees, edges);
         if (solutions.isEmpty()) throw new NoSolutionException("No solution found"); //??
-
-        solutions.forEach(s->System.out.println(s.toDot()));
         return solutions;
     }
 
@@ -80,26 +79,25 @@ public class GraphG {
         }
     }
 
-    public Graph getGraph(int nodes, int edges) {
+    public Graph getGraph(int nodes, int edges) throws FileNotFoundException {
         String path = nodes + "_" + edges + ".json";
-        List<Graph> sol = readFromJson(path);
+        List<Graph> sol = null;
+        sol = readFromJson(path);
         return sol.get(new Random().nextInt(sol.size()));
     }
 
-    public void writeToJSON(List<Graph> graphs, String path) {
+    public void writeToJSON(List<Graph> graphs, String path) throws IOException {
         Gson gson = new Gson();
         String json = gson.toJson(graphs);
-        try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter(path));
-            writer.write(json);
-            writer.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println(json);
-        }
+        BufferedWriter writer = new BufferedWriter(new FileWriter(path));
+        writer.write(json);
+        writer.close();
     }
 
-    public List<Graph> readFromJson(String path) {
-        return null;
+    public List<Graph> readFromJson(String path) throws FileNotFoundException {
+        Type graphType = new TypeToken<ArrayList<Graph>>() {
+        }.getType();
+        JsonReader reader = new JsonReader(new FileReader(path));
+        return new Gson().fromJson(reader, graphType);
     }
 }
