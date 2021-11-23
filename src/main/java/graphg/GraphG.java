@@ -10,14 +10,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-/**
- * @author Andre Matutat
- */
+/** @author Andre Matutat */
 public class GraphG {
 
     /**
-     * Calculate a list of planar graphs.
-     * Generate all possible trees and then draw extra edges.
+     * Calculate a list of planar graphs. Generate all possible trees and then draw extra edges.
      *
      * @param nodes number of nodes
      * @param edges number of extra edges that get drawn into the generated tree
@@ -26,7 +23,8 @@ public class GraphG {
      * @throws IllegalArgumentException
      * @throws NoSolutionException
      */
-    public List<Graph> generateGraphs(int nodes, int edges) throws CantBePlanarException, IllegalArgumentException, NoSolutionException {
+    public List<Graph> generateGraphs(int nodes, int edges)
+            throws CantBePlanarException, IllegalArgumentException, NoSolutionException {
         if (nodes <= 1)
             throw new IllegalArgumentException("A graph must consist of at least two nodes");
         if (edges < 0)
@@ -37,13 +35,12 @@ public class GraphG {
         int leftTerm = 3 * nodes - 6;
         if (minimumEdges > leftTerm) throw new CantBePlanarException("e<=3V-6 does not hold");
 
-
         Graph tree = new Graph();
         List<Graph> trees = new ArrayList<>();
         trees.add(tree);
         trees = calculateTrees(trees, nodes - 2);
         List<Graph> solutions = calculateGraphs(trees, edges);
-        if (solutions.isEmpty()) throw new NoSolutionException("No solution found"); //??
+        if (solutions.isEmpty()) throw new NoSolutionException("No solution found"); // ??
         return solutions;
     }
 
@@ -54,9 +51,9 @@ public class GraphG {
             for (Graph t : trees)
                 for (Node n : t.getNodes()) {
                     Graph newTree = t.copy();
-                    //have to get the copy of 'n', the index of the copy is always the index of the original
-                    if (newTree.connectNewNode(n.getIndex()))
-                        newTrees.add(newTree);
+                    // have to get the copy of 'n', the index of the copy is always the index of the
+                    // original
+                    if (newTree.connectNewNode(n.getIndex())) newTrees.add(newTree);
                 }
             return calculateTrees(newTrees, nodesLeft - 1);
         }
@@ -70,8 +67,9 @@ public class GraphG {
                 for (Node n1 : g.getNodes())
                     for (Node n2 : g.getNodes()) {
                         Graph newGraph = g.copy();
-                        //same as in tree, have to get the copys of n and n2
-                        if (n1.getIndex() != n2.getIndex() && newGraph.connectNodes(n1.getIndex(), n2.getIndex())) {
+                        // same as in tree, have to get the copys of n and n2
+                        if (n1.getIndex() != n2.getIndex()
+                                && newGraph.connectNodes(n1.getIndex(), n2.getIndex())) {
                             newGraphs.add(newGraph);
                         }
                     }
@@ -95,8 +93,7 @@ public class GraphG {
     }
 
     public List<Graph> readFromJson(String path) throws FileNotFoundException {
-        Type graphType = new TypeToken<ArrayList<Graph>>() {
-        }.getType();
+        Type graphType = new TypeToken<ArrayList<Graph>>() {}.getType();
         JsonReader reader = new JsonReader(new FileReader(path));
         return new Gson().fromJson(reader, graphType);
     }

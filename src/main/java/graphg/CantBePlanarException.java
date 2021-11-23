@@ -7,8 +7,7 @@ package graphg;
  */
 public class CantBePlanarException extends Exception {
     // Parameterless Constructor
-    public CantBePlanarException() {
-    }
+    public CantBePlanarException() {}
 
     // Constructor that accepts a message
     public CantBePlanarException(String message) {

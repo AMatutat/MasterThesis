@@ -7,8 +7,7 @@ package graphg;
  */
 public class NoSolutionException extends Exception {
     // Parameterless Constructor
-    public NoSolutionException() {
-    }
+    public NoSolutionException() {}
 
     // Constructor that accepts a message
     public NoSolutionException(String message) {

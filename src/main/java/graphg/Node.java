@@ -3,9 +3,7 @@ package graphg;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author Andre Matutat
- */
+/** @author Andre Matutat */
 public class Node {
     private List<Integer> neighbours = new ArrayList<>();
     private int index;
@@ -40,8 +38,7 @@ public class Node {
     }
 
     /**
-     * If two nodes have the same index, they are a copy of another
-     * Sets the index.
+     * If two nodes have the same index, they are a copy of another Sets the index.
      *
      * @param i
      */
@@ -60,9 +57,7 @@ public class Node {
 
     public String toDot() {
         String dot = "";
-        for (Integer n : getNeighbours())
-            if (getIndex() < n)
-                dot += getIndex() + "->" + n + "\n";
+        for (Integer n : getNeighbours()) if (getIndex() < n) dot += getIndex() + "->" + n + "\n";
         return dot;
     }
 }

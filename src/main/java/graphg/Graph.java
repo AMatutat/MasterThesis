@@ -3,18 +3,14 @@ package graphg;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author Andre Matutat
- */
+/** @author Andre Matutat */
 public class Graph {
 
     private List<Node> nodes = new ArrayList<>();
     private final int MAX_NODES = 4;
     private final int MAX_NEIGHBOURS = 2;
 
-    /**
-     * Create a Graph with two connected nodes.
-     */
+    /** Create a Graph with two connected nodes. */
     public Graph() {
         Node n1 = new Node();
         Node n2 = new Node();
@@ -61,7 +57,6 @@ public class Graph {
         } else return false;
     }
 
-
     /**
      * Try to connect two existing nodes with eachother
      *
@@ -73,7 +68,6 @@ public class Graph {
         Node n1 = nodes.get(index1);
         Node n2 = nodes.get(index2);
 
-
         if (n1.notConnectedWith(n2) && canConnect(n1, n2)) {
             n1.connect(n2);
             n2.connect(n1);
@@ -84,8 +78,9 @@ public class Graph {
     private boolean canConnect(Node n) {
         List<Node> manyNeighbour = new ArrayList<>(nodes);
         manyNeighbour.removeIf(node -> node.getNeighbours().size() <= MAX_NEIGHBOURS);
-        if (manyNeighbour.size() <= MAX_NODES || manyNeighbour.contains(n) || n.getNeighbours().size() + 1 <= MAX_NEIGHBOURS)
-            return true;
+        if (manyNeighbour.size() <= MAX_NODES
+                || manyNeighbour.contains(n)
+                || n.getNeighbours().size() + 1 <= MAX_NEIGHBOURS) return true;
         else return false;
     }
 
@@ -109,5 +104,4 @@ public class Graph {
         for (Node n : nodes) dot += n.toDot();
         return dot + "}";
     }
-
 }
