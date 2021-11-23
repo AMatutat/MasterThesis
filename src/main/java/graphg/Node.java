@@ -7,7 +7,7 @@ import java.util.List;
  * @author Andre Matutat
  */
 public class Node {
-    private List<Node> neighbours = new ArrayList<>();
+    private List<Integer> neighbours = new ArrayList<>();
     private int index;
 
     /**
@@ -16,7 +16,12 @@ public class Node {
      * @param n
      */
     public void connect(Node n) {
-        neighbours.add(n);
+        neighbours.add(n.index);
+    }
+
+    public boolean notConnectedWith(Node n) {
+        if (!neighbours.contains(n.getIndex())) return true;
+        else return false;
     }
 
     /**
@@ -30,7 +35,7 @@ public class Node {
         return copy;
     }
 
-    public List<Node> getNeighbours() {
+    public List<Integer> getNeighbours() {
         return neighbours;
     }
 
@@ -55,9 +60,9 @@ public class Node {
 
     public String toDot() {
         String dot = "";
-        for (Node n : getNeighbours())
-            if (getIndex() < n.getIndex())
-                dot += getIndex() + "->" + n.getIndex() + "\n";
+        for (Integer n : getNeighbours())
+            if (getIndex() < n)
+                dot += getIndex() + "->" + n + "\n";
         return dot;
     }
 }

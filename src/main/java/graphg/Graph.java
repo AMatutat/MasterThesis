@@ -35,9 +35,9 @@ public class Graph {
         nodes.forEach(n -> nodesCopy.add(n.copy()));
 
         for (Node n : nodes) {
-            for (Node nb : n.getNeighbours()) {
+            for (Integer nb : n.getNeighbours()) {
                 Node n1 = nodesCopy.get(n.getIndex());
-                n1.connect(nodesCopy.get(nb.getIndex()));
+                n1.connect(nodesCopy.get(nb));
             }
         }
         return new Graph(nodesCopy);
@@ -73,7 +73,8 @@ public class Graph {
         Node n1 = nodes.get(index1);
         Node n2 = nodes.get(index2);
 
-        if (!n1.getNeighbours().contains(n2) && canConnect(n1, n2)) {
+
+        if (n1.notConnectedWith(n2) && canConnect(n1, n2)) {
             n1.connect(n2);
             n2.connect(n1);
             return true;
@@ -108,4 +109,5 @@ public class Graph {
         for (Node n : nodes) dot += n.toDot();
         return dot + "}";
     }
+
 }

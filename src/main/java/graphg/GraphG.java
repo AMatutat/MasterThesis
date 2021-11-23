@@ -1,7 +1,13 @@
 package graphg;
 
+import com.google.gson.Gson;
+
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * @author Andre Matutat
@@ -37,6 +43,8 @@ public class GraphG {
         trees = calculateTrees(trees, nodes - 2);
         List<Graph> solutions = calculateGraphs(trees, edges);
         if (solutions.isEmpty()) throw new NoSolutionException("No solution found"); //??
+
+        solutions.forEach(s->System.out.println(s.toDot()));
         return solutions;
     }
 
@@ -70,5 +78,28 @@ public class GraphG {
                     }
             return calculateGraphs(newGraphs, edgesLeft - 1);
         }
+    }
+
+    public Graph getGraph(int nodes, int edges) {
+        String path = nodes + "_" + edges + ".json";
+        List<Graph> sol = readFromJson(path);
+        return sol.get(new Random().nextInt(sol.size()));
+    }
+
+    public void writeToJSON(List<Graph> graphs, String path) {
+        Gson gson = new Gson();
+        String json = gson.toJson(graphs);
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(path));
+            writer.write(json);
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println(json);
+        }
+    }
+
+    public List<Graph> readFromJson(String path) {
+        return null;
     }
 }
