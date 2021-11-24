@@ -44,54 +44,54 @@ Im Folgenden werden die konkreten Aufgaben und Konzepte zur Umsetzung der einzel
     - durch einhalten des theorem
 
   - Anzahl der Knoten und Kanten soll teilweise bestimmbar sein
-  - Knoten solle gelabelt werden können
   - ausgabe nach dot zur visualisierung und abspeicherung
-
 - Konzept:
 
-  - Class Edge:
+  - GraphG bekommt Die gewünschte Anzahl der Knoten n und die gewünschet Anzahl an Extra kanten e(was ist das) übergeben
+  - Prüfen der eingaben ob gültig und ob e<=3n-6 hält
+  - GraphG erzeugt alle möglichen Trees aus der Knotenanzahl n die das Theorem einhalten
 
-    - gibt die verbindungen an
-    - warum eigene Klasse für die Kanten und nicht einfach eine Liste Nachbarn <Knoten> in Class Knoten
-    - Hashvalue: WAIT theortisch könnte die SUmme beider Hashwerte ja nochmal auftreten. Idee also okay aber anders berechnen
-  - Class Knoten
+    - wie?
+  - Jetzt müssen die Kanten eingezeichnet werden
+  - Jede möglichkeit eine Kante im Tree einzuzeichen die das Theorem hält wird mithilfe einer Kopie des Trees umgesetzt. Das sind jetzt Graphen. 
+  - Dieses verfahren wird so oft rekursiv ausgeführt bis die gewünschte anzahl an kanten eingezeichnet wird
+  - Am ende kommt eine Liste mit allen möglichen Graphen die n Knoten mit e Extrakanten haben und das Theorem halten. 
+  - von hier aus kann in zwei richtungen weitergearbeitet werden
+  - entweder aus der Liste einen zufälligen Graphen picken und damit arbeiten
+  - Die liste in einer json speichern
 
-    - name des Knoten
+    - dann gibt es eine funktion welche die json einliest und daraus dann zufällig einen Graphen zurückgibt mit n Kanten und e Edges
+- UMLs
+- GraphG
 
-    - anzahl der Nachbarn
-  - Graph
-    - Bekommt die Parameter übergeben
-    - Erzeugt die Knoten
-    - ConnectUnconnected
-      - 1. Nimm die erten beiden Knoten und verbinde diese
-        2. Nimm einen unverbunden Knoten und verbinde ihn mit einen zufälligen bereits verbunden Knoten
-           1. achte darauf, dass nicht zuviele Knoten mit zuvielen Kanten erzeugt werden (Liste führen)
-        3. repeat
-    - addExtraEdges
-      - solange noch edges erstellt werden sollen
-        - nimm zwei zufällige Knoten
-        - prüfe ob die Knoten gleich sein
-          - ja: nächster durchlauf
-          - nein: weiter
-        - prüfe ob die Knoten bereits verbunden sind:
-          - ja: nächter durchlauf
-          - nein: weiter
-        - prüfe ob das Theorem hält, wenn die Knoten verbunden werden
-          - Prüfe für beide Knoten
-            - würde eine weitere Verbindung die Anzahl der Nachbarn über den Schwellwert bringen?
-              - nein: verbinde
-              - ja: ist der Knoten bereits in der Liste?
-                - ja: verbinde
-                - nein: wäre die Liste überfüllt wenn er hinzugefügt wird:
-                  - ja: nächster durchlauf
-                  - nein: müsste der nächste Knoten auch in die Liste hinzugefügt werden 
-                    - ja: wäre die liste dann überfüllt?
-                      - ja: nächster durchlauf
-                      - nein: verbinden 
-                    - nein: verbinde
+  - generateGraph(nodes: int, edges: int): List<Graph> 
+  - calculateTree(trees: List<Graph>,nodesLeft: int): List<Graph>
+  - calculateGraph(graphs:List<Graph>,edgesLeft:int): List<Graph>
+  - getGraph(nodes: int, edges:int): Graph
+  - writeToJson(graphs: List<Graph>, path:String)
+  - readFromJson(String path): List<Graph> 
+- Graph
 
-  ​    
+  - nodes: List<Node> 
 
+  - Graph(nodes: List<nodes>) //copy
+
+  - copy(): Graph
+
+  - connectNewNode(index: int): boolean
+
+  - connectNodes(index1:int, index2:int): boolean
+
+  - toDot():String
+- Node
+  - neighbours List<Integer> 
+  - index:int
+  - connect(n: Node): void
+  - copy():Node
+  - setIndex(index:int):void
+  - getIndex():int
+  - getNeighbours(): List <Integer> 
+  - toDot()String
 ### RoomG
 
 ### LevelG
