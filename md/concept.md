@@ -60,38 +60,12 @@ Im Folgenden werden die konkreten Aufgaben und Konzepte zur Umsetzung der einzel
   - entweder aus der Liste einen zufälligen Graphen picken und damit arbeiten
   - Die liste in einer json speichern
 
-    - dann gibt es eine funktion welche die json einliest und daraus dann zufällig einen Graphen zurückgibt mit n Kanten und e Edges
-- UMLs
-- GraphG
+    - dann gibt es eine funktion welche die json einliest und daraus dann zufällig einen Graphen zurückgibt mit n Kanten und e Edge
 
-  - generateGraph(nodes: int, edges: int): List<Graph> 
-  - calculateTree(trees: List<Graph>,nodesLeft: int): List<Graph>
-  - calculateGraph(graphs:List<Graph>,edgesLeft:int): List<Graph>
-  - getGraph(nodes: int, edges:int): Graph
-  - writeToJson(graphs: List<Graph>, path:String)
-  - readFromJson(String path): List<Graph> 
-- Graph
+![UML-Klassendiagramm für GraphG mit den wichtigsten Methoden. \label{graphgUML](figs/chapter4/graphgUML.png)
 
-  - nodes: List<Node> 
+![UML-Sequenzdiagramm für GraphG ohne Einblick in die Rekursiven Methoden. \label{graphgSeq](figs/chapter4/graphgSeq.png)
 
-  - Graph(nodes: List<nodes>) //copy
-
-  - copy(): Graph
-
-  - connectNewNode(index: int): boolean
-
-  - connectNodes(index1:int, index2:int): boolean
-
-  - toDot():String
-- Node
-  - neighbours List<Integer> 
-  - index:int
-  - connect(n: Node): void
-  - copy():Node
-  - setIndex(index:int):void
-  - getIndex():int
-  - getNeighbours(): List <Integer> 
-  - toDot()String
 ### RoomG
 
 ### LevelG
