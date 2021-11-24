@@ -24,10 +24,10 @@ geschätzer umfang ca 20%
 
 - Heap Error erklären, mögliche fixex präsentieren, begründen warum diese nicht ugesetzt wurden und erklären wie der fix vorgenommen wurde
 
-![Von GraphG erzeugter Graph mit 7 Knoten und 3 Extrakanten \label{ex1}](figs/chapter4/graphgsol/example1.png)
-![Von GraphG erzeugter Graph mit 7 Knoten und 3 Extrakanten \label{ex1}](figs/chapter4/graphgsol/example2.png)
-![Von GraphG erzeugter Graph mit 7 Knoten und 3 Extrakanten \label{ex1}](figs/chapter4/graphgsol/example3.png)
-![Von GraphG erzeugter Graph mit 7 Knoten und 3 Extrakanten \label{ex1}](figs/chapter4/graphgsol/example4.png)
+![Von GraphG erzeugter Graph mit 7 Knoten und 3 Extrakanten \label{ex1}](figs/chapter4/graphgsol/example1.PNG)
+![Von GraphG erzeugter Graph mit 7 Knoten und 3 Extrakanten \label{ex2}](figs/chapter4/graphgsol/example2.PNG)
+![Von GraphG erzeugter Graph mit 7 Knoten und 3 Extrakanten \label{ex3}](figs/chapter4/graphgsol/example3.PNG)
+![Von GraphG erzeugter Graph mit 7 Knoten und 3 Extrakanten \label{ex4}](figs/chapter4/graphgsol/example4.PNG)
 
 
 ## Umsetzung RoomG
