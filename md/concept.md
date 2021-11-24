@@ -48,7 +48,7 @@ Im Folgenden werden die konkreten Aufgaben und Konzepte zur Umsetzung der einzel
 - Konzept:
 
   - GraphG bekommt Die gewünschte Anzahl der Knoten n und die gewünschet Anzahl an Extra kanten e(was ist das) übergeben
-  - Prüfen der eingaben ob gültig und ob e<=3n-6 hält
+  - Prüfen der eingaben ob gültig und ob e<=3n-6 hält ToDo Quelle dafür raussuchen
   - GraphG erzeugt alle möglichen Trees aus der Knotenanzahl n die das Theorem einhalten
 
     - wie?
@@ -61,10 +61,12 @@ Im Folgenden werden die konkreten Aufgaben und Konzepte zur Umsetzung der einzel
   - Die liste in einer json speichern
 
     - dann gibt es eine funktion welche die json einliest und daraus dann zufällig einen Graphen zurückgibt mit n Kanten und e Edge
+  - UML Klassendiagramm erklären
+  - Sequenzdiagramm(e) erklären
 
-![UML-Klassendiagramm für GraphG mit den wichtigsten Methoden. \label{graphgUML](figs/chapter4/graphgUML.png)
+![UML-Klassendiagramm für GraphG mit den wichtigsten Methoden. \label{graphgUML\](figs/chapter4/graphgUML.png)
 
-![UML-Sequenzdiagramm für GraphG ohne Einblick in die Rekursiven Methoden. \label{graphgSeq](figs/chapter4/graphgSeq.png)
+![UML-Sequenzdiagramm für GraphG ohne Einblick in die Rekursiven Methoden. \label{graphgSeq}](figs/chapter4/graphgSeq.png)
 
 ### RoomG
 

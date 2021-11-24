@@ -18,14 +18,17 @@ geschätzer umfang ca 20%
 ## Umsetzung GraphG
 
 - Interessante Codezeilen
-
-  - can be connected?
   - rekursive aufrufe
-  - copy
-  - Alles wo ein Fehlergeworfen wird weil die generierung so nicht geht? 
+  - can be connected?
+  - copy  
 
 - Heap Error erklären, mögliche fixex präsentieren, begründen warum diese nicht ugesetzt wurden und erklären wie der fix vorgenommen wurde
-- beispielgraphen zeigen (ohne bewertung)
+
+![Von GraphG erzeugter Graph mit 7 Knoten und 3 Extrakanten \label{ex1}](figs/chapter4/graphgsol/example1.png)
+![Von GraphG erzeugter Graph mit 7 Knoten und 3 Extrakanten \label{ex1}](figs/chapter4/graphgsol/example2.png)
+![Von GraphG erzeugter Graph mit 7 Knoten und 3 Extrakanten \label{ex1}](figs/chapter4/graphgsol/example3.png)
+![Von GraphG erzeugter Graph mit 7 Knoten und 3 Extrakanten \label{ex1}](figs/chapter4/graphgsol/example4.png)
+
 
 ## Umsetzung RoomG
 
