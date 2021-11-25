@@ -29,7 +29,7 @@ In diesem Kapitel wird ein eigenes Konzept zur Implementierung eines prozedurale
 
 ## Darstellung des Konzeptes
 
-Der Dungeongenerator *DungeonG* wird mithilfe der im vorherigen Kapitel vorgestellten Algorithmen umgesetzt und besteht im Wesentlichen aus drei Bausteinen.
+Der Dungeongenerator **DungeonG** wird mithilfe der im vorherigen Kapitel vorgestellten Algorithmen umgesetzt und besteht im Wesentlichen aus drei Bausteinen.
 Baustein eins ist der Graphgenerator **GraphG**, welcher einen planaren Graphen generiert.
 Baustein zwei ist der Raumgenerator **RoomG**, welcher verschiedene Räume aus vorgegebenen Templates erzeugt. 
 Baustein drei ist der Levelgenerator **LevelG**, welcher den von GraphG erzeugten Graphen nimmt und diesen mithilfe der Räume von RoomG in ein spielbares Level verwandelt. 
@@ -38,35 +38,53 @@ Im Folgenden werden die konkreten Aufgaben und Konzepte zur Umsetzung der einzel
 
 ### GraphG
 
-- Aufgaben und Anforderungen: 
+GraphG erzeugt planare Graphen. Dabei soll die Anzahl der Knoten und Kanten beim Aufruf bestimmbar sein. Um eine vom PM-Dungeon unabhängige Visualisierungmöglichkeit zu haben, soll der Graph in *DOT* (add Footnote) Formatierung exportierbar sein. 
 
-  - Planaren graphen Generieren
-    - durch einhalten des theorem
+Um sicherzustellen, dass die erzeugten Graphen planar sind, beachtet GraphG den Satz von Kuratowski und verhindert die Generierung von $K5$ und $K3,3$ Teilgraphen indem bei der Generierung maximal vier Knoten mit drei oder mehr Nachbarn erzeugt werden.
 
-  - Anzahl der Knoten und Kanten soll teilweise bestimmbar sein
-  - ausgabe nach dot zur visualisierung und abspeicherung
-- Konzept:
+Abbildung \ref{graphSeq} zeigt ein reduziertes Sequenzdiagramm zur Darstellung des grundlegenden Ablaufes von GraphG. Beim Aufruf von `GraphG#generateGraphs` wird die gewünschte Anzahl an Knoten und extra Kanten übergeben. Da GraphG nur Graphen erzeugt in dem jeder Knoten verbunden ist, ergibt sich $Kantenanzahl=Knotenanzahl-1+Anzahl extra Kanten$. Dies liegt daran, dass die generierung von GraphG zweigeteilt ist. Im ersten Teil `GraphG#calculateTrees` werden alle gültigen\footnote{ Ein Baum bzw. Graph ist genau dann gültig, wenn er maximal vier Knoten mit mehr als drei oder mehr Nachbarn hat.} Bäume mit der gewünschten Anzahl der Knoten erzeugt, auf die genauere funktionsweise von `GraphG#calculateTrees` wird weiter unten eingegangen. Jeder Erzeugter Baum hat $Knotenanzahl-1$ Kanten. Im zweiten Teil wird aus jeden Baum jeder gültiger Graphen erzeugt indem in `GraphG#calculateGraphs` die extra Kanten in die Bäume eingezeichnet werden, auf die genauere Funktionsweise von `GraphG#calculateGraphs` wird weiter unten eingegangen. Am Ende wird eine Liste mit allen gültigen Graphen mit der gewünschten Knoten und Kanten Anzahl übergeben. 
 
-  - GraphG bekommt Die gewünschte Anzahl der Knoten n und die gewünschet Anzahl an Extra kanten e(was ist das) übergeben
-  - Prüfen der eingaben ob gültig und ob e<=3n-6 hält ToDo Quelle dafür raussuchen
-  - GraphG erzeugt alle möglichen Trees aus der Knotenanzahl n die das Theorem einhalten
+![UML-Sequenzdiagramm für GraphG ohne Einblick in die Rekursiven Methoden. \label{graphgSeq}]()
 
-    - wie?
-  - Jetzt müssen die Kanten eingezeichnet werden
-  - Jede möglichkeit eine Kante im Tree einzuzeichen die das Theorem hält wird mithilfe einer Kopie des Trees umgesetzt. Das sind jetzt Graphen. 
-  - Dieses verfahren wird so oft rekursiv ausgeführt bis die gewünschte anzahl an kanten eingezeichnet wird
-  - Am ende kommt eine Liste mit allen möglichen Graphen die n Knoten mit e Extrakanten haben und das Theorem halten. 
-  - von hier aus kann in zwei richtungen weitergearbeitet werden
-  - entweder aus der Liste einen zufälligen Graphen picken und damit arbeiten
-  - Die liste in einer json speichern
+GraphG generiert die Graphen daher nicht per Zufall, sondern verwendet Breitensuche um alle gültigen Lösungen zu finden. Im vergleich zur Zufalls Suchen hat dies den Vorteil, das sichergesellt werden kann das alle gültigen Lösungen generiert werden und der Rechen- Speicheraufwand für gleiche Parameterkombination konstant bleibt. Die Zufallssuche kann zwar in der Theorie schneller eine gültige Lösung finden, dies kann aber nicht sichergestellt werden. Im Rahmen dieser Arbeit wurden auch mit der Zufallssuche experimentiert. Im Anhang **TODO** kann eine Tabelle mit Messdaten eingesehen werden. Es hat sich herausgestellt, dass die Zufallssuche zwar in Suchräumen mit vielen Lösungen schnell eine solche finden kann jedoch in Suchräumen mit wenigen Lösungen nur sehr langsam eine Lösung findet. Daher eignet sich die Zufallssuche nicht für den Anwendungsfall PM-Dungeon. 
 
-    - dann gibt es eine funktion welche die json einliest und daraus dann zufällig einen Graphen zurückgibt mit n Kanten und e Edge
-  - UML Klassendiagramm erklären
-  - Sequenzdiagramm(e) erklären
+Da GraphG alle Lösungen für eine Parameterkombination findet, können diese abgespeichert werden und können beim nächsten Aufruf ohne Suche verwendet werden. GraphG speichert alle gefundenen Lösungen für eine Parameterkombination in einer JSON Datei ab und mithilfe von `GraphG#getGraph(int knoten, int edges)` kann ein zufälliger, vorher gefundener, Graph aus der JSON abgefragt werden. Dieses vorgehen sparrt vorallem Rechenleistung welche im laufenden Spiel unter umständen benötigt wird, setzt aber die JSON-Dateien voraus. Da GraphG beides ermöglicht, können die studierende ihr bevorzugtes verfahren werden. 
 
-![UML-Klassendiagramm für GraphG mit den wichtigsten Methoden. \label{graphgUML\](figs/chapter4/graphgUML.png)
+Für planare zusammenhängende Graphen gilt zusätzlich $e<=3v-6$ wobei $e$ die Anazahl der Kanten und $v$ die Anzahl der Knoten angibt. **TODO QUELLE** Dieser Satz erlaubt es, einige Parameterkombination bereits vor der Suche als unlösbar zu klassifizieren. GraphG führt daher keine Suche für Parameterkombinationen durch für die diese Bedingung nicht hält. 
 
-![UML-Sequenzdiagramm für GraphG ohne Einblick in die Rekursiven Methoden. \label{graphgSeq}](figs/chapter4/graphgSeq.png)
+Codesnippet **TODO** zeigt die Methonde `GraphG#calculateTrees` welche mithilfe von Rekursion alle gültigen Bäume erzeugt. Der Methode bekommt initial eine Liste mit einem Graphen, der aus zwei miteinander verbundene Knoten besteht, sowie die Anzahl der noch hinzuzufügenden Knoten übergeben. Für jeden durchlauf wird eine neue Liste erstellt, in dieser Liste werden alle gültigen Bäume abgespeichert, die in diesem durchlauf gefunden werden. Für die Suche wird über jeden Graphen in der übergebenen Liste iteriert. Dann wird über jeden Knoten im Graphen iteriert. Für jeden betrachteten Knoten im Graphen wird eine Kopie des Graphen erstellt und dann geschaut ob in der Kopie des Graphen an der Kopie des betrachteten Knoten ein neuer Knoten hinzugefügt werden kann. Ist dies der fall, wird der Knoten hinzugefügt und verbunden und die Kopie des Graphen in der neune Liste hinzugefügt. Dies wird wiederholt, bis jede möglickeit einen neuen Knoten im Graphen anzubinden für jeden Graphen betachtet wurde. Dannach ruft sich die Methode rekursiv selbst auf und üvergibt die neue Liste und redutiert den noch hinzufzufügenden Knotencounter um 1. Müssen keine Knoten mehr hinzugefügt werden, gibt die Methode die Liste mit allen gültigen Bäumen zurück. 
+
+```python
+List<Graph> calculateTrees(List<Graph> trees, int nodesLeft){
+    if(nodesLeft<=0) return trees;
+    List<Graph> newTrees = new ArrayList<>();
+    for each Graph tree in trees:
+    	for each Node n in tree.getNodes():
+    		Graph newTree= tree.copy();
+    		if neuer Node kann an n angebunden werden:
+    			verbinde n mit einen neuen Node in newTree
+    			newTrees.add(newTree);
+    return calculateTrees(newTrees,nodesLeft-1);
+}
+```
+
+Codesnippet **TODO** zeigt die Methode `GraphG#calculateGraphs` welche ähnliche wie die Methode `GraphG#calculateTrees` funkitoniert. Diese Methode bekommt initial eine Liste mit gültigen Bäumen sowie der Anzahl der noch hinzuzufügenden Kanten übergeben. Es wird wieder eine Liste für die neuen Graphen angelegt und über alle Graphen in der übergebenen Liste itteriert. Dieses mal wierd ebenfalls über jeden Knoten im Graphen itteriert jedoch findet eine verschachtelte Itteration statt, in der für jeden Knoten im Graphen über jeden Knoten im Graphen itteriert wird. Dies wird getan, damit die verschiedenen Knoten im Graphen miteinander verbunden werden können. Es wird jede möglichkeit eine Kante einzuzeichnen betrachtet und wenn dabei eine gültige Lösung gefunde wurde, wird diese in der neuen Liste gespeichert. Dannach ruft sich die Methode rekursiv selbst auf und übergibt die neue Liste mit den gefundenen Lösungen und reduziert die Anzahl der noch hinzuzufügfenden Kanten um 1. Sind alle Kanten hinzugefügt gibt die Methode die Liste mit allen Lösungen zurück. In der Liste stehen jetzt alle gültigen Graphen für die übergebene Parameterkombination aus Knoten und extra Kanten. 
+
+```java
+List<Graph> calculateGraphs(List<Graph> graphs, int edgesLeft){
+    if(edgesLeft<=0) return graphs;
+    List<Graph> newGraphs = new ArrayList<>();
+    for each Graph graph in graphs:
+    	for each Node n1 in graph.getNodes():
+    		for each Node n2 in graph.getNodes():
+    			Graph newGraph= graph.copy();
+    			if neuer Node kann an n angebunden werden:
+    				verbind n1 mit n2 in newGraph    							newGraphs.add(newGraph);
+    return calculateGraphs(newGraphs,edgesLeft-1);
+}
+```
+
+
 
 ### RoomG
 

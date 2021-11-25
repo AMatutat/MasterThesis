@@ -21,8 +21,9 @@ geschätzer umfang ca 20%
   - rekursive aufrufe
   - can be connected?
   - copy  
-
 - Heap Error erklären, mögliche fixex präsentieren, begründen warum diese nicht ugesetzt wurden und erklären wie der fix vorgenommen wurde
+
+![UML-Klassendiagramm für GraphG mit den wichtigsten Methoden. \label{graphgUML\](figs/chapter4/graphgUML.png)
 
 ![Von GraphG erzeugter Graph mit 7 Knoten und 3 Extrakanten \label{ex1}](figs/chapter4/graphgsol/example1.PNG)
 ![Von GraphG erzeugter Graph mit 7 Knoten und 3 Extrakanten \label{ex2}](figs/chapter4/graphgsol/example2.PNG)
