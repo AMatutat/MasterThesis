@@ -369,4 +369,51 @@
   year    = {2018},
 }
 
+@Online{Nepozitek2019,
+  author  = {Ondřej Nepožitek},
+  title   = {Dungeon Generator (Part 2) – Implementation},
+  url     = {https://ondra.nepozitek.cz/blog/238/dungeon-generator-part-2-implementation/},
+  urldate = {2021-09-29},
+  year    = {2019},
+}
+
+@Online{Brinkmann,
+  author  = {Gunnar Brinkmann and Brendan D. McKay},
+  title   = {Fast generation of planar graphs(expanded version)},
+  url     = {https://users.cecs.anu.edu.au/~bdm/papers/plantri-full.pdf},
+  urldate = {2021-10-18},
+}
+
+@Online{wikipedia2021,
+  author  = {wikipedia},
+  title   = {Satz von Kuratowski},
+  url     = {https://de.wikipedia.org/wiki/Satz_von_Kuratowski},
+  urldate = {2021-10-18},
+  year    = {2021},
+}
+
+@Online{wikipedia2016,
+  author  = {wikipedia},
+  title   = {Unterteilungsgraph},
+  url     = {https://de.wikipedia.org/wiki/Unterteilungsgraph},
+  urldate = {2021-10-19},
+  year    = {2016},
+}
+
+@Book{Diestel2010,
+  author = {Reinhard Diestel},
+  date   = {2010},
+  title  = {Graphentheorie},
+  isbn   = {978-3-642-14911-5},
+  pages  = {354},
+}
+
+@Article{Cook1971,
+  author       = {Stepehn A. Cook},
+  date         = {1971-05-03},
+  journaltitle = {STOC '71: Proceedings of the third annual ACM symposium on Theory of computing},
+  title        = {The complexity of theorem-proving procedures},
+  doi          = {10.1145/800157.805047},
+}
+
 @Comment{jabref-meta: databaseType:biblatex;}
