@@ -60,7 +60,7 @@ List<Graph> calculateTrees(List<Graph> trees, int nodesLeft){
     List<Graph> newTrees = new ArrayList<>();
     for each Graph tree in trees:
     	for each Node n in tree.getNodes():
-    		Graph newTree= tree.copy();
+    		Graph newTree= newTree(tree);
     		if neuer Node kann an n angebunden werden:
     			verbinde n mit einen neuen Node in newTree
     			newTrees.add(newTree);
@@ -77,7 +77,7 @@ List<Graph> calculateGraphs(List<Graph> graphs, int edgesLeft){
     for each Graph graph in graphs:
     	for each Node n1 in graph.getNodes():
     		for each Node n2 in graph.getNodes():
-    			Graph newGraph= graph.copy();
+    			Graph newGraph= new Graph(graph);
     			if neuer Node kann an n angebunden werden:
     				verbind n1 mit n2 in newGraph    							newGraphs.add(newGraph);
     return calculateGraphs(newGraphs,edgesLeft-1);

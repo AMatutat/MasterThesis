@@ -24,22 +24,18 @@ Abbildung \ref{graphgUML} zeigt ein reduziertes UML-Klassendiagramm für den Auf
 
 \begin{lstlisting}[language=python, label=copy, caption={Kopieren von Graphen und Kanten.}  ]
 //in Graph
-Graph copy(){
-    List<Node> nodesCopy = new ArrayList<>();
-        nodes.forEach(n -> nodesCopy.add(n.copy()));
-        for (Node n : nodes) {
+Graph (Graph g){
+        g.getNodes().forEach(n -> nodes.add(new Node(n)));
+        for (Node n : g.getNodes()) {
             for (Integer nb : n.getNeighbours()) {
-                Node n1 = nodesCopy.get(n.getIndex());
-                n1.connect(nodesCopy.get(nb));
+                Node n1 = nodes.get(n.getIndex());
+                n1.connect(nodes.get(nb));
             }
         }
-        return new Graph(nodesCopy);
 }
 //in Node
-Node copy(){
-    Node copy = new Node();
-        copy.setIndex(getIndex());
-        return copy;
+Node (Node n){
+   setIndex(n.getIndex());
 }
 \end{lstlisting}
 
@@ -82,7 +78,7 @@ Listing \ref{trees} zeigt die Methode `GraphG#calculateTrees`. Die Funktionsweis
             List<Graph> newTrees = new ArrayList<>();
             for (Graph t : trees)
                 for (Node n : t.getNodes()) {
-                    Graph newTree = t.copy();
+                    Graph newTree = new Graph(tree);
                     if (newTree.connectNewNode(n.getIndex())) newTrees.add(newTree);
                 }
             return calculateTrees(newTrees, nodesLeft - 1);
@@ -100,7 +96,7 @@ Listing \ref{graphs} zeigt die Funktionsweise der Methode `GraphG#calculateGraph
             for (Graph g : graphs)
                 for (Node n1 : g.getNodes())
                     for (Node n2 : g.getNodes()) {
-                        Graph newGraph = g.copy();
+                        Graph newGraph = new Graph(g);
                         if (n1.getIndex() != n2.getIndex()
                                 && newGraph.connectNodes(n1.getIndex(), n2.getIndex())) {
                             newGraphs.add(newGraph);
