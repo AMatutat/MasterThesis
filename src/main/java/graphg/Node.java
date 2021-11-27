@@ -3,10 +3,25 @@ package graphg;
 import java.util.ArrayList;
 import java.util.List;
 
-/** @author Andre Matutat */
+/**
+ * @author Andre Matutat
+ */
 public class Node {
     private List<Integer> neighbours = new ArrayList<>();
     private int index;
+
+    public Node (int index){
+        this.index=index;
+    }
+
+    /**
+     * only copys index not the neighbour list
+     *
+     * @return
+     */
+    public Node(Node n) {
+        this.setIndex(n.getIndex());
+    }
 
     /**
      * Add this node as neighbour
@@ -22,16 +37,7 @@ public class Node {
         else return false;
     }
 
-    /**
-     * only copys index not the neighbour list
-     *
-     * @return
-     */
-    public Node copy() {
-        Node copy = new Node();
-        copy.setIndex(getIndex());
-        return copy;
-    }
+
 
     public List<Integer> getNeighbours() {
         return neighbours;

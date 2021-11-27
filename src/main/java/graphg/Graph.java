@@ -3,40 +3,39 @@ package graphg;
 import java.util.ArrayList;
 import java.util.List;
 
-/** @author Andre Matutat */
+/**
+ * @author Andre Matutat
+ */
 public class Graph {
 
     private List<Node> nodes = new ArrayList<>();
     private final int MAX_NODES = 4;
     private final int MAX_NEIGHBOURS = 2;
 
-    /** Create a Graph with two connected nodes. */
+    /**
+     * Create a Graph with two connected nodes.
+     */
     public Graph() {
-        Node n1 = new Node();
-        Node n2 = new Node();
+        Node n1 = new Node(0);
+        Node n2 = new Node(1);
         nodes.add(n1);
-        n1.setIndex(0);
         nodes.add(n2);
-        n2.setIndex(1);
         n1.connect(n2);
         n2.connect(n1);
     }
 
-    public Graph(List<Node> nodes) {
-        this.nodes = nodes;
-    }
-
-    public Graph copy() {
-        List<Node> nodesCopy = new ArrayList<>();
-        nodes.forEach(n -> nodesCopy.add(n.copy()));
-
-        for (Node n : nodes) {
+    public Graph(Graph g) {
+        g.getNodes().forEach(n -> nodes.add(new Node(n)));
+        for (Node n : g.getNodes()) {
             for (Integer nb : n.getNeighbours()) {
-                Node n1 = nodesCopy.get(n.getIndex());
-                n1.connect(nodesCopy.get(nb));
+                Node n1 = nodes.get(n.getIndex());
+                n1.connect(nodes.get(nb));
             }
         }
-        return new Graph(nodesCopy);
+    }
+
+    public Graph(List<Node> nodes) {
+        this.nodes = nodes;
     }
 
     /**
@@ -48,9 +47,8 @@ public class Graph {
     public boolean connectNewNode(int index) {
         Node n = nodes.get(index);
         if (canConnect(n)) {
-            Node n2 = new Node();
+            Node n2 = new Node(nodes.size());
             nodes.add(n2);
-            n2.setIndex(nodes.size() - 1);
             n2.connect(n);
             n.connect(n2);
             return true;
