@@ -34,10 +34,6 @@ public class Graph {
         }
     }
 
-    public Graph(List<Node> nodes) {
-        this.nodes = nodes;
-    }
-
     /**
      * Try to connect a existing node with a new node
      *
