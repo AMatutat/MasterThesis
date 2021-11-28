@@ -25,9 +25,15 @@ public class ReplacementLoader {
         return results;
     }
 
-    //ToDo
     private Replacement rotate90(Replacement r) {
-        return new Replacement(r.getLayout(),r.getRotate(),r.getDesign());
+        int[][] originalLayout = r.getLayout();
+        int mSize = originalLayout.length;
+        int nSize = originalLayout[0].length;
+        int[][] rotatedLayout = new int[nSize][mSize];
+        for (int row = 0; row < mSize; row++)
+            for (int col = 0; col < nSize; col++)
+                rotatedLayout[col][mSize - 1 - row] = originalLayout[row][col];
+        return new Replacement(rotatedLayout, r.getRotate(), r.getDesign());
     }
 
     private void readInReplacements(String path) throws FileNotFoundException {
@@ -48,6 +54,11 @@ public class ReplacementLoader {
                 replacements.add(tmp);
             }
         }
+    }
+
+    //ToDo
+    public void writeReplacement(String path){
+
     }
 
 
