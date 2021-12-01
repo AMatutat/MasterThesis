@@ -6,22 +6,23 @@ import java.util.List;
 
 public class Room {
 
-    private int [][] layout;
+    private int[][] layout;
     private DesignLabel design;
+    //private transient String test="NOT IN JSON";
 
 
-    public Room (int[][]layout, DesignLabel label){
-        this.layout=layout;
-        this.design=label;
+    public Room(int[][] layout, DesignLabel label) {
+        this.layout = layout;
+        this.design = label;
     }
 
-    public Room (Room r){
-        this.layout=r.getLayout();
-        this.design=r.getDesign();
+    public Room(Room r) {
+        this.layout = r.getLayout();
+        this.design = r.getDesign();
     }
 
     //ToDo
-    public void replace(List<Replacement> replacements){
+    public void replace(List<Replacement> replacements) {
 
     }
 
@@ -32,4 +33,5 @@ public class Room {
     public DesignLabel getDesign() {
         return design;
     }
+
 }
