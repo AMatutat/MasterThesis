@@ -10,8 +10,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-/** @author Andre Matutat */
+/**
+ * @author Andre Matutat
+ */
 public class GraphG {
+    public Graph getGraph(int nodes, int edges) throws FileNotFoundException {
+        String path = nodes + "_" + edges + ".json";
+        List<Graph> sol = null;
+        sol = readFromJson(path);
+        return sol.get(new Random().nextInt(sol.size()));
+    }
 
     /**
      * Calculate a list of planar graphs. Generate all possible trees and then draw extra edges.
@@ -77,11 +85,12 @@ public class GraphG {
         }
     }
 
-    public Graph getGraph(int nodes, int edges) throws FileNotFoundException {
-        String path = nodes + "_" + edges + ".json";
-        List<Graph> sol = null;
-        sol = readFromJson(path);
-        return sol.get(new Random().nextInt(sol.size()));
+
+    public List<Graph> readFromJson(String path) throws FileNotFoundException {
+        Type graphType = new TypeToken<ArrayList<Graph>>() {
+        }.getType();
+        JsonReader reader = new JsonReader(new FileReader(path));
+        return new Gson().fromJson(reader, graphType);
     }
 
     public void writeToJSON(List<Graph> graphs, String path) throws IOException {
@@ -92,9 +101,5 @@ public class GraphG {
         writer.close();
     }
 
-    public List<Graph> readFromJson(String path) throws FileNotFoundException {
-        Type graphType = new TypeToken<ArrayList<Graph>>() {}.getType();
-        JsonReader reader = new JsonReader(new FileReader(path));
-        return new Gson().fromJson(reader, graphType);
-    }
+
 }

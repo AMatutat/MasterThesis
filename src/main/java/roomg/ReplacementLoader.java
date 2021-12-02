@@ -34,8 +34,13 @@ public class ReplacementLoader {
         return new Replacement(rotatedLayout, r.canRotate(), r.getDesign());
     }
 
+    public void addReplacement(Replacement r) {
+        if (!replacements.contains(r)) replacements.add(r);
+    }
+
     private void readFromJson(String path) {
-        Type replacementType = new TypeToken<ArrayList<Replacement>>() {}.getType();
+        Type replacementType = new TypeToken<ArrayList<Replacement>>() {
+        }.getType();
         JsonReader reader = null;
         try {
             reader = new JsonReader(new FileReader(path));
@@ -64,10 +69,6 @@ public class ReplacementLoader {
         }
     }
 
-    public void addReplacement(Replacement r) {
-        if (!replacements.contains(r)) replacements.add(r);
-    }
-
     public void writeToJSON(List<Replacement> rep, String path) {
         Gson gson = new Gson();
         String json = gson.toJson(rep);
@@ -80,21 +81,4 @@ public class ReplacementLoader {
         }
     }
 
-    // ToDo remove
-    public static void createTemplates() {
-        int xs = 4;
-        int ys = 4;
-        boolean rotate = false;
-        int[][] squarelay = new int[xs][ys];
-        for (int y = 0; y < ys; y++)
-            for (int x = 0; x < xs; x++) {
-                squarelay[x][y] = LevelElement.FLOOR.getValue();
-            }
-
-        String path = "./replacementLayouts/replacements.json";
-        Replacement square = new Replacement(squarelay, rotate, DesignLabel.DEFAULT);
-        ReplacementLoader rl = new ReplacementLoader(path);
-        rl.addReplacement(square);
-        rl.writeToJSON(rl.getReplacements(DesignLabel.ALL), path);
-    }
 }

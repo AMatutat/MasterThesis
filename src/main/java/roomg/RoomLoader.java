@@ -23,8 +23,13 @@ public class RoomLoader {
         return results;
     }
 
+    public void addRoomTemplate(Room r) {
+        if (!roomTemplates.contains(r)) roomTemplates.add(r);
+    }
+
     private void readFromJson(String path) {
-        Type roomType = new TypeToken<ArrayList<Room>>() {}.getType();
+        Type roomType = new TypeToken<ArrayList<Room>>() {
+        }.getType();
         JsonReader reader = null;
         try {
             reader = new JsonReader(new FileReader(path));
@@ -40,10 +45,6 @@ public class RoomLoader {
         }
     }
 
-    public void addRoomTemplate(Room r) {
-        if (!roomTemplates.contains(r)) roomTemplates.add(r);
-    }
-
     public void writeToJSON(List<Room> rooms, String path) {
         Gson gson = new Gson();
         String json = gson.toJson(rooms);
@@ -57,22 +58,4 @@ public class RoomLoader {
         }
     }
 
-    // ToDo remove
-    public static void createTemplates() {
-        int xs = 10;
-        int ys = 10;
-        int[][] squarelay = new int[xs][ys];
-        for (int y = 0; y < ys; y++)
-            for (int x = 0; x < xs; x++) {
-                if (x == 0 || x == xs - 1 || y == 0 || y == ys - 1)
-                    squarelay[x][y] = LevelElement.WALL.getValue();
-                else squarelay[x][y] = LevelElement.FLOOR.getValue();
-            }
-
-        String path = "./roomLayouts/roomTemplates.json";
-        Room square = new Room(squarelay, DesignLabel.DEFAULT);
-        RoomLoader rl = new RoomLoader(path);
-        rl.addRoomTemplate(square);
-        rl.writeToJSON(rl.getRoomTemplates(DesignLabel.ALL), path);
-    }
 }

@@ -1,7 +1,7 @@
 package stuff;
 
 /**
- * specifies which textures and layouts should be used for the room.
+ * Specifies which textures and layouts should be used for the room.
  *
  * @author Andre Matutat
  */

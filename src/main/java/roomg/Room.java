@@ -1,15 +1,14 @@
 package roomg;
 
 import stuff.DesignLabel;
+import stuff.LevelElement;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Room {
-
     private int[][] layout;
     private DesignLabel design;
-    // private transient String test="NOT IN JSON";
 
     public Room(int[][] layout, DesignLabel label) {
         this.layout = layout;
@@ -21,47 +20,6 @@ public class Room {
         for (int y = 0; y < layout.length; y++)
             for (int x = 0; x < layout[0].length; x++) layout[x][y] = r.getLayout()[x][y];
         design = r.getDesign();
-    }
-
-    /**
-     * Check if a replacement fit in a specific spot on the layout
-     *
-     * @param r the replacement
-     * @param xCor place the left upper corner of the replacement on this x
-     * @param yCor place the left upper corner of the replacement on this y
-     * @return if replacement can be done
-     */
-    private boolean canReplaceIn(final Replacement r, int xCor, int yCor) {
-        int[][] layout = getLayout();
-        int[][] rlayout = r.getLayout();
-        for (int y = yCor; y < yCor + rlayout.length; y++)
-            for (int x = xCor; x < xCor + rlayout[0].length; x++) {
-                if (rlayout[y - yCor][x - xCor] != LevelElement.PLACEHOLDER.getValue()
-                        && layout[y][x] != LevelElement.PLACEHOLDER.getValue()) return false;
-            }
-        return true;
-    }
-
-    /**
-     * Replace a specific spot in the layout
-     *
-     * @param r the replacement
-     * @param xCor place the left upper corner of the replacement on this x
-     * @param yCor place the left upper corner of the replacement on this y
-     * @return if replacement was done
-     */
-    private boolean placeIn(final Replacement r, int xCor, int yCor) {
-        if (!canReplaceIn(r, xCor, yCor)) return false;
-        else {
-            int[][] layout = getLayout();
-            int[][] rlayout = r.getLayout();
-            for (int y = yCor; y < yCor + rlayout.length; y++)
-                for (int x = xCor; x < xCor + rlayout[0].length; x++) {
-                    if (rlayout[y - yCor][x - xCor] != LevelElement.PLACEHOLDER.getValue())
-                        layout[y][x] = rlayout[y - yCor][x - xCor];
-                }
-            return true;
-        }
     }
 
     public void replace(final List<Replacement> replacements) {
@@ -93,6 +51,47 @@ public class Room {
             for (int x = 0; x < layoutWidth; x++)
                 if (getLayout()[y][x] == LevelElement.PLACEHOLDER.getValue())
                     getLayout()[y][x] = LevelElement.FLOOR.getValue();
+    }
+
+    /**
+     * Replace a specific spot in the layout
+     *
+     * @param r    the replacement
+     * @param xCor place the left upper corner of the replacement on this x
+     * @param yCor place the left upper corner of the replacement on this y
+     * @return if replacement was done
+     */
+    private boolean placeIn(final Replacement r, int xCor, int yCor) {
+        if (!canReplaceIn(r, xCor, yCor)) return false;
+        else {
+            int[][] layout = getLayout();
+            int[][] rlayout = r.getLayout();
+            for (int y = yCor; y < yCor + rlayout.length; y++)
+                for (int x = xCor; x < xCor + rlayout[0].length; x++) {
+                    if (rlayout[y - yCor][x - xCor] != LevelElement.PLACEHOLDER.getValue())
+                        layout[y][x] = rlayout[y - yCor][x - xCor];
+                }
+            return true;
+        }
+    }
+
+    /**
+     * Check if a replacement fit in a specific spot on the layout
+     *
+     * @param r    the replacement
+     * @param xCor place the left upper corner of the replacement on this x
+     * @param yCor place the left upper corner of the replacement on this y
+     * @return if replacement can be done
+     */
+    private boolean canReplaceIn(final Replacement r, int xCor, int yCor) {
+        int[][] layout = getLayout();
+        int[][] rlayout = r.getLayout();
+        for (int y = yCor; y < yCor + rlayout.length; y++)
+            for (int x = xCor; x < xCor + rlayout[0].length; x++) {
+                if (rlayout[y - yCor][x - xCor] != LevelElement.PLACEHOLDER.getValue()
+                        && layout[y][x] != LevelElement.PLACEHOLDER.getValue()) return false;
+            }
+        return true;
     }
 
     public int[][] getLayout() {

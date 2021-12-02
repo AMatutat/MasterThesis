@@ -4,9 +4,9 @@ import stuff.DesignLabel;
 
 public class Replacement {
 
-    int[][] layout;
-    DesignLabel label;
-    boolean rotate;
+    private int[][] layout;
+    private DesignLabel label;
+    private boolean rotate;
 
     public Replacement(int[][] layout, boolean rotate, DesignLabel label) {
         this.layout = layout;
