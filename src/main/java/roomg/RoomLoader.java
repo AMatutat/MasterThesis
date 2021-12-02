@@ -13,21 +13,18 @@ import java.util.List;
 public class RoomLoader {
     private List<Room> roomTemplates;
 
-    public RoomLoader(String path){
+    public RoomLoader(String path) {
         this.readFromJson(path);
     }
 
     public List<Room> getRoomTemplates(DesignLabel l) {
         List<Room> results = new ArrayList<>(roomTemplates);
-        if (l != DesignLabel.ALL)
-            results.removeIf(r -> r.getDesign() != l);
+        if (l != DesignLabel.ALL) results.removeIf(r -> r.getDesign() != l);
         return results;
     }
 
-
     private void readFromJson(String path) {
-        Type roomType = new TypeToken<ArrayList<Room>>() {
-        }.getType();
+        Type roomType = new TypeToken<ArrayList<Room>>() {}.getType();
         JsonReader reader = null;
         try {
             reader = new JsonReader(new FileReader(path));
@@ -41,7 +38,6 @@ public class RoomLoader {
             e.printStackTrace();
             roomTemplates = new ArrayList<>();
         }
-
     }
 
     public void addRoomTemplate(Room r) {
@@ -59,11 +55,10 @@ public class RoomLoader {
         } catch (IOException e) {
             System.out.println("File" + path + " not found");
         }
-
     }
 
-    //ToDo remove
-    public static void createTemplates(){
+    // ToDo remove
+    public static void createTemplates() {
         int xs = 10;
         int ys = 10;
         int[][] squarelay = new int[xs][ys];
@@ -71,8 +66,7 @@ public class RoomLoader {
             for (int x = 0; x < xs; x++) {
                 if (x == 0 || x == xs - 1 || y == 0 || y == ys - 1)
                     squarelay[x][y] = LevelElement.WALL.getValue();
-                else
-                    squarelay[x][y] = LevelElement.FLOOR.getValue();
+                else squarelay[x][y] = LevelElement.FLOOR.getValue();
             }
 
         String path = "./roomLayouts/roomTemplates.json";
@@ -81,5 +75,4 @@ public class RoomLoader {
         rl.addRoomTemplate(square);
         rl.writeToJSON(rl.getRoomTemplates(DesignLabel.ALL), path);
     }
-
 }

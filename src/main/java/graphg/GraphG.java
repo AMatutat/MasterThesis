@@ -10,9 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-/**
- * @author Andre Matutat
- */
+/** @author Andre Matutat */
 public class GraphG {
 
     /**
@@ -95,8 +93,7 @@ public class GraphG {
     }
 
     public List<Graph> readFromJson(String path) throws FileNotFoundException {
-        Type graphType = new TypeToken<ArrayList<Graph>>() {
-        }.getType();
+        Type graphType = new TypeToken<ArrayList<Graph>>() {}.getType();
         JsonReader reader = new JsonReader(new FileReader(path));
         return new Gson().fromJson(reader, graphType);
     }

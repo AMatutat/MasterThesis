@@ -3,18 +3,14 @@ package graphg;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author Andre Matutat
- */
+/** @author Andre Matutat */
 public class Graph {
 
     private List<Node> nodes = new ArrayList<>();
     private final int MAX_NODES = 4;
     private final int MAX_NEIGHBOURS = 2;
 
-    /**
-     * Create a Graph with two connected nodes.
-     */
+    /** Create a Graph with two connected nodes. */
     public Graph() {
         Node n1 = new Node(0);
         Node n2 = new Node(1);

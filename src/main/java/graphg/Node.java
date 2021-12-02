@@ -3,15 +3,13 @@ package graphg;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author Andre Matutat
- */
+/** @author Andre Matutat */
 public class Node {
     private List<Integer> neighbours = new ArrayList<>();
     private int index;
 
-    public Node (int index){
-        this.index=index;
+    public Node(int index) {
+        this.index = index;
     }
 
     /**
@@ -36,8 +34,6 @@ public class Node {
         if (!neighbours.contains(n.getIndex())) return true;
         else return false;
     }
-
-
 
     public List<Integer> getNeighbours() {
         return neighbours;

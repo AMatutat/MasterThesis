@@ -19,8 +19,7 @@ public class ReplacementLoader {
 
     public List<Replacement> getReplacements(DesignLabel l) {
         List<Replacement> results = new ArrayList<>(replacements);
-        if (l != DesignLabel.ALL)
-            results.removeIf(r -> r.getDesign() != l);
+        if (l != DesignLabel.ALL) results.removeIf(r -> r.getDesign() != l);
         return results;
     }
 
@@ -36,20 +35,19 @@ public class ReplacementLoader {
     }
 
     private void readFromJson(String path) {
-        Type replacementType = new TypeToken<ArrayList<Replacement>>() {
-        }.getType();
+        Type replacementType = new TypeToken<ArrayList<Replacement>>() {}.getType();
         JsonReader reader = null;
         try {
             reader = new JsonReader(new FileReader(path));
             replacements = new Gson().fromJson(reader, replacementType);
             if (replacements == null) throw new NullPointerException("File is empty");
-            //add all rotations to list
+            // add all rotations to list
             List<Replacement> toRotate = new ArrayList<>(replacements);
             toRotate.removeIf(r -> !r.canRotate());
 
             for (Replacement r : toRotate) {
                 Replacement tmp = r;
-                //90,180,270
+                // 90,180,270
                 for (int i = 0; i < 3; i++) {
                     tmp = rotate90(tmp);
                     replacements.add(tmp);
@@ -64,7 +62,6 @@ public class ReplacementLoader {
             e.printStackTrace();
             replacements = new ArrayList<>();
         }
-
     }
 
     public void addReplacement(Replacement r) {
@@ -83,7 +80,7 @@ public class ReplacementLoader {
         }
     }
 
-    //ToDo remove
+    // ToDo remove
     public static void createTemplates() {
         int xs = 4;
         int ys = 4;
@@ -101,5 +98,3 @@ public class ReplacementLoader {
         rl.writeToJSON(rl.getReplacements(DesignLabel.ALL), path);
     }
 }
-
-
