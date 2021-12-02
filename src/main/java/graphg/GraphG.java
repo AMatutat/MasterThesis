@@ -14,7 +14,7 @@ import java.util.Random;
  * @author Andre Matutat
  */
 public class GraphG {
-    public Graph getGraph(int nodes, int edges) throws FileNotFoundException {
+    public Graph getGraph(int nodes, int edges) {
         String path = nodes + "_" + edges + ".json";
         List<Graph> sol = null;
         sol = readFromJson(path);
@@ -85,20 +85,34 @@ public class GraphG {
         }
     }
 
-
-    public List<Graph> readFromJson(String path) throws FileNotFoundException {
+    private List<Graph> readFromJson(String path) {
         Type graphType = new TypeToken<ArrayList<Graph>>() {
         }.getType();
-        JsonReader reader = new JsonReader(new FileReader(path));
-        return new Gson().fromJson(reader, graphType);
+        try {
+            JsonReader reader = new JsonReader(new FileReader(path));
+            return new Gson().fromJson(reader, graphType);
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found.");
+            return new ArrayList<>();
+        }
     }
 
-    public void writeToJSON(List<Graph> graphs, String path) throws IOException {
+    /**
+     * Writes down the list to a json
+     *
+     * @param graphs the list of rooms to save
+     * @param path   where to save
+     */
+    public void writeToJSON(List<Graph> graphs, String path) {
         Gson gson = new Gson();
         String json = gson.toJson(graphs);
-        BufferedWriter writer = new BufferedWriter(new FileWriter(path));
-        writer.write(json);
-        writer.close();
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(path));
+            writer.write(json);
+            writer.close();
+        } catch (IOException e) {
+            System.out.println("File" + path + " not found");
+        }
     }
 
 

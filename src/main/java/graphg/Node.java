@@ -3,7 +3,9 @@ package graphg;
 import java.util.ArrayList;
 import java.util.List;
 
-/** @author Andre Matutat */
+/**
+ * @author Andre Matutat
+ */
 public class Node {
     private List<Integer> neighbours = new ArrayList<>();
     private int index;
@@ -13,12 +15,13 @@ public class Node {
     }
 
     /**
-     * only copys index not the neighbour list
+     * copy node
      *
      * @return
      */
     public Node(Node n) {
         this.setIndex(n.getIndex());
+        this
     }
 
     /**
@@ -30,6 +33,12 @@ public class Node {
         neighbours.add(n.index);
     }
 
+    /**
+     * check if this node is not connected to specific another node
+     *
+     * @param n
+     * @return
+     */
     public boolean notConnectedWith(Node n) {
         if (!neighbours.contains(n.getIndex())) return true;
         else return false;

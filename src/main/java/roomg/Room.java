@@ -6,15 +6,30 @@ import stuff.LevelElement;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Andre Matutat
+ */
 public class Room {
     private int[][] layout;
     private DesignLabel design;
 
+    /**
+     * A Room can replace a node. The layout of a room is represented by a 2D array.
+     * Attention: A layout can contain placeholders, so always use .replace() before final loading the room.
+     *
+     * @param layout the layout of the room
+     * @param label  the DesignLabel of the room
+     */
     public Room(int[][] layout, DesignLabel label) {
         this.layout = layout;
         this.design = label;
     }
 
+    /**
+     * copy a room
+     *
+     * @param r original room
+     */
     public Room(Room r) {
         layout = new int[r.getLayout()[0].length][r.getLayout().length];
         for (int y = 0; y < layout.length; y++)
@@ -22,6 +37,11 @@ public class Room {
         design = r.getDesign();
     }
 
+    /**
+     * Replace all placeholder with the replacements in the list
+     *
+     * @param replacements list of replacements
+     */
     public void replace(final List<Replacement> replacements) {
         int layoutHeight = getLayout().length;
         int layoutWidth = getLayout()[0].length;
