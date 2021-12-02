@@ -11,45 +11,45 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * loads and stores rooms from a jsons
+ * loads and stores roomtemplates from a json
  *
  * @author Andre Matutat
  */
-public class RoomLoader {
-    private List<Room> roomTemplates;
+public class RoomTemplateLoader {
+    private List<RoomTemplate> roomTemplates;
 
     /**
-     * Creates a RoomLoader and loads the rooms from the json. if the json is empty, the list is empty
+     * Creates a RoomTemplateLoader and loads the template from the json. if the json is empty, the list is empty
      *
      * @param path path to json
      */
-    public RoomLoader(String path) {
+    public RoomTemplateLoader(String path) {
         this.readFromJson(path);
     }
 
     /**
      * Returns a list of RoomTemplates that have the corresponding DesignLabel
      *
-     * @param l the DesignLabel, use ALL if you don't care
+     * @param label the DesignLabel, use ALL if you don't care
      * @return the list
      */
-    public List<Room> getRoomTemplates(DesignLabel l) {
-        List<Room> results = new ArrayList<>(roomTemplates);
-        if (l != DesignLabel.ALL) results.removeIf(r -> r.getDesign() != l);
+    public List<RoomTemplate> getRoomTemplates(DesignLabel label) {
+        List<RoomTemplate> results = new ArrayList<>(roomTemplates);
+        if (label != DesignLabel.ALL) results.removeIf(r -> r.getDesign() != label);
         return results;
     }
 
     /**
-     * adds a room to the list
+     * adds a template to the list
      *
-     * @param r the room to add
+     * @param template the template to add
      */
-    public void addRoomTemplate(Room r) {
-        if (!roomTemplates.contains(r)) roomTemplates.add(r);
+    public void addRoomTemplate(RoomTemplate template) {
+        if (!roomTemplates.contains(template)) roomTemplates.add(template);
     }
 
     private void readFromJson(String path) {
-        Type roomType = new TypeToken<ArrayList<Room>>() {
+        Type roomType = new TypeToken<ArrayList<RoomTemplate>>() {
         }.getType();
         JsonReader reader = null;
         try {
@@ -69,14 +69,14 @@ public class RoomLoader {
     /**
      * Writes down the list to a json
      *
-     * @param rooms the list of rooms to save
-     * @param path  where to save
+     * @param templates the list of template to save
+     * @param path      where to save
      */
-    public void writeToJSON(List<Room> rooms, String path) {
+    public void writeToJSON(List<RoomTemplate> templates, String path) {
         Gson gson = new Gson();
-        String json = gson.toJson(rooms);
+        String json = gson.toJson(templates);
         try {
-            System.out.println(rooms.size());
+            System.out.println(templates.size());
             BufferedWriter writer = new BufferedWriter(new FileWriter(path));
             writer.write(json);
             writer.close();
