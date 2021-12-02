@@ -21,7 +21,6 @@ public class Node {
      */
     public Node(Node n) {
         this.setIndex(n.getIndex());
-        this
     }
 
     /**

@@ -29,7 +29,7 @@ public class Graph {
      *
      * @param g
      */
-    public Graph(Graph g) s{
+    public Graph(Graph g) {
         g.getNodes().forEach(n -> nodes.add(new Node(n)));
         for (Node n : g.getNodes()) {
             for (Integer nb : n.getNeighbours()) {
