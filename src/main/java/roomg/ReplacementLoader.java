@@ -24,7 +24,7 @@ public class ReplacementLoader {
         return results;
     }
 
-    private Replacement rotate90(Replacement r) {
+    private Replacement rotate90(final Replacement r) {
         int[][] originalLayout = r.getLayout();
         int mSize = originalLayout.length;
         int nSize = originalLayout[0].length;
@@ -32,7 +32,7 @@ public class ReplacementLoader {
         for (int row = 0; row < mSize; row++)
             for (int col = 0; col < nSize; col++)
                 rotatedLayout[col][mSize - 1 - row] = originalLayout[row][col];
-        return new Replacement(rotatedLayout, r.getRotate(), r.getDesign());
+        return new Replacement(rotatedLayout, r.canRotate(), r.getDesign());
     }
 
     private void readFromJson(String path) {
@@ -45,7 +45,7 @@ public class ReplacementLoader {
             if (replacements == null) throw new NullPointerException("File is empty");
             //add all rotations to list
             List<Replacement> toRotate = new ArrayList<>(replacements);
-            toRotate.removeIf(r -> !r.getRotate());
+            toRotate.removeIf(r -> !r.canRotate());
 
             for (Replacement r : toRotate) {
                 Replacement tmp = r;
@@ -71,7 +71,7 @@ public class ReplacementLoader {
         if (!replacements.contains(r)) replacements.add(r);
     }
 
-    public void writeToJSON(List<Replacement> rep, String path){
+    public void writeToJSON(List<Replacement> rep, String path) {
         Gson gson = new Gson();
         String json = gson.toJson(rep);
         try {

@@ -22,7 +22,7 @@ public class Replacement {
         return this.label;
     }
 
-    public boolean getRotate() {
+    public boolean canRotate() {
         return this.rotate;
     }
 }
