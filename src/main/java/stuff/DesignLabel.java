@@ -5,12 +5,13 @@ package stuff;
  *
  * @author Andre Matutat
  */
-public enum DesignLabels {
+public enum DesignLabel {
     DEFAULT,
     FIRE,
     FOREST,
     WATER,
     HELL,
     DUNGEON,
-    ICE
+    ICE,
+    ALL
 }

@@ -10,7 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-/** @author Andre Matutat */
+/**
+ * @author Andre Matutat
+ */
 public class GraphG {
 
     /**
@@ -50,7 +52,7 @@ public class GraphG {
             List<Graph> newTrees = new ArrayList<>();
             for (Graph t : trees)
                 for (Node n : t.getNodes()) {
-                    Graph newTree = t.copy();
+                    Graph newTree = new Graph(t);
                     // have to get the copy of 'n', the index of the copy is always the index of the
                     // original
                     if (newTree.connectNewNode(n.getIndex())) newTrees.add(newTree);
@@ -66,7 +68,7 @@ public class GraphG {
             for (Graph g : graphs)
                 for (Node n1 : g.getNodes())
                     for (Node n2 : g.getNodes()) {
-                        Graph newGraph = g.copy();
+                        Graph newGraph = new Graph(g);
                         // same as in tree, have to get the copys of n and n2
                         if (n1.getIndex() != n2.getIndex()
                                 && newGraph.connectNodes(n1.getIndex(), n2.getIndex())) {
@@ -93,7 +95,8 @@ public class GraphG {
     }
 
     public List<Graph> readFromJson(String path) throws FileNotFoundException {
-        Type graphType = new TypeToken<ArrayList<Graph>>() {}.getType();
+        Type graphType = new TypeToken<ArrayList<Graph>>() {
+        }.getType();
         JsonReader reader = new JsonReader(new FileReader(path));
         return new Gson().fromJson(reader, graphType);
     }
