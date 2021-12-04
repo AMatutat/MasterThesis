@@ -182,7 +182,7 @@ Spieleentwicklung ist ein kostspieliges Unterfangen und bereits kleinere Produkt
 
 ## Anforderungen an einen Level-Generator 
 
-Dir vorgestellten Regeln geben zwar eine Idee dafür, wie gute Level aufzusehen haben, sie geben aber keine klaren Kriterien vor, die ein Level-Generator erfüllen sollte.
+Dir vorgestellten Regeln geben zwar eine Idee davon, wie gute Level auszusehen haben, sie geben aber keine klaren Kriterien vor, die ein Level-Generator erfüllen sollte.
 In diesem Abschnitt werden aus den vorgestellten Regeln Kriterien abgeleitet, die ein Level-Generator erfüllen sollte, um gute Level zu erzeugen. Dabei stellen die Kriterien sowohl Anforderungen an die erzeugten Level als auch an den Algorithmus und seine Input- sowie Output-Daten. Die Kriterien sollen dabei helfen, festzustellen, ob die obengenannten Regeln eingehalten wurden. Sie dienen als Anforderung für den in dieser Arbeit erzeugten Generator und werden in Kapitel 3 genutzt, um einzelne Bausteine aus anderen Algorithmen zu bewerten. 
 
 ### Regel 1: Gute Level sind lösbar

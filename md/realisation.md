@@ -118,9 +118,19 @@ Möglichkeit 2 wäre es den Algorithmus umzuschreiben. Aktuell werden auch zuein
 
 Um den zeitlichen Rahmen dieser Arbeit einhalten zu können, wird keiner der beiden Möglichkeiten umgesetzt. Es wird ein Grenzwert von 1000 definiert, der die maximal betrachteten Teillösungen zu einem Zeitpunkt angibt. Sollte die Liste mit den Teillösungen den Schwellwert überschreiten, wird die Liste beim nächsten rekursiven Aufruf wieder verkleinert, indem so lange zufällige Teillösungen aus der Liste entfernt werden, bis der Schwellwert erreicht ist. Dies schränkt GraphG so ein, dass nicht mehr alle Lösungen gefunden werden. Für Suchräume mit wenigen gültigen (Teil-)Lösungen sollten dennoch eine Vielzahl an unterschiedlichen Graphen gefunden werden. Für Suchräumen mit vielen gültigen Graphen könnten sich, je nach Größe des Suchraumes und Anzahl der (Teil-)Lösungen, die gefunden Graphen stark ähneln. 
 
-Abbildungen \ref{ex1}, \ref{ex2}, \ref{ex3} und \ref{ex4} zeigen von GraphG generierte Graphen mit unterschiedlicher Kanten und Knotenanzahl. Die Graphen wurden zufällig ausgewählt, um die mögliche Variation zu zeigen. Im Kapitel Realisation werden die Graphen auf ihre Qualität als Level-Graph analysiert und bewertet. 
+Abbildungen \ref{ex1}, \ref{ex2}, \ref{ex3} und \ref{ex4} zeigen von GraphG generierte Graphen mit unterschiedlicher Kanten und Knotenanzahl. Die Graphen wurden zufällig ausgewählt, um die mögliche Variation zu zeigen. Im Kapitel Evaluierung werden die Graphen auf ihre Qualität als Level-Graph analysiert und bewertet. 
 
 ## Umsetzung RoomG
+
+- UML Klassendiagramm
+- Was macht der ReplacmentLoader
+  - rotiert die Replacer und fügt sie in die liste ein
+- Was macht der RoomTemplateLoader
+- Was macht Room.replace, wie genau funktioniert das
+
+
+
+Für diese Arbeit wurden verschiedene Layouts für RoomTemplates und Replacments erstellt. Abbildungen **TODO** zeigen  verschiedene, von RoomG, erzeugte Räume und die dafür verwendeten Templates und Replacments. Im Kapitel Evaluierung wird die die Vielfallt und Qualität der Räume analysiert und bewertet. 
 
 ## Umsetzung LevelG
 
@@ -130,9 +140,10 @@ Abbildungen \ref{ex1}, \ref{ex2}, \ref{ex3} und \ref{ex4} zeigen von GraphG gene
 
 # Evaluierung 
 
-- Zeigen von Ergebnissen
-
-  - GraphG
+- GraphG
+  - Zeigen von Graphen
+  - was machen die einzelenn Graphen gut, was schlecht
+  - vermerk das die qualität als Level stark von der gewählten Knoten und Kanten anzahl abhängt
 
 ![Von GraphG erzeugter Graph mit 12 Knoten und 2 Extrakanten. \label{ex1}](figs/chapter4/graphgsol/example1.png)
 
@@ -143,14 +154,20 @@ Abbildungen \ref{ex1}, \ref{ex2}, \ref{ex3} und \ref{ex4} zeigen von GraphG gene
 ![Von GraphG erzeugter Graph mit 7 Knoten und 1 Extrakanten. \label{ex4}](figs/chapter4/graphgsol/example4.png)
 
   - RoomG
+
+      - zeigen von Templates und daraus erzeugten Räume
+      - Unterscheiden die sich gut? 
+      - Gibt es Probleme?
+      - Ist halt doof das die dinger eingelesen werden müssen
+
   - LevelG
 
-- Auswerten der Ergebnisse
+    
 
-  
-  
-  
-  
-  
-  
-  
+    
+
+    
+
+    
+
+    

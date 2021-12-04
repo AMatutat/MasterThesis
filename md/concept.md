@@ -88,13 +88,58 @@ List<Graph> calculateGraphs(List<Graph> graphs, int edgesLeft){
 
 ### RoomG
 
+- Was ist die Aufgabe von RoomG?
+
+- Was sind die Anforderungen an RoomG?
+
+- DesignLabels erklären
+
+- LevelElements erklären
+
+- Wie funktioniert Roomg?
+
+  - RoomTemplates
+  - Replacments
+  - Ersetzungsprozess als pseudocode
+
+  
+
 ### LevelG
 
 ### Integration in das PM-Dungeon
 
+- wie werden die level eingeladen?
+- wie werden die level gezeichnet?
+- wie geht der levelcontrollr damit um?
+- wie werden objekte im level platziert?s
+
 ### Schnittstellen
 
+Neben der fundamentalen Integration in das PM-Dungeon werden auch verschiedene Methoden zur Verfügung gestellt um das arbeiten mit dem Level zu vereinfachen. Diese Methoden dienen als Schnittstelle zwischen Levelstruktur und Studierenden. Im folgenden werden die Methoden der Schnittstelle, deren Funktionsweise sowie mögliche Anwendungsfälle skizziert. 
 
+`getAllPath(start,goal)`
+
+Diese Methoden findet mithilfe des Graphen alle Pfade vom übergebenen Startknoten bis zum übergebenen Zielknoten.   
+
+Damit können Wege bestimmt werden. Denkbar wären zum Beispiel Monster die sich durch mehrere Räume des Level bewegen um den Spieler zu verfolgen oder aus verschiedenen Richtungen anzugreifen. Die Methode wird auch von weiteren Methoden der Schnittstelle genutzt. 
+
+- todo Wie funktioniert die Theorie dahinter
+
+`getCriticalNodes`
+
+Diese Methode findet mithilfe des Graphen alle Knoten die betreten werden müssen um vom Start des Level bis zum Ende zu gelangen. Dieses unterschiedet sich insofern von `getOnePath` , dass mithilfe von `getAllPath` alle Wege vom Start zum Ziel gefunden werden und nur die Räume, die in jedem möglichen Pfad enthalten sind als krtisch betrachtet werden. So kann sichergestellt werden, dass der Spieler zum beenden des Level in jedem Fall diese Knoten betritt.
+
+In kritischen Knoten könne Inhalte platziert werden, die der Spieler auf jeden Fall finden bzw. erleben soll. Dies können für die Geschichte Relveante Inhalte sein, ein Tutorial oder ein Bossgegner. Dies ermöglicht es, das Pacing des Spiels zu kontrollieren. 
+
+`getOptionalNodes` funktioniert analog zu `getCriticalNodes` und liefert eine Liste mit allen Knoten, die nicht auf dem Weg zum Ziel liegen. Diese Knoten sind daher in keinem Pfad der von `getAllPath` vom Startraum bis zum Zielraum enthalten. 
+
+In sicher optionalen Räumen können verschiedene Inhalte platziert werden die der Spieler finden bzw. erleben kann aber nicht muss. Dies können extra Schätze sein oder ein optionaler Bossgegner. Dies ermöglich das erzeugen von Risk and Reward Momenten und ermöglicht es das Balancing des Spiels zu kontrollieren.
+
+`isRoomReachableWithout(start,goal,avoid)` 
+
+Diese Methode prüft ob der Zielraum vom Startraum aus betreten werden kann, ohne den `avoid` Knoten zu betreten. Damit können Schlüsselrätsel implementiert werden. Es wäre denkbar, dass der `avoid` Raum verschlossen ist und der Schlüssel sich in einen anderen Raum im Dungeon befindet. Mithilfe dieser Methode kann sichergestellt werden, dass der Schlüssel gefunden werden kann ohne durch den verschlossenen Knoten gehen zu müssen. 
+
+Die Methode verwendet das selbe Verfahren wie `getAllPath` verwendet aber eine Kopie des Level-Graphen aus dem der `avoid` Knoten und entsprechend alle Kanten die zu `avoid` führen, entfernt wurden. Wird ein oder mehrere Pfade gefunden, muss `avoid` nicht betreten werden um von `start` zu `goal` zu gelangen.
 
 
 
