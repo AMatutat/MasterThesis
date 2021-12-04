@@ -6,10 +6,11 @@ package stuff;
  * @author Andre Matutat
  */
 public enum LevelElement {
+    SKIP(-2),
     /**
      * This field can be replaced with another one
      */
-    PLACEHOLDER(-1),
+    WILDCARD(-1),
     /**
      * This field is a floor-field
      */

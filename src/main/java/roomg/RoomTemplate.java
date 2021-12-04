@@ -70,7 +70,7 @@ public class RoomTemplate {
                 int rWidth = r.getLayout()[0].length;
                 for (int y = 0; y < layoutHeight - rHeight; y++)
                     for (int x = 0; x < layoutWidth - rWidth; x++)
-                        if (roomLayout[y][x] == LevelElement.PLACEHOLDER.getValue()
+                        if (roomLayout[y][x] == LevelElement.WILDCARD.getValue()
                                 && placeIn(roomLayout, r, x, y)) changes = true;
             }
         } while (changes);
@@ -78,7 +78,7 @@ public class RoomTemplate {
         // replace all placeholder that are left with floor
         for (int y = 0; y < layoutHeight; y++)
             for (int x = 0; x < layoutWidth; x++)
-                if (roomLayout[y][x] == LevelElement.PLACEHOLDER.getValue())
+                if (roomLayout[y][x] == LevelElement.WILDCARD.getValue())
                     roomLayout[y][x] = LevelElement.FLOOR.getValue();
         return new levelg.Room(roomLayout, getDesign());
     }
@@ -98,7 +98,7 @@ public class RoomTemplate {
             int[][] rlayout = r.getLayout();
             for (int y = yCor; y < yCor + rlayout.length; y++)
                 for (int x = xCor; x < xCor + rlayout[0].length; x++) {
-                    if (rlayout[y - yCor][x - xCor] != LevelElement.PLACEHOLDER.getValue())
+                    if (rlayout[y - yCor][x - xCor] != LevelElement.SKIP.getValue())
                         layout[y][x] = rlayout[y - yCor][x - xCor];
                 }
             return true;
@@ -118,8 +118,8 @@ public class RoomTemplate {
         int[][] rlayout = r.getLayout();
         for (int y = yCor; y < yCor + rlayout.length; y++)
             for (int x = xCor; x < xCor + rlayout[0].length; x++) {
-                if (rlayout[y - yCor][x - xCor] != LevelElement.PLACEHOLDER.getValue()
-                        && layout[y][x] != LevelElement.PLACEHOLDER.getValue()) return false;
+                if (rlayout[y - yCor][x - xCor] != LevelElement.SKIP.getValue()
+                        && layout[y][x] != LevelElement.WILDCARD.getValue()) return false;
             }
         return true;
     }
