@@ -107,20 +107,7 @@ Damit ein Room-Template als Raum im Dungeon verwendet werden kann, müssen alle 
 Replacements halten ebenfalls Layouts bestehend aus den bekannten Feldertypen ab. Zusätzlich zu den bekannten Feldertypen haben sie einen weitern Typ `Skip = -2`. Dieser wird im ersetzungsprozess genutzt um anzugeben das dieses Feld im Replacment übersprungen werden muss. 
 
 
-Listing \ref{replace} zeigt den Ablauf des Ersetzungsprozesses. Beim Ersetzungsprozess wird das Room-Template nach Wildcards durchsucht, wurde eine Wildcard gefunden wird diese durch ein Replacement ersetzt. Dabei ersetzt ein Replacement nicht ein einziges Feld sondern einen gesamten Teilbereich des Room-Layouts. Daher muss beim Ersetzungsprozess geschaut werden, ob das Layout des Replacements an die entsprechende Stelle im Room-Layout passt. Ein Replacement passt genau dann, wenn die obere linke ecke des Replacements-Layouts auf die gefundene Wildcard im Room-Layout platziert werden kann und sich unter jedem Feld im Replacment-Layout, das nicht den Wert `Skip` hat eine Wildcard im Room-Layout befindet. Passt ein Replacement, können die Wildcards mit dem Werten aus dem Replacement-Layout ersetzt werden. Da in einem Replacement wiederum Wildcards enthalten sein können, muss die Suche nach Wildcards nach jedem Ersetzungsprozess neugestartet werden. In Ersetzungsprozess werden immer nur Wildcards ersetzt, niemals andere Feldtypen. 
-
-Die Suche nach Wildcards und das Ersetzten dieser muss solange durchgeführt werden, bis es keine Wildcards mehr im Room-Layout gibt. Sollte es Wildcards geben, für die kein passendes Replacement gefunden werden kann, werden diese durch Bodenfelder ersetzt.
-
-\begin{lstlisting}[language=python, label=replace, caption={Pseudocode replace}  ]
-replace(RoomTemplate template, List<Replacement> replacements):
-	repeat:
-		suche wildcard
-		wildcard gefunden:
-			for each r in replacments
-				pruefe ob r passt, wenn ja ersetze wildcard mit r		
-​	until:(aenderungen wurden gemacht)
-​	ersetze uebrige Wildcards mit Bodenfeldern
-\end{lstlisting}
+Beim Ersetzungsprozess wird das Room-Template nach Wildcards durchsucht, wurde eine Wildcard gefunden wird diese durch ein Replacement ersetzt. Dabei ersetzt ein Replacement nicht ein einziges Feld sondern einen gesamten Teilbereich des Room-Layouts. Daher muss beim Ersetzungsprozess geschaut werden, ob das Layout des Replacements an die entsprechende Stelle im Room-Layout passt. Ein Replacement passt genau dann, wenn die obere linke ecke des Replacements-Layouts auf die gefundene Wildcard im Room-Layout platziert werden kann und sich unter jedem Feld im Replacment-Layout, das nicht den Wert `Skip` hat eine Wildcard im Room-Layout befindet. Passt ein Replacement, können die Wildcards mit dem Werten aus dem Replacement-Layout ersetzt werden. Da in einem Replacement wiederum Wildcards enthalten sein können, muss die Suche nach Wildcards nach jedem Ersetzungsprozess neugestartet werden. In Ersetzungsprozess werden immer nur Wildcards ersetzt, niemals andere Feldtypen. Die Suche nach Wildcards und das Ersetzten dieser muss solange durchgeführt werden, bis es keine Wildcards mehr im Room-Layout gibt. Sollte es Wildcards geben, für die kein passendes Replacement gefunden werden kann, werden diese durch Bodenfelder ersetzt.
 
 Um mehr Optische Abwechsung zu erlauben können sowohl RoomTeplates als auch Replacements mit DesignLabel markiert werden. Nur wenn das DesignLabel eines Replacment mit dem des RoomTemplates überseinsteimmen, können diese zusammen verwendet werden. DesignLabels können genutzt werden um bestimmte Layouts nur in bestimmten Regionen, wie Wald oder Gebirge, anzuwenden. So können sich die Verschiedenen Regionen nicht nur optisch sondern auch strukturel voneinander unterscheiden.  
 
