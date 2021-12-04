@@ -117,9 +117,9 @@ replace(RoomTemplate template, List<Replacement> replacements):
 		suche wildcard
 		wildcard gefunden:
 			for each r in replacments
-				prüfe ob r passt, wenn ja ersetze wildcard mit r		
-​	until:(änderungen wurden gemacht)
-​	ersetze ürbrige Wildcards mit Bodenfeldern
+				pruefe ob r passt, wenn ja ersetze wildcard mit r		
+​	until:(aenderungen wurden gemacht)
+​	ersetze uebrige Wildcards mit Bodenfeldern
 \end{lstlisting}
 
 Um mehr Optische Abwechsung zu erlauben können sowohl RoomTeplates als auch Replacements mit DesignLabel markiert werden. Nur wenn das DesignLabel eines Replacment mit dem des RoomTemplates überseinsteimmen, können diese zusammen verwendet werden. DesignLabels können genutzt werden um bestimmte Layouts nur in bestimmten Regionen, wie Wald oder Gebirge, anzuwenden. So können sich die Verschiedenen Regionen nicht nur optisch sondern auch strukturel voneinander unterscheiden.  
