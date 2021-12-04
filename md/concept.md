@@ -88,21 +88,44 @@ List<Graph> calculateGraphs(List<Graph> graphs, int edgesLeft){
 
 ### RoomG
 
-- Was ist die Aufgabe von RoomG?
+RoomG nutz Templates von Räumen und verändert diese mithilfe von Versatzstücken um abwechslungsreiche Räume zu erstellen. Dabei sind sowohl die Raum-Templates als auch die Versatzstücke per Hand erstellt und werden aus einer Json eingelesen. 
 
-- Was sind die Anforderungen an RoomG?
+Raum-Templates halten das Layout des Raumes als zwei dimensionales Integer-Array. Jedes Feld im Array stellt ein Feld im Level dar. Der Wert des Feldes gibt um welchen Feldtypen es sich handelt. 
 
-- DesignLabels erklären
+| Wert | Feldtyp  | Beschreibung                                                 |
+| ---- | -------- | ------------------------------------------------------------ |
+| 0    | Boden    | Auf diesen Feld können Gegenstände platziert werden und Monstern sowie Helden sich bewegen. |
+| 1    | Wand     | Eine Wand im Level durch die der Held und Monster nicht durchlaufen können. |
+| 2    | Ausgang  | Dieses Feld führt zum nächsten Level.                        |
+| 3    | Falle    | Auf diesen Feld ist eine Falle. Der spezifische Typ der Falle muss vom Studierenden bestimmt werden. |
+| -1   | Wildcard | Dieses Feld muss durch Replacements ersetzt werden.          |
 
-- LevelElements erklären
+Wildcards erlauben es, aus einen Template mehrere unterschiedliche Räume zu erstellen und reduzieren daher den Aufwand bei der Erstellung von Räumen. 
 
-- Wie funktioniert Roomg?
+Damit ein Room-Template als Raum im Dungeon verwendet werden kann, müssen alle Wildcards durch gültige Feldertypen ersetzt werden. Dafür werden Replacements verwendet.
 
-  - RoomTemplates
-  - Replacments
-  - Ersetzungsprozess als pseudocode
+Replacements halten ebenfalls Layouts bestehend aus den bekannten Feldertypen ab. Zusätzlich zu den bekannten Feldertypen haben sie einen weitern Typ `Skip = -2`. Dieser wird im ersetzungsprozess genutzt um anzugeben das dieses Feld im Replacment übersprungen werden muss. 
 
-  
+
+Listing \ref{replace} zeigt den Ablauf des Ersetzungsprozesses. Beim Ersetzungsprozess wird das Room-Template nach Wildcards durchsucht, wurde eine Wildcard gefunden wird diese durch ein Replacement ersetzt. Dabei ersetzt ein Replacement nicht ein einziges Feld sondern einen gesamten Teilbereich des Room-Layouts. Daher muss beim Ersetzungsprozess geschaut werden, ob das Layout des Replacements an die entsprechende Stelle im Room-Layout passt. Ein Replacement passt genau dann, wenn die obere linke ecke des Replacements-Layouts auf die gefundene Wildcard im Room-Layout platziert werden kann und sich unter jedem Feld im Replacment-Layout, das nicht den Wert `Skip` hat eine Wildcard im Room-Layout befindet. Passt ein Replacement, können die Wildcards mit dem Werten aus dem Replacement-Layout ersetzt werden. In Ersetzungsprozess werden immer nur Wildcards ersetzt, niemals andere Feldtypen. 
+
+Die Suche nach Wildcards und das Ersetzten dieser muss solange durchgeführt werden, bis es keine Wildcards mehr im Room-Layout gibt. Sollte es Wildcards geben, für die kein passendes Replacement gefunden werden kann, werden diese durch Bodenfelder ersetzt.
+
+
+
+\begin{lstlisting}[language=python, label=replace, caption={Pseudocode replace}  ]
+replace(RoomTemplate template, List<Replacement> replacements):
+	repeat:
+		for each Replacment r in replacements:
+			itteriere über template:
+				if(Wildcard gefunden und r passt):
+					setzte r ein				
+	until:(änderungen wurden gemacht)
+	ersetze ürbrige Wildcards mit Bodenfeldern
+\end{lstlisting}
+
+Um mehr Optische Abwechsung zu erlauben können sowohl RoomTeplates als auch Replacements mit DesignLabel markiert werden. Nur wenn das DesignLabel eines Replacment mit dem des RoomTemplates überseinsteimmen, können diese zusammen verwendet werden. DesignLabels können genutzt werden um bestimmte Layouts nur in bestimmten Regionen, wie Wald oder Gebirge, anzuwenden. So können sich die Verschiedenen Regionen nicht nur optisch sondern auch strukturel voneinander unterscheiden.  
+
 
 ### LevelG
 
