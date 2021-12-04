@@ -122,84 +122,87 @@ Abbildungen \ref{ex1}, \ref{ex2}, \ref{ex3} und \ref{ex4} zeigen von GraphG gene
 
 ## Umsetzung RoomG
 
+Abbildung \ref{roomgUML} zeigt ein reduiziertes UML-Klassendiagramm für RoomG. 
+
+Die Klasse `RoomLoader` lädt alle abgespeicherten RoomTemplates aus einer Json und speichert diese ab. Mit der Methode `getRoomTemplate` kann eine Liste mit allen Templates abgefragt werden, die das übergebene DesignLabel haben. `DesignLabel` ist ein enum mit verschiedenen Designs. Sollen alle Templates abgefragt werden, kann `DesignLabel.ALL` verwendet werden.
+
+ Die Klasse `ReplacementLoader` lädt alle abgesepicherten Replacements aus einer Json und speichert diese ab. Dabei prüft der Loader, ob die `rotate`-Flag eines Replacments gesetzt ist, und wenn ja, erstellt er drei neue Replacments mit einen um jeweils 90,180 und 270 Grad rotierten Layout. So können Replacements auch in verschiedenen Positionen eingesetzt werden. Mit der Methode `getReplacements` kann eine Liste mit allen Replacements abgefragt werden, die das übergebene DesignLabel haben. Sollen alle Replacements abgefragt werden, kann `DesignLabel.ALL` übergeben werden.
+
 ![UML-Klassendiagramm für RoomG mit den wichtigsten Methoden. \label{roomgUML}](figs/chapter4/roomg.png)
 
-- UML Klassendiagramm
-- Was macht der ReplacmentLoader
-  - rotiert die Replacer und fügt sie in die liste ein
-- Was macht der RoomTemplateLoader
+Die Klassen `Replacement` und `RoomTemplate` speichern jeweils ein Layout und ein DesignLabel. Der Ersetzungsprozess findet in `RoomTemplate#replace` statt und wird in Listing **TODO** gezeigt. 
 
-
-
-- Was macht Room.replace, wie genau funktioniert das
+Da ein Template mehrfach verwendet werden soll, wird in Zeile 1 eine Kopie des Layouts erstellt. Die Ersetzung wird in dieser Kopie durchgeführt. In Zeile 2 und 3 wird die Größe des Layouts abgefragt um späteres Iterieren zu vereinfachen. Genau wie das Template soll auch die Liste mit den möglichen Replacements merhfach verwenden werden können, daher wird in Zeile 6 eine Kopie der übergebenen Liste erstellt. In Zeile 7 bis 10 werden alle Replacements aus der Liste gelöscht die zu groß für das Layout sind, also über den Rand des Raumes herausragen würden. In Zeile 12 bis 24 findet der eigentliche Ersetzungsprozess statt. Die äußere Schleife in Zeile 14 bis 24 sorgt dafür, dass im falle einer Änderung des Layouts die gesamte innere Prozess erneut durchgefürt wird. Der innere Prozess in Zeile 16 bis 23 iteriert für jedes Replacment über das Layout und such nach einer Wildcard. Dabei muss nicht das gesamte Layout betrachtet, sondern nur die Punkte, bei dem das einfügen der Replacement nicht dafür sorgen würde, dass  das Replacement über den Raumrand hinausragt. Daher kann in Zeile 19 und 20 die Abbruchbedingung der Zählergesteurten-Schleifen angepasst werden. In Zeile 21 wird geprüft ob das aktuelle betrachtete Feld eine Wildcard ist und in Zeile 22 wird versucht diese Wildcard mit dem Replacement zu ersezten. Die Funktionsweise von `placeIn` wird weiter unten erläutert. Ist der Ersetzungsprozess erfolgreich, muss nach Abschluss der foreach-Schleife in Zeile 16 der gesamte Prozess wiederholt werden um möglicherweise neu eingesetzte Wildcards zu ersetzen. In Zeile 26 bis 30 werden alle verbliebenen Wildcards durch Bodenfelder ersetzt. In Zeile 30 erstellt die Methode einen neues Objekte der Klasse `Room` mit dem ersetzten Layout. Dieser Raum ist bereit um im PM-Dungeon verwendet zu werden. 
 
 ```
-    public Room replace(final List<Replacement> replacements) {
-        int layoutHeight = getLayout().length;
-        int layoutWidth = getLayout()[0].length;
-        int[][] roomLayout = copy(this.layout);
-
-        // remove all replacements that are too big
-        List<Replacement> replacementList = new ArrayList<>(replacements);
-        for (Replacement r : replacements) {
-            if (r.getLayout()[0].length <= layoutWidth && r.getLayout().length <= layoutHeight)
-                replacementList.add(r);
-        }
-    
-        // replace with replacements
-        boolean changes;
-        do {
-            changes = false;
-            for (Replacement r : replacementList) {
-                int rHeight = r.getLayout().length;
-                int rWidth = r.getLayout()[0].length;
-                for (int y = 0; y < layoutHeight - rHeight; y++)
-                    for (int x = 0; x < layoutWidth - rWidth; x++)
-                        if (roomLayout[y][x] == LevelElement.WILDCARD.getValue()
-                                && placeIn(roomLayout, r, x, y)) changes = true;
-            } 
-        } while (changes);
-    
-        // replace all placeholder that are left with floor
-        for (int y = 0; y < layoutHeight; y++)
-            for (int x = 0; x < layoutWidth; x++)
-                if (roomLayout[y][x] == LevelElement.WILDCARD.getValue())
-                    roomLayout[y][x] = LevelElement.FLOOR.getValue();
-        return new levelg.Room(roomLayout, getDesign());
-    }
+0    public Room replace(List<Replacement> replacements) {
+1		int[][] roomLayout = copy(this.layout);        		
+2        int layoutWidth = getLayout()[0].length;
+3        int layoutHeight = getLayout().length;
+4
+5       // remove all replacements that are too big
+6        List<Replacement> replacementList = new ArrayList<>(replacements);
+7        for (Replacement r : replacements) {
+8            if (r.getLayout()[0].length <= layoutWidth && r.getLayout().length <= layoutHeight)
+9                replacementList.add(r);
+10        }
+11    
+12        // replace with replacements
+13        boolean changes;
+14        do {
+15            changes = false;
+16            for (Replacement r : replacementList) {
+17                int rHeight = r.getLayout().length;
+18                int rWidth = r.getLayout()[0].length;
+19                for (int y = 0; y < layoutHeight - rHeight; y++)
+20                    for (int x = 0; x < layoutWidth - rWidth; x++)
+21                        if (roomLayout[y][x] == LevelElement.WILDCARD.getValue()
+22                                && placeIn(roomLayout, r, x, y)) changes = true;
+23            } 
+24        } while (changes);
+25    
+26        // replace all placeholder that are left with floor
+27        for (int y = 0; y < layoutHeight; y++)
+28            for (int x = 0; x < layoutWidth; x++)
+29                if (roomLayout[y][x] == LevelElement.WILDCARD.getValue())
+30                    roomLayout[y][x] = LevelElement.FLOOR.getValue();
+31        return new levelg.Room(roomLayout, getDesign());
+32    }
 ```
 
+Listing **ToDo** zeigt die Methode `placIn`. Die Methode bekommt ein Layout übergeben in den das Replacment `r` so eingesetzt werden soll, dass die obere linke Ecke vom `r` in `layout[yCor][xCor]` eingesetzt wird. Ist der Prozess erfolgreich gibt die Methode `true` zurück, ansonsten `false`. In Zeile 1 Prüft die Methode mithilfe von `canReplaceIn` ob `r` in `layout` an der stelle `[ycor][xcor]` passt. 
 
+Listing **TODO** zeigt die Methode `canReplaceIn`. Die Methode iteriert durch die Zeilen 2 und 3 über das layout ab der Stelle `[yCor][xCor]` bis zu der Stelle an der das Replacement enden würde, wenn es eingesetzt wird. Für jedes Feld das dabei betrachtet wird, wird in Zeile 6 und 7 geprüft, ob das Replacement an der Stelle ein Feld ersetzen wollen würde und ob an dieser Stelle im Layout eine Wildcard ist. Möchte das Replacement ein Feld ersetzten an der im Layout keine Wildcard ist, kann keine ersetzung durchgeführt werden und die Methode gibt `false` zurück. Sollte an jeder zu ersetzenden Stelle auch ein Placeholder sein, gibt die Methode `true` zurück. 
 
-```
-    private boolean canReplaceIn(int[][] layout, final Replacement r, int xCor, int yCor) {
-        int[][] rlayout = r.getLayout();
-        for (int y = yCor; y < yCor + rlayout.length; y++)
-            for (int x = xCor; x < xCor + rlayout[0].length; x++) {
-                if (rlayout[y - yCor][x - xCor] != LevelElement.SKIP.getValue()
-                        && layout[y][x] != LevelElement.WILDCARD.getValue()) return false;
-            }
-        return true;
-    }
-```
+Ist eine Ersetzung Möglich, iteriert `placeIn` genauso wie `canReplaceIn` durch Zeile 4 und 5 über das Layout und führt in Zeile 6 und 7 an den jeweiligen Stellen eine Ersetzung durch. 
 
 ```
-    private boolean placeIn(final int[][] layout, final Replacement r, int xCor, int yCor) {
-        if (!canReplaceIn(layout, r, xCor, yCor)) return false;
-        else {
-            int[][] rlayout = r.getLayout();
-            for (int y = yCor; y < yCor + rlayout.length; y++)
-                for (int x = xCor; x < xCor + rlayout[0].length; x++) {
-                    if (rlayout[y - yCor][x - xCor] != LevelElement.SKIP.getValue())
-                        layout[y][x] = rlayout[y - yCor][x - xCor];
-                }
-            return true;
-        }
-    }
+  0  private boolean placeIn(final int[][] layout, final Replacement r, int xCor, int yCor) {
+  1      if (!canReplaceIn(layout, r, xCor, yCor)) return false;
+  2     else {
+  3          int[][] rlayout = r.getLayout();
+  4          for (int y = yCor; y < yCor + rlayout.length; y++)
+  5              for (int x = xCor; x < xCor + rlayout[0].length; x++) {
+  6                  if (rlayout[y - yCor][x - xCor] != LevelElement.SKIP.getValue())
+  7                      layout[y][x] = rlayout[y - yCor][x - xCor];
+  8              }
+  9          return true;
+  10      }
+  11  }
 ```
 
 
-
+```
+ 0   private boolean canReplaceIn(int[][] layout, final Replacement r, int xCor, int yCor) {
+ 1       int[][] rlayout = r.getLayout();
+ 2       for (int y = yCor; y < yCor + rlayout.length; y++)
+ 3           for (int x = xCor; x < xCor + rlayout[0].length; x++) {
+ 4               if (rlayout[y - yCor][x - xCor] != LevelElement.SKIP.getValue()
+ 5                       && layout[y][x] != LevelElement.WILDCARD.getValue()) return false;
+ 6           }
+ 7       return true;
+ 8   }
+```
 
 
 
