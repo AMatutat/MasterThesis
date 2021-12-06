@@ -132,14 +132,6 @@ Nachteil: Die Struktur des Graphen ist größtenteils zufällig.
 
 Lösungsansatz: Verschiedene Verfahren zur Graphenanalyse können genutzt werden, um Schwachstellen im Graphen zu erkennen und diese durch Veränderungen zu verbessern. 
 
-## Graphen optimieren
-
-- https://ctrl500.com/tech/handcrafted-feel-dungeon-generation-unexplored-explores-cyclic-dungeon-generation/
-
-### Vor- und Nachteile
-
-- Hilft dabei das pacing zu steuern indem backtracking vermieden wird
-
 ## Spelunky
 
 Spelunky ist ein 2D-Rogue-Like-Plattformer. Es verbindet das klassische Gameplay von Plattformern und erweitert sie um prozedural generierte Level und Permadeath aus dem Rogue-Like Genre. Derek Yu, der Entwickler von Spelunky beschreibt im gleichnamigen Buch "Spelunky" unter anderem wie die Level im Spiel generiert werden. [@Yu2016]
