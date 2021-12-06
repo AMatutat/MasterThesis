@@ -16,16 +16,49 @@ In diesem Kapitel wird ein eigenes Konzept zur Implementierung eines prozedurale
 
 ## Zielsetzung und Anforderungen an das Projekt 
 
+Konkreter Satz: Ziel dieser Arbeit ist.... um ... . Dazu gehört.....
+
 - Fokussiert auf die Anforderungen an das Programm, nicht auf die Anforderungen der Level
+  - Das Programm muss testbar sein
+  - Das Programm muss mit dem PM-Dungeon kompatibel sein
+  - Das Programm muss lauffähig sein
+  - Das Programm muss weder besonders Zeit noch Platz effektiv gebaut sein, schadet aber nicht
+  - Der Code muss Strukturiert und verständlich sein 
+  - Die erzeugten Level müssen nutzbar sein
 - Schnittstellenanforderungen
+  - muss einfach in das dungeon integrierbar sein 
+  - muss möglichkeit geben um das spiel zu beeinflusse
+    - items/monster platzieren
+    - level struktur abfragen
 - Was genau muss der Algo können?
+  - Abwechslungsreiche Level erzeugen 
+    - graphen generieren
+    - räume generieren/mutieren
+    - Level zusammensetzten
 - Was nicht?
+  - Räume vollkommen stelbständig generierne
+  - 3D 
+  - Eigenständig die Qualität der Level bewerten
 - Welche Anforderungen muss der Algorithmus und das Framework erfüllen?
+  - Die Regeln sollten beachtet werden bzw umsetzbar gemacht werden
+  - Der ganze Mechanismuss sollte modular genug sein um gut ergänzt werden zu können
+  - Einfach zu benutzten, die studenten sollen sich nicht mit der generierung auseinandersetzten, es ist ein tool ds helfen soll nicht belasten
+- Die Regeln
+  - Gute Level sind lösbar und fehlerfrei
+  - gute level fordern die mechaniken des spiels
+  - Gute lLevel sing gut gebalanced
+  - Gute Level haben Risk and Reward momente
+  - Gute Level steurn das Pacing des Spiels
+  - Gute Level sind einzigartig
+  - Gute Level sidn effizient in der Herstellung
 
 ## Abgrenzung zu anderen Levelgeneratoren und prozeduralen Algorithmen 
 
-- Warum ist dieser Algo besser für das PM-Dungeon als die anderen?
-- Welche Grenzen wird dieser Algo haben im vergleich zu den anderen?
+Der in dieser Arbeit vorgestellte Algorithmus grenzt sich von den bereits vorgestellten Verfahren durch mehrere Aspekte ab. In diesem Kapitel werden diese Aspekte erläutert. 
+
+- Braucht minimale inputdaten
+- deckt den gesamten prozess ab
+- die gestalterische freiheit ist eingegrenzt, es kann nicht alles bis ins kleinste detail konfiguriert werden, die konfigurationsmöglichkeiten sind kleiner, können dadurch aber auch einfach genutztwerden und benötigen keine anstrengung im level desighn. Der Generator ist daher ehr für Programmierer und nicht für Designer optimiert, was im kontext der lehrvranstalltung deutlich mher sinn ergibt. 
 
 ## Darstellung des Konzeptes
 
@@ -110,6 +143,8 @@ Replacements halten ebenfalls Layouts bestehend aus den bekannten Feldertypen ab
 Beim Ersetzungsprozess wird das Room-Template nach Wildcards durchsucht, wurde eine Wildcard gefunden wird diese durch ein Replacement ersetzt. Dabei ersetzt ein Replacement nicht ein einziges Feld sondern einen gesamten Teilbereich des Room-Layouts. Daher muss beim Ersetzungsprozess geschaut werden, ob das Layout des Replacements an die entsprechende Stelle im Room-Layout passt. Ein Replacement passt genau dann, wenn die obere linke ecke des Replacements-Layouts auf die gefundene Wildcard im Room-Layout platziert werden kann und sich unter jedem Feld im Replacment-Layout, das nicht den Wert `Skip` hat eine Wildcard im Room-Layout befindet. Passt ein Replacement, können die Wildcards mit dem Werten aus dem Replacement-Layout ersetzt werden. Da in einem Replacement wiederum Wildcards enthalten sein können, muss die Suche nach Wildcards nach jedem Ersetzungsprozess neugestartet werden. In Ersetzungsprozess werden immer nur Wildcards ersetzt, niemals andere Feldtypen. Die Suche nach Wildcards und das Ersetzten dieser muss solange durchgeführt werden, bis es keine Wildcards mehr im Room-Layout gibt. Sollte es Wildcards geben, für die kein passendes Replacement gefunden werden kann, werden diese durch Bodenfelder ersetzt.
 
 Um mehr Optische Abwechsung zu erlauben können sowohl RoomTeplates als auch Replacements mit DesignLabel markiert werden. Nur wenn das DesignLabel eines Replacment mit dem des RoomTemplates überseinsteimmen, können diese zusammen verwendet werden. DesignLabels können genutzt werden um bestimmte Layouts nur in bestimmten Regionen, wie Wald oder Gebirge, anzuwenden. So können sich die Verschiedenen Regionen nicht nur optisch sondern auch strukturel voneinander unterscheiden.  
+
+Damit die Lösbarkeit der Level gewährleistet werden kann, ist bei der Erstellung von Templates und Replacments darauf zu achten, dass keine Unerreichbare Felder in den Layouts enthalten sind. 
 
 
 ### LevelG
