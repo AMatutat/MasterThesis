@@ -13,10 +13,15 @@ geschätzer umfang ca 20%
 - nur ausschnitte werden gezeigt 
 
 ## Projekt Konfiguration
-- Build Script und targets
-- github workflows/settings
-- github actions
-- package struktur
+
+Um eine Reibungslose integraiton in das PM-Dungeon-Framework zu ermöglichen, wurde für das Projekt die Projektkonfigurationen des Frameworks übernommen. 
+
+- Das Buildtool Gradle wird genutzt um das Projekt zu bauen. Alle externen libaries werden als dependencie hinzugefügt.
+- Der google java formater wird genauso wie im Framework konfiguriert und genutzt um eine einheitlichen Codestil zu gewährlesiten.
+- Die Package Sturktur des Frameworks wurde übernommen.
+- Das für den Generator genutzte Git-Repository wird mithilfe von GitHub-Actions so konfiguriert, das es dem PM-Dungeon repo gleicht. Dies bedeutet das Code nur dann gemerged werden kann, wenn der Codestil eingehalten ist, alle JUnit-Testfälle erflogreich durchlaufen und das Tool Spot-Bugs keine Antipattern im Code finden kann oder die gefundenen Antipattern bewusst akzeptiert werden. Sollten Antipattern bewusst im Code gelassen werden, muss dies Entscheidung Dokumentiert und nachvollziehbar begründe werden.
+
+Die konkrete Konfiguration des GitHub-Actions kann im Repository auf GitHub **TODO footnote** oder im Anhang **todo** eingesehen werden. 
 
 ## Umsetzung GraphG
 
