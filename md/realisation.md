@@ -136,7 +136,7 @@ Da ein Template mehrfach verwendet werden soll, wird in Zeile 1 eine Kopie des L
 
 ```
 0    public Room replace(List<Replacement> replacements) {
-1		int[][] roomLayout = copy(this.layout);        		
+1		LevelElement[][] roomLayout = copy(this.layout);        		
 2        int layoutWidth = getLayout()[0].length;
 3        int layoutHeight = getLayout().length;
 4
@@ -156,7 +156,7 @@ Da ein Template mehrfach verwendet werden soll, wird in Zeile 1 eine Kopie des L
 18                int rWidth = r.getLayout()[0].length;
 19                for (int y = 0; y < layoutHeight - rHeight; y++)
 20                    for (int x = 0; x < layoutWidth - rWidth; x++)
-21                        if (roomLayout[y][x] == LevelElement.WILDCARD.getValue()
+21                        if (roomLayout[y][x] == LevelElement.WILDCARD
 22                                && placeIn(roomLayout, r, x, y)) changes = true;
 23            } 
 24        } while (changes);
@@ -164,8 +164,8 @@ Da ein Template mehrfach verwendet werden soll, wird in Zeile 1 eine Kopie des L
 26        // replace all placeholder that are left with floor
 27        for (int y = 0; y < layoutHeight; y++)
 28            for (int x = 0; x < layoutWidth; x++)
-29                if (roomLayout[y][x] == LevelElement.WILDCARD.getValue())
-30                    roomLayout[y][x] = LevelElement.FLOOR.getValue();
+29                if (roomLayout[y][x] == LevelElement.WILDCARD)
+30                    roomLayout[y][x] = LevelElement.FLOOR;
 31        return new levelg.Room(roomLayout, getDesign());
 32    }
 ```
@@ -177,13 +177,13 @@ Listing **TODO** zeigt die Methode `canReplaceIn`. Die Methode iteriert durch di
 Ist eine Ersetzung Möglich, iteriert `placeIn` genauso wie `canReplaceIn` durch Zeile 4 und 5 über das Layout und führt in Zeile 6 und 7 an den jeweiligen Stellen eine Ersetzung durch. 
 
 ```
-  0  private boolean placeIn(final int[][] layout, final Replacement r, int xCor, int yCor) {
+  0  private boolean placeIn(final LevelElement[][] layout, final Replacement r, int xCor, int yCor) {
   1      if (!canReplaceIn(layout, r, xCor, yCor)) return false;
   2     else {
-  3          int[][] rlayout = r.getLayout();
+  3          LevelElement[][] rlayout = r.getLayout();
   4          for (int y = yCor; y < yCor + rlayout.length; y++)
   5              for (int x = xCor; x < xCor + rlayout[0].length; x++) {
-  6                  if (rlayout[y - yCor][x - xCor] != LevelElement.SKIP.getValue())
+  6                  if (rlayout[y - yCor][x - xCor] != LevelElement.SKIP)
   7                      layout[y][x] = rlayout[y - yCor][x - xCor];
   8              }
   9          return true;
@@ -193,12 +193,12 @@ Ist eine Ersetzung Möglich, iteriert `placeIn` genauso wie `canReplaceIn` durch
 
 
 ```
- 0   private boolean canReplaceIn(int[][] layout, final Replacement r, int xCor, int yCor) {
- 1       int[][] rlayout = r.getLayout();
+ 0   private boolean canReplaceIn(LevelElement[][] layout, final Replacement r, int xCor, int yCor) {
+ 1       LevelElement[][] rlayout = r.getLayout();
  2       for (int y = yCor; y < yCor + rlayout.length; y++)
  3           for (int x = xCor; x < xCor + rlayout[0].length; x++) {
- 4               if (rlayout[y - yCor][x - xCor] != LevelElement.SKIP.getValue()
- 5                       && layout[y][x] != LevelElement.WILDCARD.getValue()) return false;
+ 4               if (rlayout[y - yCor][x - xCor] != LevelElement.SKIP
+ 5                       && layout[y][x] != LevelElement.WILDCARD) return false;
  6           }
  7       return true;
  8   }
