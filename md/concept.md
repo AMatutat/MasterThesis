@@ -16,49 +16,25 @@ In diesem Kapitel wird ein eigenes Konzept zur Implementierung eines prozedurale
 
 ## Zielsetzung und Anforderungen an das Projekt 
 
-Konkreter Satz: Ziel dieser Arbeit ist.... um ... . Dazu gehört.....
+Ziel dieser Arbeit ist es, ein Generator zu Entwickler der abwechslungsreiche und spaßige Level erstellt und in das PM-Dungeon-Framework integriert werden kann. Daher sind die Anforderungen an den Generator zweigeteilt: Auf der einen Seite muss der Generator gute Level erzeugen, dafür wurden im Kapitel 2 verschiedene Regeln für gutes Leveldesign aufgestellt. 
 
-- Fokussiert auf die Anforderungen an das Programm, nicht auf die Anforderungen der Level
-  - Das Programm muss testbar sein
-  - Das Programm muss mit dem PM-Dungeon kompatibel sein
-  - Das Programm muss lauffähig sein
-  - Das Programm muss weder besonders Zeit noch Platz effektiv gebaut sein, schadet aber nicht
-  - Der Code muss Strukturiert und verständlich sein 
-  - Die erzeugten Level müssen nutzbar sein
-- Schnittstellenanforderungen
-  - muss einfach in das dungeon integrierbar sein 
-  - muss möglichkeit geben um das spiel zu beeinflusse
-    - items/monster platzieren
-    - level struktur abfragen
-- Was genau muss der Algo können?
-  - Abwechslungsreiche Level erzeugen 
-    - graphen generieren
-    - räume generieren/mutieren
-    - Level zusammensetzten
-- Was nicht?
-  - Räume vollkommen stelbständig generierne
-  - 3D 
-  - Eigenständig die Qualität der Level bewerten
-- Welche Anforderungen muss der Algorithmus und das Framework erfüllen?
-  - Die Regeln sollten beachtet werden bzw umsetzbar gemacht werden
-  - Der ganze Mechanismuss sollte modular genug sein um gut ergänzt werden zu können
-  - Einfach zu benutzten, die studenten sollen sich nicht mit der generierung auseinandersetzten, es ist ein tool ds helfen soll nicht belasten
-- Die Regeln
-  - Gute Level sind lösbar und fehlerfrei
-  - gute level fordern die mechaniken des spiels
-  - Gute lLevel sing gut gebalanced
-  - Gute Level haben Risk and Reward momente
-  - Gute Level steurn das Pacing des Spiels
-  - Gute Level sind einzigartig
-  - Gute Level sidn effizient in der Herstellung
+1. Gute Level sind lösbar und fehlerfrei
+2. Gute Level fordern die Mechaniken des Spiels
+3. Gute Level sing gut gebalanced
+4. Gute Level haben Risk and Reward Momente
+5. Gute Level steurn das Pacing des Spiels
+6. Gute Level sind einzigartig
+7. Gute Level sind effizient in der Herstellung
+
+Die vom Generator erzeugten Level sollten all diese Regeln beachten und der Generator muss Schnittstellen anbieten um die Einhaltung der Regeln zu gewährleisten. 
+
+Auf der anderen Seite der Anforderungen steht die integration in das PM-Dungeon-Framework. Das bedeutet, dass der Generator nahtlos in das bestehende Framework eingegliedert werden können muss und die Anforderungen des Frameworks berücksichtigt. Dies schließ neben dem einhaltn der Code Konvention, Kompatibilität der verwendeten Buildtools und libaries vorallem auch die Testbarkeit des Generators mit ein. Der Code sollte so konzeptioniert werden, dass eine sehr gute Testabdeckung mithilfe von JUnit möglich ist. Tests sollten für alle essenziellen Bestandteile geschrieben und dokumentiert werden. Alle Codeteile sollten ausreichend Dokumentiert und Kommentiert sein. Schnittstellen müssen Umfangreich und Verständlich Dokumentiert sein. Der Grundsätzliche Projektaufbau des Frameworks muss beachtet werden. 
+
+Da der eigentliche Fokus des PM-Dungeon nicht die Entwicklung eines Spiels ist, sondern das erlernen und vertiefen der Programmierkenntnisse, muss der Generator ohne Inputdaten der Anwender funktionieren. Parameterkonfigurationen sind zwar erwünscht, es sollte jedoch immer eine Standartkonfiguration angeboten werden. Der Code sollte wenmöglich Modular aufagbaut sein, damit zukünftige Verbesserungen und Änderungen schnell integriert werden können. Außerdem erlaubt eine Modulare Gestaltung den interessierten Studierenden eigene Inhalte in den Generator hinzuzufügen oder Teile auszutauschen. Der Generator muss weder Zeit- noch Speicherplatzeffizient sein. Sollte es der Lesbarkeit des Codes zugute kommen, ist langsamerer, speicheruneffizienter Code zu bevorziehen. Die generierung von Level im dreidimensionalen Raum ist nicht Ziel dieser arbeit und stellt keine Anforderung an den Generator dar. 
 
 ## Abgrenzung zu anderen Levelgeneratoren und prozeduralen Algorithmen 
 
-Der in dieser Arbeit vorgestellte Algorithmus grenzt sich von den bereits vorgestellten Verfahren durch mehrere Aspekte ab. In diesem Kapitel werden diese Aspekte erläutert. 
-
-- Braucht minimale inputdaten
-- deckt den gesamten prozess ab
-- die gestalterische freiheit ist eingegrenzt, es kann nicht alles bis ins kleinste detail konfiguriert werden, die konfigurationsmöglichkeiten sind kleiner, können dadurch aber auch einfach genutztwerden und benötigen keine anstrengung im level desighn. Der Generator ist daher ehr für Programmierer und nicht für Designer optimiert, was im kontext der lehrvranstalltung deutlich mher sinn ergibt. 
+Der Generator in dieser Arbeit unterscheidet sich vor allem durch die unterschiedlichen Anwenderzielgruppen zu den anderen in dieser Arbeit vorgestellten oder in der Praxis angewendeten Algorithmen. Während die bekannte Verfahren so konzeptioniert sind, dass erfahrene Game- und Leveldesigner sorgfältig gestaltete Inhalte erzeugen und mithilfe der Algorithmen abwandeln um effizient Level zu erzeugen, muss der Generator für das PM-Dungeon ohne Inhalte von Designern auskommen. Auch wenn die qualität der Level ein wichtiges Kriteriums ist, so ist die bedienbarkeit und integration des Generatos wichtiger als bei anderen Algorithmen. Während andere Generatoren nur Teilaspekte der Generierung abdecken, wie Levelstruktur oder gesaltung der Räume, deckt der Generator dieser Arbeit alle Aspekte der Levelgenerierung ab. Dieser Generator stellt weniger Konfigurationsmöglichkeiten zur verüfugung als andere Generatoren, ermöglicht es aber Anwender aus dem Programmierbereich einfach abwechslungsreiche Level zu erzeugen. Der Generator ist für die Anwendung durch Programmierer und nicht für die Anwendung durch Designer optimiert.
 
 ## Darstellung des Konzeptes
 
