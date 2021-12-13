@@ -20,15 +20,15 @@ Ziel dieser Arbeit ist es, ein Generator zu Entwickler der abwechslungsreiche un
 
 1. Gute Level sind lösbar und fehlerfrei
 2. Gute Level fordern die Mechaniken des Spiels
-3. Gute Level sing gut gebalanced
+3. Gute Level sind gut gebalanced
 4. Gute Level haben Risk and Reward Momente
-5. Gute Level steurn das Pacing des Spiels
+5. Gute Level steuern das Pacing des Spiels
 6. Gute Level sind einzigartig
 7. Gute Level sind effizient in der Herstellung
 
 Die vom Generator erzeugten Level sollten all diese Regeln beachten und der Generator muss Schnittstellen anbieten um die Einhaltung der Regeln zu gewährleisten. 
 
-Auf der anderen Seite der Anforderungen steht die integration in das PM-Dungeon-Framework. Das bedeutet, dass der Generator nahtlos in das bestehende Framework eingegliedert werden können muss und die Anforderungen des Frameworks berücksichtigt. Dies schließ neben dem einhaltn der Code Konvention, Kompatibilität der verwendeten Buildtools und libaries vorallem auch die Testbarkeit des Generators mit ein. Der Code sollte so konzeptioniert werden, dass eine sehr gute Testabdeckung mithilfe von JUnit möglich ist. Tests sollten für alle essenziellen Bestandteile geschrieben und dokumentiert werden. Alle Codeteile sollten ausreichend Dokumentiert und Kommentiert sein. Schnittstellen müssen Umfangreich und Verständlich Dokumentiert sein. Der Grundsätzliche Projektaufbau des Frameworks muss beachtet werden. 
+Auf der anderen Seite der Anforderungen steht die Integration in das PM-Dungeon-Framework. Das bedeutet, dass der Generator nahtlos in das bestehende Framework eingegliedert werden können muss und die Anforderungen des Frameworks berücksichtigt. Dies schließ neben dem einhalten der Code Konvention, Kompatibilität der verwendeten Buildtools und libaries vorallem auch die Testbarkeit des Generators mit ein. Der Code sollte so konzeptioniert werden, dass eine sehr gute Testabdeckung mithilfe von JUnit möglich ist. Tests sollten für alle essenziellen Bestandteile geschrieben und dokumentiert werden. Alle Codeteile sollten ausreichend Dokumentiert und Kommentiert sein. Schnittstellen müssen Umfangreich und Verständlich Dokumentiert sein. Der Grundsätzliche Projektaufbau des Frameworks muss beachtet werden. 
 
 Da der eigentliche Fokus des PM-Dungeon nicht die Entwicklung eines Spiels ist, sondern das erlernen und vertiefen der Programmierkenntnisse, muss der Generator ohne Inputdaten der Anwender funktionieren. Parameterkonfigurationen sind zwar erwünscht, es sollte jedoch immer eine Standartkonfiguration angeboten werden. Der Code sollte wenmöglich Modular aufagbaut sein, damit zukünftige Verbesserungen und Änderungen schnell integriert werden können. Außerdem erlaubt eine Modulare Gestaltung den interessierten Studierenden eigene Inhalte in den Generator hinzuzufügen oder Teile auszutauschen. Der Generator muss weder Zeit- noch Speicherplatzeffizient sein. Sollte es der Lesbarkeit des Codes zugute kommen, ist langsamerer, speicheruneffizienter Code zu bevorziehen. Die generierung von Level im dreidimensionalen Raum ist nicht Ziel dieser arbeit und stellt keine Anforderung an den Generator dar. 
 
@@ -106,7 +106,6 @@ Raum-Templates halten das Layout des Raumes als zwei dimensionales Integer-Array
 | 0    | Boden    | Auf diesen Feld können Gegenstände platziert werden und Monstern sowie Helden sich bewegen. |
 | 1    | Wand     | Eine Wand im Level durch die der Held und Monster nicht durchlaufen können. |
 | 2    | Ausgang  | Dieses Feld führt zum nächsten Level.                        |
-| 3    | Falle    | Auf diesen Feld ist eine Falle. Der spezifische Typ der Falle muss vom Studierenden bestimmt werden. |
 | -1   | Wildcard | Dieses Feld muss durch Replacements ersetzt werden.          |
 
 Wildcards erlauben es, aus einen Template mehrere unterschiedliche Räume zu erstellen und reduzieren daher den Aufwand bei der Erstellung von Räumen. 
