@@ -1,6 +1,7 @@
 package roomg;
 
 import stuff.DesignLabel;
+import stuff.LevelElement;
 
 /**
  * can be used to replace placeholder in a room layout
@@ -9,7 +10,7 @@ import stuff.DesignLabel;
  */
 public class Replacement {
 
-    private int[][] layout;
+    private LevelElement[][] layout;
     private DesignLabel label;
     private boolean rotate;
 
@@ -18,13 +19,13 @@ public class Replacement {
      * @param rotate can the layout be rotated?
      * @param label  DesignLabel of the replacer
      */
-    public Replacement(int[][] layout, boolean rotate, DesignLabel label) {
+    public Replacement(LevelElement[][] layout, boolean rotate, DesignLabel label) {
         this.layout = layout;
         this.rotate = rotate;
         this.label = label;
     }
 
-    public int[][] getLayout() {
+    public LevelElement[][] getLayout() {
         return this.layout;
     }
 

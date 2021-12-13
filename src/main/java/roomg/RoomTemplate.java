@@ -3,6 +3,7 @@ package roomg;
 import levelg.Room;
 import stuff.DesignLabel;
 import stuff.LevelElement;
+import stuff.Point;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,8 +12,9 @@ import java.util.List;
  * @author Andre Matutat
  */
 public class RoomTemplate {
-    private int[][] layout;
+    private LevelElement[][] layout;
     private DesignLabel design;
+    private Point localRef;
 
     /**
      * A RoomTemplate can be used to create a room.
@@ -20,9 +22,10 @@ public class RoomTemplate {
      * @param layout the layout of the room
      * @param label  the DesignLabel of the room
      */
-    public RoomTemplate(int[][] layout, DesignLabel label) {
+    public RoomTemplate(LevelElement[][] layout, DesignLabel label, Point localRef) {
         this.layout = layout;
         this.design = label;
+        this.localRef=localRef;
     }
 
     /**
@@ -31,7 +34,7 @@ public class RoomTemplate {
      * @param r original room
      */
     public RoomTemplate(RoomTemplate r) {
-        layout = new int[r.getLayout()[0].length][r.getLayout().length];
+        layout = new LevelElement[r.getLayout()[0].length][r.getLayout().length];
         for (int y = 0; y < layout.length; y++)
             for (int x = 0; x < layout[0].length; x++) layout[x][y] = r.getLayout()[x][y];
         design = r.getDesign();
@@ -43,10 +46,10 @@ public class RoomTemplate {
      * @param replacements list of replacements
      * @return the created room
      */
-    public Room replace(final List<Replacement> replacements) {
+    public Room replace(final List<Replacement> replacements, Point globalRef) {
         int layoutHeight = getLayout().length;
         int layoutWidth = getLayout()[0].length;
-        int[][] roomLayout = new int[layoutHeight][layoutWidth];
+        LevelElement[][] roomLayout = new LevelElement[layoutHeight][layoutWidth];
 
         //copy layout
         for (int y = 0; y < layoutHeight; y++)
@@ -70,7 +73,7 @@ public class RoomTemplate {
                 int rWidth = r.getLayout()[0].length;
                 for (int y = 0; y < layoutHeight - rHeight; y++)
                     for (int x = 0; x < layoutWidth - rWidth; x++)
-                        if (roomLayout[y][x] == LevelElement.WILDCARD.getValue()
+                        if (roomLayout[y][x] == LevelElement.WILDCARD
                                 && placeIn(roomLayout, r, x, y)) changes = true;
             }
         } while (changes);
@@ -78,9 +81,10 @@ public class RoomTemplate {
         // replace all placeholder that are left with floor
         for (int y = 0; y < layoutHeight; y++)
             for (int x = 0; x < layoutWidth; x++)
-                if (roomLayout[y][x] == LevelElement.WILDCARD.getValue())
-                    roomLayout[y][x] = LevelElement.FLOOR.getValue();
-        return new levelg.Room(roomLayout, getDesign());
+                if (roomLayout[y][x] == LevelElement.WILDCARD)
+                    roomLayout[y][x] = LevelElement.FLOOR;
+
+        return new levelg.Room(roomLayout, getDesign(),localRef,globalRef);
     }
 
     /**
@@ -92,13 +96,13 @@ public class RoomTemplate {
      * @param yCor   place the left upper corner of the replacement on this y
      * @return if replacement was done
      */
-    private boolean placeIn(final int[][] layout, final Replacement r, int xCor, int yCor) {
+    private boolean placeIn(final LevelElement[][] layout, final Replacement r, int xCor, int yCor) {
         if (!canReplaceIn(layout, r, xCor, yCor)) return false;
         else {
-            int[][] rlayout = r.getLayout();
+            LevelElement[][] rlayout = r.getLayout();
             for (int y = yCor; y < yCor + rlayout.length; y++)
                 for (int x = xCor; x < xCor + rlayout[0].length; x++) {
-                    if (rlayout[y - yCor][x - xCor] != LevelElement.SKIP.getValue())
+                    if (rlayout[y - yCor][x - xCor] != LevelElement.SKIP)
                         layout[y][x] = rlayout[y - yCor][x - xCor];
                 }
             return true;
@@ -114,17 +118,17 @@ public class RoomTemplate {
      * @param yCor   place the left upper corner of the replacement on this y
      * @return if replacement can be done
      */
-    private boolean canReplaceIn(int[][] layout, final Replacement r, int xCor, int yCor) {
-        int[][] rlayout = r.getLayout();
+    private boolean canReplaceIn(LevelElement[][] layout, final Replacement r, int xCor, int yCor) {
+        LevelElement[][] rlayout = r.getLayout();
         for (int y = yCor; y < yCor + rlayout.length; y++)
             for (int x = xCor; x < xCor + rlayout[0].length; x++) {
-                if (rlayout[y - yCor][x - xCor] != LevelElement.SKIP.getValue()
-                        && layout[y][x] != LevelElement.WILDCARD.getValue()) return false;
+                if (rlayout[y - yCor][x - xCor] != LevelElement.SKIP
+                        && layout[y][x] != LevelElement.WILDCARD) return false;
             }
         return true;
     }
 
-    public int[][] getLayout() {
+    public LevelElement[][] getLayout() {
         return layout;
     }
 

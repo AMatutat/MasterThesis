@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import stuff.DesignLabel;
+import stuff.LevelElement;
 
 import java.io.*;
 import java.lang.reflect.Type;
@@ -47,10 +48,10 @@ public class ReplacementLoader {
      * @return new Replacement with rotated layout
      */
     private Replacement rotate90(final Replacement r) {
-        int[][] originalLayout = r.getLayout();
+        LevelElement[][] originalLayout = r.getLayout();
         int mSize = originalLayout.length;
         int nSize = originalLayout[0].length;
-        int[][] rotatedLayout = new int[nSize][mSize];
+        LevelElement[][] rotatedLayout = new LevelElement[nSize][mSize];
         for (int row = 0; row < mSize; row++)
             for (int col = 0; col < nSize; col++)
                 rotatedLayout[col][mSize - 1 - row] = originalLayout[row][col];
