@@ -208,9 +208,60 @@ Für diese Arbeit wurden verschiedene Layouts für Room-Templates und Replacment
 
 ## Anbindung an das PM-Dungeon und Schnittstellen
 
-Die Anbindung an das Framework wurde wie konzeptioniert durchgeführt und bietet keine nennenswerten Aspekte und wird daher in diesem Abschnitt nicht weiter erläutert. 
+Die Anbindung an das Framework wurde wie konzeptioniert durchgeführt und bietet keine nennenswerten Aspekte und wird daher in diesem Abschnitt nicht weiter erläutert. Ebenso wurde die Graph-Search wie beschrieben umgesetzt und wird in diesem Abschnitt auch nicht weiter erläutert. In diesem Abschnitt werden verschiedene Code-Snippets erläutert um zu präsentieren, wie die Studierenden die Schnittstellen nutzen können, um ihr Spiel zu gestalten. Alle Code-Snippets sind so abstrahiert, dass kein weiteres Verständnis für das PM-Dungeon-Framework von Nöten ist.
 
-- libGDX für A*, welche Anpassungen waren nötig
+Listing **TODO** zeigt wie ein Monster zufällige im Level platziert werden kann. In Zeile 0 wird das aktuelle Level abgefragt. In Zeile 1 wird ein zufälliges Bodenfeld aus einem zufälligen Raum im Level ausgewählt. In Zeile 2 wird dem Monster `dino` die Globale-Position des Tiles zugewiesen.  
+
+```java
+0 Level currentLevel = levelAPI.getCurrentLevel();
+1 Tile randomTile = currentLevel.getRandomRoom().getRandomFloorTile();
+2 dino.setPosition(randomTile.getGlobalPosition());
+```
+
+Listing **TODO** zeigt wie der Held auf dem Startpunkt des Level gesetzt werden kann. In Zeile 0 wird das aktuelle Level abgefragt. In Zeile 1 wird das als Startpunkt markierte Tile abgefragt. In Zeile 2 wird dem Helden die Position des Tiles zugewiesen. 
+
+```java
+0 Level currentLevel = levelAPI.getCurrentLevel();
+1 Tile startTile = currentLevel.getStartTile();
+2 hero.setPosition(starTile.getGlobalPosition());
+```
+
+Listing **TODO** zeigt wie ein Monster in einem kritischen Raum platziert werden kann. In Zeile 0 wird das aktuelle Level abgefragt. In Zeile 1 werden alle kritischen Knoten abgefragt. In Zeile 2 wird ein zufälliger Knoten aus allen kritischen Knoten ausgewählt. In Zeile 3 wird der Raum gespeichert, der den Knoten im Level repräsentiert. Der Index des Knoten in `Level.rooms` ist identisch mit dem passenden Index des Knoten in `Level.nodes`. In Zeile 4 wird ein zufälliges Bodenfeld aus dem Raum ausgewählt. In Zeile 5 wird dem Monster `evilDuck` die Position des Tiles zugewiesen. 
+
+```java
+0 Level currentLevel = levelAPI.getCurrentLevel();
+1 List <Node> criticalNodes = currentLevel.getCriticalNodes();
+2 Node randomNode = criticalNodes.get(new Random(criticalNodes.size()));
+3 Room randomRoom = currentLevel.getRoomToNode(randomNode);
+4 Tile randomTile = randomRoom.getRandomFloorTile();
+5 evilDuck.setPosition(randomTile.getGlobalPosition());
+```
+
+Listing **TODO** zeigt wie eine Schatztruhe in einen optionalen Raum mit platziert werden kann. In Zeile 0 wird das aktuelle Level abgefragt. In Zeile 1 werden alle optionalen Knoten abgefragt. In Zeile 2 wird ein zufälliger Knoten aus allen optionalen Knoten ausgewählt. In Zeile 3 wird der Raum gespeichert, der den Knoten im Level repräsentiert. In Zeile 4 wird ein zufälliges Bodenfeld aus dem Raum ausgewählt. In Zeile 5 wird der Schatzkiste `bigLoot` die Position des Tiles zugewiesen. 
+
+```java
+0 Level currentLevel = levelAPI.getCurrentLevel();
+1 List <Node> optionalNodes = currentLevel.getOptionalNodes();
+2 Node randomNode = optionalNodes.get(new Random(optionalNodes.size()));
+3 Room randomRoom = currentLevel.getRoomToNode(randomNode);
+4 Tile randomTile = randomRoom.getRandomFloorTile();
+5 bigLoot.setPosition(randomTile.getGlobalPosition());
+```
+
+Listing **TODO** zeigt wie geprüft werden kann, ob ein bestimmter Raum umgangen werden kann. In Zeile 0 wird das aktuelle Level abgefragt. In Zeile 1 und 2 werden sowohl der Start- als auch der Endknoten des Levels abgefragt. In Zeile 3 wird der kürzeste Pfad vom Start- bis zum Endknoten abgefragt. In Zeile 4 wird ein zufälliger Knoten aus diesem Pfad ausgewählt, dieser Knoten dient zur Demonstration und gilt es zu vermeiden. In Zeile 5 wird geprüft ob der ausgewählte Knoten auf dem Weg vom Start- bis zum Endknoten umgangen werden kann. In diesem Beispiel würde das bedeuten, das es mehrere Wege zum Ziel gibt. In Zeile 6 und 7 finden Ausgaben entsprechend der Ergebnisse statt. Diese dienen nur der Demonstration und könnten durch spezifische Game-Design Entscheidungen ersetzt werden. 
+
+```java
+0 Level currentLevel = levelAPI.getCurrentLevel();
+1 Node start = currentLevel.getStartNode();
+2 Node end = currentLevel.getEndNode();   
+3 List<Node> path = currentLevel.getShortestPath(start,end);
+4 Node toAvoid = path.get(new Random(path.size()));
+5 if (currentLevel.isRoomReachableWithout(start,end,toAvoid))
+6 System.out.println("YES!")
+7 else System.out.println("OH NO!"));   
+```
+
+
 
 # Evaluierung 
 
