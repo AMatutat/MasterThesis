@@ -1,17 +1,5 @@
 # Eigenes Konzept
 
-<!--
-
-*   Zielsetzung definieren, sowie Bewertungskriterien darstellen
-*   Herausstellen der verwendeten Feature Elemente aus den anderen Algorithmen
-*   Vergleich mit bekannten Lösungen: Worin unterscheiden sich die eigenen Ansätze von den bekannten? Wo liegen mögliche Vor- oder Nachteile?
-*   Darstellen von Theoretischen Problemen der zusammenfügung
-*   Beschreiben wie diese Probleme auf konzeptueller ebene behoben werden
-*   Beschreibung des gesamten umsetzungs konzeptes 
-
-geschätzter  ca. 20% ... 30% der Arbeit
--->
-
 In diesem Kapitel wird ein eigenes Konzept zur Implementierung eines prozeduralen graphenbasierten 2D-Levelgenerator vorgestellt. Der konzeptionierte Generator soll nicht nur gute Level erzeugen, sondern auch in das PM-Dungeon integriert werden können und für die Studierenden nutzbar gemacht werden. Der Generator soll die in Kapitel 3 vorgestellten Algorithmen verwenden und miteinander kombinieren, um effektiv gute Level zu generieren. Im nächsten Abschnitt werden weitere spezifische Anforderungen für den Generator aufgestellt, die sich vor allem auf die Integration des Generators in das PM-Dungeon fokussieren. Um die Besonderheiten des in dieser Arbeit konzeptionierten Algorithmus hervorzuheben, findet in Abschnitt 3.2 eine Abgrenzung zu anderen prozeduralen Algorithmen statt, bevor im letzten Abschnitt das modulare Bausteinkonzept für den Generator vorgestellt und das Konzept zur Implementierung des Generators präsentiert wird. 
 
 ## Zielsetzung und Anforderungen an das Projekt 
@@ -121,15 +109,27 @@ Um mehr Optische Abwechsung zu erlauben können sowohl RoomTeplates als auch Rep
 
 Damit die Lösbarkeit der Level gewährleistet werden kann, ist bei der Erstellung von Templates und Replacments darauf zu achten, dass keine Unerreichbare Felder in den Layouts enthalten sind. 
 
-
 ### LevelG
+
+- auch Tile erklären
 
 ### Integration in das PM-Dungeon
 
-- wie werden die level eingeladen?
-- wie werden die level gezeichnet?
-- wie geht der levelcontrollr damit um?
-- wie werden objekte im level platziert?s
+In diesen Abschnitt wird erläutert wie die vorher vorgestellten Inhalte in das PM-Dungeon-Framework integriert werden. Dabei geht es hier konkret darum, wie DungeonG in das Projekt eingebunden wird, wie die Level gezeichnet werden und wie Inhalte im Level platziert werden können. Im Abschnitt *Schnittstellen* werden dann weitere, über die Grundlagen hinausgehende, Funktionen vorgestellt. 
+
+Im Rahmen dieser Arbeit ist es nicht möglich, auf alle Einzelheiten des PM-Dungeon-Frameworks einzugehen, daher wird die Integration nur grobgranular beschrieben und an nötigen stellen abstrahiert. Designentscheidungen des Frameworks werden hier nicht begründet. 
+
+Das Framework ist Modular aufgebaut und besitzt ein Modul, welches für alle Level-Angelegenheiten zuständig ist. In diesem Modul kann DungeonG eingebunden werden. Als Schnittstelle zwischen DungeonG und Framework dient die Klasse `LevelAPI`. Diese Klasse verwaltet und lädt das Level und stößt Zeichenprozess an. 
+
+Um das Level zu laden werden verschiedene Funktionen angeboten, mit dem Knotenanzahl, Kantenanzahl und Design des Level bestimmt werden können. Mit diesen Parametern startet `LevelAPI` den Generierungsprozess von `DugeonG` und speichert das erzeugte Level als `currentLevel` ab. 
+
+Das Level muss in jedem Frame neu gezeichnet werden. Um das Level zu zeichnen benötigen die einzelnen Felder im Level eine Textur. Die Textur ist das aussehen des Feldes. Die Klasse `TileTextureFactory` sucht die passende Textur für ein Tile. Die Entscheidung welche Textur dem Tile zugeordnet wird, hängt von davon ab ob es sich um ein Boden- oder Wandfeld handelt und welche Typen von Felder sich über, unter, links und rechts vom betrachteten Tile befinden. So kann entschieden werden ob es sich um eine Ecke, eine grade Wand, ein Boden, eine T-Kreuzung etc. handelt. Je nachdem welches DesignLabel gesetzt ist, werden dann die entsprechenden Texturen ausgewählt. 
+
+Um das Level zu zeichnen, iteriert die `LevelAPI` über jeden Raum im Level. In jedem Raum wird jedes Tile ausgewählt und die im Tile gespeicherte Textur an der Globalen-Koordinate des Tile gezeichnet. Felder im Level, die kein Tile halten, werden nicht gezeichnet und werden daher schwarz dargestellt. Dies sind Felder die außerhalb des Spielbereiches liegen.
+
+Um Objekte im Level zu verteilen, kann ein zufälliges Tile in einen bestimmten oder einen zufälligen Raum ausgewählt werden und die Position des Objekt auf die Position des ausgewählten Tile zu setzten. Der Zeichenprozess des Level wird immer vor dem Zeichenprozess der Objekte ausgeführt, daher werden die Texturen der Objekte über die Texturen des Level gezeichnet und werden so nicht überdeckt. 
+
+  
 
 ### Schnittstellen
 

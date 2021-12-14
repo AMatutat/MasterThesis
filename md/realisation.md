@@ -215,9 +215,11 @@ Für diese Arbeit wurden verschiedene Layouts für RoomTemplates und Replacments
 
 ## Umsetzung LevelG
 
-## Anbindung an das PM-Dungeon
+## Anbindung an das PM-Dungeon und Schnittstellen
 
-## Implementieren der Schnittstellen
+Die Anbindung an das Framework wurde wie konzeptioniert durchgeführt und bietet keine nennenswerte Aspekte und wird daher in diesem Abschnitt nicht weiter erläutert. 
+
+- libGDX für A*, welche Anpassungen waren nötig
 
 # Evaluierung 
 
