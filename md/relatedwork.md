@@ -50,15 +50,38 @@ Die roten Kanten in Abbildung \ref{dag} zeigen den kritischen Pfad. Der kritisch
 
 Diese Art der Darstellung eignet sich vor allem für zweidimensionale Spiele, da auch der Graph zweidimensional ist. Zu beachten ist, dass der Graph nur die Struktur des Levels darstellt, jedoch nicht die Geometrie, das Aussehen oder den Inhalt.
 
-## Graphenanalyse 
-	- Welche Alogrithmen gibt es um Graphen zu analyisieren?
-	- Was bringen die im kontext dieser arbeit?
-	- Faces
-		- Was sind Faces?
-		- Wie können Faces erkannt werden
-	- Zyklus und Pfade
-	- Kürzester Weg im Pfade
+## Graphen-Analyse 
 
+Im laufe dieser Arbeit werden verschiedene Verfahren der Graphen-Analyse verwendet, in diesem Abschnitt werden diese Verfahren vorgestellt und erläutert. 
+
+### Graph-Search
+
+Beim Graph-Search verfahren, werden mithilfe von Breiten- oder Tiefensuche Pfade von einem Knoten im Graphen zu einem anderen Knoten im Graphen gesucht. Um Zyklen zu vermeiden, werden bei Suche alle bereits betrachteten Knoten markiert. Anders als bei Verfahren wie `A*` oder dem Dijkstra-Algorithmus, werden keine gewichteten Kanten benötigt. Das Graph-Search Verfahren findet daher nicht den kürzesten oder längsten Pfad im Graphen, sondern alle. In Kapitel 4 wird der spezifische Anwendungsfall in dieser Arbeit dafür beschrieben. In diesen Abschnitt wird nur das Theoretische-Verfahren betrachtet. 
+
+Listing **TODO** zeigt eine Implementierung der Graph-Search mithilfe von Breitensuche in Pseudocode. Zeile 0 dient dabei als Einstiegspunkt, der Methode werden Start- und Zielknoten übergeben. In Zeile 1 wird dann eine Liste erstellt, in der alle Pfade abgespeichert werden, ein Pfad ist dabei selbst eine Liste aus Knoten. In Zeile 2 wird die Suche gestartet und in Zeile 3 werden alle gefunden Pfade zurückgegeben. Die Methode in Zeile 5 bekommt den aktuell betrachteten Knoten, eine Liste mit bereits betrachteten Knoten, den Zielknoten sowie die Liste mit den bereits gefunden Pfaden übergeben. In Zeile 6 wird der aktuell betrachtete Knoten markiert und in Zeile 7 wird geprüft, ob es ich bei diesem Knoten um den Zielknoten handelt, ist dies der Fall wird die Liste mit den betrachteten Knoten als Pfad in die Lösungsliste abgespeichert. Sollte es sich nicht um den Zielknoten handeln, wird in Zeile 9-12 die Methode rekursiv für jedes Kind des Knotens erneut aufgerufen. Dabei wird die Liste mit dem bereits betrachteten Knoten kopiert, damit jede Suche unabhängig von den anderen Suchen ist. Sollte der aktuell betrachtete Knoten weder der Zielknoten sein und auch keine Kinder haben bzw. keine Kinder, die noch nicht betrachtet wurden, wurde in diesem Zweig der Breitensuche kein Pfad zum Ziel gefunden und der Zweig wird nicht weiter betrachtet. 
+
+```python
+0 List<List<Node>> graph_search(Node start, Node goal):
+1    List<List<Node>> paths;
+2    graph_serach(start,new List<Node>(),goal,paths);
+3	 return paths;
+4
+5 void graph_search(Node currentNode, List<Node> marked, Node goal, List <Node> paths):
+6   marked.add(currentNode);
+7	if(currentNode==goal): 
+8    	paths.add(marked);  
+9    elif(currentNode.hasChilds):      
+10    	forEach(Node child: currentNode.child):
+11    		if(!marked.contains(child)):
+12    			graph_search(child,marked.copy(),goal,paths);   
+```
+
+
+
+### Faces 
+
+- Was sind Faces?
+- Wie können Faces erkannt werden
 
 ## Rogue-Like
 
