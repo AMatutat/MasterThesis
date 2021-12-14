@@ -1,10 +1,10 @@
 # Eigenes Konzept
 
-In diesem Kapitel wird ein eigenes Konzept zur Implementierung eines prozeduralen graphenbasierten 2D-Levelgenerator vorgestellt. Der konzeptionierte Generator soll nicht nur gute Level erzeugen, sondern auch in das PM-Dungeon integriert werden können und für die Studierenden nutzbar gemacht werden. Der Generator soll die in Kapitel 3 vorgestellten Algorithmen verwenden und miteinander kombinieren, um effektiv gute Level zu generieren. Im nächsten Abschnitt werden weitere spezifische Anforderungen für den Generator aufgestellt, die sich vor allem auf die Integration des Generators in das PM-Dungeon fokussieren. Um die Besonderheiten des in dieser Arbeit konzeptionierten Algorithmus hervorzuheben, findet in Abschnitt 3.2 eine Abgrenzung zu anderen prozeduralen Algorithmen statt, bevor im letzten Abschnitt das modulare Bausteinkonzept für den Generator vorgestellt und das Konzept zur Implementierung des Generators präsentiert wird. 
+In diesem Kapitel wird ein eigenes Konzept zur Implementierung eines prozeduralen graphenbasierten 2D-Level-Generator vorgestellt. Der konzeptionierte Generator soll nicht nur gute Level erzeugen, sondern auch in das PM-Dungeon integriert werden können und für die Studierenden nutzbar gemacht werden. Der Generator soll die in Kapitel 3 vorgestellten Algorithmen verwenden und miteinander kombinieren, um effektiv gute Level zu generieren. Im nächsten Abschnitt werden weitere spezifische Anforderungen für den Generator aufgestellt, die sich vor allem auf die Integration des Generators in das PM-Dungeon fokussieren. Um die Besonderheiten des in dieser Arbeit konzeptionierten Algorithmus hervorzuheben, findet in Abschnitt 3.2 eine Abgrenzung zu anderen prozeduralen Algorithmen statt, bevor im letzten Abschnitt das modulare Bausteinkonzept für den Generator vorgestellt und das Konzept zur Implementierung des Generators präsentiert wird. 
 
 ## Zielsetzung und Anforderungen an das Projekt 
 
-Ziel dieser Arbeit ist es, ein Generator zu Entwickler der abwechslungsreiche und spaßige Level erstellt und in das PM-Dungeon-Framework integriert werden kann. Daher sind die Anforderungen an den Generator zweigeteilt: Auf der einen Seite muss der Generator gute Level erzeugen, dafür wurden im Kapitel 2 verschiedene Regeln für gutes Leveldesign aufgestellt. 
+Ziel dieser Arbeit ist es, ein Generator zu entwickeln, der abwechslungsreiche und spaßige Level erstellt und in das PM-Dungeon-Framework integriert werden kann. Daher sind die Anforderungen an den Generator zweigeteilt: Auf der einen Seite muss der Generator gute Level erzeugen, dafür wurden im Kapitel 2 verschiedene Regeln für gutes Leveldesign aufgestellt. 
 
 1. Gute Level sind lösbar und fehlerfrei
 2. Gute Level fordern die Mechaniken des Spiels
@@ -14,15 +14,15 @@ Ziel dieser Arbeit ist es, ein Generator zu Entwickler der abwechslungsreiche un
 6. Gute Level sind einzigartig
 7. Gute Level sind effizient in der Herstellung
 
-Die vom Generator erzeugten Level sollten all diese Regeln beachten und der Generator muss Schnittstellen anbieten um die Einhaltung der Regeln zu gewährleisten. 
+Die vom Generator erzeugten Level sollten all diese Regeln beachten und der Generator muss Schnittstellen anbieten, um die Einhaltung der Regeln zu gewährleisten. 
 
-Auf der anderen Seite der Anforderungen steht die Integration in das PM-Dungeon-Framework. Das bedeutet, dass der Generator nahtlos in das bestehende Framework eingegliedert werden können muss und die Anforderungen des Frameworks berücksichtigt. Dies schließ neben dem einhalten der Code Konvention, Kompatibilität der verwendeten Buildtools und libaries vorallem auch die Testbarkeit des Generators mit ein. Der Code sollte so konzeptioniert werden, dass eine sehr gute Testabdeckung mithilfe von JUnit möglich ist. Tests sollten für alle essenziellen Bestandteile geschrieben und dokumentiert werden. Alle Codeteile sollten ausreichend Dokumentiert und Kommentiert sein. Schnittstellen müssen Umfangreich und Verständlich Dokumentiert sein. Der Grundsätzliche Projektaufbau des Frameworks muss beachtet werden. 
+Auf der anderen Seite der Anforderungen steht die Integration in das PM-Dungeon-Framework. Das bedeutet, dass der Generator nahtlos in das bestehende Framework eingegliedert werden können muss und die Anforderungen des Frameworks berücksichtigt. Dies schließ neben dem einhalten der Code Konvention, Kompatibilität der verwendeten Buildtools und libaries vor allem auch die Testbarkeit des Generators mit ein. Der Code sollte so konzeptioniert werden, dass eine sehr gute Testabdeckung mithilfe von JUnit möglich ist. Tests sollten für alle essenziellen Bestandteile geschrieben und dokumentiert werden. Alle Codeteile sollten ausreichend dokumentiert und kommentiert sein. Schnittstellen müssen umfangreich und verständlich dokumentiert sein. Der grundsätzliche Projektaufbau des Frameworks muss beachtet werden. 
 
-Da der eigentliche Fokus des PM-Dungeon nicht die Entwicklung eines Spiels ist, sondern das erlernen und vertiefen der Programmierkenntnisse, muss der Generator ohne Inputdaten der Anwender funktionieren. Parameterkonfigurationen sind zwar erwünscht, es sollte jedoch immer eine Standartkonfiguration angeboten werden. Der Code sollte wenmöglich Modular aufagbaut sein, damit zukünftige Verbesserungen und Änderungen schnell integriert werden können. Außerdem erlaubt eine Modulare Gestaltung den interessierten Studierenden eigene Inhalte in den Generator hinzuzufügen oder Teile auszutauschen. Der Generator muss weder Zeit- noch Speicherplatzeffizient sein. Sollte es der Lesbarkeit des Codes zugute kommen, ist langsamerer, speicheruneffizienter Code zu bevorziehen. Die generierung von Level im dreidimensionalen Raum ist nicht Ziel dieser arbeit und stellt keine Anforderung an den Generator dar. 
+Da der eigentliche Fokus des PM-Dungeon nicht die Entwicklung eines Spiels ist, sondern das erlernen und vertiefen der Programmierkenntnisse, muss der Generator ohne Inputdaten der Anwender funktionieren. Parameterkonfigurationen sind zwar erwünscht, es sollte jedoch immer eine Standardkonfiguration angeboten werden. Der Code sollte, wen möglich modular aufgebaut sein, damit zukünftige Verbesserungen und Änderungen schnell integriert werden können. Außerdem erlaubt eine modulare Gestaltung den interessierten Studierenden eigene Inhalte in den Generator hinzuzufügen oder Teile auszutauschen. Der Generator muss weder Zeit- noch Speicherplatzeffizient sein. Sollte es der Lesbarkeit des Codes zugutekommen, ist langsamerer, speicheruneffizienter Code zu bevor ziehen. Die Generierung von Level im dreidimensionalen Raum ist nicht Ziel dieser Arbeit und stellt keine Anforderung an den Generator dar. 
 
 ## Abgrenzung zu anderen Levelgeneratoren und prozeduralen Algorithmen 
 
-Der Generator in dieser Arbeit unterscheidet sich vor allem durch die unterschiedlichen Anwenderzielgruppen zu den anderen in dieser Arbeit vorgestellten oder in der Praxis angewendeten Algorithmen. Während die bekannte Verfahren so konzeptioniert sind, dass erfahrene Game- und Leveldesigner sorgfältig gestaltete Inhalte erzeugen und mithilfe der Algorithmen abwandeln um effizient Level zu erzeugen, muss der Generator für das PM-Dungeon ohne Inhalte von Designern auskommen. Auch wenn die qualität der Level ein wichtiges Kriteriums ist, so ist die bedienbarkeit und integration des Generatos wichtiger als bei anderen Algorithmen. Während andere Generatoren nur Teilaspekte der Generierung abdecken, wie Levelstruktur oder gesaltung der Räume, deckt der Generator dieser Arbeit alle Aspekte der Levelgenerierung ab. Dieser Generator stellt weniger Konfigurationsmöglichkeiten zur verüfugung als andere Generatoren, ermöglicht es aber Anwender aus dem Programmierbereich einfach abwechslungsreiche Level zu erzeugen. Der Generator ist für die Anwendung durch Programmierer und nicht für die Anwendung durch Designer optimiert.
+Der Generator in dieser Arbeit unterscheidet sich vor allem durch die unterschiedlichen Anwenderzielgruppen zu den anderen in dieser Arbeit vorgestellten oder in der Praxis angewendeten Algorithmen. Während die bekannten Verfahren so konzeptioniert sind, dass erfahrene Game- und Level-Designer sorgfältig gestaltete Inhalte erzeugen und mithilfe der Algorithmen abwandeln, um effizient Level zu erzeugen, muss der Generator für das PM-Dungeon ohne Inhalte von Designern auskommen. Auch wenn die Qualität der Level ein wichtiges Kriterium ist, so ist die Bedienbarkeit und Integration des Generators wichtiger als bei anderen Algorithmen. Während andere Generatoren nur Teilaspekte der Generierung abdecken, wie Level-Struktur oder Gestaltung der Räume, deckt der Generator dieser Arbeit alle Aspekte der Generierung ab. Dieser Generator stellt weniger Konfigurationsmöglichkeiten zur Verfügung als andere Generatoren, ermöglicht es aber Anwender aus dem Programmierbereich einfach abwechslungsreiche Level zu erzeugen. Der Generator ist für die Anwendung durch Programmierer und nicht für die Anwendung durch Designer optimiert.
 
 ## Darstellung des Konzeptes
 
@@ -85,29 +85,29 @@ List<Graph> calculateGraphs(List<Graph> graphs, int edgesLeft){
 
 ### RoomG
 
-RoomG nutz Templates von Räumen und verändert diese mithilfe von Versatzstücken um abwechslungsreiche Räume zu erstellen. Dabei sind sowohl die Raum-Templates als auch die Versatzstücke per Hand erstellt und werden aus einer Json eingelesen. 
+RoomG nutzt Templates von Räumen und verändert diese mithilfe von Versatzstücken, um abwechslungsreiche Räume zu erstellen. Dabei sind sowohl die Raum-Templates als auch die Versatzstücke per Hand erstellt und werden aus einer Json eingelesen.  
 
-Raum-Templates halten das Layout des Raumes als zwei dimensionales Integer-Array. Jedes Feld im Array stellt ein Feld im Level dar. Der Wert des Feldes gibt um welchen Feldtypen es sich handelt. 
+Raum-Templates halten das Layout des Raumes als zwei dimensionales Integer-Array. Jedes Feld im Array stellt ein Feld im Level dar. Der Wert des Feldes gibt, um welchen Feldtypen es sich handelt. 
 
 | Wert | Feldtyp  | Beschreibung                                                 |
 | ---- | -------- | ------------------------------------------------------------ |
-| 0    | Boden    | Auf diesen Feld können Gegenstände platziert werden und Monstern sowie Helden sich bewegen. |
+| 0    | Boden    | Auf diesem Feld können Gegenstände platziert werden und Monstern sowie Helden sich bewegen. |
 | 1    | Wand     | Eine Wand im Level durch die der Held und Monster nicht durchlaufen können. |
 | 2    | Ausgang  | Dieses Feld führt zum nächsten Level.                        |
 | -1   | Wildcard | Dieses Feld muss durch Replacements ersetzt werden.          |
 
-Wildcards erlauben es, aus einen Template mehrere unterschiedliche Räume zu erstellen und reduzieren daher den Aufwand bei der Erstellung von Räumen. 
+Wildcards erlauben es, aus einem Template mehrere unterschiedliche Räume zu erstellen und reduzieren daher den Aufwand bei der Erstellung von Räumen. 
 
 Damit ein Room-Template als Raum im Dungeon verwendet werden kann, müssen alle Wildcards durch gültige Feldertypen ersetzt werden. Dafür werden Replacements verwendet.
 
-Replacements halten ebenfalls Layouts bestehend aus den bekannten Feldertypen ab. Zusätzlich zu den bekannten Feldertypen haben sie einen weitern Typ `Skip = -2`. Dieser wird im ersetzungsprozess genutzt um anzugeben das dieses Feld im Replacment übersprungen werden muss. 
+Replacements halten ebenfalls Layouts bestehend aus den bekannten Feldertypen ab. Zusätzlich zu den bekannten Feldertypen haben sie einen weiteren Typ `Skip = -2`. Dieser wird im Ersetzungsprozess genutzt, um anzugeben, dass dieses Feld im Replacment übersprungen werden muss. 
 
 
-Beim Ersetzungsprozess wird das Room-Template nach Wildcards durchsucht, wurde eine Wildcard gefunden wird diese durch ein Replacement ersetzt. Dabei ersetzt ein Replacement nicht ein einziges Feld sondern einen gesamten Teilbereich des Room-Layouts. Daher muss beim Ersetzungsprozess geschaut werden, ob das Layout des Replacements an die entsprechende Stelle im Room-Layout passt. Ein Replacement passt genau dann, wenn die obere linke ecke des Replacements-Layouts auf die gefundene Wildcard im Room-Layout platziert werden kann und sich unter jedem Feld im Replacment-Layout, das nicht den Wert `Skip` hat eine Wildcard im Room-Layout befindet. Passt ein Replacement, können die Wildcards mit dem Werten aus dem Replacement-Layout ersetzt werden. Da in einem Replacement wiederum Wildcards enthalten sein können, muss die Suche nach Wildcards nach jedem Ersetzungsprozess neugestartet werden. In Ersetzungsprozess werden immer nur Wildcards ersetzt, niemals andere Feldtypen. Die Suche nach Wildcards und das Ersetzten dieser muss solange durchgeführt werden, bis es keine Wildcards mehr im Room-Layout gibt. Sollte es Wildcards geben, für die kein passendes Replacement gefunden werden kann, werden diese durch Bodenfelder ersetzt.
+Beim Ersetzungsprozess wird das Room-Template nach Wildcards durchsucht, wurde eine Wildcard gefunden wird diese durch ein Replacement ersetzt. Dabei ersetzt ein Replacement nicht ein einziges Feld, sondern einen gesamten Teilbereich des Room-Layouts. Daher muss beim Ersetzungsprozess geschaut werden, ob das Layout des Replacements an die entsprechende Stelle im Room-Layout passt. Ein Replacement passt genau dann, wenn die obere linke Ecke des Replacement-Layouts auf die gefundene Wildcard im Room-Layout platziert werden kann und sich unter jedem Feld im Replacement-Layout, das nicht den Wert `Skip` hat, eine Wildcard im Room-Layout befindet. Passt ein Replacement, können die Wildcards mit den Werten aus dem Replacement-Layout ersetzt werden. Da in einem Replacement wiederum Wildcards enthalten sein können, muss die Suche nach Wildcards nach jedem Ersetzungsprozess neu gestartet werden. In Ersetzungsprozess werden immer nur Wildcards ersetzt, niemals andere Feldtypen. Die Suche nach Wildcards und das Ersetzten dieser Felder muss so lange durchgeführt werden, bis es keine Wildcards mehr im Room-Layout gibt. Sollte es Wildcards geben, für die kein passendes Replacement gefunden werden kann, werden diese durch Bodenfelder ersetzt.
 
-Um mehr Optische Abwechsung zu erlauben können sowohl RoomTeplates als auch Replacements mit DesignLabel markiert werden. Nur wenn das DesignLabel eines Replacment mit dem des RoomTemplates überseinsteimmen, können diese zusammen verwendet werden. DesignLabels können genutzt werden um bestimmte Layouts nur in bestimmten Regionen, wie Wald oder Gebirge, anzuwenden. So können sich die Verschiedenen Regionen nicht nur optisch sondern auch strukturel voneinander unterscheiden.  
+Um mehr optische Abwechslung zu erlauben, können sowohl Room-Templates als auch Replacements mit Design-Label markiert werden. Nur wenn das Design-Label eines Replacment, mit dem des Room-Templates übereinstimmen, können diese zusammen verwendet werden. Design-Labels können genutzt werden, um bestimmte Layouts nur in bestimmten Regionen, wie Wald oder Gebirge, anzuwenden. So können sich die verschiedenen Regionen nicht nur optisch, sondern auch strukturell voneinander unterscheiden.  
 
-Damit die Lösbarkeit der Level gewährleistet werden kann, ist bei der Erstellung von Templates und Replacments darauf zu achten, dass keine Unerreichbare Felder in den Layouts enthalten sind. 
+Damit die Lösbarkeit der Level gewährleistet werden kann, ist bei der Erstellung von Templates und Replacments darauf zu achten, dass keine unerreichbaren Felder in den Layouts enthalten sind. 
 
 ### LevelG
 
@@ -115,49 +115,49 @@ Damit die Lösbarkeit der Level gewährleistet werden kann, ist bei der Erstellu
 
 ### Integration in das PM-Dungeon
 
-In diesen Abschnitt wird erläutert wie die vorher vorgestellten Inhalte in das PM-Dungeon-Framework integriert werden. Dabei geht es hier konkret darum, wie DungeonG in das Projekt eingebunden wird, wie die Level gezeichnet werden und wie Inhalte im Level platziert werden können. Im Abschnitt *Schnittstellen* werden dann weitere, über die Grundlagen hinausgehende, Funktionen vorgestellt. 
+In diesen Abschnitt wird erläutert, wie die vorher vorgestellten Inhalte in das PM-Dungeon-Framework integriert werden. Dabei geht es hier konkret darum, wie DungeonG in das Projekt eingebunden wird, wie die Level gezeichnet werden und wie Inhalte im Level platziert werden können. Im Abschnitt *Schnittstellen* werden dann weitere, über die Grundlagen hinausgehende, Funktionen vorgestellt. 
 
-Im Rahmen dieser Arbeit ist es nicht möglich, auf alle Einzelheiten des PM-Dungeon-Frameworks einzugehen, daher wird die Integration nur grobgranular beschrieben und an nötigen stellen abstrahiert. Designentscheidungen des Frameworks werden hier nicht begründet. 
+Im Rahmen dieser Arbeit ist es nicht möglich, auf alle Einzelheiten des PM-Dungeon-Frameworks einzugehen, daher wird die Integration nur grob granular beschrieben und an nötigen Stellen abstrahiert. Designentscheidungen des Frameworks werden hier nicht begründet. 
 
-Das Framework ist Modular aufgebaut und besitzt ein Modul, welches für alle Level-Angelegenheiten zuständig ist. In diesem Modul kann DungeonG eingebunden werden. Als Schnittstelle zwischen DungeonG und Framework dient die Klasse `LevelAPI`. Diese Klasse verwaltet und lädt das Level und stößt Zeichenprozess an. 
+Das Framework ist modular aufgebaut und besitzt ein Modul, welches für alle Level-Angelegenheiten zuständig ist. In diesem Modul kann DungeonG eingebunden werden. Als Schnittstelle zwischen DungeonG und Framework dient die Klasse `LevelAPI`. Diese Klasse verwaltet und lädt das Level und stößt Zeichenprozess an. 
 
-Um das Level zu laden werden verschiedene Funktionen angeboten, mit dem Knotenanzahl, Kantenanzahl und Design des Level bestimmt werden können. Mit diesen Parametern startet `LevelAPI` den Generierungsprozess von `DugeonG` und speichert das erzeugte Level als `currentLevel` ab. 
+Um das Level zu laden werden verschiedene Funktionen angeboten, mit dem Knotenanzahl, Kantenanzahl und Design des Levels bestimmt werden können. Mit diesen Parametern startet `LevelAPI` den Generierungsprozess von `DugeonG` und speichert das erzeugte Level als `currentLevel` ab. 
 
-Das Level muss in jedem Frame neu gezeichnet werden. Um das Level zu zeichnen benötigen die einzelnen Felder im Level eine Textur. Die Textur ist das aussehen des Feldes. Die Klasse `TileTextureFactory` sucht die passende Textur für ein Tile. Die Entscheidung welche Textur dem Tile zugeordnet wird, hängt von davon ab ob es sich um ein Boden- oder Wandfeld handelt und welche Typen von Felder sich über, unter, links und rechts vom betrachteten Tile befinden. So kann entschieden werden ob es sich um eine Ecke, eine grade Wand, ein Boden, eine T-Kreuzung etc. handelt. Je nachdem welches DesignLabel gesetzt ist, werden dann die entsprechenden Texturen ausgewählt. 
+Das Level muss in jedem Frame neu gezeichnet werden. Um das Level zu zeichnen, benötigen die einzelnen Felder im Level eine Textur. Die Textur ist das Aussehen des Feldes. Die Klasse `TileTextureFactory` sucht die passende Textur für ein Tile. Die Entscheidung welche Textur dem Tile zugeordnet wird, hängt von davon ab, ob es sich um ein Boden- oder Wandfeld handelt und welche Typen von Felder sich über, unter, links und rechts vom betrachteten Tile befinden. So kann entschieden werden, ob es sich um eine Ecke, eine grade Wand, ein Boden, eine T-Kreuzung etc. handelt. Je nachdem welches Design-Label gesetzt ist, werden dann die entsprechenden Texturen ausgewählt. 
 
-Um das Level zu zeichnen, iteriert die `LevelAPI` über jeden Raum im Level. In jedem Raum wird jedes Tile ausgewählt und die im Tile gespeicherte Textur an der Globalen-Koordinate des Tile gezeichnet. Felder im Level, die kein Tile halten, werden nicht gezeichnet und werden daher schwarz dargestellt. Dies sind Felder die außerhalb des Spielbereiches liegen.
+Um das Level zu zeichnen, iteriert die `LevelAPI` über jeden Raum im Level. In jedem Raum wird jedes Tile ausgewählt und die im Tile gespeicherte Textur an der Globalen-Koordinate des Tile gezeichnet. Felder im Level, die kein Tile halten, werden nicht gezeichnet und werden daher schwarz dargestellt. Dies sind Felder, die außerhalb des Spielbereiches liegen.
 
-Um Objekte im Level zu verteilen, kann ein zufälliges Tile in einen bestimmten oder einen zufälligen Raum ausgewählt werden und die Position des Objekt auf die Position des ausgewählten Tile zu setzten. Der Zeichenprozess des Level wird immer vor dem Zeichenprozess der Objekte ausgeführt, daher werden die Texturen der Objekte über die Texturen des Level gezeichnet und werden so nicht überdeckt. 
+Um Objekte im Level zu verteilen, kann ein zufälliges Tile in einen bestimmten oder einen zufälligen Raum ausgewählt werden und die Position des Objektes auf die Position des ausgewählten Tile zu setzten. Der Zeichenprozess des Levels wird immer vor dem Zeichenprozess der Objekte ausgeführt, daher werden die Texturen der Objekte über die Texturen des Levels gezeichnet und werden so nicht überdeckt.    
 
   
 
 ### Schnittstellen
 
-Neben der fundamentalen Integration in das PM-Dungeon werden auch verschiedene Methoden zur Verfügung gestellt um das arbeiten mit dem Level zu vereinfachen. Diese Methoden dienen als Schnittstelle zwischen Levelstruktur und Studierenden. Im folgenden werden die Methoden der Schnittstelle, deren Funktionsweise sowie mögliche Anwendungsfälle skizziert. 
+Neben der fundamentalen Integration in das PM-Dungeon werden auch verschiedene Methoden zur Verfügung gestellt, um das Arbeiten mit dem Level zu vereinfachen. Diese Methoden dienen als Schnittstelle zwischen Level-Struktur und Studierenden. Im Folgenden werden die Methoden der Schnittstelle, deren Funktionsweise sowie mögliche Anwendungsfälle skizziert. 
 
 `getAllPath(start,goal)`
 
 Diese Methoden findet mithilfe des Graphen alle Pfade vom übergebenen Startknoten bis zum übergebenen Zielknoten.   
 
-Damit können Wege bestimmt werden. Denkbar wären zum Beispiel Monster die sich durch mehrere Räume des Level bewegen um den Spieler zu verfolgen oder aus verschiedenen Richtungen anzugreifen. Die Methode wird auch von weiteren Methoden der Schnittstelle genutzt. 
+Damit können Wege bestimmt werden. Denkbar wären zum Beispiel Monster, die sich durch mehrere Räume des Levels bewegen, um den Spieler zu verfolgen oder aus verschiedenen Richtungen anzugreifen. Die Methode wird auch von weiteren Methoden der Schnittstelle genutzt. 
 
 - **todo** Wie funktioniert die Theorie dahinter
 
 `getCriticalNodes`
 
-Diese Methode findet mithilfe des Graphen alle Knoten die betreten werden müssen um vom Start des Level bis zum Ende zu gelangen. Dieses unterschiedet sich insofern von `getOnePath` , dass mithilfe von `getAllPath` alle Wege vom Start zum Ziel gefunden werden und nur die Räume, die in jedem möglichen Pfad enthalten sind als krtisch betrachtet werden. So kann sichergestellt werden, dass der Spieler zum beenden des Level in jedem Fall diese Knoten betritt.
+Diese Methode findet mithilfe des Graphen alle Knoten, die betreten werden müssen, um vom Start des Levels bis zum Ende zu gelangen. Dieses unterscheidet sich insofern von `getOnePath`, dass mithilfe von `getAllPath` alle Wege vom Start zum Ziel gefunden werden und nur die Räume, die in jedem möglichen Pfad enthalten sind, als kritisch betrachtet werden. So kann sichergestellt werden, dass der Spieler zum Beenden des Levels in jedem Fall diese Knoten betritt.
 
-In kritischen Knoten könne Inhalte platziert werden, die der Spieler auf jeden Fall finden bzw. erleben soll. Dies können für die Geschichte Relveante Inhalte sein, ein Tutorial oder ein Bossgegner. Dies ermöglicht es, das Pacing des Spiels zu kontrollieren. 
+In kritischen Knoten könne Inhalte platziert werden, die der Spieler auf jeden Fall finden bzw. erleben soll. Dies können für die Geschichte relevante Inhalte sein, ein Tutorial oder ein Bossgegner. Dies ermöglicht es, das Pacing des Spiels zu kontrollieren. 
 
 `getOptionalNodes` funktioniert analog zu `getCriticalNodes` und liefert eine Liste mit allen Knoten, die nicht auf dem Weg zum Ziel liegen. Diese Knoten sind daher in keinem Pfad der von `getAllPath` vom Startraum bis zum Zielraum enthalten. 
 
-In sicher optionalen Räumen können verschiedene Inhalte platziert werden die der Spieler finden bzw. erleben kann aber nicht muss. Dies können extra Schätze sein oder ein optionaler Bossgegner. Dies ermöglich das erzeugen von Risk and Reward Momenten und ermöglicht es das Balancing des Spiels zu kontrollieren.
+In sicher optionalen Räumen können verschiedene Inhalte platziert werden, die der Spieler finden bzw. erleben kann, aber nicht muss. Dies können extra Schätze sein oder ein optionaler Bossgegner. Dies ermöglicht das Erzeugen von Risk and Reward Momenten und ermöglicht es das Balancing des Spiels zu kontrollieren.
 
 `isRoomReachableWithout(start,goal,avoid)` 
 
-Diese Methode prüft ob der Zielraum vom Startraum aus betreten werden kann, ohne den `avoid` Knoten zu betreten. Damit können Schlüsselrätsel implementiert werden. Es wäre denkbar, dass der `avoid` Raum verschlossen ist und der Schlüssel sich in einen anderen Raum im Dungeon befindet. Mithilfe dieser Methode kann sichergestellt werden, dass der Schlüssel gefunden werden kann ohne durch den verschlossenen Knoten gehen zu müssen. 
+Diese Methode prüft, ob der Zielraum vom Startraum aus betreten werden kann, ohne den `avoid` Knoten zu betreten. Damit können Schlüsselrätsel implementiert werden. Es wäre denkbar, dass der `avoid` Raum verschlossen ist und der Schlüssel sich in einem anderen Raum im Dungeon befindet. Mithilfe dieser Methode kann sichergestellt werden, dass der Schlüssel gefunden werden kann, ohne durch den verschlossenen Knoten gehen zu müssen. 
 
-Die Methode verwendet das selbe Verfahren wie `getAllPath` verwendet aber eine Kopie des Level-Graphen aus dem der `avoid` Knoten und entsprechend alle Kanten die zu `avoid` führen, entfernt wurden. Wird ein oder mehrere Pfade gefunden, muss `avoid` nicht betreten werden um von `start` zu `goal` zu gelangen.
+Die Methode verwendet dasselbe Verfahren wie `getAllPath` verwendet aber eine Kopie des Level-Graphen aus dem der `avoid` Knoten und entsprechend alle Kanten, die zu `avoid` führen, entfernt wurden. Wird ein oder mehrere Pfade gefunden, muss `avoid` nicht betreten werden, um von `start` zu `goal` zu gelangen.
 
 
 

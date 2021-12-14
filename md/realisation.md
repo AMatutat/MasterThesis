@@ -1,31 +1,22 @@
 # Realisierung
 
-<!--
-*   Beschreibung der Umsetzung des Lösungskonzepts
-*   Darstellung der aufgetretenen Probleme sowie deren Lösung bzw. daraus resultierende Einschränkungen des Ergebnisses (falls keine Lösung)
-*   Auswertung und Interpretation der Ergebnisse
-*   Vergleich mit der ursprünglichen Zielsetzung (ausführlich): Was wurde erreicht, was nicht (und warum)? (inkl. Begründung/Nachweis)
-
-geschätzer umfang ca 20%
--->
-
 ## Einleitung
 - nur ausschnitte werden gezeigt 
 
 ## Projekt Konfiguration
 
-Um eine Reibungslose integraiton in das PM-Dungeon-Framework zu ermöglichen, wurde für das Projekt die Projektkonfigurationen des Frameworks übernommen. 
+Um eine reibungslose Integration in das PM-Dungeon-Framework zu ermöglichen, wurde für das Projekt die Projektkonfigurationen des Frameworks übernommen. 
 
-- Das Buildtool Gradle wird genutzt um das Projekt zu bauen. Alle externen libaries werden als dependencie hinzugefügt.
-- Der google java formater wird genauso wie im Framework konfiguriert und genutzt um eine einheitlichen Codestil zu gewährlesiten.
-- Die Package Sturktur des Frameworks wurde übernommen.
-- Das für den Generator genutzte Git-Repository wird mithilfe von GitHub-Actions so konfiguriert, das es dem PM-Dungeon repo gleicht. Dies bedeutet das Code nur dann gemerged werden kann, wenn der Codestil eingehalten ist, alle JUnit-Testfälle erflogreich durchlaufen und das Tool Spot-Bugs keine Antipattern im Code finden kann oder die gefundenen Antipattern bewusst akzeptiert werden. Sollten Antipattern bewusst im Code gelassen werden, muss dies Entscheidung Dokumentiert und nachvollziehbar begründe werden.
+- Das Buildtool Gradle wird genutzt, um das Projekt zu bauen. Alle externen Libraries werden als dependencies hinzugefügt.
+- Der google-java-formater wird genauso wie im Framework konfiguriert und genutzt, um eine einheitlichen Codestil zu gewährleisten.
+- Die Package-Struktur des Frameworks wurde übernommen.
+- Das für den Generator genutzte Git-Repository wird mithilfe von GitHub-Actions so konfiguriert, dass es dem PM-Dungeon-Repository gleicht. Dies bedeutet, dass Code nur dann gemerged werden kann, wenn der Codestil eingehalten ist, alle JUnit-Testfälle erfolgreich durchlaufen und das Tool Spot-Bugs keine Antipattern im Code finden kann oder die gefundenen Antipattern bewusst akzeptiert werden. Sollten Antipattern bewusst im Code gelassen werden, muss diese Entscheidung dokumentiert und nachvollziehbar begründe werden.
 
 Die konkrete Konfiguration des GitHub-Actions kann im Repository auf GitHub **TODO footnote** oder im Anhang **todo** eingesehen werden. 
 
 ## Umsetzung GraphG
 
-Abbildung \ref{graphgUML} zeigt ein reduziertes UML-Klassendiagramm für den Aufbau von GraphG. Der Baustein besteht aus drei Klassen. `GraphG` nimmt die Parameter entgegen, führt die Breitensuche durch und gibt die Lösungen zurück und liefert Möglichkeiten zum Abspeichern und Laden der Graphen in und aus JSON-Dateien. Die Klasse `Graph` hält eine Liste mit Knoten und bietet Funktionen, um zu prüfen, ob Knoten miteinander verbunden werden können, ohne gegen die Bedingungen zu verstoßen. Die Klasse `Node` stellt einen Knoten im Graphen dar und hält eine Liste mit den Nachbarknoten. Diese Liste speichert Integer Werte ab und nicht die Knoten selber. Die Werte entsprechen dem Index der Nachbarknoten in der Liste des Graphen. Jeder Knoten kennt seinen eigenen Index. Dies ermöglicht einen einfacheren Kopiervorgang der Graphen und Knoten. Beim Kopieren  der Graphen muss die Liste der Knoten kopiert werden. Dabei müssen auch Kopien der Knoten gemacht werden. Sollten nur Referenzen auf die Instanzen kopiert werden, würden neue Nachbarn, die einem Knoten hinzugefügt werden, in jeder Kopie des Knoten und somit des Graphen hinzugefügt werden. Die Kopien der Graphen wären daher zu jedem Zeitpunkt identisch, die Graphen sollen sich jedoch voneinander unterscheiden und separat betrachtet werden können. Beim Kopieren der Knoten müssen auch Kanten, also die Liste der Nachbarn, kopiert werden. Würde in der Liste eine Referenz auf die Knoten Instanzen gespeichert werden, müsste beim Kopieren eines Knotens für jeden Nachbarn die Kopie gefunden und abgespeichert werden. Werden nur die Indexe der Nachbarn in der Liste des Graphen gespeichert, reicht eine exakte Kopie der Nachbarliste. Die Indexe beziehen sich dann nicht mehr auf die Knotenliste des ursprünglichen Graphen, sondern auf die Knotenliste der Kopie des Graphen. Listing \ref{copy} zeigt den Kopiervorgang eines Graphen und dessen Knoten. 
+Abbildung \ref{graphgUML} zeigt ein reduziertes UML-Klassendiagramm für den Aufbau von GraphG. Der Baustein besteht aus drei Klassen. `GraphG` nimmt die Parameter entgegen, führt die Breitensuche durch und gibt die Lösungen zurück und liefert Möglichkeiten zum Abspeichern und Laden der Graphen in und aus JSON-Dateien. Die Klasse `Graph` hält eine Liste mit Knoten und bietet Funktionen, um zu prüfen, ob Knoten miteinander verbunden werden können, ohne gegen die Bedingungen zu verstoßen. Die Klasse `Node` stellt einen Knoten im Graphen dar und hält eine Liste mit den Nachbarknoten. Diese Liste speichert Integer Werte ab und nicht die Knoten selber. Die Werte entsprechen dem Index der Nachbarknoten in der Liste des Graphen. Jeder Knoten kennt seinen eigenen Index. Dies ermöglicht einen einfacheren Kopiervorgang der Graphen und Knoten. Beim Kopieren  der Graphen muss die Liste der Knoten kopiert werden. Dabei müssen auch Kopien der Knoten gemacht werden. Sollten nur Referenzen auf die Instanzen kopiert werden, würden neue Nachbarn, die einem Knoten hinzugefügt werden, in jeder Kopie des Knotens und somit des Graphen hinzugefügt werden. Die Kopien der Graphen wären daher zu jedem Zeitpunkt identisch, die Graphen sollen sich jedoch voneinander unterscheiden und separat betrachtet werden können. Beim Kopieren der Knoten müssen auch Kanten, also die Liste der Nachbarn, kopiert werden. Würde in der Liste eine Referenz auf die Knoten Instanzen gespeichert werden, müsste beim Kopieren eines Knotens für jeden Nachbarn die Kopie gefunden und abgespeichert werden. Werden nur die Indexe der Nachbarn in der Liste des Graphen gespeichert, reicht eine exakte Kopie der Nachbarliste. Die Indexe beziehen sich dann nicht mehr auf die Knotenliste des ursprünglichen Graphen, sondern auf die Knotenliste der Kopie des Graphen. Listing \ref{copy} zeigt den Kopiervorgang eines Graphen und dessen Knoten. 
 
 \begin{lstlisting}[language=python, label=copy, caption={Kopieren von Graphen und Kanten.}  ]
 //in Graph
@@ -127,17 +118,17 @@ Abbildungen \ref{ex1}, \ref{ex2}, \ref{ex3} und \ref{ex4} zeigen von GraphG gene
 
 ## Umsetzung RoomG
 
-Abbildung \ref{roomgUML} zeigt ein reduiziertes UML-Klassendiagramm für RoomG. 
+Abbildung \ref{roomgUML} zeigt ein reduziertes UML-Klassendiagramm für RoomG. 
 
-Die Klasse `RoomLoader` lädt alle abgespeicherten RoomTemplates aus einer Json und speichert diese ab. Mit der Methode `getRoomTemplate` kann eine Liste mit allen Templates abgefragt werden, die das übergebene DesignLabel haben. `DesignLabel` ist ein enum mit verschiedenen Designs. Sollen alle Templates abgefragt werden, kann `DesignLabel.ALL` verwendet werden.
+Die Klasse `RoomLoader` lädt alle abgespeicherten Room-Templates aus einer Json und speichert diese ab. Mit der Methode `getRoomTemplate` kann eine Liste mit allen Templates abgefragt werden, die das übergebene Design-Label haben. `DesignLabel` ist ein Enum mit verschiedenen Designs. Sollen alle Templates abgefragt werden, kann `DesignLabel.ALL` verwendet werden.
 
- Die Klasse `ReplacementLoader` lädt alle abgesepicherten Replacements aus einer Json und speichert diese ab. Dabei prüft der Loader, ob die `rotate`-Flag eines Replacments gesetzt ist, und wenn ja, erstellt er drei neue Replacments mit einen um jeweils 90,180 und 270 Grad rotierten Layout. So können Replacements auch in verschiedenen Positionen eingesetzt werden. Mit der Methode `getReplacements` kann eine Liste mit allen Replacements abgefragt werden, die das übergebene DesignLabel haben. Sollen alle Replacements abgefragt werden, kann `DesignLabel.ALL` übergeben werden.
+Die Klasse `ReplacementLoader` lädt alle abgespeicherten Replacements aus einer Json und speichert diese ab. Dabei prüft der Loader, ob die `rotate`-Flag eines Replacments gesetzt ist, und wenn ja, erstellt er drei neue Replacments mit einem um jeweils 90,180 und 270 Grad rotierten Layout. So können Replacements auch in verschiedenen Positionen eingesetzt werden. Mit der Methode `getReplacements` kann eine Liste mit allen Replacements abgefragt werden, die das übergebene Design-Label haben. Sollen alle Replacements abgefragt werden, kann `DesignLabel.ALL` übergeben werden.
 
 ![UML-Klassendiagramm für RoomG mit den wichtigsten Methoden. \label{roomgUML}](figs/chapter4/roomg.png)
 
-Die Klassen `Replacement` und `RoomTemplate` speichern jeweils ein Layout und ein DesignLabel. Der Ersetzungsprozess findet in `RoomTemplate#replace` statt und wird in Listing **TODO** gezeigt. 
+Die Klassen `Replacement` und `RoomTemplate` speichern jeweils ein Layout und ein Design-Label. Der Ersetzungsprozess findet in `RoomTemplate#replace` statt und wird in Listing **TODO** gezeigt. 
 
-Da ein Template mehrfach verwendet werden soll, wird in Zeile 1 eine Kopie des Layouts erstellt. Die Ersetzung wird in dieser Kopie durchgeführt. In Zeile 2 und 3 wird die Größe des Layouts abgefragt um späteres Iterieren zu vereinfachen. Genau wie das Template soll auch die Liste mit den möglichen Replacements merhfach verwenden werden können, daher wird in Zeile 6 eine Kopie der übergebenen Liste erstellt. In Zeile 7 bis 10 werden alle Replacements aus der Liste gelöscht die zu groß für das Layout sind, also über den Rand des Raumes herausragen würden. In Zeile 12 bis 24 findet der eigentliche Ersetzungsprozess statt. Die äußere Schleife in Zeile 14 bis 24 sorgt dafür, dass im falle einer Änderung des Layouts die gesamte innere Prozess erneut durchgefürt wird. Der innere Prozess in Zeile 16 bis 23 iteriert für jedes Replacment über das Layout und such nach einer Wildcard. Dabei muss nicht das gesamte Layout betrachtet, sondern nur die Punkte, bei dem das einfügen der Replacement nicht dafür sorgen würde, dass  das Replacement über den Raumrand hinausragt. Daher kann in Zeile 19 und 20 die Abbruchbedingung der Zählergesteurten-Schleifen angepasst werden. In Zeile 21 wird geprüft ob das aktuelle betrachtete Feld eine Wildcard ist und in Zeile 22 wird versucht diese Wildcard mit dem Replacement zu ersezten. Die Funktionsweise von `placeIn` wird weiter unten erläutert. Ist der Ersetzungsprozess erfolgreich, muss nach Abschluss der foreach-Schleife in Zeile 16 der gesamte Prozess wiederholt werden um möglicherweise neu eingesetzte Wildcards zu ersetzen. In Zeile 26 bis 30 werden alle verbliebenen Wildcards durch Bodenfelder ersetzt. In Zeile 30 erstellt die Methode einen neues Objekte der Klasse `Room` mit dem ersetzten Layout. Dieser Raum ist bereit um im PM-Dungeon verwendet zu werden. 
+Da ein Template mehrfach verwendet werden soll, wird in Zeile 1 eine Kopie des Layouts erstellt. Die Ersetzung wird in dieser Kopie durchgeführt. In Zeile 2 und 3 wird die Größe des Layouts abgefragt, um späteres Iterieren zu vereinfachen. Genau wie das Template soll auch die Liste mit den möglichen Replacements mehrfach verwenden werden können, daher wird in Zeile 6 eine Kopie der übergebenen Liste erstellt. In Zeile 7 bis 10 werden alle Replacements aus der Liste gelöscht, die zu groß für das Layout sind, also über den Rand des Raumes herausragen würden. In Zeile 12 bis 24 findet der eigentliche Ersetzungsprozess statt. Die äußere Schleife in Zeile 14 bis 24 sorgt dafür, dass im Falle einer Änderung des Layouts der gesamte innere Prozess erneut durchgeführt wird. Der innere Prozess in Zeile 16 bis 23 iteriert für jedes Replacment über das Layout und such nach einer Wildcard. Dabei muss nicht das gesamte Layout betrachtet, sondern nur die Punkte, bei dem das Einfügen der Replacement nicht dafür sorgen würde, dass  das Replacement über den Raumrand hinausragt. Daher kann in Zeile 19 und 20 die Abbruchbedingung der Zählergesteuerten-Schleifen angepasst werden. In Zeile 21 wird geprüft, ob das aktuelle betrachtete Feld eine Wildcard ist und in Zeile 22 wird versucht diese Wildcard mit dem Replacement zu ersetzen. Die Funktionsweise von `placeIn` wird weiter unten erläutert. Ist der Ersetzungsprozess erfolgreich, muss nach Abschluss der foreach-Schleife in Zeile 16 der gesamte Prozess wiederholt werden, um möglicherweise neu eingesetzte Wildcards zu ersetzen. In Zeile 26 bis 30 werden alle verbliebenen Wildcards durch Bodenfelder ersetzt. In Zeile 30 erstellt die Methode ein neues Objekt der Klasse `Room` mit dem ersetzten Layout. Dieser Raum ist bereit, um im PM-Dungeon verwendet zu werden. 
 
 ```
 0    public Room replace(List<Replacement> replacements) {
@@ -175,11 +166,11 @@ Da ein Template mehrfach verwendet werden soll, wird in Zeile 1 eine Kopie des L
 32    }
 ```
 
-Listing **ToDo** zeigt die Methode `placIn`. Die Methode bekommt ein Layout übergeben in den das Replacment `r` so eingesetzt werden soll, dass die obere linke Ecke vom `r` in `layout[yCor][xCor]` eingesetzt wird. Ist der Prozess erfolgreich gibt die Methode `true` zurück, ansonsten `false`. In Zeile 1 Prüft die Methode mithilfe von `canReplaceIn` ob `r` in `layout` an der stelle `[ycor][xcor]` passt. 
+Listing **ToDo** zeigt die Methode `placIn`. Die Methode bekommt ein Layout übergeben in den das Replacment `r` so eingesetzt werden soll, dass die obere linke Ecke vom `r` in `layout[yCor][xCor]` eingesetzt wird. Ist der Prozess erfolgreich, gibt die Methode `true` zurück, ansonsten `false`. In Zeile 1 prüft die Methode mithilfe von `canReplaceIn` ob `r` in `layout` an der Stelle `[ycor][xcor]` passt. 
 
-Listing **TODO** zeigt die Methode `canReplaceIn`. Die Methode iteriert durch die Zeilen 2 und 3 über das layout ab der Stelle `[yCor][xCor]` bis zu der Stelle an der das Replacement enden würde, wenn es eingesetzt wird. Für jedes Feld das dabei betrachtet wird, wird in Zeile 6 und 7 geprüft, ob das Replacement an der Stelle ein Feld ersetzen wollen würde und ob an dieser Stelle im Layout eine Wildcard ist. Möchte das Replacement ein Feld ersetzten an der im Layout keine Wildcard ist, kann keine ersetzung durchgeführt werden und die Methode gibt `false` zurück. Sollte an jeder zu ersetzenden Stelle auch ein Placeholder sein, gibt die Methode `true` zurück. 
+Listing **TODO** zeigt die Methode `canReplaceIn`. Die Methode iteriert durch die Zeilen 2 und 3 über das Layout ab der Stelle `[yCor][xCor]` bis zu der Stelle an der das Replacement enden würde, wenn es eingesetzt wird. Für jedes Feld, das dabei betrachtet wird, wird in Zeile 6 und 7 geprüft, ob das Replacement an der Stelle ein Feld ersetzen wollen würde und ob an dieser Stelle im Layout eine Wildcard ist. Möchte das Replacement ein Feld ersetzten an der im Layout keine Wildcard ist, kann keine Ersetzung durchgeführt werden und die Methode gibt `false` zurück. Sollte an jeder zu ersetzenden Stelle auch ein Placeholder sein, gibt die Methode `true` zurück. 
 
-Ist eine Ersetzung Möglich, iteriert `placeIn` genauso wie `canReplaceIn` durch Zeile 4 und 5 über das Layout und führt in Zeile 6 und 7 an den jeweiligen Stellen eine Ersetzung durch. 
+Ist eine Ersetzung möglich, iteriert `placeIn` genauso wie `canReplaceIn` durch Zeile 4 und 5 über das Layout und führt in Zeile 6 und 7 an den jeweiligen Stellen eine Ersetzung durch. 
 
 ```
   0  private boolean placeIn(final LevelElement[][] layout, final Replacement r, int xCor, int yCor) {
@@ -211,13 +202,13 @@ Ist eine Ersetzung Möglich, iteriert `placeIn` genauso wie `canReplaceIn` durch
 
 
 
-Für diese Arbeit wurden verschiedene Layouts für RoomTemplates und Replacments erstellt. Abbildungen **TODO** zeigen  verschiedene, von RoomG, erzeugte Räume und die dafür verwendeten Templates und Replacments. Im Kapitel Evaluierung wird die die Vielfallt und Qualität der Räume analysiert und bewertet. 
+Für diese Arbeit wurden verschiedene Layouts für Room-Templates und Replacments erstellt. Abbildungen **TODO** zeigen  verschiedene, von RoomG, erzeugte Räume und die dafür verwendeten Templates und Replacments. Im Kapitel Evaluierung wird die Vielfalt und Qualität der Räume analysiert und bewertet. 
 
 ## Umsetzung LevelG
 
 ## Anbindung an das PM-Dungeon und Schnittstellen
 
-Die Anbindung an das Framework wurde wie konzeptioniert durchgeführt und bietet keine nennenswerte Aspekte und wird daher in diesem Abschnitt nicht weiter erläutert. 
+Die Anbindung an das Framework wurde wie konzeptioniert durchgeführt und bietet keine nennenswerten Aspekte und wird daher in diesem Abschnitt nicht weiter erläutert. 
 
 - libGDX für A*, welche Anpassungen waren nötig
 
@@ -227,14 +218,6 @@ Die Anbindung an das Framework wurde wie konzeptioniert durchgeführt und bietet
   - Zeigen von Graphen
   - was machen die einzelenn Graphen gut, was schlecht
   - vermerk das die qualität als Level stark von der gewählten Knoten und Kanten anzahl abhängt
-
-![Von GraphG erzeugter Graph mit 12 Knoten und 2 Extrakanten. \label{ex1}](figs/chapter4/graphgsol/example1.png)
-
-![Von GraphG erzeugter Graph mit 15 Knoten und 4 Extrakanten. \label{ex2}](figs/chapter4/graphgsol/example2.png)
-
-![Von GraphG erzeugter Graph mit 20 Knoten und 4 Extrakanten. \label{ex3}](figs/chapter4/graphgsol/example3.png)
-
-![Von GraphG erzeugter Graph mit 7 Knoten und 1 Extrakanten. \label{ex4}](figs/chapter4/graphgsol/example4.png)
 
   - RoomG
 
