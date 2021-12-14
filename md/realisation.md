@@ -261,8 +261,6 @@ Listing **TODO** zeigt wie geprüft werden kann, ob ein bestimmter Raum umgangen
 7 else System.out.println("OH NO!"));   
 ```
 
-
-
 # Evaluierung 
 
 - GraphG
