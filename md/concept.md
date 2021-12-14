@@ -135,29 +135,19 @@ Um Objekte im Level zu verteilen, kann ein zufälliges Tile in einen bestimmten 
 
 Neben der fundamentalen Integration in das PM-Dungeon werden auch verschiedene Methoden zur Verfügung gestellt, um das Arbeiten mit dem Level zu vereinfachen. Diese Methoden dienen als Schnittstelle zwischen Level-Struktur und Studierenden. Im Folgenden werden die Methoden der Schnittstelle, deren Funktionsweise sowie mögliche Anwendungsfälle skizziert. 
 
-`getAllPath(start,goal)`
+#### `getAllPath(start,goal)`: 
 
-Diese Methoden findet mithilfe des Graphen alle Pfade vom übergebenen Startknoten bis zum übergebenen Zielknoten.   
+Diese Methoden findet mithilfe des Graphen alle Pfade vom übergebenen Startknoten bis zum übergebenen Zielknoten. Damit können Wege bestimmt werden. Denkbar wären zum Beispiel Monster, die sich durch mehrere Räume des Levels bewegen, um den Spieler zu verfolgen oder aus verschiedenen Richtungen anzugreifen. Die Methode wird von weiteren Methoden der Schnittstelle genutzt. Zur Durchführung wird der in Kapitel 2 vorgestellte Graph-Serach Algorithmus genutzt. Eine Abwandlung von `getAllPath` ist `getShortestPath(start,goal)` diese Methode gibt nur kürzesten Pfad, also dem Pfad mit dem wenigsten Knoten zurück. 
 
-Damit können Wege bestimmt werden. Denkbar wären zum Beispiel Monster, die sich durch mehrere Räume des Levels bewegen, um den Spieler zu verfolgen oder aus verschiedenen Richtungen anzugreifen. Die Methode wird auch von weiteren Methoden der Schnittstelle genutzt. 
+`getCriticalNodes`:
 
-- **todo** Wie funktioniert die Theorie dahinter
+Diese Methode findet mithilfe des Graphen alle Knoten, die betreten werden müssen, um vom Start des Levels bis zum Ende zu gelangen. Dieses unterscheidet sich insofern von `getShortestPath`, dass mithilfe von `getAllPath` alle Wege vom Start zum Ziel gefunden werden und nur die Räume, die in jedem möglichen Pfad enthalten sind, als kritisch betrachtet werden. So kann sichergestellt werden, dass der Spieler zum Beenden des Levels in jedem Fall diese Knoten betritt. In kritischen Knoten könne Inhalte platziert werden, die der Spieler auf jeden Fall finden bzw. erleben soll. Dies können für die Geschichte relevante Inhalte sein, ein Tutorial oder ein Bossgegner. Dies ermöglicht es, das Pacing des Spiels zu kontrollieren. 
 
-`getCriticalNodes`
+`getOptionalNodes` funktioniert analog zu `getCriticalNodes` und liefert eine Liste mit allen Knoten, die nicht auf dem Weg zum Ziel liegen. Diese Knoten sind daher in keinem Pfad der von `getAllPath` vom Startraum bis zum Zielraum enthalten. In sicher optionalen Räumen können verschiedene Inhalte platziert werden, die der Spieler finden bzw. erleben kann, aber nicht muss. Dies können extra Schätze sein oder ein optionaler Bossgegner. Dies ermöglicht das Erzeugen von Risk and Reward Momenten und ermöglicht es das Balancing des Spiels zu kontrollieren.
 
-Diese Methode findet mithilfe des Graphen alle Knoten, die betreten werden müssen, um vom Start des Levels bis zum Ende zu gelangen. Dieses unterscheidet sich insofern von `getOnePath`, dass mithilfe von `getAllPath` alle Wege vom Start zum Ziel gefunden werden und nur die Räume, die in jedem möglichen Pfad enthalten sind, als kritisch betrachtet werden. So kann sichergestellt werden, dass der Spieler zum Beenden des Levels in jedem Fall diese Knoten betritt.
+`isRoomReachableWithout(start,goal,avoid)`: 
 
-In kritischen Knoten könne Inhalte platziert werden, die der Spieler auf jeden Fall finden bzw. erleben soll. Dies können für die Geschichte relevante Inhalte sein, ein Tutorial oder ein Bossgegner. Dies ermöglicht es, das Pacing des Spiels zu kontrollieren. 
-
-`getOptionalNodes` funktioniert analog zu `getCriticalNodes` und liefert eine Liste mit allen Knoten, die nicht auf dem Weg zum Ziel liegen. Diese Knoten sind daher in keinem Pfad der von `getAllPath` vom Startraum bis zum Zielraum enthalten. 
-
-In sicher optionalen Räumen können verschiedene Inhalte platziert werden, die der Spieler finden bzw. erleben kann, aber nicht muss. Dies können extra Schätze sein oder ein optionaler Bossgegner. Dies ermöglicht das Erzeugen von Risk and Reward Momenten und ermöglicht es das Balancing des Spiels zu kontrollieren.
-
-`isRoomReachableWithout(start,goal,avoid)` 
-
-Diese Methode prüft, ob der Zielraum vom Startraum aus betreten werden kann, ohne den `avoid` Knoten zu betreten. Damit können Schlüsselrätsel implementiert werden. Es wäre denkbar, dass der `avoid` Raum verschlossen ist und der Schlüssel sich in einem anderen Raum im Dungeon befindet. Mithilfe dieser Methode kann sichergestellt werden, dass der Schlüssel gefunden werden kann, ohne durch den verschlossenen Knoten gehen zu müssen. 
-
-Die Methode verwendet dasselbe Verfahren wie `getAllPath` verwendet aber eine Kopie des Level-Graphen aus dem der `avoid` Knoten und entsprechend alle Kanten, die zu `avoid` führen, entfernt wurden. Wird ein oder mehrere Pfade gefunden, muss `avoid` nicht betreten werden, um von `start` zu `goal` zu gelangen.
+Diese Methode prüft, ob der Zielraum vom Startraum aus betreten werden kann, ohne den `avoid` Knoten zu betreten. Damit können Schlüsselrätsel implementiert werden. Es wäre denkbar, dass der `avoid` Raum verschlossen ist und der Schlüssel sich in einem anderen Raum im Dungeon befindet. Mithilfe dieser Methode kann sichergestellt werden, dass der Schlüssel gefunden werden kann, ohne durch den verschlossenen Knoten gehen zu müssen. Die Methode verwendet dasselbe Verfahren wie `getAllPath` verwendet aber eine Kopie des Level-Graphen aus dem der `avoid` Knoten und entsprechend alle Kanten, die zu `avoid` führen, entfernt wurden. Wird ein oder mehrere Pfade gefunden, muss `avoid` nicht betreten werden, um von `start` zu `goal` zu gelangen.
 
 
 
