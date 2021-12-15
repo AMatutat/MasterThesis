@@ -265,24 +265,31 @@ Listing **TODO** zeigt wie geprüft werden kann, ob ein bestimmter Raum umgangen
 
 - GraphG
   - Zeigen von Graphen
+  
   - was machen die einzelenn Graphen gut, was schlecht
+
   - vermerk das die qualität als Level stark von der gewählten Knoten und Kanten anzahl abhängt
 
   - RoomG
-
+  
       - zeigen von Templates und daraus erzeugten Räume
       - Unterscheiden die sich gut? 
-      - Gibt es Probleme?
+    - Gibt es Probleme?
       - Ist halt doof das die dinger eingelesen werden müssen
 
   - LevelG
 
     
 
-    
 
-    
+|SpotBugs-Meldung   |Bedeutung   |Wo   |Erläuterung   |
+|---|---|---|---|
+| EI_EXPOSE_REP | Returning a reference to a mutable object value stored in one of the object's fields exposes the internal representation of the object. If instances are accessed by untrusted code, and unchecked changes to the mutable object would compromise security or other important properties, you will need to do something different. Returning a new copy of the object is better approach in many situations. | `Room#getLayout`, `Replacement#getLayout`, `RoomTempalte#getLayout`, | **TODO** |
+| EI_EXPOSE_REP2 | This code stores a reference to an externally mutable object into the internal representation of the object. If instances are accessed by untrusted code, and unchecked changes to the mutable object would compromise security or other important properties, you will need to do something different. Storing a copy of the object is better approach in many situations. | `new RoomTemplate`, `new Replacment` | **TODO** |
+|   |   |   |   |
+|   |   |   |   |
+|   |   |   |   |
+|   |   |   |   |
+|   |   |   |   |
 
-    
-
-    
+**TODO** https://spotbugs.readthedocs.io/en/stable/bugDescriptions.html
