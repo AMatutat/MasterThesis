@@ -1,11 +1,6 @@
 # Zusammenfassung
 
-<!--
-*   Fazit: Vergleich mit der ursprünglichen Zielsetzung (komprimiert/zusammengefasst)
-*   Ausblick: Darstellung ungelöster Probleme und weiterer relevanter Ideen
-
-Umfang: typisch ca. 5% ... 10% der Arbeit
--->
+In diesen Kapitel wird ein abschließende Fazit über den Generator und die Arbeit im allgemeinen gezogen. Abschließend wird ein Ausblick auf die Weiterentwicklung von DungeonG gegeben. 
 
 ## Fazit
 
@@ -16,7 +11,8 @@ Umfang: typisch ca. 5% ... 10% der Arbeit
   - Warum sind die gut?
 - Sachen die schlecht gelaufen sind
   - Warum sind die schlecht gelaufen?
-- Welchen Beitrag hat diese Arbeit für das "Forschungsfeld" prozedurale Generierung geboten?
+
+Der in dieser Arbeit konzeptioniert und entwickelte Level-Generator kann in das PM-Dungeon-Framework integriert werden, um die Studierenden mit mehr Abwechslung im Spiel zu motivieren und somit den Lernerfolg zu steigern. Ebenso hat diese Arbeit gezeigt, dass ein gut konzeptionierter Level-Generator auch mit wenigen Parametern und Inputdaten in der Lage ist, spaßige und abwechslungsreiche Level für 2D-Rollenspiele zu erschaffen. Der Generator ist zwar speziell an das PM-Dungeon-Framework angepasst, die zugrundeliegenden Algorithmen und Verfahren können aber auf andere Spiele übertragen werden. 
 
 ## Ausblick
 
