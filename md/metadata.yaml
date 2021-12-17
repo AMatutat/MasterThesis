@@ -14,7 +14,7 @@ keywords: [Markdown, Example]
 headeralternative: true
 
 studentnumber: "1119367"
-date: "20. Juli 2019"
+date: "27. January 2022"
 
 reviewer1:  "Prof. Dr.-Ing. Carsten Gips , FH Bielefeld"
 reviewer2:  "Dipl.-Inform. Birgit Christina George, FH Bielefeld"
@@ -22,11 +22,28 @@ reviewer2:  "Dipl.-Inform. Birgit Christina George, FH Bielefeld"
 
 ## optional (mandatory, if english abstract enabled)
 abstract-de: |
-  Dies ist die Zusammenfassung auf Deutsch.
+  Das Ziel dieser Arbeit war es, einen prozeduralen graphenbasierten Algorithmus zur Generierung von 2D-Level zu entwickeln.
+  Der Generator soll im Rahmen der Lehrveranstaltung "Programmier Methoden" der Fachhochschule Bielefeld eingesetzt werden, 
+  um das PM-Dungeon-Framework zu erweitern und durch abwechslungsreiche und spaßige Level die Motivation und den Lernerfolg der Studierenden zu verbessern.
+  DungeonG ist ein, aus drei Bausteinen bestehender prozeduraler graphenbasierter Generator.
+  DungeonG generiert eigenständig planare Graphen und nutzt ein iteratives, um Backtracking erweitertes, Verfahren um
+  die vom Graphen vorgegeben Struktur in spielbare Level umzuwandeln. DungeonG nutzt ein, am Videospiel Spelunky angelehntes Verfahren, um abwechslungsreiche Räume im Level zu erstellen.
+  Zusätzlich bietet DungeonG eine umfangreiche Schnittstelle, um mit dem erzeugten Level zu arbeiten.
+  Anders als viele anderen Level-Generatoren benötigt DungeonG keinen erfahrenen Designer, um gute Level zu erstellen.
+  DungeonG wurde bereits erfolgreich in das PM-Dungeon-Framework integriert.
+
 
 ## optional
 abstract-en: |
-  This is an english abstract.
+  The goal of this work was to develop a procedural graph-based algorithm for the generation of 2D levels.
+  The generator is to be used in the course "Programming Methods" at the University of Applied Sciences Bielefeld, 
+  to extend the PM-Dungeon-Framework and to improve the motivation and the learning success of the students by varied and fun levels.
+  DungeonG is a procedural graph-based generator consisting of three building blocks.
+  DungeonG independently generates planar graphs and uses an iterative, backtracking enhanced, procedure to transform
+  the structure, given by the graph, into playable levels. DungeonG uses a method inspired by the video game Spelunky to create varied rooms in the level.
+  In addition, DungeonG provides an extensive interface to work with the generated level.
+  Unlike many other level generators, DungeonG does not require an experienced designer to create good levels.
+  DungeonG has already been successfully integrated into the PM Dungeon framework.
 
 ## mandatory
 declaration: |
