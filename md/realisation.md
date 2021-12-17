@@ -1,7 +1,6 @@
 # Realisierung
 
-## Einleitung
-- nur ausschnitte werden gezeigt 
+In diesem Kapitel wird die konkrete, in Java umgesetzte, Implementierung des im vorherigen Kapitel dargestelltem Konzeptes vorgestellt. Der Aufbau des Kapitels orientiert sich am Aufbau des vorherigen Kapitels. Daher beginnt es mit einer Erläuterung der Projekt-Konfiguration, um eine reibungslose Integration in das Framework zu ermöglichen. Danach folgt die Vorstellung der Umsetzung der einzelnen Bausteine GraphG, RoomG und LevelG. Das Kapitel endet mit einem kurzen Überblick über die Integration in das Framework und die bereitgestellte Schnittstelle. Im Rahmen dieses Kapitels kann nicht auf jeden Aspekt der Umsetzung eingegangen werden, daher werden nur auf, vom Autor, als besonders wichtig oder interessante eingeschätzte Aspekte Eingange. Es sollte dennoch ein guter Einblick über den Aufbau und Umsetzung von DungeonG entstehen. 
 
 ## Projekt Konfiguration
 
@@ -267,18 +266,22 @@ Listing **TODO** zeigt wie geprüft werden kann, ob ein bestimmter Raum umgangen
 
 # Evaluierung 
 
-- GraphG
-  - Zeigen von Graphen
-  
-  - was machen die einzelenn Graphen gut, was schlecht
+In diesem Kapitel werden die erreichten Ergebnisse mit den aufgestellten Anforderungen gegenübergestellt. Die Evaluierung wird in zwei Bereiche eingeteilt. Im ersten Teil werden der Generator und die erzeugten Level betrachtet und darauf untersucht, ob sie die bekannten Regeln für gutes Leveldesign erfüllen. Im zweiten Teil wird das Projekt selbst, insbesondere auf die Anforderungen für die Integration in das PM-Dungeon-Framework betrachtet. 
 
-  - vermerk das die qualität als Level stark von der gewählten Knoten und Kanten anzahl abhängt
+### Level
 
-  - RoomG
-  
-      - zeigen von Templates und daraus erzeugten Räume
-      - Unterscheiden die sich gut? 
-    - Gibt es Probleme?
-      - Ist halt doof das die dinger eingelesen werden müssen
+- Regel 1
 
-  - LevelG
+- 2
+
+- 3
+
+- 4
+
+- 5
+
+- 6
+
+- 7
+
+### Integration 

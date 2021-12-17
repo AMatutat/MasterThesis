@@ -4,15 +4,13 @@ In diesen Kapitel wird ein abschließende Fazit über den Generator und die Arbe
 
 ## Fazit
 
-- Wurde das Ziel erreicht? 
-  - Vergleich mit der ursprünglichen Zielsetzung
-  - Was kann ich jetzt genau mit dem Algo machen?
-- Sachen die gut gelaufen sind
-  - Warum sind die gut?
-- Sachen die schlecht gelaufen sind
-  - Warum sind die schlecht gelaufen?
+Ziel dieser Arbeit war die Konzeptionierung und Implementierung eines prozeduralen graphenbasierten 2D-Level Generator für das PM-Dungeon-Framework. Um dieses Zeil zu erreichen wurde zu beginn der Arbeit das konzept der graphenbasierten Darstellung von Level sowie die bedeutung der begrifflichkeit der prozeduralen generierung vorgestellt. Um die Qualtität des Generators und der vom Generator erzeugten Level zu bewerten wurden Regeln für gutes Leves-Design aufgestellt. Die generierten Level wurden dann anhand dieser Kriterien bewertet.
 
-Der in dieser Arbeit konzeptioniert und entwickelte Level-Generator kann in das PM-Dungeon-Framework integriert werden, um die Studierenden mit mehr Abwechslung im Spiel zu motivieren und somit den Lernerfolg zu steigern. Ebenso hat diese Arbeit gezeigt, dass ein gut konzeptionierter Level-Generator auch mit wenigen Parametern und Inputdaten in der Lage ist, spaßige und abwechslungsreiche Level für 2D-Rollenspiele zu erschaffen. Der Generator ist zwar speziell an das PM-Dungeon-Framework angepasst, die zugrundeliegenden Algorithmen und Verfahren können aber auf andere Spiele übertragen werden. 
+DungeonG ist ein vollfunktionsfähiger prozeduraler graphenbasierter Generator und erzeugt Abwechslungsreiche und spaßige Level und arbeitet dabei mit wenigen Inpudaten sowie Parameter. DungeonG erzeugt selbständig planare Graphen um die Levelstruktur festzulegen. Es werden zur verfügungsgestellte Templates genutzt und miteinander kombiniert, um verschied aussehende und strukturiertere Räume zu erzeugen. Die so erzeugten Levle unterscheiden sich stark voneinander, können zusätzlich verschiedene Texturen benutzten und können daher als einzigartig bezeichnet werden. Die Level erfüllen alle afugestellten Anforderungen. 
+
+DungeonG konnte und wurde bereits Problemlos in das Framework integriert werden und bietet verschiedene Schnittstellen um mit den Level zu arbeiten. So kann die Struktur der Level gezielt nach optionalen oder kritischen Pfaden untersucht werden und Inhalte wie Monster und schätze entsprechend platziert werden. Die Schnittstellen sind speziell für Programmiere optimiert und erfordern keine tiefen Kenntnisse über Designregeln für Videospiele. 
+
+Der in dieser Arbeit konzeptioniert und entwickelte Level-Generator wurde in das PM-Dungeon-Framework integriert, um die Studierenden mit mehr Abwechslung im Spiel zu motivieren und somit den Lernerfolg zu steigern. Ebenso hat diese Arbeit gezeigt, dass ein gut konzeptionierter Level-Generator auch mit wenigen Parametern und Inputdaten in der Lage ist, spaßige und einzigartige Level für 2D-Rollenspiele zu erschaffen. Der Generator ist zwar speziell an das PM-Dungeon-Framework angepasst, die zugrundeliegenden Algorithmen und Verfahren können aber auf andere Spiele übertragen werden. 
 
 ## Ausblick
 
