@@ -209,6 +209,8 @@ Abbildungen **TODO** zeigen verschiedene Räume die auf den selben, 8x8 großen 
 
 ## Umsetzung LevelG
 
+- A* von libGDX um lösbarkeit zu gewährleisten
+
 ## Anbindung an das PM-Dungeon und Schnittstellen
 
 Die Anbindung an das Framework wurde wie konzeptioniert durchgeführt und bietet keine nennenswerten Aspekte und wird daher in diesem Abschnitt nicht weiter erläutert. Ebenso wurde die Graph-Search wie beschrieben umgesetzt und wird in diesem Abschnitt auch nicht weiter erläutert. In diesem Abschnitt werden verschiedene Code-Snippets erläutert um zu präsentieren, wie die Studierenden die Schnittstellen nutzen können, um ihr Spiel zu gestalten. Alle Code-Snippets sind so abstrahiert, dass kein weiteres Verständnis für das PM-Dungeon-Framework von Nöten ist.
