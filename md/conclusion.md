@@ -32,7 +32,7 @@ Wie im Kapitel 5 erläutert, benötigt GraphG eine zu große Menge an Speicher, 
 
 RoomG profitiert davon, mehr Raum-Layouts sowie Replacement-Layout zu besitzen. Um das Erstellen von Layouts zu vereinfachen, könnte ein Editor entwickelt werden. Dieser Editor könnte grafische Elemente besitzen, um Layouts mittels Mausklicks zu erstellen und in das Dungeon zu laden. 
 
-Da RoomG als einziger Baustein in DungeonG nicht ohne Inputdaten von außen auskommt, würde es die Effizienz des Generators stark verbessern, wenn RoomG prozedural generierte Layouts verwenden würde. RoomG könnte auch vollständig durch einen prozeduralen Raum-Generator ersetzt werden. Ebenso können auch Texturen prozedural generiert werden, um die optische Abwechslung noch weiter zu steigern. **TODO QUELLE** 
+Da RoomG als einziger Baustein in DungeonG nicht ohne Inputdaten von außen auskommt, würde es die Effizienz des Generators stark verbessern, wenn RoomG prozedural generierte Layouts verwenden würde. RoomG könnte auch vollständig durch einen prozeduralen Raum-Generator ersetzt werden. Ebenso können auch Texturen prozedural generiert werden, um die optische Abwechslung noch weiter zu steigern.[@Dong2020]
 
 ### Schnittstelle
 
