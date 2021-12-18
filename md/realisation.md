@@ -213,7 +213,11 @@ Abbildungen **TODO** zeigen verschiedene Räume die auf den selben, 8x8 großen 
 
 ## Anbindung an das PM-Dungeon und Schnittstellen
 
-Die Anbindung an das Framework wurde wie konzeptioniert durchgeführt und bietet keine nennenswerten Aspekte und wird daher in diesem Abschnitt nicht weiter erläutert. Ebenso wurde die Graph-Search wie beschrieben umgesetzt und wird in diesem Abschnitt auch nicht weiter erläutert. In diesem Abschnitt werden verschiedene Code-Snippets erläutert um zu präsentieren, wie die Studierenden die Schnittstellen nutzen können, um ihr Spiel zu gestalten. Alle Code-Snippets sind so abstrahiert, dass kein weiteres Verständnis für das PM-Dungeon-Framework von Nöten ist.
+Abbildung \ref{intUML} zeigt wie DungeonG in das Framework integriert wurde. Die Klasse `LevelAPI` speichert eine Instanz eines Objektes vom Typen `IController` und führt, wenn von außen angefragt, die `getLevel` Methode aus. Ist DungeonG als Generator hinterlegt, wird der oben beschriebene Generierungsprozess in `LevelG` gestartet und ein Level erzeugt. Die Integration in das Framework wurde Modular durchgeführt. Im Package `levelStructure` sind alle, nicht auf den Generator spezifizierten, Klassen enthalten. Diese Klassen können direkt von der `LevelAPI` oder den Studierenden genutzt werden. Im Package `dungeong` sind die Generator spezifischen Klassen abgespeichert. Im Falle von DungeonG sind dies die Bausteine `GraphG`, `RoomG` und `LevelG`. Durch diese Aufteilung ist es möglich, DungeonG bei bedarf durch einen neuen, graphenbasierten Levelgenerator zu ersetzten. 
+
+![UML-Klassendiagramm mit Packages zeigt die Anbindung an das Framework. \label{intUML}](figs/chapter4/integration.png)
+
+In folgenden werden verschiedene Code-Snippets erläutert um zu präsentieren, wie die Studierenden die Schnittstellen nutzen können, um ihr Spiel zu gestalten. Alle Code-Snippets sind so abstrahiert, dass kein weiteres Verständnis für das PM-Dungeon-Framework von Nöten ist.
 
 Listing **TODO** zeigt wie ein Monster zufällige im Level platziert werden kann. In Zeile 0 wird das aktuelle Level abgefragt. In Zeile 1 wird ein zufälliges Bodenfeld aus einem zufälligen Raum im Level ausgewählt. In Zeile 2 wird dem Monster `dino` die Globale-Position des Tiles zugewiesen.  
 
