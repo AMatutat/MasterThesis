@@ -14,13 +14,13 @@ Der Umfang des Anhangs sollte möglichst klein sein!
 
 Hier werden verschiedene, von GraphG erzeugte, planare Graphen gezeigt. Diese Graphen können genutzt werden, um Level Strukturell darzustellen (vgl. Kapitel 2). 
 
-![Von GraphG erzeugter Graph mit 12 Knoten und 2 extra Kanten. \label{graphex1}](figs/chapter4/gexample1.png)
+![Von GraphG erzeugter Graph mit 12 Knoten und 2 extra Kanten. \label{graphex1}](figs/chapter4/graphgsol/example1.png)
 
-![Von GraphG erzeugter Graph mit 15 Knoten und 4 extra Kanten. \label{graphex2}](figs/chapter4/gexample2.png)
+![Von GraphG erzeugter Graph mit 15 Knoten und 4 extra Kanten. \label{graphex2}](figs/chapter4/graphgsol/example2.png)
 
-![Von GraphG erzeugter Graph mit 20 Knoten und 4 extra Kanten. \label{graphex3}](figs/chapter4/gexample3.png)
+![Von GraphG erzeugter Graph mit 20 Knoten und 4 extra Kanten. \label{graphex3}](figs/chapter4/graphgsol/example3.png)
 
-![Von GraphG erzeugter Graph mit 7 Knoten und 1 extra Kanten. \label{graphex4}](figs/chapter4/gexample4.png)
+![Von GraphG erzeugter Graph mit 7 Knoten und 1 extra Kanten. \label{graphex4}](figs/chapter4/graphgsol/example4.png)
 
 ## Räume 
 
