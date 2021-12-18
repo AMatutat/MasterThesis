@@ -127,76 +127,76 @@ Die Klasse `ReplacementLoader` lädt alle abgespeicherten Replacements aus einer
 
 Die Klassen `Replacement` und `RoomTemplate` speichern jeweils ein Layout und ein Design-Label. Der Ersetzungsprozess findet in `RoomTemplate#replace` statt und wird in Listing **TODO** gezeigt. 
 
-Da ein Template mehrfach verwendet werden soll, wird in Zeile 1 eine Kopie des Layouts erstellt. Die Ersetzung wird in dieser Kopie durchgeführt. In Zeile 2 und 3 wird die Größe des Layouts abgefragt, um späteres Iterieren zu vereinfachen. Genau wie das Template soll auch die Liste mit den möglichen Replacements mehrfach verwenden werden können, daher wird in Zeile 6 eine Kopie der übergebenen Liste erstellt. In Zeile 7 bis 10 werden alle Replacements aus der Liste gelöscht, die zu groß für das Layout sind, also über den Rand des Raumes herausragen würden. In Zeile 12 bis 24 findet der eigentliche Ersetzungsprozess statt. Die äußere Schleife in Zeile 14 bis 24 sorgt dafür, dass im Falle einer Änderung des Layouts der gesamte innere Prozess erneut durchgeführt wird. Der innere Prozess in Zeile 16 bis 23 iteriert für jedes Replacment über das Layout und such nach einer Wildcard. Dabei muss nicht das gesamte Layout betrachtet, sondern nur die Punkte, bei dem das Einfügen der Replacement nicht dafür sorgen würde, dass  das Replacement über den Raumrand hinausragt. Daher kann in Zeile 19 und 20 die Abbruchbedingung der Zählergesteuerten-Schleifen angepasst werden. In Zeile 21 wird geprüft, ob das aktuelle betrachtete Feld eine Wildcard ist und in Zeile 22 wird versucht diese Wildcard mit dem Replacement zu ersetzen. Die Funktionsweise von `placeIn` wird weiter unten erläutert. Ist der Ersetzungsprozess erfolgreich, muss nach Abschluss der foreach-Schleife in Zeile 16 der gesamte Prozess wiederholt werden, um möglicherweise neu eingesetzte Wildcards zu ersetzen. In Zeile 26 bis 30 werden alle verbliebenen Wildcards durch Bodenfelder ersetzt. In Zeile 30 erstellt die Methode ein neues Objekt der Klasse `Room` mit dem ersetzten Layout. Dieser Raum ist bereit, um im PM-Dungeon verwendet zu werden. 
+Da ein Template mehrfach verwendet werden soll, wird in Zeile 2 eine Kopie des Layouts erstellt. Die Ersetzung wird in dieser Kopie durchgeführt. In Zeile 3 und 4 wird die Größe des Layouts abgefragt, um späteres Iterieren zu vereinfachen. Genau wie das Template soll auch die Liste mit den möglichen Replacements mehrfach verwenden werden können, daher wird in Zeile 7 eine Kopie der übergebenen Liste erstellt. In Zeile 8 bis 11 werden alle Replacements aus der Liste gelöscht, die zu groß für das Layout sind, also über den Rand des Raumes herausragen würden. In Zeile 13 bis 25 findet der eigentliche Ersetzungsprozess statt. Die äußere Schleife in Zeile 15 bis 25 sorgt dafür, dass im Falle einer Änderung des Layouts der gesamte innere Prozess erneut durchgeführt wird. Der innere Prozess in Zeile 17 bis 24 iteriert für jedes Replacment über das Layout und such nach einer Wildcard. Dabei muss nicht das gesamte Layout betrachtet, sondern nur die Punkte, bei dem das Einfügen der Replacement nicht dafür sorgen würde, dass  das Replacement über den Raumrand hinausragt. Daher kann in Zeile 20 und 21 die Abbruchbedingung der Zählergesteuerten-Schleifen angepasst werden. In Zeile 22 wird geprüft, ob das aktuelle betrachtete Feld eine Wildcard ist und in Zeile 23 wird versucht diese Wildcard mit dem Replacement zu ersetzen. Die Funktionsweise von `placeIn` wird weiter unten erläutert. Ist der Ersetzungsprozess erfolgreich, muss nach Abschluss der foreach-Schleife in Zeile 17 der gesamte Prozess wiederholt werden, um möglicherweise neu eingesetzte Wildcards zu ersetzen. In Zeile 27 bis 30 werden alle verbliebenen Wildcards durch Bodenfelder ersetzt. In Zeile 31 erstellt die Methode ein neues Objekt der Klasse `Room` mit dem ersetzten Layout. Dieser Raum ist bereit, um im PM-Dungeon verwendet zu werden. 
 
 ```
-0    public Room replace(List<Replacement> replacements) {
-1		LevelElement[][] roomLayout = copy(this.layout);        		
-2        int layoutWidth = getLayout()[0].length;
-3        int layoutHeight = getLayout().length;
-4
-5       // remove all replacements that are too big
-6        List<Replacement> replacementList = new ArrayList<>(replacements);
-7        for (Replacement r : replacements) {
-8            if (r.getLayout()[0].length <= layoutWidth && r.getLayout().length <= layoutHeight)
-9                replacementList.add(r);
-10        }
-11    
-12        // replace with replacements
-13        boolean changes;
-14        do {
-15            changes = false;
-16            for (Replacement r : replacementList) {
-17                int rHeight = r.getLayout().length;
-18                int rWidth = r.getLayout()[0].length;
-19                for (int y = 0; y < layoutHeight - rHeight; y++)
-20                    for (int x = 0; x < layoutWidth - rWidth; x++)
-21                        if (roomLayout[y][x] == LevelElement.WILDCARD
-22                                && placeIn(roomLayout, r, x, y)) changes = true;
-23            } 
-24        } while (changes);
-25    
-26        // replace all placeholder that are left with floor
-27        for (int y = 0; y < layoutHeight; y++)
-28            for (int x = 0; x < layoutWidth; x++)
-29                if (roomLayout[y][x] == LevelElement.WILDCARD)
-30                    roomLayout[y][x] = LevelElement.FLOOR;
-31        return new levelg.Room(roomLayout, getDesign());
-32    }
+public Room replace(List<Replacement> replacements) {
+    LevelElement[][] roomLayout = copy(this.layout);        		
+    int layoutWidth = getLayout()[0].length;
+    int layoutHeight = getLayout().length;
+
+     // remove all replacements that are too big
+     List<Replacement> replacementList = new ArrayList<>(replacements);
+     for (Replacement r : replacements) {
+	     if (r.getLayout()[0].length <= layoutWidth && r.getLayout().length <= layoutHeight)
+    	      replacementList.add(r);
+	 }
+    
+	 // replace with replacements
+	 boolean changes;
+	 do {
+	 	changes = false;
+	 	for (Replacement r : replacementList) {
+	 		int rHeight = r.getLayout().length;
+	 		int rWidth = r.getLayout()[0].length;
+	 		for (int y = 0; y < layoutHeight - rHeight; y++)
+	 			for (int x = 0; x < layoutWidth - rWidth; x++)
+	 				if (roomLayout[y][x] == LevelElement.WILDCARD
+	 					&& placeIn(roomLayout, r, x, y)) changes = true;
+	 	} 
+	 } while (changes);
+    
+	 // replace all placeholder that are left with floor
+	 for (int y = 0; y < layoutHeight; y++)
+	 	for (int x = 0; x < layoutWidth; x++)
+	 		if (roomLayout[y][x] == LevelElement.WILDCARD)
+	 			roomLayout[y][x] = LevelElement.FLOOR;
+	return new levelg.Room(roomLayout, getDesign());
+}
 ```
 
-Listing **ToDo** zeigt die Methode `placIn`. Die Methode bekommt ein Layout übergeben in den das Replacment `r` so eingesetzt werden soll, dass die obere linke Ecke vom `r` in `layout[yCor][xCor]` eingesetzt wird. Ist der Prozess erfolgreich, gibt die Methode `true` zurück, ansonsten `false`. In Zeile 1 prüft die Methode mithilfe von `canReplaceIn` ob `r` in `layout` an der Stelle `[ycor][xcor]` passt. 
+Listing **ToDo** zeigt die Methode `placIn`. Die Methode bekommt ein Layout übergeben in den das Replacment `r` so eingesetzt werden soll, dass die obere linke Ecke vom `r` in `layout[yCor][xCor]` eingesetzt wird. Ist der Prozess erfolgreich, gibt die Methode `true` zurück, ansonsten `false`. In Zeile 2 prüft die Methode mithilfe von `canReplaceIn` ob `r` in `layout` an der Stelle `[ycor][xcor]` passt. 
 
-Listing **TODO** zeigt die Methode `canReplaceIn`. Die Methode iteriert durch die Zeilen 2 und 3 über das Layout ab der Stelle `[yCor][xCor]` bis zu der Stelle an der das Replacement enden würde, wenn es eingesetzt wird. Für jedes Feld, das dabei betrachtet wird, wird in Zeile 6 und 7 geprüft, ob das Replacement an der Stelle ein Feld ersetzen wollen würde und ob an dieser Stelle im Layout eine Wildcard ist. Möchte das Replacement ein Feld ersetzten an der im Layout keine Wildcard ist, kann keine Ersetzung durchgeführt werden und die Methode gibt `false` zurück. Sollte an jeder zu ersetzenden Stelle auch ein Placeholder sein, gibt die Methode `true` zurück. 
+Listing **TODO** zeigt die Methode `canReplaceIn`. Die Methode iteriert durch die Zeilen 3 und 4 über das Layout ab der Stelle `[yCor][xCor]` bis zu der Stelle an der das Replacement enden würde, wenn es eingesetzt wird. Für jedes Feld, das dabei betrachtet wird, wird in Zeile 7 und 8 geprüft, ob das Replacement an der Stelle ein Feld ersetzen wollen würde und ob an dieser Stelle im Layout eine Wildcard ist. Möchte das Replacement ein Feld ersetzten an der im Layout keine Wildcard ist, kann keine Ersetzung durchgeführt werden und die Methode gibt `false` zurück. Sollte an jeder zu ersetzenden Stelle auch ein Placeholder sein, gibt die Methode `true` zurück. 
 
-Ist eine Ersetzung möglich, iteriert `placeIn` genauso wie `canReplaceIn` durch Zeile 4 und 5 über das Layout und führt in Zeile 6 und 7 an den jeweiligen Stellen eine Ersetzung durch. 
-
-```
-  0  private boolean placeIn(final LevelElement[][] layout, final Replacement r, int xCor, int yCor) {
-  1      if (!canReplaceIn(layout, r, xCor, yCor)) return false;
-  2     else {
-  3          LevelElement[][] rlayout = r.getLayout();
-  4          for (int y = yCor; y < yCor + rlayout.length; y++)
-  5              for (int x = xCor; x < xCor + rlayout[0].length; x++) {
-  6                  if (rlayout[y - yCor][x - xCor] != LevelElement.SKIP)
-  7                      layout[y][x] = rlayout[y - yCor][x - xCor];
-  8              }
-  9          return true;
-  10      }
-  11  }
-```
-
+Ist eine Ersetzung möglich, iteriert `placeIn` genauso wie `canReplaceIn` durch Zeile 5 und 6 über das Layout und führt in Zeile 7 und 8 an den jeweiligen Stellen eine Ersetzung durch. 
 
 ```
- 0   private boolean canReplaceIn(LevelElement[][] layout, final Replacement r, int xCor, int yCor) {
- 1       LevelElement[][] rlayout = r.getLayout();
- 2       for (int y = yCor; y < yCor + rlayout.length; y++)
- 3           for (int x = xCor; x < xCor + rlayout[0].length; x++) {
- 4               if (rlayout[y - yCor][x - xCor] != LevelElement.SKIP
- 5                       && layout[y][x] != LevelElement.WILDCARD) return false;
- 6           }
- 7       return true;
- 8   }
+private boolean placeIn(final LevelElement[][] layout, final Replacement r, int xCor, int yCor) {
+	if (!canReplaceIn(layout, r, xCor, yCor)) return false;
+	else {
+		LevelElement[][] rlayout = r.getLayout();
+		for (int y = yCor; y < yCor + rlayout.length; y++)
+			for (int x = xCor; x < xCor + rlayout[0].length; x++) {
+				if (rlayout[y - yCor][x - xCor] != LevelElement.SKIP)
+					layout[y][x] = rlayout[y - yCor][x - xCor];
+			}
+		return true;
+	}
+}
+```
+
+
+```
+private boolean canReplaceIn(LevelElement[][] layout, final Replacement r, int xCor, int yCor) {
+	LevelElement[][] rlayout = r.getLayout();
+	for (int y = yCor; y < yCor + rlayout.length; y++)
+		for (int x = xCor; x < xCor + rlayout[0].length; x++) {
+			if (rlayout[y - yCor][x - xCor] != LevelElement.SKIP && layout[y][x] != LevelElement.WILDCARD) 
+			return false;
+			}
+	return true;
+}
 ```
 
 
@@ -217,55 +217,55 @@ Abbildung \ref{intUML} zeigt wie DungeonG in das Framework integriert wurde. Die
 
 In folgenden werden verschiedene Code-Snippets erläutert um zu präsentieren, wie die Studierenden die Schnittstellen nutzen können, um ihr Spiel zu gestalten. Alle Code-Snippets sind so abstrahiert, dass kein weiteres Verständnis für das PM-Dungeon-Framework von Nöten ist.
 
-Listing **TODO** zeigt wie ein Monster zufällige im Level platziert werden kann. In Zeile 0 wird das aktuelle Level abgefragt. In Zeile 1 wird ein zufälliges Bodenfeld aus einem zufälligen Raum im Level ausgewählt. In Zeile 2 wird dem Monster `dino` die Globale-Position des Tiles zugewiesen.  
+Listing **TODO** zeigt wie ein Monster zufällige im Level platziert werden kann. In Zeile 1 wird das aktuelle Level abgefragt. In Zeile 2 wird ein zufälliges Bodenfeld aus einem zufälligen Raum im Level ausgewählt. In Zeile 3 wird dem Monster `dino` die Globale-Position des Tiles zugewiesen.  
 
 ```java
-0 Level currentLevel = levelAPI.getCurrentLevel();
-1 Tile randomTile = currentLevel.getRandomRoom().getRandomFloorTile();
-2 dino.setPosition(randomTile.getGlobalPosition());
+ Level currentLevel = levelAPI.getCurrentLevel();
+ Tile randomTile = currentLevel.getRandomRoom().getRandomFloorTile();
+ dino.setPosition(randomTile.getGlobalPosition());
 ```
 
-Listing **TODO** zeigt wie der Held auf dem Startpunkt des Level gesetzt werden kann. In Zeile 0 wird das aktuelle Level abgefragt. In Zeile 1 wird das als Startpunkt markierte Tile abgefragt. In Zeile 2 wird dem Helden die Position des Tiles zugewiesen. 
+Listing **TODO** zeigt wie der Held auf dem Startpunkt des Level gesetzt werden kann. In Zeile 1 wird das aktuelle Level abgefragt. In Zeile 2 wird das als Startpunkt markierte Tile abgefragt. In Zeile 3 wird dem Helden die Position des Tiles zugewiesen. 
 
 ```java
-0 Level currentLevel = levelAPI.getCurrentLevel();
-1 Tile startTile = currentLevel.getStartTile();
-2 hero.setPosition(starTile.getGlobalPosition());
+ Level currentLevel = levelAPI.getCurrentLevel();
+ Tile startTile = currentLevel.getStartTile();
+ hero.setPosition(starTile.getGlobalPosition());
 ```
 
-Listing **TODO** zeigt wie ein Monster in einem kritischen Raum platziert werden kann. In Zeile 0 wird das aktuelle Level abgefragt. In Zeile 1 werden alle kritischen Knoten abgefragt. In Zeile 2 wird ein zufälliger Knoten aus allen kritischen Knoten ausgewählt. In Zeile 3 wird der Raum gespeichert, der den Knoten im Level repräsentiert. Der Index des Knoten in `Level.rooms` ist identisch mit dem passenden Index des Knoten in `Level.nodes`. In Zeile 4 wird ein zufälliges Bodenfeld aus dem Raum ausgewählt. In Zeile 5 wird dem Monster `evilDuck` die Position des Tiles zugewiesen. 
+Listing **TODO** zeigt wie ein Monster in einem kritischen Raum platziert werden kann. In Zeile 1 wird das aktuelle Level abgefragt. In Zeile 2 werden alle kritischen Knoten abgefragt. In Zeile 3 wird ein zufälliger Knoten aus allen kritischen Knoten ausgewählt. In Zeile 4 wird der Raum gespeichert, der den Knoten im Level repräsentiert. Der Index des Knoten in `Level.rooms` ist identisch mit dem passenden Index des Knoten in `Level.nodes`. In Zeile 5 wird ein zufälliges Bodenfeld aus dem Raum ausgewählt. In Zeile 6 wird dem Monster `evilDuck` die Position des Tiles zugewiesen. 
 
 ```java
-0 Level currentLevel = levelAPI.getCurrentLevel();
-1 List <Node> criticalNodes = currentLevel.getCriticalNodes();
-2 Node randomNode = criticalNodes.get(new Random(criticalNodes.size()));
-3 Room randomRoom = currentLevel.getRoomToNode(randomNode);
-4 Tile randomTile = randomRoom.getRandomFloorTile();
-5 evilDuck.setPosition(randomTile.getGlobalPosition());
+Level currentLevel = levelAPI.getCurrentLevel();
+List <Node> criticalNodes = currentLevel.getCriticalNodes();
+Node randomNode = criticalNodes.get(new Random(criticalNodes.size()));
+Room randomRoom = currentLevel.getRoomToNode(randomNode);
+Tile randomTile = randomRoom.getRandomFloorTile();
+evilDuck.setPosition(randomTile.getGlobalPosition());
 ```
 
-Listing **TODO** zeigt wie eine Schatztruhe in einen optionalen Raum mit platziert werden kann. In Zeile 0 wird das aktuelle Level abgefragt. In Zeile 1 werden alle optionalen Knoten abgefragt. In Zeile 2 wird ein zufälliger Knoten aus allen optionalen Knoten ausgewählt. In Zeile 3 wird der Raum gespeichert, der den Knoten im Level repräsentiert. In Zeile 4 wird ein zufälliges Bodenfeld aus dem Raum ausgewählt. In Zeile 5 wird der Schatzkiste `bigLoot` die Position des Tiles zugewiesen. 
+Listing **TODO** zeigt wie eine Schatztruhe in einen optionalen Raum mit platziert werden kann. In Zeile 1 wird das aktuelle Level abgefragt. In Zeile 2 werden alle optionalen Knoten abgefragt. In Zeile 3 wird ein zufälliger Knoten aus allen optionalen Knoten ausgewählt. In Zeile 4 wird der Raum gespeichert, der den Knoten im Level repräsentiert. In Zeile 5 wird ein zufälliges Bodenfeld aus dem Raum ausgewählt. In Zeile 6 wird der Schatzkiste `bigLoot` die Position des Tiles zugewiesen. 
 
 ```java
-0 Level currentLevel = levelAPI.getCurrentLevel();
-1 List <Node> optionalNodes = currentLevel.getOptionalNodes();
-2 Node randomNode = optionalNodes.get(new Random(optionalNodes.size()));
-3 Room randomRoom = currentLevel.getRoomToNode(randomNode);
-4 Tile randomTile = randomRoom.getRandomFloorTile();
-5 bigLoot.setPosition(randomTile.getGlobalPosition());
+Level currentLevel = levelAPI.getCurrentLevel();
+List <Node> optionalNodes = currentLevel.getOptionalNodes();
+Node randomNode = optionalNodes.get(new Random(optionalNodes.size()));
+Room randomRoom = currentLevel.getRoomToNode(randomNode);
+Tile randomTile = randomRoom.getRandomFloorTile();
+bigLoot.setPosition(randomTile.getGlobalPosition());
 ```
 
-Listing **TODO** zeigt wie geprüft werden kann, ob ein bestimmter Raum umgangen werden kann. In Zeile 0 wird das aktuelle Level abgefragt. In Zeile 1 und 2 werden sowohl der Start- als auch der Endknoten des Levels abgefragt. In Zeile 3 wird der kürzeste Pfad vom Start- bis zum Endknoten abgefragt. In Zeile 4 wird ein zufälliger Knoten aus diesem Pfad ausgewählt, dieser Knoten dient zur Demonstration und gilt es zu vermeiden. In Zeile 5 wird geprüft ob der ausgewählte Knoten auf dem Weg vom Start- bis zum Endknoten umgangen werden kann. In diesem Beispiel würde das bedeuten, das es mehrere Wege zum Ziel gibt. In Zeile 6 und 7 finden Ausgaben entsprechend der Ergebnisse statt. Diese dienen nur der Demonstration und könnten durch spezifische Game-Design Entscheidungen ersetzt werden. 
+Listing **TODO** zeigt wie geprüft werden kann, ob ein bestimmter Raum umgangen werden kann. In Zeile 1 wird das aktuelle Level abgefragt. In Zeile 2 und 3 werden sowohl der Start- als auch der Endknoten des Levels abgefragt. In Zeile 4 wird der kürzeste Pfad vom Start- bis zum Endknoten abgefragt. In Zeile 5 wird ein zufälliger Knoten aus diesem Pfad ausgewählt, dieser Knoten dient zur Demonstration und gilt es zu vermeiden. In Zeile 6 wird geprüft ob der ausgewählte Knoten auf dem Weg vom Start- bis zum Endknoten umgangen werden kann. In diesem Beispiel würde das bedeuten, das es mehrere Wege zum Ziel gibt. In Zeile 7 und 8 finden Ausgaben entsprechend der Ergebnisse statt. Diese dienen nur der Demonstration und könnten durch spezifische Game-Design Entscheidungen ersetzt werden. 
 
 ```java
-0 Level currentLevel = levelAPI.getCurrentLevel();
-1 Node start = currentLevel.getStartNode();
-2 Node end = currentLevel.getEndNode();   
-3 List<Node> path = currentLevel.getShortestPath(start,end);
-4 Node toAvoid = path.get(new Random(path.size()));
-5 if (currentLevel.isRoomReachableWithout(start,end,toAvoid))
-6 System.out.println("YES!")
-7 else System.out.println("OH NO!"));   
+Level currentLevel = levelAPI.getCurrentLevel();
+Node start = currentLevel.getStartNode();
+Node end = currentLevel.getEndNode();   
+List<Node> path = currentLevel.getShortestPath(start,end);
+Node toAvoid = path.get(new Random(path.size()));
+if (currentLevel.isRoomReachableWithout(start,end,toAvoid))
+	System.out.println("YES!")
+else System.out.println("OH NO!"));   
 ```
 
 # Evaluierung 
