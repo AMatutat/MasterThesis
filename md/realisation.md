@@ -11,7 +11,7 @@ Um eine reibungslose Integration in das PM-Dungeon-Framework zu ermöglichen, wu
 - Die Package-Struktur des Frameworks wurde übernommen.
 - Das für den Generator genutzte Git-Repository wird mithilfe von GitHub-Actions so konfiguriert, dass es dem PM-Dungeon-Repository gleicht. Dies bedeutet, dass Code nur dann gemerged werden kann, wenn der Codestil eingehalten ist, alle JUnit-Testfälle erfolgreich durchlaufen und das Tool Spot-Bugs keine Antipattern im Code finden kann oder die gefundenen Antipattern bewusst akzeptiert werden. Sollten Antipattern bewusst im Code gelassen werden, muss diese Entscheidung dokumentiert und nachvollziehbar begründe werden.
 
-Die konkrete Konfiguration des GitHub-Actions kann im Repository auf GitHub **TODO footnote** oder im Anhang **todo** eingesehen werden. 
+Die konkrete Konfiguration des GitHub-Actions kann im Repository auf GitHub\footnote{GitHub-Repo für diese Arbeit: https://github.com/AMatutat/MasterThesis} oder im Anhang \ref{workflows} eingesehen werden. 
 
 ## Umsetzung GraphG
 
@@ -125,11 +125,11 @@ Die Klasse `ReplacementLoader` lädt alle abgespeicherten Replacements aus einer
 
 ![UML-Klassendiagramm für RoomG mit den wichtigsten Methoden. \label{roomgUML}](figs/chapter4/roomg.png)
 
-Die Klassen `Replacement` und `RoomTemplate` speichern jeweils ein Layout und ein Design-Label. Der Ersetzungsprozess findet in `RoomTemplate#replace` statt und wird in Listing **TODO** gezeigt. 
+Die Klassen `Replacement` und `RoomTemplate` speichern jeweils ein Layout und ein Design-Label. Der Ersetzungsprozess findet in `RoomTemplate#replace` statt und wird in Listing \ref{replace_code} gezeigt. 
 
 Da ein Template mehrfach verwendet werden soll, wird in Zeile 2 eine Kopie des Layouts erstellt. Die Ersetzung wird in dieser Kopie durchgeführt. In Zeile 3 und 4 wird die Größe des Layouts abgefragt, um späteres Iterieren zu vereinfachen. Genau wie das Template soll auch die Liste mit den möglichen Replacements mehrfach verwenden werden können, daher wird in Zeile 7 eine Kopie der übergebenen Liste erstellt. In Zeile 8 bis 11 werden alle Replacements aus der Liste gelöscht, die zu groß für das Layout sind, also über den Rand des Raumes herausragen würden. In Zeile 13 bis 25 findet der eigentliche Ersetzungsprozess statt. Die äußere Schleife in Zeile 15 bis 25 sorgt dafür, dass im Falle einer Änderung des Layouts der gesamte innere Prozess erneut durchgeführt wird. Der innere Prozess in Zeile 17 bis 24 iteriert für jedes Replacment über das Layout und such nach einer Wildcard. Dabei muss nicht das gesamte Layout betrachtet, sondern nur die Punkte, bei dem das Einfügen der Replacement nicht dafür sorgen würde, dass  das Replacement über den Raumrand hinausragt. Daher kann in Zeile 20 und 21 die Abbruchbedingung der Zählergesteuerten-Schleifen angepasst werden. In Zeile 22 wird geprüft, ob das aktuelle betrachtete Feld eine Wildcard ist und in Zeile 23 wird versucht diese Wildcard mit dem Replacement zu ersetzen. Die Funktionsweise von `placeIn` wird weiter unten erläutert. Ist der Ersetzungsprozess erfolgreich, muss nach Abschluss der foreach-Schleife in Zeile 17 der gesamte Prozess wiederholt werden, um möglicherweise neu eingesetzte Wildcards zu ersetzen. In Zeile 27 bis 30 werden alle verbliebenen Wildcards durch Bodenfelder ersetzt. In Zeile 31 erstellt die Methode ein neues Objekt der Klasse `Room` mit dem ersetzten Layout. Dieser Raum ist bereit, um im PM-Dungeon verwendet zu werden. 
 
-```
+\begin{lstlisting}[language=java, label=replace_code, caption={Replace Wildcard in einen Room-Layout}  ]
 public Room replace(List<Replacement> replacements) {
     LevelElement[][] roomLayout = copy(this.layout);        		
     int layoutWidth = getLayout()[0].length;
@@ -138,40 +138,40 @@ public Room replace(List<Replacement> replacements) {
      // remove all replacements that are too big
      List<Replacement> replacementList = new ArrayList<>(replacements);
      for (Replacement r : replacements) {
-	     if (r.getLayout()[0].length <= layoutWidth && r.getLayout().length <= layoutHeight)
+         if (r.getLayout()[0].length <= layoutWidth && r.getLayout().length <= layoutHeight)
     	      replacementList.add(r);
-	 }
+     }
     
-	 // replace with replacements
-	 boolean changes;
-	 do {
-	 	changes = false;
-	 	for (Replacement r : replacementList) {
-	 		int rHeight = r.getLayout().length;
-	 		int rWidth = r.getLayout()[0].length;
-	 		for (int y = 0; y < layoutHeight - rHeight; y++)
-	 			for (int x = 0; x < layoutWidth - rWidth; x++)
-	 				if (roomLayout[y][x] == LevelElement.WILDCARD
-	 					&& placeIn(roomLayout, r, x, y)) changes = true;
-	 	} 
-	 } while (changes);
+     // replace with replacements
+     boolean changes;
+     do {
+     	changes = false;
+     	for (Replacement r : replacementList) {
+     		int rHeight = r.getLayout().length;
+     		int rWidth = r.getLayout()[0].length;
+     		for (int y = 0; y < layoutHeight - rHeight; y++)
+     			for (int x = 0; x < layoutWidth - rWidth; x++)
+     				if (roomLayout[y][x] == LevelElement.WILDCARD
+     					&& placeIn(roomLayout, r, x, y)) changes = true;
+     	} 
+     } while (changes);
     
-	 // replace all placeholder that are left with floor
-	 for (int y = 0; y < layoutHeight; y++)
-	 	for (int x = 0; x < layoutWidth; x++)
-	 		if (roomLayout[y][x] == LevelElement.WILDCARD)
-	 			roomLayout[y][x] = LevelElement.FLOOR;
-	return new levelg.Room(roomLayout, getDesign());
+     // replace all placeholder that are left with floor
+     for (int y = 0; y < layoutHeight; y++)
+     	for (int x = 0; x < layoutWidth; x++)
+     		if (roomLayout[y][x] == LevelElement.WILDCARD)
+     			roomLayout[y][x] = LevelElement.FLOOR;
+    return new levelg.Room(roomLayout, getDesign());
 }
-```
+\end{lstlisting}
 
-Listing **ToDo** zeigt die Methode `placIn`. Die Methode bekommt ein Layout übergeben in den das Replacment `r` so eingesetzt werden soll, dass die obere linke Ecke vom `r` in `layout[yCor][xCor]` eingesetzt wird. Ist der Prozess erfolgreich, gibt die Methode `true` zurück, ansonsten `false`. In Zeile 2 prüft die Methode mithilfe von `canReplaceIn` ob `r` in `layout` an der Stelle `[ycor][xcor]` passt. 
+Listing \ref{placein_code} zeigt die Methode `placIn`. Die Methode bekommt ein Layout übergeben in den das Replacment `r` so eingesetzt werden soll, dass die obere linke Ecke vom `r` in `layout[yCor][xCor]` eingesetzt wird. Ist der Prozess erfolgreich, gibt die Methode `true` zurück, ansonsten `false`. In Zeile 2 prüft die Methode mithilfe von `canReplaceIn` ob `r` in `layout` an der Stelle `[ycor][xcor]` passt. 
 
-Listing **TODO** zeigt die Methode `canReplaceIn`. Die Methode iteriert durch die Zeilen 3 und 4 über das Layout ab der Stelle `[yCor][xCor]` bis zu der Stelle an der das Replacement enden würde, wenn es eingesetzt wird. Für jedes Feld, das dabei betrachtet wird, wird in Zeile 7 und 8 geprüft, ob das Replacement an der Stelle ein Feld ersetzen wollen würde und ob an dieser Stelle im Layout eine Wildcard ist. Möchte das Replacement ein Feld ersetzten an der im Layout keine Wildcard ist, kann keine Ersetzung durchgeführt werden und die Methode gibt `false` zurück. Sollte an jeder zu ersetzenden Stelle auch ein Placeholder sein, gibt die Methode `true` zurück. 
+Listing \ref{canplacein_code} zeigt die Methode `canReplaceIn`. Die Methode iteriert durch die Zeilen 3 und 4 über das Layout ab der Stelle `[yCor][xCor]` bis zu der Stelle an der das Replacement enden würde, wenn es eingesetzt wird. Für jedes Feld, das dabei betrachtet wird, wird in Zeile 7 und 8 geprüft, ob das Replacement an der Stelle ein Feld ersetzen wollen würde und ob an dieser Stelle im Layout eine Wildcard ist. Möchte das Replacement ein Feld ersetzten an der im Layout keine Wildcard ist, kann keine Ersetzung durchgeführt werden und die Methode gibt `false` zurück. Sollte an jeder zu ersetzenden Stelle auch ein Placeholder sein, gibt die Methode `true` zurück. 
 
 Ist eine Ersetzung möglich, iteriert `placeIn` genauso wie `canReplaceIn` durch Zeile 5 und 6 über das Layout und führt in Zeile 7 und 8 an den jeweiligen Stellen eine Ersetzung durch. 
 
-```
+\begin{lstlisting}[language=java, label=placein_code, caption={Code um ein Replacment in eine spezifische Stelle im Room-Layout zu platzieren.}  ]
 private boolean placeIn(final LevelElement[][] layout, final Replacement r, int xCor, int yCor) {
 	if (!canReplaceIn(layout, r, xCor, yCor)) return false;
 	else {
@@ -184,10 +184,9 @@ private boolean placeIn(final LevelElement[][] layout, final Replacement r, int 
 		return true;
 	}
 }
-```
+\end{lstlisting}
 
-
-```
+\begin{lstlisting}[language=java, label=canplacein_code, caption={Prüfen ob das Replacement an die spezifische Stelle im Layout eingesetzt werden kann.}  ]
 private boolean canReplaceIn(LevelElement[][] layout, final Replacement r, int xCor, int yCor) {
 	LevelElement[][] rlayout = r.getLayout();
 	for (int y = yCor; y < yCor + rlayout.length; y++)
@@ -197,11 +196,7 @@ private boolean canReplaceIn(LevelElement[][] layout, final Replacement r, int x
 			}
 	return true;
 }
-```
-
-
-
-Für diese Arbeit wurden verschiedene Layouts für Room-Templates und Replacments erstellt. Abbildungen **TODO** zeigen  verschiedene, von RoomG, erzeugte Räume und die dafür verwendeten Templates und Replacments. Im Kapitel Evaluierung wird die Vielfalt und Qualität der Räume analysiert und bewertet. 
+\end{lstlisting}
 
 Abbildungen **TODO** zeigen verschiedene Räume die auf den selben, 8x8 großen Raum-Template basieren und durch verschiedene Replacern verändert wurden. Im Kapitel Evaluierung wird weiter auf die Qualität und Abwechslung der Räume Eingange. 
 
@@ -217,47 +212,47 @@ Abbildung \ref{intUML} zeigt wie DungeonG in das Framework integriert wurde. Die
 
 In folgenden werden verschiedene Code-Snippets erläutert um zu präsentieren, wie die Studierenden die Schnittstellen nutzen können, um ihr Spiel zu gestalten. Alle Code-Snippets sind so abstrahiert, dass kein weiteres Verständnis für das PM-Dungeon-Framework von Nöten ist.
 
-Listing **TODO** zeigt wie ein Monster zufällige im Level platziert werden kann. In Zeile 1 wird das aktuelle Level abgefragt. In Zeile 2 wird ein zufälliges Bodenfeld aus einem zufälligen Raum im Level ausgewählt. In Zeile 3 wird dem Monster `dino` die Globale-Position des Tiles zugewiesen.  
+Listing \ref{api1} zeigt wie ein Monster zufällige im Level platziert werden kann. In Zeile 1 wird das aktuelle Level abgefragt. In Zeile 2 wird ein zufälliges Bodenfeld aus einem zufälligen Raum im Level ausgewählt. In Zeile 3 wird dem Monster `dino` die Globale-Position des Tiles zugewiesen.  
 
-```java
+\begin{lstlisting}[language=java, label=api1, caption={Platziere ein Monster zufällig im Level.}  ]
  Level currentLevel = levelAPI.getCurrentLevel();
  Tile randomTile = currentLevel.getRandomRoom().getRandomFloorTile();
  dino.setPosition(randomTile.getGlobalPosition());
-```
+\end{lstlisting}
 
-Listing **TODO** zeigt wie der Held auf dem Startpunkt des Level gesetzt werden kann. In Zeile 1 wird das aktuelle Level abgefragt. In Zeile 2 wird das als Startpunkt markierte Tile abgefragt. In Zeile 3 wird dem Helden die Position des Tiles zugewiesen. 
+Listing \ref{api2} zeigt wie der Held auf dem Startpunkt des Level gesetzt werden kann. In Zeile 1 wird das aktuelle Level abgefragt. In Zeile 2 wird das als Startpunkt markierte Tile abgefragt. In Zeile 3 wird dem Helden die Position des Tiles zugewiesen. 
 
-```java
+\begin{lstlisting}[language=java, label=api2, caption={Platziere den Helden am Startpunkt des Level.}  ]
  Level currentLevel = levelAPI.getCurrentLevel();
  Tile startTile = currentLevel.getStartTile();
  hero.setPosition(starTile.getGlobalPosition());
-```
+\end{lstlisting}
 
-Listing **TODO** zeigt wie ein Monster in einem kritischen Raum platziert werden kann. In Zeile 1 wird das aktuelle Level abgefragt. In Zeile 2 werden alle kritischen Knoten abgefragt. In Zeile 3 wird ein zufälliger Knoten aus allen kritischen Knoten ausgewählt. In Zeile 4 wird der Raum gespeichert, der den Knoten im Level repräsentiert. Der Index des Knoten in `Level.rooms` ist identisch mit dem passenden Index des Knoten in `Level.nodes`. In Zeile 5 wird ein zufälliges Bodenfeld aus dem Raum ausgewählt. In Zeile 6 wird dem Monster `evilDuck` die Position des Tiles zugewiesen. 
+Listing \ref{api3} zeigt wie ein Monster in einem kritischen Raum platziert werden kann. In Zeile 1 wird das aktuelle Level abgefragt. In Zeile 2 werden alle kritischen Knoten abgefragt. In Zeile 3 wird ein zufälliger Knoten aus allen kritischen Knoten ausgewählt. In Zeile 4 wird der Raum gespeichert, der den Knoten im Level repräsentiert. Der Index des Knoten in `Level.rooms` ist identisch mit dem passenden Index des Knoten in `Level.nodes`. In Zeile 5 wird ein zufälliges Bodenfeld aus dem Raum ausgewählt. In Zeile 6 wird dem Monster `evilDuck` die Position des Tiles zugewiesen. 
 
-```java
+\begin{lstlisting}[language=java, label=api3, caption={Platziere ein Monster in einen zufälligen kritischen Raum.}  ]
 Level currentLevel = levelAPI.getCurrentLevel();
 List <Node> criticalNodes = currentLevel.getCriticalNodes();
 Node randomNode = criticalNodes.get(new Random(criticalNodes.size()));
 Room randomRoom = currentLevel.getRoomToNode(randomNode);
 Tile randomTile = randomRoom.getRandomFloorTile();
 evilDuck.setPosition(randomTile.getGlobalPosition());
-```
+\end{lstlisting}
 
-Listing **TODO** zeigt wie eine Schatztruhe in einen optionalen Raum mit platziert werden kann. In Zeile 1 wird das aktuelle Level abgefragt. In Zeile 2 werden alle optionalen Knoten abgefragt. In Zeile 3 wird ein zufälliger Knoten aus allen optionalen Knoten ausgewählt. In Zeile 4 wird der Raum gespeichert, der den Knoten im Level repräsentiert. In Zeile 5 wird ein zufälliges Bodenfeld aus dem Raum ausgewählt. In Zeile 6 wird der Schatzkiste `bigLoot` die Position des Tiles zugewiesen. 
+Listing \ref{api4} zeigt wie eine Schatztruhe in einen optionalen Raum mit platziert werden kann. In Zeile 1 wird das aktuelle Level abgefragt. In Zeile 2 werden alle optionalen Knoten abgefragt. In Zeile 3 wird ein zufälliger Knoten aus allen optionalen Knoten ausgewählt. In Zeile 4 wird der Raum gespeichert, der den Knoten im Level repräsentiert. In Zeile 5 wird ein zufälliges Bodenfeld aus dem Raum ausgewählt. In Zeile 6 wird der Schatzkiste `bigLoot` die Position des Tiles zugewiesen. 
 
-```java
+\begin{lstlisting}[language=java, label=api4, caption={Platziere eine Schatzkiste in einen zufälligen optionalen Raum.}  ]
 Level currentLevel = levelAPI.getCurrentLevel();
 List <Node> optionalNodes = currentLevel.getOptionalNodes();
 Node randomNode = optionalNodes.get(new Random(optionalNodes.size()));
 Room randomRoom = currentLevel.getRoomToNode(randomNode);
 Tile randomTile = randomRoom.getRandomFloorTile();
 bigLoot.setPosition(randomTile.getGlobalPosition());
-```
+\end{lstlisting}
 
-Listing **TODO** zeigt wie geprüft werden kann, ob ein bestimmter Raum umgangen werden kann. In Zeile 1 wird das aktuelle Level abgefragt. In Zeile 2 und 3 werden sowohl der Start- als auch der Endknoten des Levels abgefragt. In Zeile 4 wird der kürzeste Pfad vom Start- bis zum Endknoten abgefragt. In Zeile 5 wird ein zufälliger Knoten aus diesem Pfad ausgewählt, dieser Knoten dient zur Demonstration und gilt es zu vermeiden. In Zeile 6 wird geprüft ob der ausgewählte Knoten auf dem Weg vom Start- bis zum Endknoten umgangen werden kann. In diesem Beispiel würde das bedeuten, das es mehrere Wege zum Ziel gibt. In Zeile 7 und 8 finden Ausgaben entsprechend der Ergebnisse statt. Diese dienen nur der Demonstration und könnten durch spezifische Game-Design Entscheidungen ersetzt werden. 
+Listing \ref{api5} zeigt wie geprüft werden kann, ob ein bestimmter Raum umgangen werden kann. In Zeile 1 wird das aktuelle Level abgefragt. In Zeile 2 und 3 werden sowohl der Start- als auch der Endknoten des Levels abgefragt. In Zeile 4 wird der kürzeste Pfad vom Start- bis zum Endknoten abgefragt. In Zeile 5 wird ein zufälliger Knoten aus diesem Pfad ausgewählt, dieser Knoten dient zur Demonstration und gilt es zu vermeiden. In Zeile 6 wird geprüft ob der ausgewählte Knoten auf dem Weg vom Start- bis zum Endknoten umgangen werden kann. In diesem Beispiel würde das bedeuten, das es mehrere Wege zum Ziel gibt. In Zeile 7 und 8 finden Ausgaben entsprechend der Ergebnisse statt. Diese dienen nur der Demonstration und könnten durch spezifische Game-Design Entscheidungen ersetzt werden. 
 
-```java
+\begin{lstlisting}[language=java, label=api5, caption={Prüfe ob ein Raum betreten werden muss, um von Raum A nach Raum B zu gelangen.}  ]
 Level currentLevel = levelAPI.getCurrentLevel();
 Node start = currentLevel.getStartNode();
 Node end = currentLevel.getEndNode();   
@@ -266,7 +261,7 @@ Node toAvoid = path.get(new Random(path.size()));
 if (currentLevel.isRoomReachableWithout(start,end,toAvoid))
 	System.out.println("YES!")
 else System.out.println("OH NO!"));   
-```
+\end{lstlisting}
 
 # Evaluierung 
 

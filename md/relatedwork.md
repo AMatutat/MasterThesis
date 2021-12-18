@@ -58,9 +58,9 @@ Im laufe dieser Arbeit werden verschiedene Verfahren der Graphen-Analyse verwend
 
 Beim Graph-Search verfahren, werden mithilfe von Breiten- oder Tiefensuche Pfade von einem Knoten im Graphen zu einem anderen Knoten im Graphen gesucht. Um Zyklen zu vermeiden, werden bei Suche alle bereits betrachteten Knoten markiert. Anders als bei Verfahren wie `A*` oder dem Dijkstra-Algorithmus, werden keine gewichteten Kanten benötigt. Das Graph-Search Verfahren findet daher nicht den kürzesten oder längsten Pfad im Graphen, sondern alle. In Kapitel 4 wird der spezifische Anwendungsfall in dieser Arbeit dafür beschrieben. In diesen Abschnitt wird nur das Theoretische-Verfahren betrachtet. 
 
-Listing **TODO** zeigt eine Implementierung der Graph-Search mithilfe von Tiefensuche in Pseudocode. Zeile 1 dient dabei als Einstiegspunkt, der Methode werden Start- und Zielknoten übergeben. In Zeile 2 wird dann eine Liste erstellt, in der alle Pfade abgespeichert werden, ein Pfad ist dabei selbst eine Liste aus Knoten. In Zeile 3 wird die Suche gestartet und in Zeile 4 werden alle gefunden Pfade zurückgegeben. Die Methode in Zeile 6 bekommt den aktuell betrachteten Knoten, eine Liste mit bereits betrachteten Knoten, den Zielknoten sowie die Liste mit den bereits gefunden Pfaden übergeben. In Zeile 7 wird der aktuell betrachtete Knoten markiert und in Zeile 8 wird geprüft, ob es ich bei diesem Knoten um den Zielknoten handelt, ist dies der Fall wird die Liste mit den betrachteten Knoten als Pfad in die Lösungsliste abgespeichert. Sollte es sich nicht um den Zielknoten handeln, wird in Zeile 10-12 die Methode rekursiv für jedes Kind des Knotens erneut aufgerufen. Dabei wird die Liste mit dem bereits betrachteten Knoten kopiert, damit jede Suche unabhängig von den anderen Suchen ist. Sollte der aktuell betrachtete Knoten weder der Zielknoten sein und auch keine Kinder haben bzw. keine Kinder, die noch nicht betrachtet wurden, wurde in diesem Zweig der Breitensuche kein Pfad zum Ziel gefunden und der Zweig wird nicht weiter betrachtet. 
+Listing \ref{graphsearch_pseudo} zeigt eine Implementierung der Graph-Search mithilfe von Tiefensuche in Pseudocode. Zeile 1 dient dabei als Einstiegspunkt, der Methode werden Start- und Zielknoten übergeben. In Zeile 2 wird dann eine Liste erstellt, in der alle Pfade abgespeichert werden, ein Pfad ist dabei selbst eine Liste aus Knoten. In Zeile 3 wird die Suche gestartet und in Zeile 4 werden alle gefunden Pfade zurückgegeben. Die Methode in Zeile 6 bekommt den aktuell betrachteten Knoten, eine Liste mit bereits betrachteten Knoten, den Zielknoten sowie die Liste mit den bereits gefunden Pfaden übergeben. In Zeile 7 wird der aktuell betrachtete Knoten markiert und in Zeile 8 wird geprüft, ob es ich bei diesem Knoten um den Zielknoten handelt, ist dies der Fall wird die Liste mit den betrachteten Knoten als Pfad in die Lösungsliste abgespeichert. Sollte es sich nicht um den Zielknoten handeln, wird in Zeile 10-12 die Methode rekursiv für jedes Kind des Knotens erneut aufgerufen. Dabei wird die Liste mit dem bereits betrachteten Knoten kopiert, damit jede Suche unabhängig von den anderen Suchen ist. Sollte der aktuell betrachtete Knoten weder der Zielknoten sein und auch keine Kinder haben bzw. keine Kinder, die noch nicht betrachtet wurden, wurde in diesem Zweig der Breitensuche kein Pfad zum Ziel gefunden und der Zweig wird nicht weiter betrachtet. 
 
-```python
+\begin{lstlisting}[language=python, label=graphsearch_pseudo, caption={Graph-Search Tiefensuche in Pseudocode}  ]
 List<List<Node>> graph_search(Node start, Node goal):
 	List<List<Node>> paths;
 	graph_serach(start,new List<Node>(),goal,paths);
@@ -73,7 +73,7 @@ void graph_search(Node currentNode, List<Node> marked, Node goal, List<List<Node
 	else forEach(Node child: currentNode.child):
 		if(!marked.contains(child)):
 			graph_search(child,marked.copy(),goal,paths);   
-```
+\end{lstlisting}
 
 
 

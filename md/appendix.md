@@ -28,7 +28,9 @@ Hier werden verschiedene, von GraphG erzeugte, planare Graphen gezeigt. Diese Gr
 
 - Graphen und draus erzeugte Level
 
-## GitHub-Workflows
+## GitHub-Workflows 
+
+\label{workflows}
 
 Das folgende Listing zeigt wie der GitHub-Workflow für die Einhaltung die Code-Konvetion mithilfe von `google-java-formater` konfiguriert wurde. Nach jedem push auf den Branch `master` oder `codeBase` führt der Formatter automatisch eine Formatierung des Codes durch. 
 
