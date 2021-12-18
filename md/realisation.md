@@ -272,20 +272,20 @@ Listing **TODO** zeigt wie geprüft werden kann, ob ein bestimmter Raum umgangen
 
 In diesem Kapitel werden die erreichten Ergebnisse mit den aufgestellten Anforderungen gegenübergestellt. Die Evaluierung wird in zwei Bereiche eingeteilt. Im ersten Teil werden der Generator und die erzeugten Level betrachtet und darauf untersucht, ob sie die bekannten Regeln für gutes Leveldesign erfüllen. Im zweiten Teil wird das Projekt selbst, insbesondere auf die Anforderungen für die Integration in das PM-Dungeon-Framework betrachtet. 
 
-### Level
 
-- Regel 1
+## Gute Level sind lösbar und fehlerfrei
+## Gute Level fordern die Mechaniken des Spiels
+## Gute Level sind gut gebalanced
+## Gute Level haben Risk and Reward Momente
+## Gute Level steuern das Pacing des Spiels
+## Gute Level sind einzigartig
+## Gute Level sind effizient in der Herstellung
+## Testabdeckung
+## Integration in das PM-Dungeon-Framework
+- Code Stle
+- Buidltools
+- Nahtlose Anbindung
+- Moudlarität
+## Schnittstelle 
 
-- 2
 
-- 3
-
-- 4
-
-- 5
-
-- 6
-
-- 7
-
-### Integration 
