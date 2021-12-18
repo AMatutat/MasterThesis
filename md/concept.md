@@ -119,7 +119,7 @@ In diesen Abschnitt wird erläutert, wie die vorher vorgestellten Inhalte in das
 
 Im Rahmen dieser Arbeit ist es nicht möglich, auf alle Einzelheiten des PM-Dungeon-Frameworks einzugehen, daher wird die Integration nur grob granular beschrieben und an nötigen Stellen abstrahiert. Designentscheidungen des Frameworks werden hier nicht begründet. 
 
-Das Framework ist modular aufgebaut und besitzt ein Modul, welches für alle Level-Angelegenheiten zuständig ist. In diesem Modul kann DungeonG eingebunden werden. Als Schnittstelle zwischen DungeonG und Framework dient die Klasse `LevelAPI`. Diese Klasse verwaltet und lädt das Level und stößt Zeichenprozess an. Abbildung **TODO** zeigt ein **??**-Diagramm um die Anbindung an das Framework zu visualisieren. 
+Das Framework ist modular aufgebaut und besitzt ein Modul, welches für alle Level-Angelegenheiten zuständig ist. In diesem Modul kann DungeonG eingebunden werden. Als Schnittstelle zwischen DungeonG und Framework dient die Klasse `LevelAPI`. Diese Klasse verwaltet und lädt das Level und stößt Zeichenprozess an. Um DungeonG für `LevelAPI` verwendbar zu machen, muss `LevelG` das Interface `IGenerator` implementieren. Das Interface gibt die Methode `Level getLeve()` vor.  In `getLevel` wird dann der gesamte Generierungsprozess mit zufälligen Parametern durchgeführt. Abbildung **TODO** zeigt ein **??**-Diagramm um die Anbindung an das Framework zu visualisieren. 
 
 Um das Level zu laden werden verschiedene Funktionen angeboten, mit dem Knotenanzahl, Kantenanzahl und Design des Levels bestimmt werden können. Mit diesen Parametern startet `LevelAPI` den Generierungsprozess von `DugeonG` und speichert das erzeugte Level als `currentLevel` ab. 
 
