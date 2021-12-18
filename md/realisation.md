@@ -113,9 +113,7 @@ Möglichkeit 2 wäre es den Algorithmus umzuschreiben. Aktuell werden auch zuein
 
 Um den zeitlichen Rahmen dieser Arbeit einhalten zu können, wird keiner der beiden Möglichkeiten umgesetzt. Es wird ein Grenzwert von 1000 definiert, der die maximal betrachteten Teillösungen zu einem Zeitpunkt angibt. Sollte die Liste mit den Teillösungen den Schwellwert überschreiten, wird die Liste beim nächsten rekursiven Aufruf wieder verkleinert, indem so lange zufällige Teillösungen aus der Liste entfernt werden, bis der Schwellwert erreicht ist. Dies schränkt GraphG so ein, dass nicht mehr alle Lösungen gefunden werden. Für Suchräume mit wenigen gültigen (Teil-)Lösungen sollten dennoch eine Vielzahl an unterschiedlichen Graphen gefunden werden. Für Suchräumen mit vielen gültigen Graphen könnten sich, je nach Größe des Suchraumes und Anzahl der (Teil-)Lösungen, die gefunden Graphen stark ähneln. 
 
-Abbildungen **TODO** zeigen von GraphG generierte Graphen mit unterschiedlicher Kanten und Knotenanzahl. Die Graphen wurden zufällig ausgewählt, um die mögliche Variation zu zeigen. Im Kapitel Evaluierung werden die Graphen auf ihre Qualität als Level-Graph analysiert und bewertet. 
-
-
+Abbildungen \ref{graphex1}, \ref{graphex2}, \ref{graphex3} und \ref{graphex4} zeigen von GraphG generierte Graphen mit unterschiedlicher Kanten und Knotenanzahl. Die Graphen wurden zufällig ausgewählt, um die mögliche Variation zu zeigen. Im Kapitel Evaluierung werden die Graphen auf ihre Qualität als Level-Graph analysiert und bewertet. 
 
 ## Umsetzung RoomG
 
