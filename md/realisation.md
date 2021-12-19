@@ -267,20 +267,72 @@ else System.out.println("OH NO!"));
 
 In diesem Kapitel werden die erreichten Ergebnisse mit den aufgestellten Anforderungen gegenübergestellt. Die Evaluierung wird in zwei Bereiche eingeteilt. Im ersten Teil werden der Generator und die erzeugten Level betrachtet und darauf untersucht, ob sie die bekannten Regeln für gutes Leveldesign erfüllen. Im zweiten Teil wird das Projekt selbst, insbesondere auf die Anforderungen für die Integration in das PM-Dungeon-Framework betrachtet. 
 
+## Betrachtung eines Level
 
-## Gute Level sind lösbar und fehlerfrei
+**TODO**
+
+## Gute Level sind lösbar und fehlerfrei 
+
+Als kritisches Kriterium wurde die Lösbarkeit und Fehlerfreiheit der Level genannt. Die Generierung und grafische Darstellung der Level funktioniert fehlerfrei, es sind keine Fehler in den Algorithmen und Schnittstellen bekannt. Die Testabdeckung hilft dabei, eine Vielzahl an Fehler auszuschließen. 
+
+Der Generator stellt sicher, dass alle erzeugten Level lösbar sind. Während der Graphengenerierung werden nur zusammenhängende Graphen erzeugt. So ist sichergestellt, dass jeder Raum im Level strukturell erreichbar ist. Durch die Verwendung verschiedener Raum-Layouts und Replacements, kann es passieren, dass unerreichbare Felder im Level entstehen. Mithilfe des integrierten A* Algorithmus wird geprüft, ob ein Weg vom Startpunkt des Levels bis zum Endpunkt führt. Nur Level, die einen solche Weg haben, werden akzeptiert und als Lösung ausgegeben. In gültigen Level können aber unerreichbare Felder sein. Um zu prüfen, ob ein spezifisches Feld erreichbar ist, wird ebenfalls der A* Algorithmus genutzt. So kann vor der Platzierung von Inhalten geprüft werden, ob die Inhalte dann auch erreichbar sind. Nicht erreichbare Felder müssen erst mithilfe von Spielelementen wie Bomben oder Spruchrollen freigelegt werden.  
+
+Die Anforderung, dass nur lösbare und fehlerfreie Level erzeugt werden, kann als erfüllt betrachtet werden.
+
 ## Gute Level fordern die Mechaniken des Spiels
+
+Die generierten Level können problemlos im PM-Dungeon genutzt werden. Sie bestehen aus den grundlegenden Spielelementen, dies beinhaltet Wände, Böden und ein Start- sowie Endpunkt. Die Level werden mithilfe des Frameworks und libGDX gezeichnet. Mithilfe der Schnittstellen können selbst implementierte Inhalte im Level platziert werden. Dabei können Objekte wie Monster, Items oder Fallen platziert werden, aber auch die Struktur der Level verändert werden, indem zum Beispiel Wände gesprengt werden. Auch haben die Studierenden die Möglichkeit von den grundlegenden Regeln des Spiels abzuweichen. Es können beispielhaft auch Gegner implementiert werden, die auch durch Wände gehen können oder sich wie der Springer eines Schachfeldes bewegen.
+
+Die Anforderung, dass der Generator und die erzeugten Level die Mechaniken des Spieles fordern, kann als erfüllt betrachtet werden.
+
 ## Gute Level sind gut gebalanced
+
+Das Balancing der Level hängt von den platzierten Inhalten ab. Mithilfe der Schnittstellen können Inhalte an spezifischen Orten gesetzt werden. Auch können Inhalte während des laufenden Spieles im Level platziert werden. Sollte der Spieler besonders gut sein, können also im laufenden Level mehr Gegner platziert werden, sollte der Spiele Probleme haben, können stärkere Items oder Heiltränke im aktuellen Level platziert werden. Die konkrete Konzeptionierung Implementierung der Balancing Funktionen ist von den Studierenden durchzuführen. 
+
+Die Anforderung, dass die Level Möglichkeiten zum Balancen haben, kann als erfüllt betrachtet werden.
+
 ## Gute Level haben Risk and Reward Momente
+
+Der Levelgenerator kann optionale Räume und Pfade erzeuge. Die Schnittstellen erlauben es, diese optionalen Räume abzufragen und gezielt Inhalte in diesen Räumen zu platzieren und somit Risk and Reward Momente zu erzeugen. Die Anzahl und Verteilung der optionalen Räume kann nicht festgelegt werden. Durch unterschiedliche Werte für die Knoten- und Kantenanzahl bei der Graphengenerierung kann jedoch Einfluss genommen werden. Graphen mit vielen Knoten haben eine höhere Chance optionale Räume zu haben als Graphen mit wenigen Knoten und Graphen mit vielen extra Kanten haben mehr optionale Pfade als Graphen mit wenigen extra Kanten. 
+
+Die Anforderung, dass der Generator Level mit optionalen Pfaden erzeugen muss und dass auf diesen Pfaden gezielt Risk and Reward Momente erzeugt werden können, kann als erfüllt betrachtet werden.
+
 ## Gute Level steuern das Pacing des Spiels
+
+Das Pacing der Level wird durch die Struktur der Level bestimmt. Die Struktur der Level wird von dem zugrunde legenden Graphen festgelegt. Bei der Generierung der Graphen kann keine konkrete Vorgabe gemacht werden, wie die Graphen aussehen sollen, aber mithilfe der Parameter kann Einfluss auf den Generierungsprozess genommen werden. Insbesondere die Größe der Graphen kann bestimmt werden. Ebenso können eigenständig neue Knoten und Kanten hinzugefügt werden. Ein Graph könnte daher auf Sackgassen untersucht werden und so verändert werden, dass Backtracking nicht nötig ist, um wieder auf den Hauptpfad zu gelangen. DungeonG bietet keine konkrete Schnittstelle mit verschiedenen Graphen Analyse Algorithmen, diese müssen daher selbstständig implementiert werden.
+
+Dennoch erfüllt DungeonG grundlegend die Anforderung, um die Steuerung des Pacing mithilfe der Level-Struktur zu ermöglichen. 
+
 ## Gute Level sind einzigartig
+
+Die von DungeonG erzeugten Level unterscheiden sich sowohl strukturell als auch optisch stark voneinander. Das Layout der Level wird von den Graphen bestimmt. GraphG kann eine Vielzahl an unterschiedlichen planaren Graphen erzeugen und initial werden pro Konfiguration 1000 unterschiedliche Graphen angeboten. Die verwendeten Layouts der Räume werden durch die Replacements verändert, so können aus wenigen Layouts eine Vielzahl an unterschiedlichen fertigen Räume erzeugt werden. Der Generator unterstützt verschiedene Designs der Level. Dabei geben die Designs nicht nur an, welche Texturen für das Level verwendet werden sollen, sondern auch welche Raum-Layouts und Replacements. Je nach Design können auch unterschiedliche Monster und Items platziert werden. Neue Layouts können selbstständig hinzugefügt werden, um die Abwechslung zu vergrößern. Die erzeugten Level können sowohl strukturell als auch optisch als einzigartig bezeichnet werden. 
+
+Die Anforderung, dass die erzeugten Level sich optisch und strukturell voneinander abgrenzen, kann als erfüllt betrachtet werden.
+
 ## Gute Level sind effizient in der Herstellung
+
+DungeonG ist ein funktionsfähiger prozeduraler Level-Generator und ist daher eine effiziente Möglichkeit Level zu generieren. Aber auch für einen prozeduralen Generator, kann DungeonG als effizient betrachtet werden. DungeonG benötigt nur Raum-Layouts und Replacements, um Level zu generieren, alle anderen benötigten Inhalte erzeugt DungeonG eigenständig und erlaubt es, mit Parametern Einfluss auf den Prozess zu nehmen. Durch die Verbindung der Raum-Layouts und Replacements kann DungeonG auch aus einer geringen Anzahl an Inputdaten, eine Vielzahl an optisch und strukturell unterschiedlichen Level erzeugen. 
+
+
+Auch wenn DungeonG nicht vollständig ohne Inputdaten auskommt, kann die Anforderung, dass Level effizient generiert werden sollen, als erfüllt betrachtet werden. Hierbei spielt der Speicher- und Rechenleistungsbedarf keine Rolle.
+
+
 ## Testabdeckung
+
+**TODO** Wird gemacht während die Arbeit Kontrolle gelesen wird. 
+
+- Grenzwertanalyse
+- Testfälle
+
 ## Integration in das PM-Dungeon-Framework
-- Code Stle
-- Buidltools
-- Nahtlose Anbindung
-- Moudlarität
-## Schnittstelle 
+
+Neben den Regeln für gutes Leveldesign gibt es auch spezifische Anforderungen für die Integration in das PM-Dungeon-Framework. 
+
+Da darauf geachtet wurde, dass dieselben Tools und Konfigurationen für das Projekt genutzt wurden wie für das Framework selbst, war die Anbindung des Generators an das Framework reibungslos möglich. Mithilfe von Spot-Bugs und dem Google-Java-Formatter wurde die Einhaltung der Code-Konvention sichergestellt. Alle von Spot-Bugs gefundenen Antipattern wurde beseitigt. Der Code ist angemessen dokumentiert und kommentiert. 
+
+Ebenso ist DungeonG modular aufgebaut und angebunden. Die einzelnen Bausteine GraphG, RoomG und LevelG können einzeln oder vollständig ersetzt werden. Auch kann DungeonG selbst vollständig aus dem Framework entfernt und durch einen anderen Generator ersetzt werden (vgl. \ref{intUML}). 
+
+
+
 
 
