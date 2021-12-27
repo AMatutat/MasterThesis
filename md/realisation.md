@@ -198,7 +198,7 @@ private boolean canReplaceIn(LevelElement[][] layout, final Replacement r, int x
 }
 \end{lstlisting}
 
-Abbildungen **TODO** zeigen verschiedene Räume die auf den selben, 8x8 großen Raum-Template basieren und durch verschiedene Replacern verändert wurden. Im Kapitel Evaluierung wird weiter auf die Qualität und Abwechslung der Räume Eingange. 
+Abbildung **TODO** zeigt verschiedene Räume die auf den selben, 8x8 großen Raum-Template basieren und durch verschiedene Replacern verändert wurden. Im Kapitel Evaluierung wird weiter auf die Qualität und Abwechslung der Räume Eingange. 
 
 ## Umsetzung LevelG
 
