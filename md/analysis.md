@@ -1,6 +1,6 @@
 # Algorithmen zur prozeduralen Generierung
 
-In diesem Kapitel werden Algorithmen vorgestellt, die verschiedene Aspekte der prozeduralen Level-Generierung abdecken. Nicht jeder vorgestellter Algorithmus ist für die Generierung von Level konzeptioniert, kann aber für Teilaspekte verwendet werden. Es werden Algorithmen zur Generierung und Modifikation von planaren Graphen, Erzeugen von Level aus diesen Graphen sowie zum Erstellen von einzelnen Räumen vorgestellt. Ziel ist es, im nächsten Kapitel, die einzelnen Elemente der Algorithmen so zu kombinieren, dass das Resultat die in Kapitel 2 aufgestellten Anforderungen bestmöglich erfüllt. 
+In diesem Kapitel werden Algorithmen vorgestellt, die verschiedene Aspekte der prozeduralen Level-Generierung abdecken. Nicht jeder vorgestellter Algorithmus ist für die Generierung von Level konzeptioniert, kann aber für Teilaspekte verwendet werden. Es werden Algorithmen zur Generierung von planaren Graphen, Erzeugen von Level aus diesen Graphen sowie zum Erstellen von einzelnen Räumen vorgestellt. Ziel ist es, im nächsten Kapitel, die einzelnen Elemente der Algorithmen so zu kombinieren, dass das Resultat die in Kapitel 2 aufgestellten Anforderungen bestmöglich erfüllt. 
 
 
 ## Vom Graph zum Level 
@@ -9,7 +9,7 @@ Zwar kann das Layout eines Level mithilfe eines Graphen dargestellt werden, schl
 
 ![Beispiel: Output für einen Graphen und Strukturen. \label{graph2level}[@Ma2014]](figs/chapter3/fromgraphtolevel.PNG)
 
-Als Input werden dem Algorithmus zu einem der planare Level-Graph $G$ übergeben sowie ein Set aus 2D-Polygonalen Blöcken $B$ (vgl. Abbildung \ref{graph2level}). Diese Blöcke können als Räume des Level betrachtet werden und werden im Verlaufe des Algorithmus genutzt, um die Knoten im Graphen aufzulösen. Dabei ist zu beachten, dass der Algorithmus die Blöcke zufällig und mehrfach auswählt. Der Algorithmus erlaubt es nicht Bedingungen festzulegen, wie dass ein spezifischer Knoten durch einen spezifischen Block aufgelöst werden soll oder ein Block nur einmal verwendet werden soll. So lässt sich zum Beispiel kein spezifischer Bossraum mit einem einzigartigen Layout bestimmen. Wenn eine mögliche Lösung für $G$ mit $B$ gibt, ist diese der Output des Algorithmus. Durch sein inkrementelles Vorgehen, welches im weiteren Verlauf des Abschnittes beschrieben wird, ist der Algorithmus effizient in der Lage auch mehrere Lösungen für ein Input $G$ und $B$ zu finden. 
+Als Input werden dem Algorithmus zu einem der planare Level-Graph $G$ übergeben sowie ein Set aus 2D-Polygonalen Blöcken $B$ (vgl. Abbildung \ref{graph2level}). Diese Blöcke können als Räume des Level betrachtet werden und werden im Verlaufe des Algorithmus genutzt, um die Knoten im Graphen aufzulösen. Dabei ist zu beachten, dass der Algorithmus die Blöcke zufällig und mehrfach auswählt. Der Algorithmus erlaubt es nicht Bedingungen festzulegen, wie dass ein spezifischer Knoten durch einen spezifischen Block aufgelöst werden soll oder ein Block nur einmal verwendet werden soll. So lässt sich zum Beispiel kein spezifischer Bossraum mit einem einzigartigen Layout bestimmen. Wenn es eine mögliche Lösung für $G$ mit $B$ gibt, ist diese der Output des Algorithmus. Durch sein inkrementelles Vorgehen, welches im weiteren Verlauf des Abschnittes beschrieben wird, ist der Algorithmus effizient in der Lage auch mehrere Lösungen für ein Input $G$ und $B$ zu finden. 
 
 Der Algorithmus besteht im Wesentlichen aus zwei Schritten:
 
@@ -22,15 +22,15 @@ Auflösung von Knoten meint, dass in der Darstellung von $G$ in physischer Anord
 
 Abbildung \ref{confspace} a) zeigt wie der configuration space für eine Verbindung von zwei Blöcken aussehen könnte. Beim Auflösen einer solchen Verbindung ist ein Block statisch, kann also nicht bewegt oder rotiert werden und der andere Block ist dynamisch, kann also bewegt und rotiert werden. In diesem Fall ist der mittlere (umgedrehtes L) Block statisch und der quadratische Block dynamisch. Im dynamischen Block wird ein Referenzpunkt bestimmt, in diesen Fall das Zentrum des Blocks. Die rote Linie ist der configuration space und zeigt nun alle möglichen Positionen, die der Referenzpunkt einnehmen kann, um die Verbindung gültig zu lösen. Abbildung \ref{confspace} b) zeigt wie eine Verbindung mit zwei statischen und einem dynamischen Block aufgelöst wird. Zuerst wird für jeden statischen Block der configuration space bestimmt, die Schnittpunkte beider configuration spaces (gelbe Punkte) sind die gültigen Positionen für den Referenzpunkt des dynamischen Blocks.
 
-Das Berechnen des configuration spaces reduziert den lokalen Suchraum für die individuellen Knoten, jedoch ist der Suchraum für den gesamten Graphen weiterhin zu groß, um zuverlässig in einer angebrachten Zeit eine Lösung zu finden. Daher wird das Problem in kleinere, einfacher zu lösende, Teilprobleme aufteilt. Es hat sich herausgestellt, dass Graphen, in den jeder Knoten maximal zwei Nachbarn besitzt, einfacher aufzulösen sind, da die Anzahl der Kanten der Blöcke immer größer ist als die Anzahl der Kanten des Knotens im Graph. 
+Das Berechnen des configuration spaces reduziert den lokalen Suchraum für die individuellen Knoten, jedoch ist der Suchraum für den gesamten Graphen weiterhin zu groß, um zuverlässig in einer angebrachten Zeit eine Lösung zu finden. Daher wird das Problem in kleinere, einfacher zu lösende, Teilprobleme aufgeteilt. Es hat sich herausgestellt, dass Graphen, in den jeder Knoten maximal zwei Nachbarn besitzt, einfacher aufzulösen sind, da die Anzahl der Kanten der Blöcke immer größer ist als die Anzahl der Kanten des Knotens im Graph. 
 
 ![Beispiel: Aufteilen eines Graphen in Chains. \label{how2chain}[@Nepozitek2019]](figs/chapter3/howtochain.PNG)
 
-Der Input-Graph wird daher in kleinere Subgraphen aufteilt, sogenannten Chains. In einer Chain hat jeder Knoten maximal zwei Nachbarn. Abbildung \ref{how2chain} zeigt wie ein Graph in Chains aufgeteilt werden kann. Knoten mit derselben Nummerierung gehören zu einer Chain. Zuerst werden alle Faces im Graphen gesucht, da diese Kreise im Leveldesign darstellen. Kreise haben mehr Bedingungen als eine lineare Folge von Knoten, deswegen ist die Auflösung dieser komplexer. Daher werden Kreise bevorzugt am Anfang des Algorithmus aufgelöst, um späteres Backtracking zu vermeiden. Die erste Chain ist das kleinste Face im Graphen (Label "0"). Die weiteren Chains werden gebildet, indem per Breitensuche die weiteren Faces gesucht werden '(Label "1"). Stehen mehrere Faces zur Auswahl, wird zuerst das kleinere genommen. Ein Face ist kleiner als ein anderes Face, wenn weniger Kanten durchlaufen werden müssen, um es zu bilden. Wenn keine Faces mehr vorhanden sind, werden die restlichen Chains hinzugefügt (Label "2","3","4").  
+Der Input-Graph wird daher in kleinere Subgraphen aufgeteilt, sogenannten Chains. In einer Chain hat jeder Knoten maximal zwei Nachbarn. Abbildung \ref{how2chain} zeigt wie ein Graph in Chains aufgeteilt werden kann. Knoten mit derselben Nummerierung gehören zu einer Chain. Zuerst werden alle Faces im Graphen gesucht, da diese Kreise im Leveldesign darstellen. Kreise haben mehr Bedingungen als eine lineare Folge von Knoten, deswegen ist die Auflösung dieser komplexer. Daher werden Kreise bevorzugt am Anfang des Algorithmus aufgelöst, um späteres Backtracking zu vermeiden. Die erste Chain ist das kleinste Face im Graphen (Label "0"). Die weiteren Chains werden gebildet, indem per Breitensuche die weiteren Faces gesucht werden '(Label "1"). Stehen mehrere Faces zur Auswahl, wird zuerst das kleinere genommen. Ein Face ist kleiner als ein anderes Face, wenn weniger Kanten durchlaufen werden müssen, um es zu bilden. Wenn keine Faces mehr vorhanden sind, werden die restlichen Chains hinzugefügt (Label "2","3","4").  
 
 Nachdem der Graph in Chains aufgeteilt wurde, können die einzelnen Chains inkrementell gelöst werden. Zuerst wird die erste Chain genommen und mit dem oben beschriebenen Verfahren aufgelöst. Der Algorithmus erzeugt jedoch nicht nur eine Lösung für die Chain, sondern mehrere Lösungen und speichert diese ab (vgl. Abbildung \ref{graphpartsolution}). Im nächsten Schritt wird die nächste Chain aus der Liste genommen, mit einer der Lösungen aus dem Vorschritt verbunden und aufgelöst. Sollte es keine Möglichkeit geben die Chain aufzulösen, wird per Backtracking eine andere Lösung aus dem Vorschritt ausgewählt und erneut versucht eine Lösung zu finden. Dieses Vorgehen wird wiederholt, bis alle Chains aufgelöst sind und dadurch eine Lösung für das vollständige Problem gefunden wurde. 
 
-```python
+\begin{lstlisting}[language=python, label=laydown, caption={Inkrementelles Erstellen von Level aus einen Graphen.}  ]
 Input: Planr graph G, bulding blocks B, layout stack S
 procedure INCREMENTALLAYOUT(G,B,S)
 	Push empty layout into S
@@ -43,9 +43,10 @@ procedure INCREMENTALLAYOUT(G,B,S)
 		end if 
 	until target # of full layouts is generated or S is empty
 end procedure
-```
-Peseudocode für das inkrementelle Erstellen des Level. 
-Quelle [@Ma2014]
+\end{lstlisting}
+
+Listing \ref{laydown} zeigt den Peseudocode für das inkrementelle Erstellen eines Level mithilfe des beschriebenen Verfahrens.  [@Ma2014]
+
 
 Zwar könnten die Chains auch separat aufgelöst werden und dann versucht werde die Teillösungen miteinander zu verbinden, jedoch würden dabei Lösungen erzeugt werden, die zwar die Chain auflösen aber nicht mit den gesamten Graphen kompatibel sind und daher unbrauchbar wären. Zusätzlich sind im Level alle miteinander verbunden, daher gibt es auch keine Vorteile die Chains einzeln zu lösen. 
 
@@ -87,7 +88,7 @@ Abbildung \ref{plantri} zeigt zwei verschiedene Graphen, die mithilfe von *plant
 
 Eine andere Möglichkeit zur Generierung von Planaren Graphen ist die kontrollierte Zufallssuche. Ein Algorithmus, der vollkommen zufällig einen Graphen erzeugt, würde auch planare Graphen erzeugen. Da dies weder ein zuverlässiger noch effizienter Weg zur Generierung ist, muss der Zufall so eingeschränkt werden, dass die Generierung von nicht planaren Graphen unmöglich wird.
 
-Das Satz von Kuratowski sagt, dass ein Graph genau dann planar ist, wenn er keinen Teilgraph besitzt, der ein Unterteilungsgraph des $K5$ oder $K3,3$ ist. Ein Untereilungsgraph ist ein Graph, der dadurch entsteht, dass in einen Graphen $G$ neue Knoten durch Kantenunterteilung hinzugefügt werden. $K5$ und $K3,3$ sind zwei Graphen für die es keine planare Darstellung gibt (vgl. Abbildung \ref{k5} und Abbildung {k3}). [@Diestel2010]
+Das Satz von Kuratowski sagt, dass ein Graph genau dann planar ist, wenn er keinen Teilgraph besitzt, der ein Unterteilungsgraph des $K5$ oder $K3,3$ ist. Ein Untereilungsgraph ist ein Graph, der dadurch entsteht, dass in einen Graphen $G$ neue Knoten durch Kantenunterteilung hinzugefügt werden. $K5$ und $K3,3$ sind zwei Graphen für die es keine planare Darstellung gibt (vgl. Abbildung \ref{k5} und Abbildung \ref{k3}). [@Diestel2010]
 
 Bei der Generierung eines planaren Graphen muss also darauf geachtet werden, dass weder $K5$ noch $K3,3$ enthalten sind. 
 
@@ -156,7 +157,8 @@ Jedes Template lässt sich als String darstellen und kann als 8x10 Matrix versta
 
 : Ersetzungstabelle für Spelunky \label{spelunkytable}
 
-Um Monster und Items zu verteilen, wird zum Schluss für jedes als 1 gekennzeichnetes Feld entschieden, ob ein Monster oder ein Schatz darauf oder darunter platziert wird oder das Feld leer bleibt. Bei der Platzierung nehmen auch umliegende Felder Einfluss, so werden beispielsweise Truhen bevorzugt in Nischen platziert. Spelunky verwendet verschiedene Texturen, um die optische Abwechslung zu gewährleisten. Nach einer bestimmten Anzahl an Level wird ein neues Theme angewandt. Auf die Struktur und den Aufbau der Level hat dies keinen Einfluss, es werden lediglich Texturen ersetzt. 
+Um Monster und Items zu verteilen, wird zum Schluss für jedes als 1 gekennzeichnetes Feld entschieden, ob ein Monster oder ein Schatz darauf oder darunter platziert wird oder das Feld leer bleibt. Bei der Platzierung nehmen auch umliegende Felder Einfluss, so werden beispielsweise Truhen bevorzugt in Nischen platziert. 
+Spelunky verwendet verschiedene Texturen, um die optische Abwechslung zu gewährleisten. Nach einer bestimmten Anzahl an Level wird ein neues Theme angewandt. Auf die Struktur und den Aufbau der Level hat dies keinen Einfluss, es werden lediglich Texturen ersetzt. 
 
 Derek Yu schrieb in seinen Buch: 
 

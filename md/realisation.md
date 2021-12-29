@@ -1,13 +1,13 @@
 # Realisierung
 
-In diesem Kapitel wird die konkrete, in Java umgesetzte, Implementierung des im vorherigen Kapitel dargestelltem Konzeptes vorgestellt. Der Aufbau des Kapitels orientiert sich am Aufbau des vorherigen Kapitels. Daher beginnt es mit einer Erläuterung der Projekt-Konfiguration, um eine reibungslose Integration in das Framework zu ermöglichen. Danach folgt die Vorstellung der Umsetzung der einzelnen Bausteine GraphG, RoomG und LevelG. Das Kapitel endet mit einem kurzen Überblick über die Integration in das Framework und die bereitgestellte Schnittstelle. Im Rahmen dieses Kapitels kann nicht auf jeden Aspekt der Umsetzung eingegangen werden, daher werden nur auf, vom Autor, als besonders wichtig oder interessante eingeschätzte Aspekte Eingange. Es sollte dennoch ein guter Einblick über den Aufbau und Umsetzung von DungeonG entstehen. 
+In diesem Kapitel wird die konkrete, in Java umgesetzte, Implementierung des im vorherigen Kapitel dargestelltem Konzeptes vorgestellt. Der Aufbau des Kapitels orientiert sich am Aufbau des vorherigen Kapitels. Daher beginnt es mit einer Erläuterung der Projekt-Konfiguration, um eine reibungslose Integration in das Framework zu ermöglichen. Danach folgt die Vorstellung der Umsetzung der einzelnen Bausteine GraphG, RoomG und LevelG. Das Kapitel endet mit einem kurzen Überblick über die Integration in das Framework und die bereitgestellte Schnittstelle. Im Rahmen dieses Kapitels kann nicht auf jeden Aspekt der Umsetzung eingegangen werden, daher werden nur auf, vom Autor als besonders wichtig oder interessante eingeschätzte Aspekte Eingange. Es sollte dennoch ein guter Einblick über den Aufbau und Umsetzung von DungeonG entstehen. 
 
 ## Projekt Konfiguration
 
 Um eine reibungslose Integration in das PM-Dungeon-Framework zu ermöglichen, wurde für das Projekt die Projektkonfigurationen des Frameworks übernommen. 
 
-- Das Buildtool Gradle wird genutzt, um das Projekt zu bauen. Alle externen Libraries werden als dependencies hinzugefügt.
-- Der google-java-formater wird genauso wie im Framework konfiguriert und genutzt, um eine einheitlichen Codestil zu gewährleisten.
+- Das Buildtool Gradle wird genutzt, um das Projekt zu bauen. Alle externen Libraries werden als Dependencies hinzugefügt.
+- Der Google-Java-Formater wird genauso wie im Framework konfiguriert und genutzt, um einen einheitlichen Codestil zu gewährleisten.
 - Die Package-Struktur des Frameworks wurde übernommen.
 - Das für den Generator genutzte Git-Repository wird mithilfe von GitHub-Actions so konfiguriert, dass es dem PM-Dungeon-Repository gleicht. Dies bedeutet, dass Code nur dann gemerged werden kann, wenn der Codestil eingehalten ist, alle JUnit-Testfälle erfolgreich durchlaufen und das Tool Spot-Bugs keine Antipattern im Code finden kann oder die gefundenen Antipattern bewusst akzeptiert werden. Sollten Antipattern bewusst im Code gelassen werden, muss diese Entscheidung dokumentiert und nachvollziehbar begründe werden.
 
@@ -119,9 +119,9 @@ Abbildungen \ref{graphex1}, \ref{graphex2}, \ref{graphex3} und \ref{graphex4} ze
 
 Abbildung \ref{roomgUML} zeigt ein reduziertes UML-Klassendiagramm für RoomG. 
 
-Die Klasse `RoomLoader` lädt alle abgespeicherten Room-Templates aus einer Json und speichert diese ab. Mit der Methode `getRoomTemplate` kann eine Liste mit allen Templates abgefragt werden, die das übergebene Design-Label haben. `DesignLabel` ist ein Enum mit verschiedenen Designs. Sollen alle Templates abgefragt werden, kann `DesignLabel.ALL` verwendet werden.
+Die Klasse `RoomLoader` lädt alle abgespeicherten Room-Templates aus einer JSON-Datei und speichert diese ab. Mit der Methode `getRoomTemplate` kann eine Liste mit allen Templates abgefragt werden, die das übergebene Design-Label haben. `DesignLabel` ist ein Enum mit verschiedenen Designs. Sollen alle Templates abgefragt werden, kann `DesignLabel.ALL` verwendet werden.
 
-Die Klasse `ReplacementLoader` lädt alle abgespeicherten Replacements aus einer Json und speichert diese ab. Dabei prüft der Loader, ob die `rotate`-Flag eines Replacments gesetzt ist, und wenn ja, erstellt er drei neue Replacments mit einem um jeweils 90,180 und 270 Grad rotierten Layout. So können Replacements auch in verschiedenen Positionen eingesetzt werden. Mit der Methode `getReplacements` kann eine Liste mit allen Replacements abgefragt werden, die das übergebene Design-Label haben. Sollen alle Replacements abgefragt werden, kann `DesignLabel.ALL` übergeben werden.
+Die Klasse `ReplacementLoader` lädt alle abgespeicherten Replacements aus einer JSON-Datei und speichert diese ab. Dabei prüft der Loader, ob die `rotate`-Flag eines Replacments gesetzt ist, und wenn ja, erstellt er drei neue Replacments mit einem um jeweils 90,180 und 270 Grad rotierten Layout. So können Replacements auch in verschiedenen Positionen eingesetzt werden. Mit der Methode `getReplacements` kann eine Liste mit allen Replacements abgefragt werden, die das übergebene Design-Label haben. Sollen alle Replacements abgefragt werden, kann `DesignLabel.ALL` übergeben werden.
 
 ![UML-Klassendiagramm für RoomG mit den wichtigsten Methoden. \label{roomgUML}](figs/chapter4/roomg.png)
 
@@ -239,7 +239,7 @@ Tile randomTile = randomRoom.getRandomFloorTile();
 evilDuck.setPosition(randomTile.getGlobalPosition());
 \end{lstlisting}
 
-Listing \ref{api4} zeigt wie eine Schatztruhe in einen optionalen Raum mit platziert werden kann. In Zeile 1 wird das aktuelle Level abgefragt. In Zeile 2 werden alle optionalen Knoten abgefragt. In Zeile 3 wird ein zufälliger Knoten aus allen optionalen Knoten ausgewählt. In Zeile 4 wird der Raum gespeichert, der den Knoten im Level repräsentiert. In Zeile 5 wird ein zufälliges Bodenfeld aus dem Raum ausgewählt. In Zeile 6 wird der Schatzkiste `bigLoot` die Position des Tiles zugewiesen. 
+Listing \ref{api4} zeigt wie eine Schatztruhe in einen optionalen Raum platziert werden kann. In Zeile 1 wird das aktuelle Level abgefragt. In Zeile 2 werden alle optionalen Knoten abgefragt. In Zeile 3 wird ein zufälliger Knoten aus allen optionalen Knoten ausgewählt. In Zeile 4 wird der Raum gespeichert, der den Knoten im Level repräsentiert. In Zeile 5 wird ein zufälliges Bodenfeld aus dem Raum ausgewählt. In Zeile 6 wird der Schatzkiste `bigLoot` die Position des Tiles zugewiesen. 
 
 \begin{lstlisting}[language=java, label=api4, caption={Platziere eine Schatzkiste in einen zufälligen optionalen Raum.}  ]
 Level currentLevel = levelAPI.getCurrentLevel();
@@ -250,7 +250,7 @@ Tile randomTile = randomRoom.getRandomFloorTile();
 bigLoot.setPosition(randomTile.getGlobalPosition());
 \end{lstlisting}
 
-Listing \ref{api5} zeigt wie geprüft werden kann, ob ein bestimmter Raum umgangen werden kann. In Zeile 1 wird das aktuelle Level abgefragt. In Zeile 2 und 3 werden sowohl der Start- als auch der Endknoten des Levels abgefragt. In Zeile 4 wird der kürzeste Pfad vom Start- bis zum Endknoten abgefragt. In Zeile 5 wird ein zufälliger Knoten aus diesem Pfad ausgewählt, dieser Knoten dient zur Demonstration und gilt es zu vermeiden. In Zeile 6 wird geprüft ob der ausgewählte Knoten auf dem Weg vom Start- bis zum Endknoten umgangen werden kann. In diesem Beispiel würde das bedeuten, das es mehrere Wege zum Ziel gibt. In Zeile 7 und 8 finden Ausgaben entsprechend der Ergebnisse statt. Diese dienen nur der Demonstration und könnten durch spezifische Game-Design Entscheidungen ersetzt werden. 
+Listing \ref{api5} zeigt wie geprüft werden kann, ob ein bestimmter Raum umgangen werden kann. In Zeile 1 wird das aktuelle Level abgefragt. In Zeile 2 und 3 werden sowohl der Start- als auch der Endknoten des Levels abgefragt. In Zeile 4 wird der kürzeste Pfad vom Start- bis zum Endknoten abgefragt. In Zeile 5 wird ein zufälliger Knoten aus diesem Pfad ausgewählt, dieser Knoten dient zur Demonstration und gilt es zu vermeiden. In Zeile 6 wird geprüft ob der ausgewählte Knoten auf dem Weg vom Start- bis zum Endknoten umgangen werden kann. In diesem Beispiel würde das bedeuten, das es mehrere Wege zum Ziel gibt. In Zeile 7 und 8 finden Ausgaben entsprechend der Ergebnisse statt. Diese dienen nur der Demonstration und könnten durch spezifische Game-Designentscheidungen ersetzt werden. 
 
 \begin{lstlisting}[language=java, label=api5, caption={Prüfe ob ein Raum betreten werden muss, um von Raum A nach Raum B zu gelangen.}  ]
 Level currentLevel = levelAPI.getCurrentLevel();
@@ -275,7 +275,7 @@ In diesem Kapitel werden die erreichten Ergebnisse mit den aufgestellten Anforde
 
 Als kritisches Kriterium wurde die Lösbarkeit und Fehlerfreiheit der Level genannt. Die Generierung und grafische Darstellung der Level funktioniert fehlerfrei, es sind keine Fehler in den Algorithmen und Schnittstellen bekannt. Die Testabdeckung hilft dabei, eine Vielzahl an Fehler auszuschließen. 
 
-Der Generator stellt sicher, dass alle erzeugten Level lösbar sind. Während der Graphengenerierung werden nur zusammenhängende Graphen erzeugt. So ist sichergestellt, dass jeder Raum im Level strukturell erreichbar ist. Durch die Verwendung verschiedener Raum-Layouts und Replacements, kann es passieren, dass unerreichbare Felder im Level entstehen. Mithilfe des integrierten A* Algorithmus wird geprüft, ob ein Weg vom Startpunkt des Levels bis zum Endpunkt führt. Nur Level, die einen solche Weg haben, werden akzeptiert und als Lösung ausgegeben. In gültigen Level können aber unerreichbare Felder sein. Um zu prüfen, ob ein spezifisches Feld erreichbar ist, wird ebenfalls der A* Algorithmus genutzt. So kann vor der Platzierung von Inhalten geprüft werden, ob die Inhalte dann auch erreichbar sind. Nicht erreichbare Felder müssen erst mithilfe von Spielelementen wie Bomben oder Spruchrollen freigelegt werden.  
+Der Generator stellt sicher, dass alle erzeugten Level lösbar sind. Während der Graphengenerierung werden nur zusammenhängende Graphen erzeugt. So ist sichergestellt, dass jeder Raum im Level strukturell erreichbar ist. Durch die Verwendung verschiedener Raum-Layouts und Replacements, kann es passieren, dass unerreichbare Felder im Level entstehen. Mithilfe des integrierten A*-Algorithmus wird geprüft, ob ein Weg vom Startpunkt des Levels bis zum Endpunkt führt. Nur Level, die einen solche Weg haben, werden akzeptiert und als Lösung ausgegeben. In gültigen Level können aber unerreichbare Felder sein. Um zu prüfen, ob ein spezifisches Feld erreichbar ist, wird ebenfalls der A*-Algorithmus genutzt. So kann vor der Platzierung von Inhalten geprüft werden, ob die Inhalte dann auch erreichbar sind. Nicht erreichbare Felder müssen erst mithilfe von Spielelementen wie Bomben oder Spruchrollen freigelegt werden.  
 
 Die Anforderung, dass nur lösbare und fehlerfreie Level erzeugt werden, kann als erfüllt betrachtet werden.
 
@@ -287,7 +287,7 @@ Die Anforderung, dass der Generator und die erzeugten Level die Mechaniken des S
 
 ## Gute Level sind gut gebalanced
 
-Das Balancing der Level hängt von den platzierten Inhalten ab. Mithilfe der Schnittstellen können Inhalte an spezifischen Orten gesetzt werden. Auch können Inhalte während des laufenden Spieles im Level platziert werden. Sollte der Spieler besonders gut sein, können also im laufenden Level mehr Gegner platziert werden, sollte der Spiele Probleme haben, können stärkere Items oder Heiltränke im aktuellen Level platziert werden. Die konkrete Konzeptionierung Implementierung der Balancing Funktionen ist von den Studierenden durchzuführen. 
+Das Balancing der Level hängt von den platzierten Inhalten ab. Mithilfe der Schnittstellen können Inhalte an spezifischen Orten gesetzt werden. Auch können Inhalte während des laufenden Spieles im Level platziert werden. Sollte der Spieler besonders gut sein, können also im laufenden Level mehr Gegner platziert werden, sollte der Spiele Probleme haben, können stärkere Items oder Heiltränke im aktuellen Level platziert werden. Die konkrete Konzeptionierung und Implementierung der Balancing-Funktionen ist von den Studierenden durchzuführen. 
 
 Die Anforderung, dass die Level Möglichkeiten zum Balancen haben, kann als erfüllt betrachtet werden.
 
@@ -299,13 +299,13 @@ Die Anforderung, dass der Generator Level mit optionalen Pfaden erzeugen muss un
 
 ## Gute Level steuern das Pacing des Spiels
 
-Das Pacing der Level wird durch die Struktur der Level bestimmt. Die Struktur der Level wird von dem zugrunde legenden Graphen festgelegt. Bei der Generierung der Graphen kann keine konkrete Vorgabe gemacht werden, wie die Graphen aussehen sollen, aber mithilfe der Parameter kann Einfluss auf den Generierungsprozess genommen werden. Insbesondere die Größe der Graphen kann bestimmt werden. Ebenso können eigenständig neue Knoten und Kanten hinzugefügt werden. Ein Graph könnte daher auf Sackgassen untersucht werden und so verändert werden, dass Backtracking nicht nötig ist, um wieder auf den Hauptpfad zu gelangen. DungeonG bietet keine konkrete Schnittstelle mit verschiedenen Graphen Analyse Algorithmen, diese müssen daher selbstständig implementiert werden.
+Das Pacing der Level wird durch die Struktur der Level bestimmt. Die Struktur der Level wird von dem zugrunde legenden Graphen festgelegt. Bei der Generierung der Graphen kann keine konkrete Vorgabe gemacht werden, wie die Graphen aussehen sollen, aber mithilfe der Parameter kann Einfluss auf den Generierungsprozess genommen werden. Insbesondere die Größe der Graphen kann bestimmt werden. Ebenso können eigenständig neue Knoten und Kanten hinzugefügt werden. Ein Graph könnte daher auf Sackgassen untersucht werden und so verändert werden, dass Backtracking nicht nötig ist, um wieder auf den Hauptpfad zu gelangen. DungeonG bietet keine konkrete Schnittstelle mit verschiedenen Graphenanalyse-Algorithmen, diese müssen daher selbstständig implementiert werden.
 
 Dennoch erfüllt DungeonG grundlegend die Anforderung, um die Steuerung des Pacing mithilfe der Level-Struktur zu ermöglichen. 
 
 ## Gute Level sind einzigartig
 
-Die von DungeonG erzeugten Level unterscheiden sich sowohl strukturell als auch optisch stark voneinander. Das Layout der Level wird von den Graphen bestimmt. GraphG kann eine Vielzahl an unterschiedlichen planaren Graphen erzeugen und initial werden pro Konfiguration 1000 unterschiedliche Graphen angeboten. Die verwendeten Layouts der Räume werden durch die Replacements verändert, so können aus wenigen Layouts eine Vielzahl an unterschiedlichen fertigen Räume erzeugt werden. Der Generator unterstützt verschiedene Designs der Level. Dabei geben die Designs nicht nur an, welche Texturen für das Level verwendet werden sollen, sondern auch welche Raum-Layouts und Replacements. Je nach Design können auch unterschiedliche Monster und Items platziert werden. Neue Layouts können selbstständig hinzugefügt werden, um die Abwechslung zu vergrößern. Die erzeugten Level können sowohl strukturell als auch optisch als einzigartig bezeichnet werden. 
+Die von DungeonG erzeugten Level unterscheiden sich sowohl strukturell als auch optisch stark voneinander. Das Layout der Level wird von den Graphen bestimmt. GraphG kann eine Vielzahl an unterschiedlichen planaren Graphen erzeugen und initial werden pro Konfiguration bis zu 1000 unterschiedliche Graphen angeboten. Die verwendeten Layouts der Räume werden durch die Replacements verändert, so können aus wenigen Layouts eine Vielzahl an unterschiedlichen fertigen Räume erzeugt werden. Der Generator unterstützt verschiedene Designs der Level. Dabei geben die Designs nicht nur an, welche Texturen für das Level verwendet werden sollen, sondern auch welche Raum-Layouts und Replacements. Je nach Design können auch unterschiedliche Monster und Items platziert werden. Neue Layouts können selbstständig hinzugefügt werden, um die Abwechslung zu vergrößern. Die erzeugten Level können sowohl strukturell als auch optisch als einzigartig bezeichnet werden. 
 
 Die Anforderung, dass die erzeugten Level sich optisch und strukturell voneinander abgrenzen, kann als erfüllt betrachtet werden.
 
