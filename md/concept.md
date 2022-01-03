@@ -111,8 +111,13 @@ Damit die Lösbarkeit der Level gewährleistet werden kann, ist bei der Erstellu
 
 ### LevelG
 
-- auch Tile erklären
-- nutzt A*
+- Was macht LevelG?
+- Funktioniert wie der Algorithmus in Kapitel 3.1
+- Aufteilung des Level in Chains
+- Chains iterativ auflösen und configuration spaces berechnen
+- Templats in Räume umwandeln, Tiles erklären
+- Türen platzieren
+- Mithilfe von A* Prüfen ob das Level lösbar ist. 
 
 ### Integration in das PM-Dungeon
 
@@ -120,9 +125,9 @@ In diesen Abschnitt wird erläutert, wie die vorher vorgestellten Inhalte in das
 
 Im Rahmen dieser Arbeit ist es nicht möglich, auf alle Einzelheiten des PM-Dungeon-Frameworks einzugehen, daher wird die Integration nur grob granular beschrieben und an nötigen Stellen abstrahiert. Designentscheidungen des Frameworks werden hier nicht begründet. 
 
-Das Framework ist modular aufgebaut und besitzt ein Modul, welches für alle Level-Angelegenheiten zuständig ist. In diesem Modul kann DungeonG eingebunden werden. Als Schnittstelle zwischen DungeonG und Framework dient die Klasse `LevelAPI`. Diese Klasse verwaltet und lädt das Level und stößt Zeichenprozess an. Um DungeonG für `LevelAPI` verwendbar zu machen, muss `LevelG` das Interface `IGenerator` implementieren. Das Interface gibt die Methode `Level getLeve()` vor.  In `LevelG#getLevel` wird dann der gesamte Generierungsprozess mit zufälligen Parametern durchgeführt. 
+Das Framework ist modular aufgebaut und besitzt ein Modul, welches für alle Level-Angelegenheiten zuständig ist. In diesem Modul kann DungeonG eingebunden werden. Als Schnittstelle zwischen DungeonG und Framework dient die Klasse `LevelAPI`. Diese Klasse verwaltet und lädt das Level und stößt Zeichenprozess an. Um DungeonG für `LevelAPI` verwendbar zu machen, muss `LevelG` das Interface `IGenerator`\footnote{*IGenerator* auf GitHub: https://github.com/PM-Dungeon/pmdungeon/blob/master/code/core/src/level/generator/IGenerator.java} implementieren. Das Interface gibt Methode vor, um Level mit verschiedenen Parametern zu erstellen. 
 
-Das Level muss in jedem Frame neu gezeichnet werden. Um das Level zu zeichnen, benötigen die einzelnen Felder im Level eine Textur. Die Textur ist das Aussehen des Feldes. Die Klasse `TileTextureFactory` sucht die passende Textur für ein Tile. Die Entscheidung welche Textur dem Tile zugeordnet wird, hängt von davon ab, ob es sich um ein Boden- oder Wandfeld handelt und welche Typen von Felder sich über, unter, links und rechts vom betrachteten Tile befinden. So kann entschieden werden, ob es sich um eine Ecke, eine grade Wand, ein Boden, eine T-Kreuzung etc. handelt. Je nachdem welches Design-Label gesetzt ist, werden dann die entsprechenden Texturen ausgewählt. 
+Das Level muss in jedem Frame neu gezeichnet werden. Um das Level zu zeichnen, benötigen die einzelnen Felder im Level eine Textur. Die Textur ist das Aussehen des Feldes. Die Klasse `TileTextureFactory` sucht die passende Textur für ein Tile. Die Entscheidung welche Textur dem Tile zugeordnet wird, hängt davon ab, ob es sich um ein Boden- oder Wandfeld handelt und welche Typen von Felder sich über, unter, links und rechts vom betrachteten Tile befinden. So kann entschieden werden, ob es sich um eine Ecke, eine grade Wand, ein Boden, eine T-Kreuzung etc. handelt. Je nachdem welches Design-Label gesetzt ist, werden dann die entsprechenden Texturen ausgewählt. 
 
 Um das Level zu zeichnen, iteriert die `LevelAPI` über jeden Raum im Level. In jedem Raum wird jedes Tile ausgewählt und die im Tile gespeicherte Textur an der Globalen-Koordinate des Tile gezeichnet. Felder im Level, die kein Tile halten, werden nicht gezeichnet und werden daher schwarz dargestellt. Dies sind Felder, die außerhalb des Spielbereiches liegen.
 

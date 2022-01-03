@@ -202,6 +202,27 @@ Abbildung **TODO** zeigt verschiedene Räume die auf den selben, 8x8 großen Rau
 
 ## Umsetzung LevelG
 
+- Startpunkt getLevel und untermethode
+- Aufteilung in Chains
+  - ChainNode.class
+  - Chain.class
+  - `splitInChains`
+- ConfigurationSpace berechnen
+
+  - ConfigurationSpace.class
+
+  - `layDownLevel`
+
+  - `calculateLevel`
+
+  - `calculateConfigurationSpace`
+
+  - `calculateAttachingPoints`
+
+  - `overlap`
+
+- Convert RoomTemplates to Rooms with Tiles.
+- `placeDoors`
 - A* von libGDX um lösbarkeit zu gewährleisten
 
 ## Anbindung an das PM-Dungeon und Schnittstellen
