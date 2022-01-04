@@ -64,7 +64,7 @@ Listing \ref{cc} zeigt wie geprüft wird, ob Knoten miteinander verbunden werden
 
 \end{lstlisting}
 
-Listing \ref{trees} zeigt die Methode `GraphG#calculateTrees`. Die Funktionsweise wurde bereits im vorherigen Kapitel erläutert, daher soll hier der Fokus nur auf Zeile 7 und 8 liegen. Zeile 7 kopiert mithilfe der oben beschriebenen Methode den aktuell betrachteten Graphen und Zeile 8 nutzt die Methode `Graph#connectNewNode(int index)`, um den betrachteten Knoten mit einem neuen Knoten zu verbinden. Die Methode gibt `true` zurück, wenn eine Verbindung erstellt wurde und `false` wenn keine Verbindung erstellt werden kann. Kann eine Verbindung erstellt werden, wird der kopierte Graph in der Liste der Teillösungen aufgenommen. Anzumerken ist, dass in Zeile 8 der Index des originalen Knotens `n` genutzt wird, um die Kopie des Knotens `n` in `newTree` anzusprechen. 
+Listing \ref{trees} zeigt die Methode `GraphG#calculateTrees`. Die Funktionsweise wurde bereits in Kapitel 4.3.1 erläutert, daher soll hier der Fokus nur auf Zeile 7 und 8 liegen. Zeile 7 kopiert mithilfe der oben beschriebenen Methode den aktuell betrachteten Graphen und Zeile 8 nutzt die Methode `Graph#connectNewNode(int index)`, um den betrachteten Knoten mit einem neuen Knoten zu verbinden. Die Methode gibt `true` zurück, wenn eine Verbindung erstellt wurde und `false` wenn keine Verbindung erstellt werden kann. Kann eine Verbindung erstellt werden, wird der kopierte Graph in der Liste der Teillösungen aufgenommen. Anzumerken ist, dass in Zeile 8 der Index des originalen Knotens `n` genutzt wird, um die Kopie des Knotens `n` in `newTree` anzusprechen. 
 
 \begin{lstlisting}[language=python, label=trees, caption={Breitensuchen nach allen gültigen Bäumen}]
 	private List<Graph> calculateTrees(List<Graph> trees, int nodesLeft) {
@@ -81,7 +81,7 @@ Listing \ref{trees} zeigt die Methode `GraphG#calculateTrees`. Die Funktionsweis
     }
 \end{lstlisting}
 
-Listing \ref{graphs} zeigt die Funktionsweise der Methode `GraphG#calculateGraphs`.  Die Funktionsweise wurde bereits im vorherigen Kapitel erläutert, daher soll hier der Fokus nur auf Zeile 6 bis 11 liegen. In Zeile 6 wird über jeden Knoten im Graphen  `g` iteriert, `g` ist dabei keine Kopie eines Graphen, sondern stammt direkt aus der Liste, die übergeben wird. In Zeile 7 wird nun auch über jeden Knoten in `g` iteriert und in Zeile 8 wird `g` kopiert. In Zeile 9 wird geprüft ob `n1` und `n2` nicht identisch sind und in Zeile 10 wird versucht eine Verbindung zwischen den Kopien der Knoten `n1` und `n2` herzustellen, wenn dies gelingt wird in Zeile 11  der kopierte Graph in die Liste der Teillösungen aufgenommen. 
+Listing \ref{graphs} zeigt die Funktionsweise der Methode `GraphG#calculateGraphs`.  Die Funktionsweise wurde bereits in Kapitel 4.3.1 erläutert, daher soll hier der Fokus nur auf Zeile 6 bis 11 liegen. In Zeile 6 wird über jeden Knoten im Graphen  `g` iteriert, `g` ist dabei keine Kopie eines Graphen, sondern stammt direkt aus der Liste, die übergeben wird. In Zeile 7 wird nun auch über jeden Knoten in `g` iteriert und in Zeile 8 wird `g` kopiert. In Zeile 9 wird geprüft ob `n1` und `n2` nicht identisch sind und in Zeile 10 wird versucht eine Verbindung zwischen den Kopien der Knoten `n1` und `n2` herzustellen, wenn dies gelingt wird in Zeile 11  der kopierte Graph in die Liste der Teillösungen aufgenommen. 
 
 \begin{lstlisting}[language=python, label=graphs, caption={Breitensuchen nach allen gültigen Graphen.}]
   private List<Graph> calculateGraphs(List<Graph> graphs, int edgesLeft) {
@@ -113,7 +113,7 @@ Möglichkeit 2 wäre es den Algorithmus umzuschreiben. Aktuell werden auch zuein
 
 Um den zeitlichen Rahmen dieser Arbeit einhalten zu können, wird keiner der beiden Möglichkeiten umgesetzt. Es wird ein Grenzwert von 1000 definiert, der die maximal betrachteten Teillösungen zu einem Zeitpunkt angibt. Sollte die Liste mit den Teillösungen den Schwellwert überschreiten, wird die Liste beim nächsten rekursiven Aufruf wieder verkleinert, indem so lange zufällige Teillösungen aus der Liste entfernt werden, bis der Schwellwert erreicht ist. Dies schränkt GraphG so ein, dass nicht mehr alle Lösungen gefunden werden. Für Suchräume mit wenigen gültigen (Teil-)Lösungen sollten dennoch eine Vielzahl an unterschiedlichen Graphen gefunden werden. Für Suchräumen mit vielen gültigen Graphen könnten sich, je nach Größe des Suchraumes und Anzahl der (Teil-)Lösungen, die gefunden Graphen stark ähneln. 
 
-Abbildungen \ref{graphex1}, \ref{graphex2}, \ref{graphex3} und \ref{graphex4} zeigen von GraphG generierte Graphen mit unterschiedlicher Kanten und Knotenanzahl. Die Graphen wurden zufällig ausgewählt, um die mögliche Variation zu zeigen. Im Kapitel Evaluierung werden die Graphen auf ihre Qualität als Level-Graph analysiert und bewertet. 
+Abbildungen \ref{graphex1}, \ref{graphex2}, \ref{graphex3} und \ref{graphex4} zeigen von GraphG generierte Graphen mit unterschiedlicher Kanten und Knotenanzahl. Die Graphen wurden zufällig ausgewählt, um die mögliche Variation zu zeigen. In Kapitel 6 werden die Graphen auf ihre Qualität als Level-Graph analysiert und bewertet. 
 
 ## Umsetzung RoomG
 
@@ -198,7 +198,7 @@ private boolean canReplaceIn(LevelElement[][] layout, final Replacement r, int x
 }
 \end{lstlisting}
 
-Abbildung **TODO** zeigt verschiedene Räume die auf den selben, 8x8 großen Raum-Template basieren und durch verschiedene Replacern verändert wurden. Im Kapitel Evaluierung wird weiter auf die Qualität und Abwechslung der Räume Eingange. 
+Abbildung **TODO** zeigt verschiedene Räume die auf den selben, 8x8 großen Raum-Template basieren und durch verschiedene Replacern verändert wurden. In Kapitel 6 wird weiter auf die Qualität und Abwechslung der Räume Eingange. 
 
 ## Umsetzung LevelG
 

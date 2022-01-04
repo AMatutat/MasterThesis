@@ -4,7 +4,7 @@ In diesem Kapitel wird ein eigenes Konzept zur Implementierung eines prozedurale
 
 ## Zielsetzung und Anforderungen an das Projekt 
 
-Ziel dieser Arbeit ist es, ein Generator zu entwickeln, der abwechslungsreiche und spaßige Level erstellt und in das PM-Dungeon-Framework integriert werden kann. Daher sind die Anforderungen an den Generator zweigeteilt: Auf der einen Seite muss der Generator gute Level erzeugen, dafür wurden im Kapitel 2 verschiedene Regeln für gutes Leveldesign aufgestellt. 
+Ziel dieser Arbeit ist es, ein Generator zu entwickeln, der abwechslungsreiche und spaßige Level erstellt und in das PM-Dungeon-Framework integriert werden kann. Daher sind die Anforderungen an den Generator zweigeteilt: Auf der einen Seite muss der Generator gute Level erzeugen, dafür wurden im Kapitel 2.6 verschiedene Regeln für gutes Leveldesign aufgestellt. 
 
 1. Gute Level sind lösbar und fehlerfrei
 2. Gute Level fordern die Mechaniken des Spiels
@@ -114,8 +114,16 @@ Damit die Lösbarkeit der Level gewährleistet werden kann, ist bei der Erstellu
 - Was macht LevelG?
 - Funktioniert wie der Algorithmus in Kapitel 3.1
 - Aufteilung des Level in Chains
-- Chains iterativ auflösen und configuration spaces berechnen
-- Templats in Räume umwandeln, Tiles erklären
+  - Algorithmus aus Kapitel 2.3.2
+  - chains können dann in eine solution order gebracht werden
+- SolutionOrder iterativ auflösen und configuration spaces berechnen
+  - ein configurationspace besteht aus einen Raumtemplate und einer Position an dem das Template liegt (system der referenzpunkte erklären)
+  - defintion: anliegen definition: überschneiden
+  - eine Liste an aus ConfigurationSpaces stellen dann ein level da. 
+  - pseudocode makeLevel
+- Templats in Räume umwandeln, 
+  - Umrechnen der lokalen felder positionen im RoomLayout auf globale Koordinaten 
+  - Tiles erklären
 - Türen platzieren
 - Mithilfe von A* Prüfen ob das Level lösbar ist. 
 
@@ -141,7 +149,7 @@ Neben der fundamentalen Integration in das PM-Dungeon werden auch verschiedene M
 
 `Level#getAllPath(start,goal)`: 
 
-Diese Methoden findet mithilfe des Graphen alle Pfade vom übergebenen Startknoten bis zum übergebenen Zielknoten. Damit können Wege bestimmt werden. Denkbar wären zum Beispiel Monster, die sich durch mehrere Räume des Levels bewegen, um den Spieler zu verfolgen oder um aus verschiedenen Richtungen anzugreifen. Die Methode wird von weiteren Methoden der Schnittstelle genutzt. Zur Durchführung wird der in Kapitel 2 vorgestellte Graph-Serach Algorithmus genutzt. Eine Abwandlung von `getAllPath` ist `getShortestPath(start,goal)` diese Methode gibt nur den kürzesten Pfad, also den Pfad mit dem wenigsten Knoten zurück. 
+Diese Methoden findet mithilfe des Graphen alle Pfade vom übergebenen Startknoten bis zum übergebenen Zielknoten. Damit können Wege bestimmt werden. Denkbar wären zum Beispiel Monster, die sich durch mehrere Räume des Levels bewegen, um den Spieler zu verfolgen oder um aus verschiedenen Richtungen anzugreifen. Die Methode wird von weiteren Methoden der Schnittstelle genutzt. Zur Durchführung wird der in Kapitel 2.3.1 vorgestellte Graph-Serach Algorithmus genutzt. Eine Abwandlung von `getAllPath` ist `getShortestPath(start,goal)` diese Methode gibt nur den kürzesten Pfad, also den Pfad mit dem wenigsten Knoten zurück. 
 
 `Level#getCriticalNodes`:
 
