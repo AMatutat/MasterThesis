@@ -111,21 +111,40 @@ Damit die Lösbarkeit der Level gewährleistet werden kann, ist bei der Erstellu
 
 ### LevelG
 
-- Was macht LevelG?
-- Funktioniert wie der Algorithmus in Kapitel 3.1
-- Aufteilung des Level in Chains
-  - Algorithmus aus Kapitel 2.3.2
-  - chains können dann in eine solution order gebracht werden
-- SolutionOrder iterativ auflösen und configuration spaces berechnen
-  - ein configurationspace besteht aus einen Raumtemplate und einer Position an dem das Template liegt (system der referenzpunkte erklären)
-  - defintion: anliegen definition: überschneiden
-  - eine Liste an aus ConfigurationSpaces stellen dann ein level da. 
-  - pseudocode makeLevel
-- Templats in Räume umwandeln, 
-  - Umrechnen der lokalen felder positionen im RoomLayout auf globale Koordinaten 
-  - Tiles erklären
-- Türen platzieren
-- Mithilfe von A* Prüfen ob das Level lösbar ist. 
+LevelG verwendet GraphG und RoomG um die spielbaren Level zu erzeugen. Es nimmt die Räum-Templates und ordnet sie so an, dass die Anordnung der Struktur des Graphen entspricht. Dafür nutzt LevelG das aus Kapitel 3.1 bekannte Verfahren. 
+
+Zuerst wird der Graph mithilfe des Algorithmus aus Kapitel 2.3.2 in Chains aufgeteilt. In einer Chain hat jeder Knoten maximal zwei Nachbarn. Mithilfe der Chains lassen sich die Knoten in eine Reihenfolge bringen, die der Reihenfolge entspricht, in der die Knoten aufgelöst\footnote{Auflösen meint, ein Raum im Level platzieren, der den Knoten im Graphen repräsentiert} werden. Zuerst werden die Knoten aus dem kleinsten Zyklus in die Liste gepackt, dann werden die benachbarten Chains in Breite betrachtet und in Reihenfolge der Zyklen-Größe dazu gepackt. Dabei gilt, zuerst kleine Zyklen, dann größere Zyklen und am Ende alle Chains, die keine Zyklen bilden. Dieser Vorgang wird wiederholt, bis alle Chains betrachtet wurden und alle Knoten in der Liste hinzugefügt wurden.
+
+Um die Knoten aufzulösen werden die Configuration-Spaces berechnete. Ein Configuration-Space gibt dabei an, an welche Stelle im Level ein bestimmtes Raum-Template liegen kann und dabei alle  Bedingungen erfüllt. Eine Gruppe aus zusammengehörigen Configuration-Spaces bilden dann ein Level. Damit ein Configuration-Space gültig ist, darf das Raum-Template sich nicht mit einem anderen Template überschneiden und der Raum muss an alle im Graphen eingezeichneten Nachbarn anliegen. Anliegen tun zwei Raum-Templates genau dann, wenn die Außenwände aufeinanderliegen. Überschneiden tun sich zwei Templates, wenn Felder des einen Template im Layout des anderen Templates liegen.
+
+Um die Position zu bestimmen werden lokale und globale Koordinaten genutzt. Jedes Raum-Template hat einen lokalen Referenzpunkt. Beim Platzieren des Templates im Level, wird dieser Referenzpunkt auf eine globale Koordinate gelegt, damit kann dann bestimmt werden, wo genau die Felder des Templates im Level liegen. Ein Configuration-Space gibt also an, wo der lokale Referenzpunkt eines bestimmten Raum-Templates im globalen System liegt.
+
+Listing \ref{backtrack} zeigt in Pseudocode, wie alle Knoten mithilfe des inkrementellen Verfahren und Backtracking aufgelöst werden können. Der Methode wird zu einem die Liste der noch zu platzierenden Knoten als auch die bereits gefundenen Configuration-Spaces übergeben. In Zeile 2 wird geprüft, ob es noch Knoten zum Platzieren gibt, sind alle Knoten platziert, wurde eine gültige Zusammenstellung gefunden, welche sich aus der Liste der Configuration-Spaces ergibt. 
+Sind noch Knoten übrig zum Auflösen, geht der Algorithmus weiter. In Zeile 3 wird sich der nächste Knoten zum Auflösen aus der Liste genommen. In Zeile 4 werden alle gültigen Configuration-Spaces für den Knoten abgefragt. In `getAllCF` werden dabei die Configuration-Spaces für alle verfügbaren Raum-Templates unter Berücksichtigung der oben genannten Bedingungen berechnet. In Zeile 5 wird geprüft, ob es mindestens einen gültigen Configuration-Space für den Knoten gibt, ist dies nicht der Fall, gibt die Methode `null` zurück und signalisiert damit, dass Backtracking durchgeführt werden muss, also dass andere Configuration-Spaces für die vorherigen Knoten benutzt werden müssen. Gibt es gültige Configuration-Spaces werden diese in Zeile 6 in eine zufällige Reihenfolge gebracht, um auch bei gleichbleibenden Graphen und Templates unterschiedliche Level erzeugen zu können. In Zeile 7 bis 11 wird über jeden gültigen Configuration-Space iteriert. Per Tiefensuche wird mit jedem Configuration-Space nach einer Endlösung gesucht. In Zeile 11 wird geprüft, ob im betrachteten Zwei eine Lösung gefunden wurde, wenn ja, ist dies die Endlösung, wenn nicht, wird der nächste Zweig betrachtet. Führt kein Zweig zu einer Lösung, wird in Zeile 12 `null` zurückgegeben und damit signalisiert, dass Backtracking durchgeführt werden muss.
+
+\begin{lstlisting}[label=backtrack, caption={Pseudocode um inkrementell alle Knoten aufzulösen.}  ]
+getLevelCS (List<Node> toPlace, List <CS> partSolution): 
+	if (toPlace.isEmpty()) return partSolution; //this is the final solution
+	Node thisNode = toPlace.get(0);
+	List<CF> spaces = getAllCF(thisNode,partSolution);
+	if(spaces.isEmpty()) return null; //no solution. Backtrack if possible. 
+	spaces.shuffle();
+	for (CS cs: spaces):
+		List<CS> thisPartSolution=partSolution.copy();
+		thisPartSolution.add(cs);
+		List<CS> solution = getLevelCS(toPlace-thisNode,thisPartSolution)
+		if(solution!=null) return solution; //this is the final solution
+	return null; //no solution. Backtrack if possible. 
+\end{lstlisting}
+
+
+Die gelegten Räume müssen nun durch Durchgänge miteinander verbunden werden. Durchgänge werden zwischen jedem Raum, die miteinander verbunden werden sollen. Der Graph gibt an, zwischen welchen Räumen es einen Durchgang geben soll. Ein Durchgang ist 3-Felder groß und besteht aus zwei Wandfeldern und einem Bodenfeld dazwischen. Es wird nach allen möglichen Positionen gesucht, an dem der Durchgang platziert werden kann und damit die Räume miteinander verbindet. Sind mehrere Positionen möglich, wird davon eine zufällige ausgewählt. Beim Platzieren des Durchgangs werden die Tiles der Räume durch die Tiles des Durchganges ersetzt. 
+
+Das gelegte Level in Form der Menge an Configuration-Spaces muss nun noch in ein spielbares Level umgewandelt werden. Dafür werden die Raum-Templates der einzelnen Configuration-Spaces in konkrete Räume umgewandelt. Dazu werden zuerst die Wildcards im Template durch Replacer ersetzt (vgl. vorherigen Abschnitt). Darnach werden die bisher noch abstrakten Felder in Tiles umgewandelt. Ein Tile ist ein bestimmter Feldtyp mit einer Textur und einer globalen Position im Level. Die globale Position wird anhand der Position des Configuration-Spaces sowie mithilfe des lokalen Referenzpunktes des Raum-Templates bestimmt werden.
+
+Ein `Level` besteht aus der Liste an umgewandelten Räumen, der Knotenliste des Graphen um die Struktur des Levels darzustellen und einem Start- sowie Endfeld. Diese Felder werden durch zufällige Auswahl eines Bodenfeldes im Level bestimmt. 
+
+Durch die zufällige Kombination aus Room-Templates und Replacern könnte es dazu kommen, dass ein Level nicht lösbar ist, also das End-Tile nicht vom Start-Tile aus erreichbar ist, weil eine Wand im Weg ist. Um diese Level nicht auszugeben, können verschiedene Wegfindungs-Algorithmen eingesetzt werden. LibGDX stellt  den A*-Algorithmus zur Verfügung, daher wird dieser genutzt, um jedes Level abschließend auf Lösbarkeit zu überprüfen. Nur lösbare Level werden zurückgegeben. 
 
 ### Integration in das PM-Dungeon
 
@@ -141,7 +160,6 @@ Um das Level zu zeichnen, iteriert die `LevelAPI` über jeden Raum im Level. In 
 
 Um Objekte im Level zu verteilen, kann ein zufälliges Tile in einen bestimmten oder einen zufälligen Raum ausgewählt werden und die Position des Objektes auf die Position des ausgewählten Tile zu setzten. Der Zeichenprozess des Levels wird immer vor dem Zeichenprozess der Objekte ausgeführt, daher werden die Texturen der Objekte über die Texturen des Levels gezeichnet und werden so nicht überdeckt.    
 
-  
 
 ### Schnittstellen
 
