@@ -83,9 +83,11 @@ Als Face werden Flächen in einem planaren Graphen bezeichnet, wenn dieser grafi
 
 Im weiteren Verlauf dieser Arbeit sind nur Faces, die durch Kanten gebildet werden, wichtig (so wie $f2$,$f3$). Ebenso ist die Position der Fläche sowie deren Inhalt nicht von Bedeutung in dieser Arbeit. Für die Arbeit ist lediglich wichtig, festzustellen, dass Faces im Graphen existieren und welche Knoten/Kanten sie bilden. Dafür muss der Graph auf Zyklen untersucht werden.
 
-**TODO** Zyklen im Graphen finden.
+Um Zyklen in einen ungerichteten Graphen zu finden, können Spannbäume genutzt werden. Ein Spannbäume ist ein Teilgraph des Graphen der alle Knoten des Graphen enthallt und dabei einen Baum ist.[@Tittmann2021] Jede Kante die zwar im Graphen vorhanden ist aber nicht im Spannbaum, ist eine Kante welche einen Zyklus bildet. Im weiteren Verlauf werden solche Kanten als *Back-Forward-Edge* bezeichnet. Um mithilfe einer Back-Forward-Edge einen Zyklus zu finden, muss der Pfad zwischen den beiden Knoten die von der Back-Forward-Edge verbunden werden gefunden werden, der nicht die Back-Forward-Edge enthält. Dafür kann unter anderen der oben Beschriebene Graph-Search Algorithmus genutzt werden. 
 
+Abbildung \ref{bfe} zeigt einen Graphen mit rot eingezeichneten Back-Forward-Edges. Die Zahlen in der Beschriftung der Knoten geben den entsprechenden Level an, auf den sich der Knoten im Spannbaum befindet. Die Back-Forward Edge $X$ bildet einen Zyklus zwischen den Knoten $B1->C2->E3$ die Back-Forward-Edge $Y$ bildet einen Zyklus zwischen $A0->B1->C2->E3$. Zusammen Bilden sie zusätzlich noch den Zyklus $A->B1->E3$. 
 
+![Graph mit eingezeichneten Back-Forward-Edges.\label{bfe}](figs/chapter2/bfe.png){width=50%}
 
 ## Rogue-Like
 
