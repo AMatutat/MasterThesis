@@ -9,9 +9,9 @@ Um eine reibungslose Integration in das PM-Dungeon-Framework zu ermöglichen, wu
 - Das Buildtool Gradle wird genutzt, um das Projekt zu bauen. Alle externen Libraries werden als Dependencies hinzugefügt.
 - Der Google-Java-Formater wird genauso wie im Framework konfiguriert und genutzt, um einen einheitlichen Codestil zu gewährleisten.
 - Die Package-Struktur des Frameworks wurde übernommen.
-- Das für den Generator genutzte Git-Repository wird mithilfe von GitHub-Actions so konfiguriert, dass es dem PM-Dungeon-Repository gleicht. Dies bedeutet, dass Code nur dann gemerged werden kann, wenn der Codestil eingehalten ist, alle JUnit-Testfälle erfolgreich durchlaufen und das Tool Spot-Bugs keine Antipattern im Code finden kann oder die gefundenen Antipattern bewusst akzeptiert werden. Sollten Antipattern bewusst im Code gelassen werden, muss diese Entscheidung dokumentiert und nachvollziehbar begründe werden.
+- Das Projekt wurde in in einen Branch des PM-Dungeon-Framework Repository implementiert. Dadurch konnte die selbe Toolchain und die selben GitHub-Actions wie das Framework verwendet werden und sichergestellt werden, dass diese immer auf den aktuellsten stand sind. Dies bedeutet, dass Code nur dann gemerged werden kann, wenn der Codestil eingehalten ist, alle JUnit-Testfälle erfolgreich durchlaufen und das Tool Spot-Bugs keine Antipattern im Code finden kann oder die gefundenen Antipattern bewusst akzeptiert werden. Sollten Antipattern bewusst im Code gelassen werden, muss diese Entscheidung dokumentiert und nachvollziehbar begründe werden.
 
-Die konkrete Konfiguration des GitHub-Actions kann im Repository auf GitHub\footnote{GitHub-Repo für diese Arbeit: https://github.com/AMatutat/MasterThesis} oder im Anhang \ref{workflows} eingesehen werden. 
+Die konkrete Konfiguration des GitHub-Actions im Anhang \ref{workflows} eingesehen werden. 
 
 ## Umsetzung GraphG
 
