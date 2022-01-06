@@ -1,14 +1,4 @@
-# Appendix 1: Some extra stuff
-
-<!--
-
-Hier werden vermutlich viele Abbildungen von Graphen und Leveln zu finden sein
-
-Platz für *wichtige* Materialien, die zu umfangreich für den eigentlichen Textteil sind.
-
-Der Anhang gehört *nicht* zum Textteil (wird nicht zum Seitenumfang hinzugerechnet).
-Der Umfang des Anhangs sollte möglichst klein sein!
--->
+# Anhang
 
 ## Graphen
 
@@ -21,12 +11,6 @@ Hier werden verschiedene, von GraphG erzeugte, planare Graphen gezeigt. Diese Gr
 ![Von GraphG erzeugter Graph mit 20 Knoten und 4 extra Kanten. \label{graphex3}](figs/chapter4/graphgsol/example3.png)
 
 ![Von GraphG erzeugter Graph mit 7 Knoten und 1 extra Kanten. \label{graphex4}](figs/chapter4/graphgsol/example4.png)
-
-## Räume 
-
-## Level
-
-- Graphen und draus erzeugte Level
 
 ## GitHub-Workflows 
 
@@ -82,11 +66,5 @@ jobs:
                 with:
                     report_paths: '**/build/test-results/test/TEST-*.xml'
 ```
-
-
-
-## Code
-
-- Vermutlich ehr nicht vorhanden
 
 
