@@ -202,28 +202,100 @@ Abbildung **TODO** zeigt verschiedene Räume die auf den selben, 8x8 großen Rau
 
 ## Umsetzung LevelG
 
-- Startpunkt getLevel und untermethode
+In diesem Abschnitt wird die Umsetzung von LevelG beschrieben. Da LevelG ein komplexer Baustein mit einer Vielzahl an Hilfsmethoden und kleineren Berechnungen ist, kann hier nicht die Funktionsweise in ihrer ganze erläutert werden. Daher konzentriert sich dieser Abschnitt auf die Beschreibung der wichtigsten Funktionalitäten. Dies umfasst die Aufteilung eines Graphen in Chains und das berechnen der configuration-spaces. 
+
+Listing \ref{getLevel} zeigt repräsentativ eine vereinfachte Implementierung der Methode `LevelG#getLevel`. Dieser Implementierung wird die gewünschte Anzahl der Knoten und Kanten und das gewünschte Design übergeben, dann erstellt die Methode ein Level. In Zeile 2 wird dafür zuerst GraphG genutzt um ein Graphen zu generieren. In Zeile 3 und 4 werden die Templates und Replacements aus RoomG geladen. In Zeile 5 wird der Graph in Chains aufgeteilt. Die Funktionsweise von `splitInChains` wird in Listing \ref{dochain} erklärt. In  Zeile 6 werden die Chains genutzt, um die Reihenfolge zum auflösen der Knoten zu bestimmen. Zeile 7 ruft die in Listing \ref{backtrack} konzeptionierte Methode `getLevelCS` auf. Wie beschrieben verwendet diese Methode Backtracking um gültige configuration-spaces für ein Level zu berechnen. Die Berechnungen der configuration-spaces wird weiter unten erläutert. Configuration-Spaces sind eigene `CS` Objekte in LevelG. In einem `CS` ist der Knoten zu dem der configuration-space gehört, das verwendete Raum-Template und die Position des lokalen Referenzpunkt des Templates im globalen Raum abgespeichert. In Zeile 8 werden alle nötigen Durchgänge zwischen den jeweiligen Räumen platziert. In Zeile 9-12 werden die Raum-Templates der einzelnen configuration-spaces in konkrete Räume umgewandelt, das bedeutet die Wildcards werden ersetzt und die abstrakten Felder im Layout durch Tiles mit einer globalen Position und einer Textur ersetzt. In Zeile 13 wird nun das Level erstellt. In Zeile 14 wird mithilfe des Integrierten A*-Algorithmus geprüft, ob das Level lösbar ist. Nur lösbare Level werden zurückgegeben. 
+
+
+
+\begin{lstlisting}[language=java, label=getLevel, caption={Vereinfache Darstellung der Methode um ein Level zu erzeugen.}  ]
+Level getLevel(int nodeCounter, int edeCounter, DesignLabel design){
+	Graph graph = graphg.getGraph(nodeCounter, edgeCounter, pathToGraph);
+	List<RoomTemplate> templates = roomLoader.getRoomTemplates(design);
+	List<Replacement> replacements = replacementLoader.getReplacements(design);
+	List<Chain> chain = splitInChains(graph);
+	List<Node> solveSeq = getSolveSequence(chains);
+	List<CS> solution = getLevelCS(graph, solveSeq, new ArrayList<CS>(), templates);	
+	placeDoors(solution, graph);
+	for (CS cs : configurationSpaces) {
+		RoomTemplate template = cs.getTemplate();
+		rooms.add(template.replace(replacements, cs.getGlobalPosition()));
+	}
+    Level level = new Level(graph.getNodes(), rooms);
+    if (checkIfCompletable(level)) return level;
+    else return null;
+}
+\end{lstlisting}
+
+
+
 - Aufteilung in Chains
   - ChainNode.class
   - Chain.class
   - `splitInChains`
-- ConfigurationSpace berechnen
 
-  - ConfigurationSpace.class
+\begin{lstlisting}[language=java, label=dochain, caption={Aufteilen eines Graphen in Chains.}  ]
+todo
+\end{lstlisting}
 
-  - `layDownLevel`
 
-  - `calculateLevel`
 
-  - `calculateConfigurationSpace`
+Listing \ref{getCS} zeigt wie alle gültigen configuration-spaces für einen Knoten gefunden werden. Der Methode werden die configuration-spaces für alle bereits platzierten Nachbarn übergeben. An diese configuration-spaces muss der platzierte Raum angebunden werden. Außerdem werden der Methode alle bereits gesetzten configuration-spaces übergeben. Bei der Platzierung des Raumes muss darauf geachtet werden, dass es zu keiner Überschneidung mit den anderen Räumen kommt. Die Methode gibt alle möglichen configuration-spaces für den Knoten mit dem zu verwendenden Template für die gegebene Umgebung zurück. Dafür wird mithilfe der Methode `calCS` jeder gültiger configuration-space berechnet bei dem der Knoten so platziert wird, dass er an den Nachbar anliegend ist. Diese Berechnung wird mit jedem Nachbar durchgeführt. Die Schnittmenge der gültigen configuration-spaces für die einzelnen Nachbarn, sind alle gültigen configuration-spaces für den Knoten, damit dieser so platziert werden kann, dass er mit allen seinen Nachbarn verbunden ist und zeitgleich keinen Raum überschneidet. 
 
-  - `calculateAttachingPoints`
+\begin{lstlisting}[language=java, label=getCS, caption={Finden aller gültigen configuration-spaces für einen Knoten.}  ]
+        private List<CS> getCS(
+                List<CS> neighbourSpaces,
+                Node node,
+                List<RoomTemplate> templates,
+                List<CS> partSolution) {
+            List<CS> possibleSpaces = new ArrayList<>();
+            for (CS cs : neighbourSpaces)
+                if (possibleSpaces.isEmpty()) possibleSpaces = calCS(cs, node, templates, partSolution);
+                else possibleSpaces.retainAll(calCS(cs, node, templates, partSolution));
+            return possibleSpaces;
+        }
+\end{lstlisting}
 
-  - `overlap`
+​    
 
-- Convert RoomTemplates to Rooms with Tiles.
-- `placeDoors`
-- A* von libGDX um lösbarkeit zu gewährleisten
+Listing \ref{calCS} zeigt wie die configuration-spaces für einen Knoten berechnet werden. Wie in Kapitel 3.1 beschrieben, wird dafür ein statischer und ein dynamischer Raum verwendet. Der statische Raum ist bereits im Level platziert und darf nicht bewegt werden, der dynamische Raum muss so platziert werden, dass er anliegend an den statischen Raum ist aber dabei keine anderen bereits gesetzten Räume überschneidet. Dafür wird in Zeile 7 bis 17 für jedes Raum-Template das verwendet werden kann geprüft ob es gültige configuration-spaces gibt. In Zeile 9 wird ein Sonderfall abgedeckt, bei dem es sich um den aktuellen Knoten zeitgleich um den ersten Knoten der aufgelöst wird, handelt. In diesem Fall wird für jedes Raum-Template die Position $(0|0)$ als globale Position bestimmt. Da es noch keine anderen gesetzten Räume gibt, müssen keine weiteren Bedingungen beachtet werden. Handelt es sich nicht um den ersten Knoten werden in Zeile 10 mithilfe der Methode `calAttachingPoints` alle Punkte berechnet, an den das Raum-Template platziert werden kann um mit den statischen Raum verbunden zu werden. in Zeile  11 bis 16 wird dann geprüft ob es bei den jeweiligen Punkte noch zu überschneidungen mit anderen bereits platzierten Räumen kommt, wenn des nicht der Fall ist, ist der gefundene Punkt ein güliger configuration-space.
+
+\begin{lstlisting}[language=java, label=calCS, caption={Berechnen der configuration-spaces für einen statischen und einen bewegbaren Raum.}  ]
+      private List<CS> calCS(
+                ConfigurationSpace staticSpace,
+                Node dynamicNode,
+                List<RoomTemplate> template,
+                List<CS> level) {
+            List<CS> spaces = new ArrayList<>();
+            for (RoomTemplate layout : template) {
+                List<Point> possiblePoints = new ArrayList<>();
+                if (level.isEmpty()) possiblePoints.add(new Point(0, 0));
+                else possiblePoints = calAttachingPoints(staticSpace, layout);               
+                for (Point position : possiblePoints) {
+                    boolean isValid = true;
+                    for (ConfigurationSpace sp : level)
+                        if (sp.overlap(layout, position)) isValid = false;                
+                    if (isValid) spaces.add(new ConfigurationSpace(layout, dynamicNode, position));
+                }
+            }    
+        return spaces;
+        }
+\end{lstlisting}
+
+Listing \ref{calAP} zeigt wie **TODO**
+
+\begin{lstlisting}[language=java, label=calAP, caption={Berechnen der globalen Positionen für ein Template um an den statischen Raum angebunden werden zu können.}  ]
+        private List<Point> calAttachingPoints(ConfigurationSpace staticSpace, RoomTemplate template) {
+            List<Point> points = new ArrayList<>();
+    
+
+            // todo
+            return points;
+        }
+\end{lstlisting}
+
+Abbildungen **TODO** zeigen verschiedene von LevelG generierte Level. In Kapitel 6 werden die Level analysiert und bewertet. 
+
 
 ## Anbindung an das PM-Dungeon und Schnittstellen
 
@@ -294,7 +366,7 @@ In diesem Kapitel werden die erreichten Ergebnisse mit den aufgestellten Anforde
 
 ## Gute Level sind lösbar und fehlerfrei 
 
-Als kritisches Kriterium wurde die Lösbarkeit und Fehlerfreiheit der Level genannt. Die Generierung und grafische Darstellung der Level funktioniert fehlerfrei, es sind keine Fehler in den Algorithmen und Schnittstellen bekannt. Die Testabdeckung hilft dabei, eine Vielzahl an Fehler auszuschließen. 
+Als kritisches Kriterium wurde die Lösbarkeit und Fehlerfreiheit der Level genannt. Die Generierung und grafische Darstellung der Level funktioniert fehlerfrei, es sind keine Fehler in den Algorithmen und Schnittstellen bekannt.
 
 Der Generator stellt sicher, dass alle erzeugten Level lösbar sind. Während der Graphengenerierung werden nur zusammenhängende Graphen erzeugt. So ist sichergestellt, dass jeder Raum im Level strukturell erreichbar ist. Durch die Verwendung verschiedener Raum-Layouts und Replacements, kann es passieren, dass unerreichbare Felder im Level entstehen. Mithilfe des integrierten A*-Algorithmus wird geprüft, ob ein Weg vom Startpunkt des Levels bis zum Endpunkt führt. Nur Level, die einen solche Weg haben, werden akzeptiert und als Lösung ausgegeben. In gültigen Level können aber unerreichbare Felder sein. Um zu prüfen, ob ein spezifisches Feld erreichbar ist, wird ebenfalls der A*-Algorithmus genutzt. So kann vor der Platzierung von Inhalten geprüft werden, ob die Inhalte dann auch erreichbar sind. Nicht erreichbare Felder müssen erst mithilfe von Spielelementen wie Bomben oder Spruchrollen freigelegt werden.  
 
@@ -340,10 +412,7 @@ Auch wenn DungeonG nicht vollständig ohne Inputdaten auskommt, kann die Anforde
 
 ## Testabdeckung
 
-**TODO** Wird gemacht während die Arbeit Kontrolle gelesen wird. 
-
-- Grenzwertanalyse
-- Testfälle
+Für die in dieser Arbeit implementierten Klassen und Funktionen sind zum aktuellen Stand keine Testfälle vorhanden. Dies stellt zwar kein Problem für die Funktionalität des Generators dar, es sollten dennoch Umfangreiche Tests konzeptioniert und umgesetzt werden damit etwaige Veränderungen am Framework oder am Generator keine unvorhergesehenen Fehlerfälle auslösen. 
 
 ## Integration in das PM-Dungeon-Framework
 
