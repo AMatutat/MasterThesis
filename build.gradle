@@ -32,3 +32,18 @@ ext {
 application {
     mainClassName = javaMainClass
 }
+
+ spotbugs {
+        toolVersion = '4.2.2'
+        ignoreFailures = true
+        showStackTraces = false
+    }
+
+    spotbugsMain {
+        reports {
+            xml {
+                enabled = true
+                destination = file("$buildDir/reports/spotbugsXml.xml")
+            }
+        }
+    }
