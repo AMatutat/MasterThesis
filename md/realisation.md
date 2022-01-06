@@ -198,7 +198,9 @@ private boolean canReplaceIn(LevelElement[][] layout, final Replacement r, int x
 }
 \end{lstlisting}
 
-Abbildung **TODO** zeigt verschiedene Räume die auf den selben, 8x8 großen Raum-Template basieren und durch verschiedene Replacern verändert wurden. In Kapitel 6 wird weiter auf die Qualität und Abwechslung der Räume Eingange. 
+![Verschiedene von RoomG erzeugte Räume, die alle das selbe 8x8 Felder großes Raum-Template als Vorlage haben. \label{roomgex}](figs/chapter4/rooms.png)
+
+Abbildung \ref{roomgex} zeigt verschiedene Räume die auf den selben, 8x8 großen Raum-Template basieren und durch verschiedene Replacern verändert wurden. In Kapitel 6 wird weiter auf die Qualität und Abwechslung der Räume Eingange. 
 
 ## Umsetzung LevelG
 
