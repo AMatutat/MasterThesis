@@ -106,7 +106,7 @@ Daraus lässt sich ableiten, dass ein Graph, der maximal vier Knoten mit drei od
 
 Abbildung \ref{mygenexample} zeigt einen Graphen, der nach den oben genannten Regeln generiert wurde. Die Knoten A und G wurden zufällig als Start- und Endpunkt festgelegt, die roten Kanten zeigen den kritischen Pfad, grüne Kanten optionale Pfade. Dieser Graph bietet im Vergleich zu den Graphen aus Abbildung \ref{plantri} einen klaren kritischen und mehrere klar optionale Pfade, wodurch die Platzierung von Risk and Reward Momenten, Monstern und anderen Elemente vereinfacht und kontrollierbarer wird. Negativ fällt auf, dass der Graph Backtracking enthält, Knoten K kann nur durch die Knoten A, H und J erreicht werden entsprechend nur über diese Knoten verlassen werden. Eine Kante zwischen K und I könnte dieses Problem beheben, da so ein Zyklus zwischen den Knoten entsteht.
 
-  ![Graphen generiert nach dem Satz von Kuratowski. \label{mygenexample}](figs/chapter3/mygenexample.png)
+  ![Graphen generiert nach dem Satz von Kuratowski. \label{mygenexample}](figs/chapter3/mygenexample.png){width=40%}
 
 ### Vor- und Nachteile
 
@@ -144,6 +144,8 @@ Abhängig von der Markierung eines Raumes wird er mit einem von mehreren per Han
 
 Jedes Template lässt sich als String darstellen und kann als 8x10 Matrix verstanden werden. In jedem Feld der Matrix steht ein Wert, dieser Wert gibt an, welche Art von Block an der jeweiligen Stelle zu platzieren ist (vgl. Tabelle \ref{spelunkytable}). Einige Felder, sogenannte Chunks, ersetzten eine 5x3 große Fläche durch eines von zehn vorgefertigten Chunk-Templates. Durch die Veränderung der Templates lassen sich viele unterschiedliche Räume generieren. 
 
+Um Monster und Items zu verteilen, wird zum Schluss für jedes als 1 gekennzeichnetes Feld entschieden, ob ein Monster oder ein Schatz darauf oder darunter platziert wird oder das Feld leer bleibt. Bei der Platzierung nehmen auch umliegende Felder Einfluss, so werden beispielsweise Truhen bevorzugt in Nischen platziert. 
+Spelunky verwendet verschiedene Texturen, um die optische Abwechslung zu gewährleisten. Nach einer bestimmten Anzahl an Level wird ein neues Theme angewandt. Auf die Struktur und den Aufbau der Level hat dies keinen Einfluss, es werden lediglich Texturen ersetzt. 
 
 | Wert | Ersetzen durch                               |
 | ---- | -------------------------------------------- |
@@ -155,12 +157,9 @@ Jedes Template lässt sich als String darstellen und kann als 8x10 Matrix versta
 | L    | Leiterteil                                   |
 | P    | Leiterteil mit Fläche zumStehen              |
 
-: Ersetzungstabelle für Spelunky \label{spelunkytable}
+: Ersetzungstabelle für Spelunky. \label{spelunkytable}
 
-Um Monster und Items zu verteilen, wird zum Schluss für jedes als 1 gekennzeichnetes Feld entschieden, ob ein Monster oder ein Schatz darauf oder darunter platziert wird oder das Feld leer bleibt. Bei der Platzierung nehmen auch umliegende Felder Einfluss, so werden beispielsweise Truhen bevorzugt in Nischen platziert. 
-Spelunky verwendet verschiedene Texturen, um die optische Abwechslung zu gewährleisten. Nach einer bestimmten Anzahl an Level wird ein neues Theme angewandt. Auf die Struktur und den Aufbau der Level hat dies keinen Einfluss, es werden lediglich Texturen ersetzt. 
-
-Derek Yu schrieb in seinen Buch: 
+Derek Yu schrieb in seinem Buch: 
 
 > This system doesn‘t create the most natural-looking caves ever, and players will quickly begin to recognize certain repeating landmarks and perhaps even sense that the levels are generated on a grid. But with enough templates and random mutations, there’s still plenty of variability. More importantly, it creates fun and engaging levels that the player can’t easily get stuck in, something much more valuable than realism when it comes to making an immersive experience. [@Yu2016] 
 

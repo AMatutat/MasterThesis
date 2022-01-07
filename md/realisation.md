@@ -11,13 +11,13 @@ Um eine reibungslose Integration in das PM-Dungeon-Framework zu ermöglichen, wu
 - Die Package-Struktur des Frameworks wurde übernommen.
 - Das Projekt wurde in in einen Branch des PM-Dungeon-Framework Repository implementiert. Dadurch konnte die selbe Toolchain und die selben GitHub-Actions wie das Framework verwendet werden und sichergestellt werden, dass diese immer auf den aktuellsten stand sind. Dies bedeutet, dass der Code nur dann gemerged werden kann, wenn der Codestil eingehalten ist, alle JUnit-Testfälle erfolgreich durchlaufen und das Tool Spot-Bugs keine Antipattern im Code finden kann oder die gefundenen Antipattern bewusst akzeptiert werden. Sollten Antipattern bewusst im Code gelassen werden, muss diese Entscheidung dokumentiert und nachvollziehbar begründet werden.
 
-Die konkrete Konfiguration des GitHub-Actions im Anhang \ref{workflows} eingesehen werden. 
+Die konkrete Konfiguration der GitHub-Actions kann im Anhang \ref{workflows} eingesehen werden. 
 
 ## Umsetzung GraphG
 
 Abbildung \ref{graphgUML} zeigt ein reduziertes UML-Klassendiagramm für den Aufbau von GraphG. Der Baustein besteht aus drei Klassen. `GraphG` nimmt die Parameter entgegen, führt die Breitensuche durch und gibt die Lösungen zurück und liefert Möglichkeiten zum Abspeichern und Laden der Graphen in und aus JSON-Dateien. Die Klasse `Graph` hält eine Liste mit Knoten und bietet Funktionen, um zu prüfen, ob Knoten miteinander verbunden werden können, ohne gegen die Bedingungen zu verstoßen. Die Klasse `Node` stellt einen Knoten im Graphen dar und hält eine Liste mit den Nachbarknoten. Diese Liste speichert Integer Werte ab und nicht die Knoten selber. Die Werte entsprechen dem Index der Nachbarknoten in der Liste des Graphen. Jeder Knoten kennt seinen eigenen Index. Dies ermöglicht einen einfacheren Kopiervorgang der Graphen und Knoten. Beim Kopieren  der Graphen muss die Liste der Knoten kopiert werden. Dabei müssen auch Kopien der Knoten gemacht werden. Sollten nur Referenzen auf die Instanzen kopiert werden, würden neue Nachbarn, die einem Knoten hinzugefügt werden, in jeder Kopie des Knotens und somit des Graphen hinzugefügt werden. Die Kopien der Graphen wären daher zu jedem Zeitpunkt identisch, die Graphen sollen sich jedoch voneinander unterscheiden und separat betrachtet werden können. Beim Kopieren der Knoten müssen auch Kanten, also die Liste der Nachbarn, kopiert werden. Würde in der Liste eine Referenz auf die Knoten Instanzen gespeichert werden, müsste beim Kopieren eines Knotens für jeden Nachbarn die Kopie gefunden und abgespeichert werden. Werden nur die Indexe der Nachbarn in der Liste des Graphen gespeichert, reicht eine exakte Kopie der Nachbarliste. Die Indexe beziehen sich dann nicht mehr auf die Knotenliste des ursprünglichen Graphen, sondern auf die Knotenliste der Kopie des Graphen. Listing \ref{copy} zeigt den Kopiervorgang eines Graphen und dessen Knoten. 
 
-\begin{lstlisting}[language=python, label=copy, caption={Kopieren von Graphen und Kanten.}  ]
+\begin{lstlisting}[label=copy, caption={Kopieren von Graphen und Kanten.}  ]
 //in Graph
 Graph (Graph g){
         g.getNodes().forEach(n -> nodes.add(new Node(n)));
@@ -39,7 +39,6 @@ Listing \ref{cc} zeigt wie geprüft wird, ob Knoten miteinander verbunden werden
 `Graph#canConnect(Node n1, Node 2)` prüft, ob zwei bereits existierende Knoten miteinander verbunden werden können, ohne gegen die Bedingung zu verstoßen. Es wird wieder die Liste `manyNeighbours` mit allen Knoten die mehr als zwei Nachbarn haben angelegt. Jetzt wird für beide Knoten separat geprüft, ob diese mit einer neuen Verbindung in die Liste aufgenommen werden müssten, dies ist der Fall, wenn sie mit der neuen Verbindung mehr als zwei Nachbarn hätten und noch nicht in der Liste eingetragen sind. Hat die Liste noch Platz für die Knoten, die hinzugefügt werden müssen, dann ist die Verbindung erlaubt, sollte die Liste überfüllt werden, kann keine Verbindung stattfinden. 
 
 \begin{lstlisting}[language=python, label=cc, caption={Prüfen ob Knoten und Kanten hinzugefügt werden können.}]
-
 	private boolean canConnect(Node n) {
 	    List<Node> manyNeighbour = new ArrayList<>(nodes);
 		//MAX_NEIGHBOURS=2
@@ -51,6 +50,7 @@ Listing \ref{cc} zeigt wie geprüft wird, ob Knoten miteinander verbunden werden
 	    else return false;
 	}
 	
+
 	private boolean canConnect(Node n1, Node n2) {
 	    List<Node> manyNeighbour = new ArrayList<>(nodes);
 	    manyNeighbour.removeIf(node -> node.getNeighbours().size() <= MAX_NEIGHBOURS);
@@ -66,7 +66,7 @@ Listing \ref{cc} zeigt wie geprüft wird, ob Knoten miteinander verbunden werden
 
 Listing \ref{trees} zeigt die Methode `GraphG#calculateTrees`. Die Funktionsweise wurde bereits in Kapitel 4.3.1 erläutert, daher soll hier der Fokus nur auf Zeile 7 und 8 liegen. Zeile 7 kopiert mithilfe der oben beschriebenen Methode den aktuell betrachteten Graphen und Zeile 8 nutzt die Methode `Graph#connectNewNode(int index)`, um den betrachteten Knoten mit einem neuen Knoten zu verbinden. Die Methode gibt `true` zurück, wenn eine Verbindung erstellt wurde und `false` wenn keine Verbindung erstellt werden kann. Kann eine Verbindung erstellt werden, wird der kopierte Graph in der Liste der Teillösungen aufgenommen. Anzumerken ist, dass in Zeile 8 der Index des originalen Knotens `n` genutzt wird, um die Kopie des Knotens `n` in `newTree` anzusprechen. 
 
-\begin{lstlisting}[language=python, label=trees, caption={Breitensuchen nach allen gültigen Bäumen}]
+\begin{lstlisting}[language=python, label=trees, caption={Breitensuchen nach allen gültigen Bäumen.}]
 	private List<Graph> calculateTrees(List<Graph> trees, int nodesLeft) {
         if (nodesLeft <= 0) return trees;
         else {
@@ -83,8 +83,8 @@ Listing \ref{trees} zeigt die Methode `GraphG#calculateTrees`. Die Funktionsweis
 
 Listing \ref{graphs} zeigt die Funktionsweise der Methode `GraphG#calculateGraphs`.  Die Funktionsweise wurde bereits in Kapitel 4.3.1 erläutert, daher soll hier der Fokus nur auf Zeile 6 bis 11 liegen. In Zeile 6 wird über jeden Knoten im Graphen  `g` iteriert, `g` ist dabei keine Kopie eines Graphen, sondern stammt direkt aus der Liste, die übergeben wird. In Zeile 7 wird nun auch über jeden Knoten in `g` iteriert und in Zeile 8 wird `g` kopiert. In Zeile 9 wird geprüft ob `n1` und `n2` nicht identisch sind und in Zeile 10 wird versucht eine Verbindung zwischen den Kopien der Knoten `n1` und `n2` herzustellen, wenn dies gelingt wird in Zeile 11  der kopierte Graph in die Liste der Teillösungen aufgenommen. 
 
-\begin{lstlisting}[language=python, label=graphs, caption={Breitensuchen nach allen gültigen Graphen.}]
-  private List<Graph> calculateGraphs(List<Graph> graphs, int edgesLeft) {
+\begin{lstlisting}[label=graphs, caption={Breitensuchen nach allen gültigen Graphen.}]
+List<Graph> calculateGraphs(List<Graph> graphs, int edgesLeft) {
         if (edgesLeft <= 0) return graphs;
         else {
             List<Graph> newGraphs = new ArrayList<>();
@@ -129,7 +129,7 @@ Die Klassen `Replacement` und `RoomTemplate` speichern jeweils ein Layout und ei
 
 Da ein Template mehrfach verwendet werden soll, wird in Zeile 2 eine Kopie des Layouts erstellt. Die Ersetzung wird in dieser Kopie durchgeführt. In Zeile 3 und 4 wird die Größe des Layouts abgefragt, um späteres Iterieren zu vereinfachen. Genau wie das Template soll auch die Liste mit den möglichen Replacements mehrfach verwenden werden können, daher wird in Zeile 7 eine Kopie der übergebenen Liste erstellt. In Zeile 8 bis 11 werden alle Replacements aus der Liste gelöscht, die zu groß für das Layout sind, also über den Rand des Raumes herausragen würden. In Zeile 13 bis 25 findet der eigentliche Ersetzungsprozess statt. Die äußere Schleife in Zeile 15 bis 25 sorgt dafür, dass im Falle einer Änderung des Layouts der gesamte innere Prozess erneut durchgeführt wird. Der innere Prozess in Zeile 17 bis 24 iteriert für jedes Replacment über das Layout und such nach einer Wildcard. Dabei muss nicht das gesamte Layout betrachtet, sondern nur die Punkte, bei dem das Einfügen der Replacement nicht dafür sorgen würde, dass  das Replacement über den Raumrand hinausragt. Daher kann in Zeile 20 und 21 die Abbruchbedingung der Zählergesteuerten-Schleifen angepasst werden. In Zeile 22 wird geprüft, ob das aktuelle betrachtete Feld eine Wildcard ist und in Zeile 23 wird versucht diese Wildcard mit dem Replacement zu ersetzen. Die Funktionsweise von `placeIn` wird weiter unten erläutert. Ist der Ersetzungsprozess erfolgreich, muss nach Abschluss der foreach-Schleife in Zeile 17 der gesamte Prozess wiederholt werden, um möglicherweise neu eingesetzte Wildcards zu ersetzen. In Zeile 27 bis 30 werden alle verbliebenen Wildcards durch Bodenfelder ersetzt. In Zeile 31 erstellt die Methode ein neues Objekt der Klasse `Room` mit dem ersetzten Layout. Dieser Raum ist bereit, um im PM-Dungeon verwendet zu werden. 
 
-\begin{lstlisting}[language=java, label=replace_code, caption={Ersetzten von Wildcards in einen Room-Layout}  ]
+\begin{lstlisting}[language=java, label=replace_code, caption={Ersetzten von Wildcards in einen Room-Layout.}  ]
 public Room replace(List<Replacement> replacements) {
     LevelElement[][] roomLayout = copy(this.layout);        		
     int layoutWidth = getLayout()[0].length;
@@ -151,8 +151,8 @@ public Room replace(List<Replacement> replacements) {
      		int rWidth = r.getLayout()[0].length;
      		for (int y = 0; y < layoutHeight - rHeight; y++)
      			for (int x = 0; x < layoutWidth - rWidth; x++)
-     				if (roomLayout[y][x] == LevelElement.WILDCARD
-     					&& placeIn(roomLayout, r, x, y)) changes = true;
+     				if (roomLayout[y][x] == LevelElement.WILDCARD && placeIn(roomLayout, r, x, y)) 
+     				changes = true;
      	} 
      } while (changes);
     
@@ -177,10 +177,10 @@ private boolean placeIn(final LevelElement[][] layout, final Replacement r, int 
 	else {
 		LevelElement[][] rlayout = r.getLayout();
 		for (int y = yCor; y < yCor + rlayout.length; y++)
-			for (int x = xCor; x < xCor + rlayout[0].length; x++) {
-				if (rlayout[y - yCor][x - xCor] != LevelElement.SKIP)
-					layout[y][x] = rlayout[y - yCor][x - xCor];
-			}
+		for (int x = xCor; x < xCor + rlayout[0].length; x++) 
+			if (rlayout[y-yCor][x-xCor] != LevelElement.SKIP)
+				layout[y][x] = rlayout[y - yCor][x - xCor];
+			
 		return true;
 	}
 }
@@ -190,15 +190,15 @@ private boolean placeIn(final LevelElement[][] layout, final Replacement r, int 
 private boolean canReplaceIn(LevelElement[][] layout, final Replacement r, int xCor, int yCor) {
 	LevelElement[][] rlayout = r.getLayout();
 	for (int y = yCor; y < yCor + rlayout.length; y++)
-		for (int x = xCor; x < xCor + rlayout[0].length; x++) {
+		for (int x = xCor; x < xCor + rlayout[0].length; x++) 
 			if (rlayout[y - yCor][x - xCor] != LevelElement.SKIP && layout[y][x] != LevelElement.WILDCARD) 
 			return false;
-			}
+			
 	return true;
 }
 \end{lstlisting}
 
-![Verschiedene von RoomG erzeugte Räume, die alle das selbe 8x8 Felder großes Raum-Template als Vorlage haben. \label{roomgex}](figs/chapter4/rooms.png)
+![Verschiedene von RoomG erzeugte Räume, die alle das selbe 8x8 Felder großes Raum-Template als Vorlage haben. \label{roomgex}](figs/chapter4/rooms.png){width=50%}
 
 Abbildung \ref{roomgex} zeigt verschiedene Räume die auf den selben, 8x8 großen Raum-Template basieren und durch verschiedene Replacern verändert wurden. In Kapitel 6 wird weiter auf die Qualität und Abwechslung der Räume eingegangen. 
 
@@ -207,8 +207,6 @@ Abbildung \ref{roomgex} zeigt verschiedene Räume die auf den selben, 8x8 große
 In diesem Abschnitt wird die Umsetzung von LevelG beschrieben. Da LevelG ein komplexer Baustein mit einer Vielzahl an Hilfsmethoden und kleineren Berechnungen ist, kann hier nicht die Funktionsweise in ihrer ganze erläutert werden. Daher konzentriert sich dieser Abschnitt auf die Beschreibung der wichtigsten Funktionalitäten. Dies umfasst die Aufteilung eines Graphen in Chains und das berechnen der configuration-spaces. 
 
 Listing \ref{getLevel} zeigt repräsentativ eine vereinfachte Implementierung der Methode `LevelG#getLevel`. Dieser Implementierung wird die gewünschte Anzahl der Knoten und Kanten und das gewünschte Design übergeben, dann erstellt die Methode ein Level. In Zeile 2 wird dafür zuerst GraphG genutzt um ein Graphen zu generieren. In Zeile 3 und 4 werden die Templates und Replacements aus RoomG geladen. In Zeile 5 wird der Graph in Chains aufgeteilt. Die Funktionsweise von `splitInChains` wird in Listing \ref{dochain} erklärt. In  Zeile 6 werden die Chains genutzt, um die Reihenfolge zum auflösen der Knoten zu bestimmen. Zeile 7 ruft die in Listing \ref{backtrack} konzeptionierte Methode `getLevelCS` auf. Wie beschrieben verwendet diese Methode Backtracking um gültige configuration-spaces für ein Level zu berechnen. Die Berechnungen der configuration-spaces wird weiter unten erläutert. Configuration-Spaces sind eigene `CS` Objekte in LevelG. In einem `CS` ist der Knoten zu dem der configuration-space gehört, das verwendete Raum-Template und die Position des lokalen Referenzpunkt des Templates im globalen Raum abgespeichert. In Zeile 8 werden alle nötigen Durchgänge zwischen den jeweiligen Räumen platziert. In Zeile 9-12 werden die Raum-Templates der einzelnen configuration-spaces in konkrete Räume umgewandelt, das bedeutet die Wildcards werden ersetzt und die abstrakten Felder im Layout durch Tiles mit einer globalen Position und einer Textur ersetzt. In Zeile 13 wird nun das Level erstellt. In Zeile 14 wird mithilfe des Integrierten A*-Algorithmus geprüft, ob das Level lösbar ist. Nur lösbare Level werden zurückgegeben. 
-
-
 
 \begin{lstlisting}[language=java, label=getLevel, caption={Vereinfache Darstellung der Methode um ein Level zu erzeugen.}  ]
 Level getLevel(int nodeCounter, int edeCounter, DesignLabel design){
@@ -256,9 +254,7 @@ Listing \ref{getCS} zeigt wie alle gültigen configuration-spaces für einen Kno
                 else possibleSpaces.retainAll(calCS(cs, node, templates, partSolution));
             return possibleSpaces;
         }
-\end{lstlisting}
-
-​    
+\end{lstlisting}    
 
 Listing \ref{calCS} zeigt wie die configuration-spaces für einen Knoten berechnet werden. Wie in Kapitel 3.1 beschrieben, wird dafür ein statischer und ein dynamischer Raum verwendet. Der statische Raum ist bereits im Level platziert und darf nicht bewegt werden, der dynamische Raum muss so platziert werden, dass er anliegend an den statischen Raum ist aber dabei keine anderen bereits gesetzten Räume überschneidet. Dafür wird in Zeile 7 bis 17 für jedes Raum-Template das verwendet werden kann geprüft ob es gültige configuration-spaces gibt. In Zeile 9 wird ein Sonderfall abgedeckt, bei dem es sich um den aktuellen Knoten zeitgleich um den ersten Knoten der aufgelöst wird, handelt. In diesem Fall wird für jedes Raum-Template die Position $(0|0)$ als globale Position bestimmt. Da es noch keine anderen gesetzten Räume gibt, müssen keine weiteren Bedingungen beachtet werden. Handelt es sich nicht um den ersten Knoten werden in Zeile 10 mithilfe der Methode `calAttachingPoints` alle Punkte berechnet, an den das Raum-Template platziert werden kann um mit den statischen Raum verbunden zu werden. in Zeile  11 bis 16 wird dann geprüft ob es bei den jeweiligen Punkte noch zu überschneidungen mit anderen bereits platzierten Räumen kommt, wenn des nicht der Fall ist, ist der gefundene Punkt ein güliger configuration-space.
 
@@ -277,7 +273,7 @@ Listing \ref{calCS} zeigt wie die configuration-spaces für einen Knoten berechn
                     boolean isValid = true;
                     for (ConfigurationSpace sp : level)
                         if (sp.overlap(layout, position)) isValid = false;                
-                    if (isValid) spaces.add(new ConfigurationSpace(layout, dynamicNode, position));
+                    if (isValid) spaces.add(new CS(layout, dynamicNode, position));
                 }
             }    
         return spaces;
@@ -287,7 +283,7 @@ Listing \ref{calCS} zeigt wie die configuration-spaces für einen Knoten berechn
 Listing \ref{calAP} zeigt wie **TODO**
 
 \begin{lstlisting}[language=java, label=calAP, caption={Berechnen der globalen Positionen für ein Template um an den statischen Raum angebunden werden zu können.}  ]
-        private List<Point> calAttachingPoints(ConfigurationSpace staticSpace, RoomTemplate template) {
+        private List<Point> calAttachingPoints(CS staticSpace, RoomTemplate template) {
             List<Point> points = new ArrayList<>();
     
 

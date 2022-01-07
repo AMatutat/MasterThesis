@@ -51,8 +51,8 @@ Für planare zusammenhängende Graphen mit $v>=3$ gilt zusätzlich $e<=3v-6$ wob
 
 Listing \ref{ctpseudo} zeigt die Methode `GraphG#calculateTrees` welche mithilfe von Rekursion alle gültigen Bäume erzeugt. In jedem Durchlauf werden Teillösungen gefunden, dies sind Bäume die einen Knoten mehr haben als die Bäume in letzten durchlauf. Die Methode bekommt initial eine Liste mit einem Graphen, der aus zwei miteinander verbundene Knoten besteht, sowie die Anzahl der noch hinzuzufügenden Knoten übergeben. Für jeden Durchlauf wird eine neue Liste mit den neuen Teillösungen erstellt, in dieser Liste werden alle gültigen Bäume abgespeichert, die in diesem Durchlauf gefunden werden. Für die Suche wird über jeden Graphen in der übergebenen Liste iteriert. Dann wird über jeden Knoten im Graphen iteriert. Für jeden betrachteten Knoten im Graphen wird eine Kopie des Graphen erstellt und dann geprüft, ob in der Kopie des Graphen an der Kopie des betrachteten Knoten ein neuer Knoten hinzugefügt werden kann. Ist dies der Fall, wird der Knoten hinzugefügt und verbunden und die Kopie des Graphen in der Liste mit den Teillösungen hinzugefügt. Dies wird wiederholt, bis jede Möglichkeit einen neuen Knoten im Graphen anzubinden für jeden Graphen betrachtet wurde. Danach ruft sich die Methode rekursiv selbst auf und übergibt die gefundenen Teillösungen und reduziert den noch hinzuzufügenden Knotencounter um 1. Müssen keine Knoten mehr hinzugefügt werden, gibt die Methode die Liste mit allen gültigen Bäumen zurück. 
 
-\begin{lstlisting}[language=python, label=ctpseudo, caption={Pseudocode calculateTrees}  ]
-List<Graph> calculateTrees(List<Graph> trees, int nodesLeft){
+\begin{lstlisting} [label=ctpseudo, caption={Pseudocode zum Erzeugen eines Baums.}  ]
+List<Graph> calculateTrees(List<Graph> trees, int nodesLeft):
     if(nodesLeft<=0) return trees;
     List<Graph> newTrees = new ArrayList<>();
     for each Graph tree in trees:
@@ -62,13 +62,12 @@ List<Graph> calculateTrees(List<Graph> trees, int nodesLeft){
     			verbinde n mit einen neuen Node in newTree
     			newTrees.add(newTree);
     return calculateTrees(newTrees,nodesLeft-1);
-}
 \end{lstlisting}
 
 Listing \ref{cgpseudo} zeigt die Methode `GraphG#calculateGraphs` welche ähnliche wie die Methode `GraphG#calculateTrees` funktioniert. Diese Methode bekommt initial eine Liste mit gültigen Bäumen sowie der Anzahl der noch hinzuzufügenden Kanten übergeben. Es wird wieder eine Liste für die neuen Teillösungen angelegt und über alle Graphen in der übergebenen Liste iteriert. Dieses Mal wird ebenfalls über jeden Knoten im Graphen iteriert, jedoch findet eine verschachtelte Iteration statt, in der für jeden Knoten im Graphen über jeden Knoten im Graphen iteriert wird. Dies wird getan, damit die verschiedenen Knoten im Graphen miteinander verbunden werden können. Es wird jede Möglichkeit eine Kante einzuzeichnen betrachtet und wenn dabei eine gültige Teillösung gefunden wurde, wird diese in der Liste gespeichert. Danach ruft sich die Methode rekursiv selbst auf und übergibt die Liste mit den neu gefundenen Teillösungen und reduziert die Anzahl der noch hinzuzufügenden Kanten um 1. Sind alle Kanten hinzugefügt, gibt die Methode die Liste mit allen Lösungen zurück. In der Liste stehen jetzt alle gültigen Graphen für die übergebene Parameterkombination aus Knoten und extra Kanten. 
 
-\begin{lstlisting}[language=python, label=cgpseudo, caption={Pseudocode calculateGraphs}  ]
-List<Graph> calculateGraphs(List<Graph> graphs, int edgesLeft){
+\begin{lstlisting}[label=cgpseudo, caption={Pseudocode calculateGraphs}  ]
+List<Graph> calculateGraphs(List<Graph> graphs, int edgesLeft):
     if(edgesLeft<=0) return graphs;
     List<Graph> newGraphs = new ArrayList<>();
     for each Graph graph in graphs:
@@ -76,18 +75,20 @@ List<Graph> calculateGraphs(List<Graph> graphs, int edgesLeft){
     		for each Node n2 in graph.getNodes():
     			Graph newGraph= new Graph(graph);
     			if neuer Node kann an n angebunden werden:
-    				verbind n1 mit n2 in newGraph    							newGraphs.add(newGraph);
+    				verbind n1 mit n2 in newGraph 
+    				newGraphs.add(newGraph);
     return calculateGraphs(newGraphs,edgesLeft-1);
-}
 \end{lstlisting}
-
-
 
 ### RoomG
 
 RoomG nutzt Templates von Räumen und verändert diese mithilfe von Versatzstücken, um abwechslungsreiche Räume zu erstellen. Dabei sind sowohl die Raum-Templates als auch die Versatzstücke per Hand erstellt und werden aus einer JSON-Datei eingelesen.  
 
-Raum-Templates halten das Layout des Raumes als zwei dimensionales Integer-Array. Jedes Feld im Array stellt ein Feld im Level dar. Der Wert des Feldes gibt an, um welchen Feldtypen es sich handelt. 
+Raum-Templates halten das Layout des Raumes als zwei dimensionales Integer-Array. Jedes Feld im Array stellt ein Feld im Level dar. Der Wert des Feldes gibt an, um welchen Feldtypen es sich handelt (vgl. Tabelle \ref{roomgtable}). 
+
+Wildcards erlauben es, aus einem Template mehrere unterschiedliche Räume zu erstellen und reduzieren daher den Aufwand bei der Erstellung von Räumen. 
+
+Damit ein Room-Template als Raum im Dungeon verwendet werden kann, müssen alle Wildcards durch gültige Feldertypen ersetzt werden. Dafür werden Replacements verwendet.
 
 | Wert | Feldtyp  | Beschreibung                                                 |
 | ---- | -------- | ------------------------------------------------------------ |
@@ -96,12 +97,9 @@ Raum-Templates halten das Layout des Raumes als zwei dimensionales Integer-Array
 | 2    | Ausgang  | Dieses Feld führt zum nächsten Level.                        |
 | -1   | Wildcard | Dieses Feld muss durch Replacements ersetzt werden.          |
 
-Wildcards erlauben es, aus einem Template mehrere unterschiedliche Räume zu erstellen und reduzieren daher den Aufwand bei der Erstellung von Räumen. 
-
-Damit ein Room-Template als Raum im Dungeon verwendet werden kann, müssen alle Wildcards durch gültige Feldertypen ersetzt werden. Dafür werden Replacements verwendet.
+: Ersetzungstabelle für RoomG. \label{roomgtable}
 
 Replacements halten ebenfalls Layouts bestehend aus den bekannten Feldertypen ab. Zusätzlich zu den bekannten Feldertypen haben sie einen weiteren Typ `Skip = -2`. Dieser wird im Ersetzungsprozess genutzt, um anzugeben, dass dieses Feld im Replacment übersprungen werden muss. 
-
 
 Beim Ersetzungsprozess wird das Room-Template nach Wildcards durchsucht, wurde eine Wildcard gefunden wird diese durch ein Replacement ersetzt. Dabei ersetzt ein Replacement nicht ein einziges Feld, sondern einen gesamten Teilbereich des Room-Layouts. Daher muss beim Ersetzungsprozess geschaut werden, ob das Layout des Replacements an die entsprechende Stelle im Room-Layout passt. Ein Replacement passt genau dann, wenn die obere linke Ecke des Replacement-Layouts auf die gefundene Wildcard im Room-Layout platziert werden kann und sich unter jedem Feld im Replacement-Layout, das nicht den Wert `Skip` hat, eine Wildcard im Room-Layout befindet. Passt ein Replacement, können die Wildcards mit den Werten aus dem Replacement-Layout ersetzt werden. Da in einem Replacement wiederum Wildcards enthalten sein können, muss die Suche nach Wildcards nach jedem Ersetzungsprozess neu gestartet werden. In Ersetzungsprozess werden immer nur Wildcards ersetzt, niemals andere Feldtypen. Die Suche nach Wildcards und das Ersetzten dieser Felder muss so lange durchgeführt werden, bis es keine Wildcards mehr im Room-Layout gibt. Sollte es Wildcards geben, für die kein passendes Replacement gefunden werden kann, werden diese durch Bodenfelder ersetzt.
 
@@ -124,17 +122,16 @@ Sind noch Knoten übrig zum Auflösen, geht der Algorithmus weiter. In Zeile 3 w
 
 \begin{lstlisting}[label=backtrack, caption={Pseudocode um inkrementell alle Knoten aufzulösen.}  ]
 getLevelCS (List<Node> toPlace, List <CS> partSolution): 
-	if (toPlace.isEmpty()) return partSolution; //this is the final solution
-	Node thisNode = toPlace.get(0);
+	if (toPlace.isEmpty()) return partSolution;
 	List<CF> spaces = getAllCF(thisNode,partSolution);
-	if(spaces.isEmpty()) return null; //no solution. Backtrack if possible. 
+	if(spaces.isEmpty()) return null; 
 	spaces.shuffle();
 	for (CS cs: spaces):
 		List<CS> thisPartSolution=partSolution.copy();
 		thisPartSolution.add(cs);
 		List<CS> solution = getLevelCS(toPlace-thisNode,thisPartSolution)
-		if(solution!=null) return solution; //this is the final solution
-	return null; //no solution. Backtrack if possible. 
+		if(solution!=null) return solution; 
+	return null;
 \end{lstlisting}
 
 

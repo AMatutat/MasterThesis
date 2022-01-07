@@ -169,7 +169,7 @@ Vor allem bei Rogue-Like Spielen sollte es ständig zu solchen Momenten kommen, 
 
 ### Pacing
 
-![Pacing im Wüstenpalast. \label{zelda3pacing}](figs/chapter2/Zelda3Pacing.png){width=100%} 
+![Pacing im Wüstenpalast. \label{zelda3pacing}](figs/chapter2/Zelda3Pacing.png){width=70%} 
 
 Der Begriff Pacing entstammt der Filmbranche und beschreibt die Spannungskurve des Films. Aus dem Film lassen sich drei Regeln für gutes Pacing ableiten, welche auch für Videospiele Anwendung finden können.[@Wesowski2009]
 
