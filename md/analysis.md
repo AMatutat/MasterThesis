@@ -48,9 +48,9 @@ end procedure
 Listing \ref{laydown} zeigt den Peseudocode für das inkrementelle Erstellen eines Level mithilfe des beschriebenen Verfahrens.  [@Ma2014]
 
 
-Zwar könnten die Chains auch separat aufgelöst werden und dann versucht werde die Teillösungen miteinander zu verbinden, jedoch würden dabei Lösungen erzeugt werden, die zwar die Chain auflösen aber nicht mit den gesamten Graphen kompatibel sind und daher unbrauchbar wären. Zusätzlich sind im Level alle miteinander verbunden, daher gibt es auch keine Vorteile die Chains einzeln zu lösen. 
+Zwar könnten die Chains auch separat aufgelöst werden und dann versucht werden die Teillösungen miteinander zu verbinden, jedoch würden dabei Lösungen erzeugt werden, die zwar die Chain auflösen aber nicht mit den gesamten Graphen kompatibel sind und daher unbrauchbar wären. Zusätzlich sind im Level alle miteinander verbunden, daher gibt es auch keine Vorteile die Chains einzeln zu lösen. 
 
-Das Erstellen von mehren Lösungen für eine Chain hat mehrere Vorteile. Zu einem ermöglicht und erleichtert es das schrittweise Backtracking, falls eine Chain nicht in der aktuellen Lösung angeschlossen werden kann und zusätzlich können schneller mehrere gültige Lösungen für ein Graph gefunden werden, indem beispielsweise nach der dritten Chain eine andere Teillösungen verwendet wird. Abbildung \ref{graphsolution} zeigt wie aus verschieden Teillösungen unterschiedliche Gesamtlösungen entstehen. Dies unterstreicht noch einmal die Effizienz des Algorithmus, da bereits aus einem einzigen Input-Graphen viele vollkommen unterschiedliche Level entstehen könne. 
+Das Erstellen von mehren Lösungen für eine Chain hat mehrere Vorteile. Zu einem ermöglicht und erleichtert es das schrittweise Backtracking, falls eine Chain nicht in der aktuellen Lösung angeschlossen werden kann und zusätzlich können schneller mehrere gültige Lösungen für ein Graph gefunden werden, indem beispielsweise nach der dritten Chain eine andere Teillösungen verwendet wird. Abbildung \ref{graphsolution} zeigt wie aus verschieden Teillösungen unterschiedliche Gesamtlösungen entstehen. Dies unterstreicht noch einmal die Effizienz des Algorithmus, da bereits aus einem einzigen Input-Graphen viele vollkommen unterschiedliche Level entstehen können. 
 
 ![Beispiel: Unterschiedliche Teillösungen für die selbe Chain. \label{graphpartsolution}[@Ma2014]](figs/chapter3/graphpatrsol.PNG)
 
@@ -70,7 +70,7 @@ Lösungsansatz: Ein weiterer Algorithmus zur Generierung planarer Graphen kann g
 
 Nachteil: Es werden immer dieselben Räume verwendet, bei wenigen Input-Räumen oder einen Spieler der viel Zeit im Spiel verbringt wird diese sichtbar und die Einzigartigkeit der Level ist nicht mehr gegeben. 
 
-Lösungsansatz: Auch hier könnte ein Algorithmus zur vollständigen Generierung von Räumen genutzt werden. Eine andere Möglichkeit wäre ein Algorithmus, der die Input-Räume anhand verschiedener Kriterien mutiert und so bereits aus wenigen Räume eine Vielzahl unterschiedlicher Räume erzeugt werden können. 
+Lösungsansatz: Auch hier könnte ein Algorithmus zur vollständigen Generierung von Räumen genutzt werden. Eine andere Möglichkeit wäre ein Algorithmus, der die Input-Räume anhand verschiedener Kriterien mutiert und so bereits aus wenigen Räumen eine Vielzahl unterschiedlicher Räume erzeugt. 
 
 Nachteil: Der Algorithmus bietet keine Möglichkeit, um das Pacing zu kontrollieren, Risk and Reward Momente zu erzeugen oder das Spiel zu balancen. Es gibt keine Schnittstelle, um das Aussehen der Level oder das Level Layout abseits des Input-Graphen anzupassen. 
 
@@ -82,7 +82,7 @@ Lösungsansatz: Der Algorithmus kann als Grundlage für die Konzeptionierung ein
 
 Bekannte Verfahren zur Generierung von planaren Graphen wie das *plantri* Programm nutzen Triangulation oder Quadrangulation. [@Brinkmann] Die erzeugten Graphen zeichnen sich dadurch aus, dass jedes Face im Graph ein Dreieck bzw. ein Quadrat ist. Dieses Verfahren ist zwar besonders effizient unter Betrachtung der Rechenleistung, die erzeugten Graphen eignen sich aber kaum, um gute Videospiellevel darzustellen.
 
-Abbildung \ref{plantri} zeigt zwei verschiedene Graphen, die mithilfe von *plantri* erzeugt werden können, einmal durch Triangulation und einmal durch Quadrangulation. Die Graphen zeichnen sich vor allem durch ihre zyklische Struktur aus, jeder Knoten kann auf mehrere Wege erreicht werden und es gibt keine klaren Endpunkte. Würde man zwei zufällige Punkte im Graphen als Start- und Endpunkt bestimmen und alle kritischen Pfade einzeichnen, wäre jede Kante markiert. Der Endpunkt kann daher durch viele verschiedenen Pfade erreicht werden. Was zunächst nach einem Vorteil klingt, da der Spieler so maximale Freiheit bei der Wahl seines Weges hat, stellt sich als Nachteil für das Pacing und Balancing heraus. Da (fast) jeder Knoten als kritisch und optional gleichzeitig betrachtet werden kann, ist es schwer Risk and Reward Momente zu platzieren, Monster gezielt auf kritischen bzw. optionalen Pfade zu platzieren oder sicherzustellen, dass der Spieler an kritischen Events vorbeimuss. Zusätzlich unterscheiden sich die Teilaspekte der Graphen im Grunde gar nicht, jedes Teilstück besteht entweder aus einem Dreieck oder einem Quadrat, daher würden die erzeugten Level sich überwiegend in der Größe der Level unterscheiden und nur wenig Variation im Layout aufweisen.
+Abbildung \ref{plantri} zeigt zwei verschiedene Graphen, die mithilfe von *plantri* erzeugt werden können, einmal durch Triangulation und einmal durch Quadrangulation. Die Graphen zeichnen sich vor allem durch ihre zyklische Struktur aus, jeder Knoten kann auf mehrere Wege erreicht werden und es gibt keine klaren Endpunkte. Würde man zwei zufällige Punkte im Graphen als Start- und Endpunkt bestimmen und alle kritischen Pfade einzeichnen, wäre jede Kante markiert. Der Endpunkt kann daher durch viele verschiedenen Pfade erreicht werden. Was zunächst nach einem Vorteil klingt, da der Spieler so maximale Freiheit bei der Wahl seines Weges hat, stellt sich als Nachteil für das Pacing und Balancing heraus. Da (fast) jeder Knoten als kritisch und optional gleichzeitig betrachtet werden kann, ist es schwer Risk and Reward Momente zu platzieren, Monster gezielt auf kritischen bzw. optionalen Pfade zu platzieren oder sicherzustellen, dass der Spieler an kritischen Events vorbei muss. Zusätzlich unterscheiden sich die Teilaspekte der Graphen im Grunde gar nicht, jedes Teilstück besteht entweder aus einem Dreieck oder einem Quadrat, daher würden die erzeugten Level sich überwiegend in der Größe der Level unterscheiden und nur wenig Variation im Layout aufweisen.
 
   ![Planare Graphen erzeugt durch Triangulation (links) und Quadrangulation (rechts) \label{plantri} [@Brinkmann] ](figs/chapter3/plantriexample.png)
 
@@ -118,7 +118,7 @@ Vorteil: Die Graphen können optionale Pfade für Risk and Reward Momente enthal
 
 Vorteil: Der Algorithmus kann um Schnittstellen ergänzt werden um Levelgröße, Pfadlänge etc. zu bestimmen und so das Pacing zu kontrollieren.
 
-Vorteil: Die erzeugten Graphen können mit anderen planaren Graphen an genau einer zufälligen Stelle verbunden werden und behalten ihre planare Eigenschaft. Dies kann genutzt werden um bei bedarf manuell erzeugte Graphen einzubinden oder die erzeugten Graphen miteinander zu kombinieren. Dies steigert zusätzlich die Effizienz, da aus einer Handvoll Graphen durch verschiedene Kombination wieder neue Graphen erzeugt werden können ohne große Berechnungen durchführen zu müssen.
+Vorteil: Die erzeugten Graphen können mit anderen planaren Graphen an genau einer zufälligen Stelle verbunden werden und behalten ihre planare Eigenschaft. Dies kann genutzt werden um bei Bedarf manuell erzeugte Graphen einzubinden oder die erzeugten Graphen miteinander zu kombinieren. Dies steigert zusätzlich die Effizienz, da aus einer Handvoll Graphen durch verschiedene Kombination wieder neue Graphen erzeugt werden können ohne große Berechnungen durchführen zu müssen.
 
 Nachteil: Der Algorithmus kann nicht jeden möglichen planaren Graphen erzeugen. Es gibt planare Graphen mit mehr als vier Knoten, die mehr als drei Nachbarn haben.
 
@@ -140,7 +140,7 @@ Jeder Raum im Grid ist mit einer Nummer markiert. Der Initialstatus jeden Raums 
 
 Durch dieses System kann sichergestellt werden, dass der kritische Pfad zwischen Start und Ende eine durchgehende Verbindung besitzt und das Level somit lösbar ist. Es werden keine Items wie Bomben oder Seile benötigt, um zum Ende zu kommen. Alle optionalen (mit 0 markiert) Räume werden abschließend zufällig mit 1,2 oder 3 markiert und können daher auch direkt am kritischen Pfad angeschlossen sein oder auch nicht. Alle nicht angeschlossene Räume können dann nur mit bestimmten Items erreicht werden. Abbildung \ref{spelunkylevel} zeigt ein erzeugtes Level mit den jeweiligen Raumnummerierungen in den Ecken sowie den kritischen Pfad in Form von roten Blöcken. 
 
-Abhängig von der Markierung eines Raums wird er mit einem von mehreren per Hand gebauten Templates gefüllt. Diese 10x8 großen Templates geben an, an welcher Stelle im Raum welcher Art von Block platziert ist. Um die Variation an Räumen möglichst groß zu gestalten und zeitgleich nicht hunderte unterschiedlicher Templates eigenständig zu bauen, werden die Templates modifiziert. 
+Abhängig von der Markierung eines Raumes wird er mit einem von mehreren per Hand gebauten Templates gefüllt. Diese 10x8 großen Templates geben an, an welcher Stelle im Raum welcher Art von Block platziert ist. Um die Variation an Räumen möglichst groß zu gestalten und zeitgleich nicht hunderte unterschiedlicher Templates eigenständig zu bauen, werden die Templates modifiziert. 
 
 Jedes Template lässt sich als String darstellen und kann als 8x10 Matrix verstanden werden. In jedem Feld der Matrix steht ein Wert, dieser Wert gibt an, welche Art von Block an der jeweiligen Stelle zu platzieren ist (vgl. Tabelle \ref{spelunkytable}). Einige Felder, sogenannte Chunks, ersetzten eine 5x3 große Fläche durch eines von zehn vorgefertigten Chunk-Templates. Durch die Veränderung der Templates lassen sich viele unterschiedliche Räume generieren. 
 
@@ -153,7 +153,7 @@ Jedes Template lässt sich als String darstellen und kann als 8x10 Matrix versta
 | 4    | bewegbarer Steinblock                        |
 | 6    | 5x3 Chunk                                    |
 | L    | Leiterteil                                   |
-| P    | Leiterteil mit Fläche zum stehen             |
+| P    | Leiterteil mit Fläche zumStehen              |
 
 : Ersetzungstabelle für Spelunky \label{spelunkytable}
 
@@ -170,7 +170,7 @@ Derek Yu schrieb in seinen Buch:
 
 Vorteile: Die erzeugten Level sind immer lösbar, da sichergestellt wird, dass der kritische Pfad immer begehbar ist und keine Items voraussetzt. 
 
-Vorteil: Die einzelnen Räume sind effizient der Herstellung. Zwar müssen die Raumtemplates per Hand gebaut werden, danach können aber durch die Mutationen viele verschiedene, einzigartige Räume erstellt werden.
+Vorteil: Die einzelnen Räume sind effizient in der Herstellung. Zwar müssen die Raumtemplates per Hand gebaut werden, danach können aber durch die Mutationen viele verschiedene, einzigartige Räume erstellt werden.
 
 Vorteil: Die Räume unterstützten verschiedene Texturen, so kann die optische Abwechslung gewährleistet werden.
 

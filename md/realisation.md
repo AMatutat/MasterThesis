@@ -9,7 +9,7 @@ Um eine reibungslose Integration in das PM-Dungeon-Framework zu ermöglichen, wu
 - Das Buildtool Gradle wird genutzt, um das Projekt zu bauen. Alle externen Libraries werden als Dependencies hinzugefügt.
 - Der Google-Java-Formater wird genauso wie im Framework konfiguriert und genutzt, um einen einheitlichen Codestil zu gewährleisten.
 - Die Package-Struktur des Frameworks wurde übernommen.
-- Das Projekt wurde in in einen Branch des PM-Dungeon-Framework Repository implementiert. Dadurch konnte die selbe Toolchain und die selben GitHub-Actions wie das Framework verwendet werden und sichergestellt werden, dass diese immer auf den aktuellsten stand sind. Dies bedeutet, dass Code nur dann gemerged werden kann, wenn der Codestil eingehalten ist, alle JUnit-Testfälle erfolgreich durchlaufen und das Tool Spot-Bugs keine Antipattern im Code finden kann oder die gefundenen Antipattern bewusst akzeptiert werden. Sollten Antipattern bewusst im Code gelassen werden, muss diese Entscheidung dokumentiert und nachvollziehbar begründe werden.
+- Das Projekt wurde in in einen Branch des PM-Dungeon-Framework Repository implementiert. Dadurch konnte die selbe Toolchain und die selben GitHub-Actions wie das Framework verwendet werden und sichergestellt werden, dass diese immer auf den aktuellsten stand sind. Dies bedeutet, dass der Code nur dann gemerged werden kann, wenn der Codestil eingehalten ist, alle JUnit-Testfälle erfolgreich durchlaufen und das Tool Spot-Bugs keine Antipattern im Code finden kann oder die gefundenen Antipattern bewusst akzeptiert werden. Sollten Antipattern bewusst im Code gelassen werden, muss diese Entscheidung dokumentiert und nachvollziehbar begründet werden.
 
 Die konkrete Konfiguration des GitHub-Actions im Anhang \ref{workflows} eingesehen werden. 
 
@@ -107,7 +107,7 @@ Listing \ref{graphs} zeigt die Funktionsweise der Methode `GraphG#calculateGraph
 
 Da GraphG alle gültigen (Teil-)Lösungen für die Parameterkombination aus Knoten und Kanten sucht, kommt es bei Kombinationen, die viele unterschiedliche (Teil-)Lösungen erlauben, zu einem `java.lang.OutOfMemoryError: Java heap space` Fehler. Dieser tritt immer dann auf, wenn der, Java zur Verfügung gestellte, Heap keinen freien Speicher mehr hat. In diesem konkreten Fall tritt er auf, wenn die Liste mit den (Teil)-Lösungen zu groß wird. Es gibt zwei Möglichkeiten diesen Fehler zu beheben, ohne die Funktionalität von GraphG zu beeinflussen.
 
-Möglichkeit 1 ist es, den Java zur Verfügung gestellten Heap zu vergrößern. Dies ist jedoch eine lokale Lösung, welche dann von jedem Anwender durchgeführt werden müssten und ist außerdem von der Umgebung auf der GraphG läuft abhängig (Betriebssystem und verfügbarer RAM). Außerdem kann der Bedarf an Speicher ins Unendliche skalieren, je nachdem wie groß die Graphen werden. 
+Möglichkeit 1 ist es, den Java zur Verfügung gestellten Heap zu vergrößern. Dies ist jedoch eine lokale Lösung, welche dann von jedem Anwender durchgeführt werden müsste und ist außerdem von der Umgebung auf der GraphG läuft abhängig (Betriebssystem und verfügbarer RAM). Außerdem kann der Bedarf an Speicher ins Unendliche skalieren, je nachdem wie groß die Graphen werden. 
 
 Möglichkeit 2 wäre es den Algorithmus umzuschreiben. Aktuell werden auch zueinander isomorphe Graphen als eigenständige (Teil-)Lösung betrachtet. Aus strukturell gleichen Teillösungen werden wiederum strukturell gleiche neue (Teil)-Lösungen generiert. Der Speicherbedarf könnte drastisch sinken, wenn zueinander isomorphe Teillösungen entdeckt werden und nur einer davon im weiteren Verlauf betrachtet und gespeichert wird. Festzustellen, ob zwei Graphen zueinander isomorph sind, ist jedoch ein NP-Vollständiges Problem.[@Cook1971]
 
@@ -200,7 +200,7 @@ private boolean canReplaceIn(LevelElement[][] layout, final Replacement r, int x
 
 ![Verschiedene von RoomG erzeugte Räume, die alle das selbe 8x8 Felder großes Raum-Template als Vorlage haben. \label{roomgex}](figs/chapter4/rooms.png)
 
-Abbildung \ref{roomgex} zeigt verschiedene Räume die auf den selben, 8x8 großen Raum-Template basieren und durch verschiedene Replacern verändert wurden. In Kapitel 6 wird weiter auf die Qualität und Abwechslung der Räume Eingange. 
+Abbildung \ref{roomgex} zeigt verschiedene Räume die auf den selben, 8x8 großen Raum-Template basieren und durch verschiedene Replacern verändert wurden. In Kapitel 6 wird weiter auf die Qualität und Abwechslung der Räume eingegangen. 
 
 ## Umsetzung LevelG
 
@@ -301,13 +301,13 @@ Abbildungen **TODO** zeigen verschiedene von LevelG generierte Level. In Kapitel
 
 ## Anbindung an das PM-Dungeon und Schnittstellen
 
-Abbildung \ref{intUML} zeigt wie DungeonG in das Framework integriert wurde. Die Klasse `LevelAPI` speichert eine Instanz eines Objektes vom Typen `IController` und führt, wenn von außen angefragt, die `getLevel` Methode aus. Ist DungeonG als Generator hinterlegt, wird der oben beschriebene Generierungsprozess in `LevelG` gestartet und ein Level erzeugt. Die Integration in das Framework wurde Modular durchgeführt. Im Package `levelStructure` sind alle, nicht auf den Generator spezifizierten, Klassen enthalten. Diese Klassen können direkt von der `LevelAPI` oder den Studierenden genutzt werden. Im Package `dungeong` sind die Generator spezifischen Klassen abgespeichert. Im Falle von DungeonG sind dies die Bausteine `GraphG`, `RoomG` und `LevelG`. Durch diese Aufteilung ist es möglich, DungeonG bei bedarf durch einen neuen, graphenbasierten Levelgenerator zu ersetzten. 
+Abbildung \ref{intUML} zeigt wie DungeonG in das Framework integriert wurde. Die Klasse `LevelAPI` speichert eine Instanz eines Objektes vom Typen `IController` und führt, wenn von außen angefragt, die `getLevel` Methode aus. Ist DungeonG als Generator hinterlegt, wird der oben beschriebene Generierungsprozess in `LevelG` gestartet und ein Level erzeugt. Die Integration in das Framework wurde Modular durchgeführt. Im Package `levelStructure` sind alle, nicht auf den Generator spezifizierten, Klassen enthalten. Diese Klassen können direkt von der `LevelAPI` oder den Studierenden genutzt werden. Im Package `dungeong` sind die Generator spezifischen Klassen abgespeichert. Im Falle von DungeonG sind dies die Bausteine `GraphG`, `RoomG` und `LevelG`. Durch diese Aufteilung ist es möglich, DungeonG bei Bedarf durch einen neuen, graphenbasierten Levelgenerator zu ersetzen. 
 
 ![UML-Klassendiagramm mit Packages zeigt die Anbindung an das Framework. \label{intUML}](figs/chapter4/integration.png)
 
-In folgenden werden verschiedene Code-Snippets erläutert um zu präsentieren, wie die Studierenden die Schnittstellen nutzen können, um ihr Spiel zu gestalten. Alle Code-Snippets sind so abstrahiert, dass kein weiteres Verständnis für das PM-Dungeon-Framework von Nöten ist.
+In Folgenden werden verschiedene Code-Snippets erläutert um zu präsentieren, wie die Studierenden die Schnittstellen nutzen können, um ihr Spiel zu gestalten. Alle Code-Snippets sind so abstrahiert, dass kein weiteres Verständnis für das PM-Dungeon-Framework von Nöten ist.
 
-Listing \ref{api1} zeigt wie ein Monster zufällige im Level platziert werden kann. In Zeile 1 wird das aktuelle Level abgefragt. In Zeile 2 wird ein zufälliges Bodenfeld aus einem zufälligen Raum im Level ausgewählt. In Zeile 3 wird dem Monster `dino` die Globale-Position des Tiles zugewiesen.  
+Listing \ref{api1} zeigt wie ein Monster zufällig im Level platziert werden kann. In Zeile 1 wird das aktuelle Level abgefragt. In Zeile 2 wird ein zufälliges Bodenfeld aus einem zufälligen Raum im Level ausgewählt. In Zeile 3 wird dem Monster `dino` die Globale-Position des Tiles zugewiesen.  
 
 \begin{lstlisting}[language=java, label=api1, caption={Platziere ein Monster zufällig im Level.}  ]
  Level currentLevel = levelAPI.getCurrentLevel();

@@ -36,7 +36,7 @@ In dieser Arbeit werden Level mithilfe von Graphen dargestellt, daher erläutert
 
 Ein Level-Graph $G$ besteht aus einer Menge an Knoten $V(G)$ und Kanten zwischen diesen Knoten $E(G)$. Knoten sind Räume, dabei spielt die Größe, der Inhalt und die Geometrie des Raumes keine Rolle. Eine Kante zwischen zwei Knoten gibt an, dass die Räume aneinander anliegend sind und mit einem Durchgang verbunden sind. Kanten können entweder gerichtet sein, dann kann ein Weg zwar von einem Raum in den anderen Raum führen, aber nicht zurück oder ungerichtet, dann kann ein Weg beidseitig passiert werden. Gerichtete Verbindungen werden durch einen Pfeil dargestellt, ungerichtete durch eine blanke Linie. Ein Level ist also eine Menge an Räumen, die miteinander verbunden sind.
 
-Da diese Arbeit 2D-Level betrachtet, müssen alle Level-Graphen planar sein. Ist ein Graph nicht planar, können die Räume nicht auf einer zweidimensionalen Fläche angeordnet werden, ohne sich zu überschneiden und neue, im Graphen nicht dargestellte, Verbindungen zu erzeugen. Für die Darstellung von 3D-Level ist es nicht nötigt, dass der Level-Graph planar ist, da hier Räume und Verbindungen auch übereinander oder untereinander liegen können.
+Da diese Arbeit 2D-Level betrachtet, müssen alle Level-Graphen planar sein. Ist ein Graph nicht planar, können die Räume nicht auf einer zweidimensionalen Fläche angeordnet werden, ohne sich zu überschneiden und neue, im Graphen nicht dargestellte, Verbindungen zu erzeugen. Für die Darstellung von 3D-Level ist es nicht nötig, dass der Level-Graph planar ist, da hier Räume und Verbindungen auch übereinander oder untereinander liegen können.
 
 Abbildung \ref{dam} zeigt ein Level aus dem Spiel *Dragon Age: Origins* in der Kartenansicht aus dem Spiel. Dieses Level wurde in Abbildung \ref{dag} in Graphendarstellung gebracht. Da das Themenfeld der Graphentheorie besonders gut erforscht ist, können nun viele der bekannten Verfahren genutzt werden, um den Level-Graph zu analysieren. Im nächsten Abschnitt werden die für diese Arbeit relevanten Algorithmen der Graphenanalyse erläutert. 
 
@@ -181,7 +181,7 @@ Auch Videospiele sollten darauf achten ihre Spannungskurve zu kontrollieren. Gut
 
 Abbildung \ref{zelda3} zeigt den Level-Graph für den Wüstenpalast aus dem Spiel *The Legend of Zelda: A Link to the past* \footnote{A Link to the past on Zeldachronicles https://zeldachronicles.de/spiele/alttp/}. Um das Level zu bestehen, muss der Spieler den Boss im letzten Raum besiegen. 
 
-Das Level startet mit einem kurzen linearen Abschnitt (blau). Der Spieler sieht zum ersten Mal wie das Dungeon von innen gestalten ist, hört die extra für das Level komponierte Musik und wir mit einen neuen Gegner Typ, den Lastertürmen konfrontiert. Die Neugier des Spielers ist geweckt.
+Das Level startet mit einem kurzen linearen Abschnitt (blau). Der Spieler sieht zum ersten Mal wie das Dungeon von innen gestalten ist, hört die extra für das Level komponierte Musik und wird mit einem neuen Gegner-Typen, den Lastertürmen konfrontiert. Die Neugier des Spielers ist geweckt.
 
 Im nächsten Abschnitt (grün) werden keine neuen Gegner eingeführt. Dieser Abschnitt ist zum Erkunden gedacht. Der Spieler muss den Weg zum Boss finden, kann aber zeitgleich verschiedene Nebenpfade erkunden, um Schätze zu finden. Einige Bereiche sind mit Türen verschlossen, für die der Spieler die Schlüssel in anderen Räumen finden muss. Die anfänglich aufgebaute Spannung fällt hier etwas ab, steigt aber dann wieder, wenn der Spieler sich auf den finalen Weg zum Boss macht. 
 
@@ -211,7 +211,7 @@ Spieleentwicklung ist ein kostspieliges Unterfangen und bereits kleinere Produkt
 
 ## Anforderungen an einen Level-Generator 
 
-Dir vorgestellten Regeln geben zwar eine Idee davon, wie gute Level auszusehen haben, sie geben aber keine klaren Kriterien vor, die ein Level-Generator erfüllen sollte.
+Die vorgestellten Regeln geben zwar eine Idee davon, wie gute Level auszusehen haben, sie geben aber keine klaren Kriterien vor, die ein Level-Generator erfüllen sollte.
 In diesem Abschnitt werden aus den vorgestellten Regeln Kriterien abgeleitet, die ein Level-Generator erfüllen sollte, um gute Level zu erzeugen. Dabei stellen die Kriterien sowohl Anforderungen an die erzeugten Level als auch an den Algorithmus und seine Input- sowie Output-Daten. Die Kriterien sollen dabei helfen, festzustellen, ob die obengenannten Regeln eingehalten wurden. Sie dienen als Anforderung für den in dieser Arbeit erzeugten Generator und werden in Kapitel 3 genutzt, um einzelne Bausteine aus anderen Algorithmen zu bewerten. 
 
 ### Regel 1: Gute Level sind lösbar
