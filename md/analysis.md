@@ -5,7 +5,7 @@ In diesem Kapitel werden Algorithmen vorgestellt, die verschiedene Aspekte der p
 
 ## Vom Graph zum Level 
 
-Zwar kann das Layout eines Level mithilfe eines Graphen dargestellt werden, schlussendlich muss aus diesen Graphen aber eine physische Anordnung von Räumen und Strukturen generiert werden, die dann das eigentliche Level im Spiel ist. Die Arbeit von Ma et al stellt einen effizienten Algorithmus vor, um diese Umwandlung durchzuführen. [@Ma2014]
+Zwar kann das Layout eines Level mithilfe eines Graphen dargestellt werden, schlussendlich muss aus diesen Graphen aber eine physische Anordnung von Räumen und Strukturen generiert werden, die dann das eigentliche Level im Spiel ist. Die Arbeit von Ma et al stellt einen effizienten Algorithmus vor, um diese Umwandlung durchzuführen.[@Ma2014]
 
 ![Beispiel: Output für einen Graphen und Strukturen. \label{graph2level}[@Ma2014]](figs/chapter3/fromgraphtolevel.PNG)
 
@@ -45,7 +45,7 @@ procedure INCREMENTALLAYOUT(G,B,S)
 end procedure
 \end{lstlisting}
 
-Listing \ref{laydown} zeigt den Peseudocode für das inkrementelle Erstellen eines Level mithilfe des beschriebenen Verfahrens.  [@Ma2014]
+Listing \ref{laydown} zeigt den Peseudocode für das inkrementelle Erstellen eines Level mithilfe des beschriebenen Verfahrens.[@Ma2014]
 
 
 Zwar könnten die Chains auch separat aufgelöst werden und dann versucht werden die Teillösungen miteinander zu verbinden, jedoch würden dabei Lösungen erzeugt werden, die zwar die Chain auflösen aber nicht mit den gesamten Graphen kompatibel sind und daher unbrauchbar wären. Zusätzlich sind im Level alle miteinander verbunden, daher gibt es auch keine Vorteile die Chains einzeln zu lösen. 
@@ -80,7 +80,7 @@ Lösungsansatz: Der Algorithmus kann als Grundlage für die Konzeptionierung ein
 
 ## Planare Graphen generieren
 
-Bekannte Verfahren zur Generierung von planaren Graphen wie das *plantri* Programm nutzen Triangulation oder Quadrangulation. [@Brinkmann] Die erzeugten Graphen zeichnen sich dadurch aus, dass jedes Face im Graph ein Dreieck bzw. ein Quadrat ist. Dieses Verfahren ist zwar besonders effizient unter Betrachtung der Rechenleistung, die erzeugten Graphen eignen sich aber kaum, um gute Videospiellevel darzustellen.
+Bekannte Verfahren zur Generierung von planaren Graphen wie das *plantri* Programm nutzen Triangulation oder Quadrangulation.[@Brinkmann] Die erzeugten Graphen zeichnen sich dadurch aus, dass jedes Face im Graph ein Dreieck bzw. ein Quadrat ist. Dieses Verfahren ist zwar besonders effizient unter Betrachtung der Rechenleistung, die erzeugten Graphen eignen sich aber kaum, um gute Videospiellevel darzustellen.
 
 Abbildung \ref{plantri} zeigt zwei verschiedene Graphen, die mithilfe von *plantri* erzeugt werden können, einmal durch Triangulation und einmal durch Quadrangulation. Die Graphen zeichnen sich vor allem durch ihre zyklische Struktur aus, jeder Knoten kann auf mehrere Wege erreicht werden und es gibt keine klaren Endpunkte. Würde man zwei zufällige Punkte im Graphen als Start- und Endpunkt bestimmen und alle kritischen Pfade einzeichnen, wäre jede Kante markiert. Der Endpunkt kann daher durch viele verschiedenen Pfade erreicht werden. Was zunächst nach einem Vorteil klingt, da der Spieler so maximale Freiheit bei der Wahl seines Weges hat, stellt sich als Nachteil für das Pacing und Balancing heraus. Da (fast) jeder Knoten als kritisch und optional gleichzeitig betrachtet werden kann, ist es schwer Risk and Reward Momente zu platzieren, Monster gezielt auf kritischen bzw. optionalen Pfade zu platzieren oder sicherzustellen, dass der Spieler an kritischen Events vorbei muss. Zusätzlich unterscheiden sich die Teilaspekte der Graphen im Grunde gar nicht, jedes Teilstück besteht entweder aus einem Dreieck oder einem Quadrat, daher würden die erzeugten Level sich überwiegend in der Größe der Level unterscheiden und nur wenig Variation im Layout aufweisen.
 
@@ -88,7 +88,7 @@ Abbildung \ref{plantri} zeigt zwei verschiedene Graphen, die mithilfe von *plant
 
 Eine andere Möglichkeit zur Generierung von Planaren Graphen ist die kontrollierte Zufallssuche. Ein Algorithmus, der vollkommen zufällig einen Graphen erzeugt, würde auch planare Graphen erzeugen. Da dies weder ein zuverlässiger noch effizienter Weg zur Generierung ist, muss der Zufall so eingeschränkt werden, dass die Generierung von nicht planaren Graphen unmöglich wird.
 
-Das Satz von Kuratowski sagt, dass ein Graph genau dann planar ist, wenn er keinen Teilgraph besitzt, der ein Unterteilungsgraph des $K5$ oder $K3,3$ ist. Ein Untereilungsgraph ist ein Graph, der dadurch entsteht, dass in einen Graphen $G$ neue Knoten durch Kantenunterteilung hinzugefügt werden. $K5$ und $K3,3$ sind zwei Graphen für die es keine planare Darstellung gibt (vgl. Abbildung \ref{k5} und Abbildung \ref{k3}). [@Diestel2010]
+Das Satz von Kuratowski sagt, dass ein Graph genau dann planar ist, wenn er keinen Teilgraph besitzt, der ein Unterteilungsgraph des $K5$ oder $K3,3$ ist. Ein Untereilungsgraph ist ein Graph, der dadurch entsteht, dass in einen Graphen $G$ neue Knoten durch Kantenunterteilung hinzugefügt werden. $K5$ und $K3,3$ sind zwei Graphen für die es keine planare Darstellung gibt (vgl. Abbildung \ref{k5} und Abbildung \ref{k3}).[@Diestel2010]
 
 Bei der Generierung eines planaren Graphen muss also darauf geachtet werden, dass weder $K5$ noch $K3,3$ enthalten sind. 
 
@@ -130,7 +130,7 @@ Lösungsansatz: Verschiedene Verfahren zur Graphenanalyse können genutzt werden
 
 ## Spelunky
 
-Spelunky ist ein 2D-Rogue-Like-Plattformer. Es verbindet das klassische Gameplay von Plattformern und erweitert sie um prozedural generierte Level und Permadeath aus dem Rogue-Like Genre. Derek Yu, der Entwickler von Spelunky beschreibt im gleichnamigen Buch "Spelunky" unter anderem wie die Level im Spiel generiert werden. [@Yu2016]
+Spelunky ist ein 2D-Rogue-Like-Plattformer. Es verbindet das klassische Gameplay von Plattformern und erweitert sie um prozedural generierte Level und Permadeath aus dem Rogue-Like Genre. Derek Yu, der Entwickler von Spelunky beschreibt im gleichnamigen Buch "Spelunky" unter anderem wie die Level im Spiel generiert werden.[@Yu2016]
 
 Die Aufgabe des Spielers in Spelunky ist es, vom Start des Levels bis zum Ausgang zu gelangen, dabei kann er zusätzlich Schätze sammeln, um Bonuspunkte zu erhalten. Auf dem Weg lauern verschiedene Gegner und Fallen. 
 
@@ -161,7 +161,7 @@ Spelunky verwendet verschiedene Texturen, um die optische Abwechslung zu gewähr
 
 Derek Yu schrieb in seinem Buch: 
 
-> This system doesn‘t create the most natural-looking caves ever, and players will quickly begin to recognize certain repeating landmarks and perhaps even sense that the levels are generated on a grid. But with enough templates and random mutations, there’s still plenty of variability. More importantly, it creates fun and engaging levels that the player can’t easily get stuck in, something much more valuable than realism when it comes to making an immersive experience. [@Yu2016] 
+> This system doesn‘t create the most natural-looking caves ever, and players will quickly begin to recognize certain repeating landmarks and perhaps even sense that the levels are generated on a grid. But with enough templates and random mutations, there’s still plenty of variability. More importantly, it creates fun and engaging levels that the player can’t easily get stuck in, something much more valuable than realism when it comes to making an immersive experience.[@Yu2016] 
 
 ![Beispiellevel aus Spelunky mit kritischem Pfad-Layout (rot) und Raum Nummerierung \label{spelunkylevel}[@Kezemi]](figs/chapter3/spelunky.png)
 

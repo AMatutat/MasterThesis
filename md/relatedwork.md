@@ -12,7 +12,7 @@ Der Begriff prozedurale Generierung, auch prozedurale Synthese genannt, beschrei
 > algorithms incorporate random numbers, they are never truly random, or
 > at least not as random as that term implies.[@Beca2017]
 
-Die Umsetzung von prozeduralen Algorithmen zur Erzeugung von Level ist ein komplexes Unterfangen. Während das klassische Erstellen von Level ein designtechnisches Problem ist, ist die Implementierung eines Algorithmus ein programmiertechnisches Problem. Viele Aspekte, die beim manuellen Erstellen von Level einfach zu überprüfen sind, wie die Lösbarkeit der Level, müssen gewährleistet und automatisch getestet werden. Die Behebung von Fehlern kann sich zu einem aufwendigen Prozess entwickeln. Werden Level manuell gebaut, können fehlerhaft platzierte Objekte schnell und einfach unplatziert werden, bei prozeduraler Generierung muss der Algorithmus umgeschrieben werden, was ein tiefes Verständnis für diesen erfordert und das Risiko erhöht einen neuen Fehler einzubauen. Schon das Auffinden von Fehlern kann zu einem mühsamen Prozess werden. Bei Millionen an unterschiedlichen Kombinationen von Parametern kann es sein, dass ein Fehler keinen der Tester begegnet. Behobenen Fehler sind vielleicht nur in den überprüften Kombinationen entfernt, aber in ungetesteten Kombinationen noch vorhanden. Die Ausarbeitung eines umfangreichen Testkonzeptes und das Loggen von möglichst vielen Daten ist daher eine Notwendigkeit. Prozedurale Algorithmen können durch die verwendeten Muster schnell repetitiv wirken, bei der Implementierung ist also auch darauf zu achten, dass die Muster gut verändert werden und es eine Vielzahl an unterschiedlichen Zufallsvariablen gibt. [@Beca2017]
+Die Umsetzung von prozeduralen Algorithmen zur Erzeugung von Level ist ein komplexes Unterfangen. Während das klassische Erstellen von Level ein designtechnisches Problem ist, ist die Implementierung eines Algorithmus ein programmiertechnisches Problem. Viele Aspekte, die beim manuellen Erstellen von Level einfach zu überprüfen sind, wie die Lösbarkeit der Level, müssen gewährleistet und automatisch getestet werden. Die Behebung von Fehlern kann sich zu einem aufwendigen Prozess entwickeln. Werden Level manuell gebaut, können fehlerhaft platzierte Objekte schnell und einfach unplatziert werden, bei prozeduraler Generierung muss der Algorithmus umgeschrieben werden, was ein tiefes Verständnis für diesen erfordert und das Risiko erhöht einen neuen Fehler einzubauen. Schon das Auffinden von Fehlern kann zu einem mühsamen Prozess werden. Bei Millionen an unterschiedlichen Kombinationen von Parametern kann es sein, dass ein Fehler keinen der Tester begegnet. Behobenen Fehler sind vielleicht nur in den überprüften Kombinationen entfernt, aber in ungetesteten Kombinationen noch vorhanden. Die Ausarbeitung eines umfangreichen Testkonzeptes und das Loggen von möglichst vielen Daten ist daher eine Notwendigkeit. Prozedurale Algorithmen können durch die verwendeten Muster schnell repetitiv wirken, bei der Implementierung ist also auch darauf zu achten, dass die Muster gut verändert werden und es eine Vielzahl an unterschiedlichen Zufallsvariablen gibt.[@Beca2017]
 
 Ein gut konzeptionierter prozedurale Algorithmus kann auf Knopfdruck hunderte verschiedener Level erzeugen, wodurch die Wiederspielbarkeit nahezu unendlich ist. Da die Entwicklung und Konzeptionierung eines solchen Algorithmus komplex ist, lohnt er sich vor allem bei Spielen, die auf viel Abwechslung bei zeitgleichen großen Spielumfang Wert legen, um die Kosten und den Zeitaufwand zu reduzieren.[@Software2007]
 
@@ -28,7 +28,7 @@ Ein simpler prozeduraler Algorithmus zur Erzeugung von Level ist der *Random Wal
         	verwandel das Feld in einen Boden
 \end{lstlisting}
 
-![Beispielergebnis eines Random Walk. Schwarze Flächen sind Wände, weiße Flächen sind Böden. [@Hagen2019] \label{drunkexample}](figs/chapter2/drunk.png){width=100%}
+![Beispielergebnis eines Random Walk. Schwarze Flächen sind Wände, weiße Flächen sind Böden.[@Hagen2019] \label{drunkexample}](figs/chapter2/drunk.png){width=100%}
 
 ## Graphen zur Darstellung von Level
 
@@ -40,7 +40,7 @@ Da diese Arbeit 2D-Level betrachtet, müssen alle Level-Graphen planar sein. Ist
 
 Abbildung \ref{dam} zeigt ein Level aus dem Spiel *Dragon Age: Origins* in der Kartenansicht aus dem Spiel. Dieses Level wurde in Abbildung \ref{dag} in Graphendarstellung gebracht. Da das Themenfeld der Graphentheorie besonders gut erforscht ist, können nun viele der bekannten Verfahren genutzt werden, um den Level-Graph zu analysieren. Im nächsten Abschnitt werden die für diese Arbeit relevanten Algorithmen der Graphenanalyse erläutert. 
 
-Die roten Kanten in Abbildung \ref{dag} zeigen den kritischen Pfad. Der kritische Pfad ist der Weg, den der Spieler vom Start des Level (Knoten 1) bis zum Ende des Level (Knoten 20) gehen muss. Alle Knoten, die auf dem kritischen Pfad liegen, müssen also vom Spieler passiert werden. Mit diesem Wissen können Entscheidungen im Design getroffen werden, welche Inhalte der Spieler passieren muss und welche Hindernisse ihn auf dem kritischen Pfad erwarten. Daraus ergibt sich auch, dass alle anderen Knoten optional sind, entsprechend können auch hier Designentscheidungen getroffen werden. Anhand des Graphen lässt sich auch feststellen, ob ein bestimmter Raum erreichbar ist, ohne einen anderen zu betreten. So könnte der Zugang zu Raum 6 verschlossen sein und der Schlüssel in Raum 3 liegen. Mittels der Graphenanalyse kann geschaut werden, ob Raum 3 betreten werden kann, ohne dabei Raum 6 zu passieren. Die Pfadlänge kann auch ermittelt werden, so können besonders lange Nebenpfade erkannt werden, bei Bedarf vermieden werden oder durch Abkürzungen wieder mit dem Hauptpfad verbunden werden. [@Mourato2013]
+Die roten Kanten in Abbildung \ref{dag} zeigen den kritischen Pfad. Der kritische Pfad ist der Weg, den der Spieler vom Start des Level (Knoten 1) bis zum Ende des Level (Knoten 20) gehen muss. Alle Knoten, die auf dem kritischen Pfad liegen, müssen also vom Spieler passiert werden. Mit diesem Wissen können Entscheidungen im Design getroffen werden, welche Inhalte der Spieler passieren muss und welche Hindernisse ihn auf dem kritischen Pfad erwarten. Daraus ergibt sich auch, dass alle anderen Knoten optional sind, entsprechend können auch hier Designentscheidungen getroffen werden. Anhand des Graphen lässt sich auch feststellen, ob ein bestimmter Raum erreichbar ist, ohne einen anderen zu betreten. So könnte der Zugang zu Raum 6 verschlossen sein und der Schlüssel in Raum 3 liegen. Mittels der Graphenanalyse kann geschaut werden, ob Raum 3 betreten werden kann, ohne dabei Raum 6 zu passieren. Die Pfadlänge kann auch ermittelt werden, so können besonders lange Nebenpfade erkannt werden, bei Bedarf vermieden werden oder durch Abkürzungen wieder mit dem Hauptpfad verbunden werden.[@Mourato2013]
 
 ![Ein Level aus dem Spiel Dragon Age: Origins. [@Ma2014] \label{dam}](figs/chapter2/damap.png){width=100%}
 
@@ -77,7 +77,7 @@ void graph_search(Node currentNode, List<Node> marked, Node goal, List<List<Node
 
 ### Faces 
 
-Als Face werden Flächen in einem planaren Graphen bezeichnet, wenn dieser grafisch auf einer Ebene dargestellt wird. [@Eyraud2016] Abbildung \ref{facesex} zeigt einen solchen planaren Graphen mit eingezeichneten Faces. Das Face $f1$ ist die äußerste Fläche und umfasst alles was nicht in $f2$ und $f3$ liegt. Face $f2$ wird durch den zyklischen Durchlauf der Kanten zwischen Knoten $1->2->4->3->1$ gebildet. Face $f3$ wird durch die Kanten $3->4->5->3$ gebildet. Knoten $6$ liegt in $f3$, ist aber kein Bestandteil der Fläche oder Flächenbildung. 
+Als Face werden Flächen in einem planaren Graphen bezeichnet, wenn dieser grafisch auf einer Ebene dargestellt wird.[@Eyraud2016] Abbildung \ref{facesex} zeigt einen solchen planaren Graphen mit eingezeichneten Faces. Das Face $f1$ ist die äußerste Fläche und umfasst alles was nicht in $f2$ und $f3$ liegt. Face $f2$ wird durch den zyklischen Durchlauf der Kanten zwischen Knoten $1->2->4->3->1$ gebildet. Face $f3$ wird durch die Kanten $3->4->5->3$ gebildet. Knoten $6$ liegt in $f3$, ist aber kein Bestandteil der Fläche oder Flächenbildung. 
 
 ![Planarer Graph mit eingezeichneten Faces. [@Eyraud2016] \label{facesex}](figs/chapter2/faces.png){width=100%}
 
@@ -99,13 +99,13 @@ Dieses Spielkonzept ist zu dieser Zeit kein unbekanntes, was Rogue hingegen bis 
 
 Bei jedem Neustart von Rogue werden die Level neu generiert. Das bedeutet der Aufbau der Level und die Anzahl und Positionierung von Monstern und Items unterscheiden sich mit jedem Spieldurchlauf. Man spielt also niemals zweimal dieselbe Partie von Rogue. Zusätzlich setzt Rogue auf den sogenannten Permadeath. Stirbt der Spieler im Dungeon, verliert er all seinen Fortschritt und muss das Spiel von vorne beginnen, mit neu generiertem Level. Rogue zeichnet sich also vor allem dadurch aus, dass jeder Spieldurchlauf anders als der andere ist und dadurch ein besonders hohes Maß an Abwechslung und damit Wiederspielwert gegeben ist.  
 
-Rogue konnte sich schnell an einiger Beliebtheit erfreuen und es dauert nicht lange bis andere Entwickler ähnliche Spiele mit prozedural generierten Inhalten veröffentlichten. [@MattBarton2009] Es entwickelte sich das Genre der Rogue-Likes.
+Rogue konnte sich schnell an einiger Beliebtheit erfreuen und es dauert nicht lange bis andere Entwickler ähnliche Spiele mit prozedural generierten Inhalten veröffentlichten.[@MattBarton2009] Es entwickelte sich das Genre der Rogue-Likes.
 
 > [... ] Rogue likes are called Rogue likes, because the games are literally like Rogue [... ] [@Brown2017]
 
-In den Jahren haben viele Entwickler versucht Regeln für das Genre aufzustellen, also Bedingungen, die ein Spiel erfüllen muss, um sich als Rogue-Like bezeichnen zu dürfen. 2008 wurde auf der Internationalen Rogue-Like Entwickler Konferenz eine Liste mit verschiedenen Faktoren veröffentlicht. Diese Liste ist als *Berliner Interpretation* bekannt. [@Conference2008] Über die Jahre wurde die Interpretation harsch kritisiert und sogar als "downright nonsense"  bezeichnet. [@Grey2013] Die Berliner Interpretation schade der kreativen Freiheit.
+In den Jahren haben viele Entwickler versucht Regeln für das Genre aufzustellen, also Bedingungen, die ein Spiel erfüllen muss, um sich als Rogue-Like bezeichnen zu dürfen. 2008 wurde auf der Internationalen Rogue-Like Entwickler Konferenz eine Liste mit verschiedenen Faktoren veröffentlicht. Diese Liste ist als *Berliner Interpretation* bekannt.[@Conference2008] Über die Jahre wurde die Interpretation harsch kritisiert und sogar als "downright nonsense"  bezeichnet.[@Grey2013] Die Berliner Interpretation schade der kreativen Freiheit.
 
-Heute muss ein Spiel nur zwei wichtige Features implementieren, um *like* Rogue zu sein, prozedural generierte Level und Permadeath. [@Brown2019] Das Genre ist daher nicht nur noch auf Rollenspiele in Labyrinthen begrenzt, sondern umfasst mittlerweile Spiele aus den unterschiedlichsten Genres wie Plattformer, Shooter oder Action-Adventures und vielen mehr. [@Wikipedia2020]
+Heute muss ein Spiel nur zwei wichtige Features implementieren, um *like* Rogue zu sein, prozedural generierte Level und Permadeath. [@Brown2019] Das Genre ist daher nicht nur noch auf Rollenspiele in Labyrinthen begrenzt, sondern umfasst mittlerweile Spiele aus den unterschiedlichsten Genres wie Plattformer, Shooter oder Action-Adventures und vielen mehr.[@Wikipedia2020]
 
 ## PM-Dungeon
 
@@ -119,7 +119,7 @@ Abbildung \ref{pmd} zeigt einen Ausschnitt aus dem Startlevel einer Beispielimpl
 
 ## Regeln für gutes Level-Design
 
-Der Begriff Level-Design kann unterschiedlich interpretiert werden. Im Allgemeinen beschreibt der Begriff die Erstellung und Bearbeitungen von Spielwelten für Videospiele. [@Wikipedia2020a] Es gibt keine festen Vorgaben dafür, welche Aspekte Teil des Level-Designs sind und welche bereits darüber hinausgehen. [@DevPlay2019] Im Rahmen dieser Arbeit beschreibt Level-Design den örtlichen Aufbau der Spielwelt, die Platzierung von Gegnern, Items und anderen Objekten sowie die optische Gestaltung der Level, dabei ist nicht das Erstellen von Texturen gemeint, sondern die Verwendung dieser. 
+Der Begriff Level-Design kann unterschiedlich interpretiert werden. Im Allgemeinen beschreibt der Begriff die Erstellung und Bearbeitungen von Spielwelten für Videospiele.[@Wikipedia2020a] Es gibt keine festen Vorgaben dafür, welche Aspekte Teil des Level-Designs sind und welche bereits darüber hinausgehen. [@DevPlay2019] Im Rahmen dieser Arbeit beschreibt Level-Design den örtlichen Aufbau der Spielwelt, die Platzierung von Gegnern, Items und anderen Objekten sowie die optische Gestaltung der Level, dabei ist nicht das Erstellen von Texturen gemeint, sondern die Verwendung dieser. 
 
 Auch wenn es viel Diskussion darüber gibt, ob Videospiele Kunst sind oder nicht, muss man den kreativen Schaffensprozess respektieren.[@Petzold2019] Daher lassen sich für Videospiele auch keine festen Regeln definieren, wie bestimmte Designelemente zu sein haben. 
 
@@ -135,9 +135,9 @@ Ein Level muss lösbar sein. Es darf keine Fehler geben, die das Voranschreiten 
 
 ### Driven by  game’s mechanics
 
-> Always remember that interactivity is what makes videogames different from any other form of entertainment: books have stories, movies have visuals, games have interaction. If your Level-Design isn’t showcasing your game mechanics, your players might as well be watching a movie or reading a book. [@Taylor2013]
+> Always remember that interactivity is what makes videogames different from any other form of entertainment: books have stories, movies have visuals, games have interaction. If your Level-Design isn’t showcasing your game mechanics, your players might as well be watching a movie or reading a book.[@Taylor2013]
 
-> Above all else, great Level-Design is driven by interaction - the game’s mechanics. Game levels don’t just provide context for mechanics, they provide the very reality in which they exist. [@Taylor2013]
+> Above all else, great Level-Design is driven by interaction - the game’s mechanics. Game levels don’t just provide context for mechanics, they provide the very reality in which they exist.[@Taylor2013]
 
 Das Level ist der Spielplatz für den Spieler, in dem er die verschiedenen Mechaniken des Spiels anwenden kann. Daher müssen alle Level so gebaut werden, dass sie die Mechaniken beanspruchen und es Spaß macht sie zu verwenden. Die Kernmechaniken des Spiels sollten in jedem Level gefordert sein. Ein Shooter braucht gute Kampfareale, ein Rennspiel spaßige Rennstrecken und ein Plattformer gute Hindernisse. Ein Rogue-Like braucht daher abwechslungsreiche Dungeons, die zum Erkunden einladen und mit Monstern und Items gefüllt sind. Gute Level bieten dem Spieler verschiedene Möglichkeiten die Herausforderungen auf unterschiedliche Weise unter Einbeziehung der Mechaniken zu lösen.
 
@@ -147,13 +147,13 @@ Das Level ist der Spielplatz für den Spieler, in dem er die verschiedenen Mecha
 
 Beim Balancen geht es darum den Schwierigkeitsgrad der Herausforderungen zu bestimmen. Ist ein Spiel zu einfach kann es schnell anspruchslos und langweilig werden, ist es zu schwer kann es frustrierend werden.
 
-> The trick to good Level-Design is to present challenges that are difficult enough to merit the players’ attention and make their heart or mind race, but not so difficult as to always leave them failing and disappointed. [@Ryan1999] 
+> The trick to good Level-Design is to present challenges that are difficult enough to merit the players’ attention and make their heart or mind race, but not so difficult as to always leave them failing and disappointed.[@Ryan1999] 
 
-Da nicht jeder Spieler gleich gut beim Spielen ist und die Vorlieben der Spieler sich unterscheiden, ist ein fest vorgegebener Schwierigkeitsgrad oft nicht zielführend. Oft lassen Spiele den Spieler selbst entscheiden, wie schwer das Spiel werden soll, indem sie vor dem Spielstart die Auswahl verschiedener Schwierigkeitsgrade anbieten. Je nach gewählter Option werden dann stärkere oder schwächere Monster platziert, die Lebenspunkte der Spielfigur angepasst oder andere Hilfestellung gegeben oder neue Hindernisse platziert. [@DevPlay2019a] Diese Variante kann sehr effektiv sein, setzt aber voraus, dass der Spieler seine eigenen Fähigkeiten richtig einschätzt, was vor allem dadurch erschwert wird, wenn der Spieler noch keine Erfahrung mit dem Spiel gemacht hat. Da sich die Auswirkungen des Schwierigkeitsgrades auch von Spiel zu Spiel unterscheiden, kann eine gute Selbsteinschätzung auch daran scheitern.
+Da nicht jeder Spieler gleich gut beim Spielen ist und die Vorlieben der Spieler sich unterscheiden, ist ein fest vorgegebener Schwierigkeitsgrad oft nicht zielführend. Oft lassen Spiele den Spieler selbst entscheiden, wie schwer das Spiel werden soll, indem sie vor dem Spielstart die Auswahl verschiedener Schwierigkeitsgrade anbieten. Je nach gewählter Option werden dann stärkere oder schwächere Monster platziert, die Lebenspunkte der Spielfigur angepasst oder andere Hilfestellung gegeben oder neue Hindernisse platziert.[@DevPlay2019a] Diese Variante kann sehr effektiv sein, setzt aber voraus, dass der Spieler seine eigenen Fähigkeiten richtig einschätzt, was vor allem dadurch erschwert wird, wenn der Spieler noch keine Erfahrung mit dem Spiel gemacht hat. Da sich die Auswirkungen des Schwierigkeitsgrades auch von Spiel zu Spiel unterscheiden, kann eine gute Selbsteinschätzung auch daran scheitern.
 
-> [... ] they (the players) might pick the easier option even though they could handle more challenge, and rob themselves of the best, and designer-intended experience [@Brown2016]
+> [... ] they (the players) might pick the easier option even though they could handle more challenge, and rob themselves of the best, and designer-intended experience.[@Brown2016]
 
-Eine andere Möglichkeit zum Balancen ist die Verwendung von dynamischen Schwierigkeitsgraden. Im Spiel *Resident Evil 4*\footnote{Resident Evil 4 Homepage https://www.residentevil.com/4/} werden mehr oder weniger Gegner platziert, abhängig davon ob der Spieler bisher besonders gut durch die Level gekommen ist oder oft gestorben ist. [@Brown2015] Im Spiel *Half-Life* \footnote{Half-Life on Wikipedia https://de.wikipedia.org/wiki/Half-Life} werden mehr Medikits platziert, wenn der Spieler wenig Lebenspunkte hat. [@Brown2016a] 
+Eine andere Möglichkeit zum Balancen ist die Verwendung von dynamischen Schwierigkeitsgraden. Im Spiel *Resident Evil 4*\footnote{Resident Evil 4 Homepage https://www.residentevil.com/4/} werden mehr oder weniger Gegner platziert, abhängig davon ob der Spieler bisher besonders gut durch die Level gekommen ist oder oft gestorben ist.[@Brown2015] Im Spiel *Half-Life* \footnote{Half-Life on Wikipedia https://de.wikipedia.org/wiki/Half-Life} werden mehr Medikits platziert, wenn der Spieler wenig Lebenspunkte hat.[@Brown2016a] 
 
 Es sollte beachtet werden, dass Spieler mit voranschreiten immer besser werden, daher sollten frühe Level deutlich einfacher sein als Level gegen Ende des Spiels. Dabei muss die Schwierigkeit der Level nicht linear steigen, es bietet sich an nach einem besonders schweren Level ein einfacheres Level einzubauen, um den Spieler Zeit zum Aufatmen zu lassen.
 
@@ -177,7 +177,7 @@ Der Begriff Pacing entstammt der Filmbranche und beschreibt die Spannungskurve d
 2. Zu Beginn sollte viel Spannung erzeugt werden, um den Zuschauer bei Stange zu halten 
 3. Kurz vor Ende sollte der spannendste Moment sein, der sich am Ende entlädt
 
-Auch Videospiele sollten darauf achten ihre Spannungskurve zu kontrollieren. Gutes Pacing sorgt dafür, dass ein Spiel nicht langweilig oder repetitiv wird.  [@Brown2018]
+Auch Videospiele sollten darauf achten ihre Spannungskurve zu kontrollieren. Gutes Pacing sorgt dafür, dass ein Spiel nicht langweilig oder repetitiv wird  [@Brown2018]
 
 Abbildung \ref{zelda3} zeigt den Level-Graph für den Wüstenpalast aus dem Spiel *The Legend of Zelda: A Link to the past* \footnote{A Link to the past on Zeldachronicles https://zeldachronicles.de/spiele/alttp/}. Um das Level zu bestehen, muss der Spieler den Boss im letzten Raum besiegen. 
 
@@ -205,7 +205,7 @@ Variation in Gegner, Texturen und Strukturen helfen dabei die Abwechslung im Lev
 
 ### Effizienz 
 
-Spieleentwicklung ist ein kostspieliges Unterfangen und bereits kleinere Produktionen können mehrere Millionen Dollar kosten. [@DevPlay2017] Daher ist die effiziente Nutzung von Ressourcen unabdingbar. Gute Level-Designer erstellen ein Set aus Modulen, mit verschiedenen Assets und Events. Diese Module können dann miteinander kombiniert und bei Bedarf angepasst werden. Aus einer Handvoll solcher Module lassen sich bereits viele verschiedene Level und Situationen erzeugen. Effizienz ist der größte Vorteil von guten prozedurale Algorithmen.
+Spieleentwicklung ist ein kostspieliges Unterfangen und bereits kleinere Produktionen können mehrere Millionen Dollar kosten.[@DevPlay2017] Daher ist die effiziente Nutzung von Ressourcen unabdingbar. Gute Level-Designer erstellen ein Set aus Modulen, mit verschiedenen Assets und Events. Diese Module können dann miteinander kombiniert und bei Bedarf angepasst werden. Aus einer Handvoll solcher Module lassen sich bereits viele verschiedene Level und Situationen erzeugen. Effizienz ist der größte Vorteil von guten prozedurale Algorithmen.
 
 **Regel 7: Gute Level sind effizient in der Herstellung.** 
 
