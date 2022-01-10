@@ -34,7 +34,7 @@ Ein simpler prozeduraler Algorithmus zur Erzeugung von Level ist der *Random Wal
 
 In dieser Arbeit werden Level mithilfe von Graphen dargestellt, daher erläutert dieser Abschnitt die verwendete Notation und Annahmen. 
 
-Ein Level-Graph $G$ besteht aus einer Menge an Knoten $V(G)$ und Kanten zwischen diesen Knoten $E(G)$. Knoten sind Räume, dabei spielt die Größe, der Inhalt und die Geometrie des Raumes keine Rolle. Eine Kante zwischen zwei Knoten gibt an, dass die Räume aneinander anliegend sind und mit einem Durchgang verbunden sind. Kanten können entweder gerichtet sein, dann kann ein Weg zwar von einem Raum in den anderen Raum führen, aber nicht zurück oder ungerichtet, dann kann ein Weg beidseitig passiert werden. Gerichtete Verbindungen werden durch einen Pfeil dargestellt, ungerichtete durch eine blanke Linie. Ein Level ist also eine Menge an Räumen, die miteinander verbunden sind.
+Ein Level-Graph $G$ besteht aus einer Menge an Knoten $V(G)$ und Kanten zwischen diesen Knoten $E(G)$. Knoten sind Räume, dabei spielt die Größe, der Inhalt und die Geometrie des Raumes keine Rolle. Eine Kante zwischen zwei Knoten gibt an, dass die Räume aneinander anliegend sind und mit einem Durchgang verbunden sind. Kanten können entweder gerichtet sein, dann kann ein Weg zwar von einem Raum in den anderen Raum führen, aber nicht zurück oder Kanten können ungerichtet sein, dann kann ein Weg beidseitig passiert werden. Gerichtete Verbindungen werden durch einen Pfeil dargestellt, ungerichtete durch eine blanke Linie. Ein Level ist also eine Menge an Räumen, die miteinander verbunden sind.
 
 Da diese Arbeit 2D-Level betrachtet, müssen alle Level-Graphen planar sein. Ist ein Graph nicht planar, können die Räume nicht auf einer zweidimensionalen Fläche angeordnet werden, ohne sich zu überschneiden und neue, im Graphen nicht dargestellte, Verbindungen zu erzeugen. Für die Darstellung von 3D-Level ist es nicht nötig, dass der Level-Graph planar ist, da hier Räume und Verbindungen auch übereinander oder untereinander liegen können.
 
@@ -54,7 +54,7 @@ Im laufe dieser Arbeit werden verschiedene Verfahren der Graphenanalyse verwende
 
 ### Graph-Search
 
-Beim Graph-Search verfahren, werden mithilfe von Breiten- oder Tiefensuche Pfade von einem Knoten im Graphen zu einem anderen Knoten im Graphen gesucht. Um Zyklen zu vermeiden, werden bei Suche alle bereits betrachteten Knoten markiert. Anders als bei Verfahren wie `A*` oder dem Dijkstra-Algorithmus, werden keine gewichteten Kanten benötigt. Das Graph-Search Verfahren findet daher nicht den kürzesten oder längsten Pfad im Graphen, sondern alle. In Kapitel 4 wird der spezifische Anwendungsfall in dieser Arbeit dafür beschrieben. In diesen Abschnitt wird nur das Theoretische-Verfahren betrachtet. 
+Beim Graph-Search Verfahren werden, mithilfe von Breiten- oder Tiefensuche, Pfade von einem Knoten im Graphen zu einem anderen Knoten im Graphen gesucht. Um Zyklen zu vermeiden, werden bei der Suche alle bereits betrachteten Knoten markiert. Anders als bei Verfahren wie `A*` oder dem *Dijkstra-Algorithmus*, werden keine gewichteten Kanten benötigt. Das Graph-Search Verfahren findet daher nicht den kürzesten oder längsten Pfad im Graphen, sondern alle Pfade. In Kapitel 4 wird der spezifische Anwendungsfall in dieser Arbeit dafür beschrieben. In diesen Abschnitt wird nur das Theoretische-Verfahren betrachtet. 
 
 Listing \ref{graphsearch_pseudo} zeigt eine Implementierung der Graph-Search mithilfe von Tiefensuche in Pseudocode. Zeile 1 dient dabei als Einstiegspunkt, der Methode werden Start- und Zielknoten übergeben. In Zeile 2 wird dann eine Liste erstellt, in der alle Pfade abgespeichert werden, ein Pfad ist dabei selbst eine Liste aus Knoten. In Zeile 3 wird die Suche gestartet und in Zeile 4 werden alle gefunden Pfade zurückgegeben. Die Methode in Zeile 6 bekommt den aktuell betrachteten Knoten, eine Liste mit bereits betrachteten Knoten, den Zielknoten sowie die Liste mit den bereits gefunden Pfaden übergeben. In Zeile 7wird der aktuell betrachtete Knoten markiert und in Zeile 8 wird geprüft, ob es ich bei diesem Knoten um den Zielknoten handelt, ist dies der Fall wird die Liste mit den betrachteten Knoten als Pfad in die Lösungsliste abgespeichert. Sollte es sich nicht um den Zielknoten handeln, wird in Zeile 10-12 die Methode rekursiv für jedes Kind des Knotens erneut aufgerufen. Dabei wird die Liste mit dem bereits betrachteten Knoten kopiert, damit jede Suche unabhängig von den anderen Suchen ist. Sollte der aktuell betrachtete Knoten weder der Zielknoten sein und auch keine Kinder haben bzw. keine Kinder, die noch nicht betrachtet wurden, wurde in diesem Zweig der Tiefensuche kein Pfad zum Ziel gefunden und der Zweig wird nicht weiter betrachtet. 
 
@@ -83,9 +83,9 @@ Als Face werden Flächen in einem planaren Graphen bezeichnet, wenn dieser grafi
 
 Im weiteren Verlauf dieser Arbeit sind nur Faces, die durch Kanten gebildet werden, wichtig (so wie $f2$,$f3$). Ebenso ist die Position der Fläche sowie deren Inhalt nicht von Bedeutung in dieser Arbeit. Für die Arbeit ist lediglich wichtig, festzustellen, dass Faces im Graphen existieren und welche Knoten/Kanten sie bilden. Dafür muss der Graph auf Zyklen untersucht werden.
 
-Um Zyklen in einen ungerichteten Graphen zu finden, können Spannbäume genutzt werden. Ein Spannbäume ist ein Teilgraph des Graphen der alle Knoten des Graphen enthallt und dabei einen Baum ist.[@Tittmann2021] Jede Kante die zwar im Graphen vorhanden ist aber nicht im Spannbaum, ist eine Kante welche einen Zyklus bildet. Im weiteren Verlauf werden solche Kanten als *Back-Forward-Edge* bezeichnet. Um mithilfe einer Back-Forward-Edge einen Zyklus zu finden, muss der Pfad zwischen den beiden Knoten die von der Back-Forward-Edge verbunden werden gefunden werden, der nicht die Back-Forward-Edge enthält. Dafür kann unter anderen der oben Beschriebene Graph-Search Algorithmus genutzt werden. 
+Um Zyklen in einen ungerichteten Graphen zu finden, können Spannbäume genutzt werden. Ein Spannbäume ist ein Teilgraph des Graphen der alle Knoten des Graphen enthallt und dabei einen Baum ist.[@Tittmann2021] Jede Kante die zwar im Graphen vorhanden ist aber nicht im Spannbaum, ist eine Kante welche einen Zyklus bildet. Im weiteren Verlauf werden solche Kanten als *Back-Forward-Edge* bezeichnet. Um mithilfe einer Back-Forward-Edge einen Zyklus zu finden, muss der Pfad zwischen den beiden Knoten, die von der Back-Forward-Edge verbunden werden, gefunden werden, welcher nicht die Back-Forward-Edge enthält. Dafür kann unter anderen der oben beschriebene Graph-Search Algorithmus genutzt werden. 
 
-Abbildung \ref{bfe} zeigt einen Graphen mit rot eingezeichneten Back-Forward-Edges. Die Zahlen in der Beschriftung der Knoten geben den entsprechenden Level an, auf den sich der Knoten im Spannbaum befindet. Die Back-Forward Edge $X$ bildet einen Zyklus zwischen den Knoten $B1->C2->E3$ die Back-Forward-Edge $Y$ bildet einen Zyklus zwischen $A0->B1->C2->E3$. Zusammen Bilden sie zusätzlich noch den Zyklus $A->B1->E3$. 
+Abbildung \ref{bfe} zeigt einen Graphen mit rot eingezeichneten Back-Forward-Edges. Die Zahlen in der Beschriftung der Knoten geben den entsprechenden Level an, auf den sich der Knoten im Spannbaum befindet. Die Back-Forward Edge $X$ bildet einen Zyklus zwischen den Knoten $B1->C2->E3->B1$ die Back-Forward-Edge $Y$ bildet einen Zyklus zwischen $A0->B1->C2->E3->A0$. Zusammen Bilden sie zusätzlich noch den Zyklus $A0->B1->E3->A0$. 
 
 ![Graph mit eingezeichneten Back-Forward-Edges.\label{bfe}](figs/chapter2/bfe.png){width=50%}
 
@@ -97,7 +97,7 @@ Dieses Spielkonzept ist zu dieser Zeit kein unbekanntes, was Rogue hingegen bis 
 
 > But I think Rogue’s biggest contribution, and one that still stands out to this day, is that the computer itself generated the adventure in Rogue. Every time you played, you got a new adventure. That’s really what made it so popular for all those years in the early eighties.[@Wichman1997]
 
-Bei jedem Neustart von Rogue werden die Level neu generiert. Das bedeutet der Aufbau der Level und die Anzahl und Positionierung von Monstern und Items unterscheiden sich mit jedem Spieldurchlauf. Man spielt also niemals zweimal dieselbe Partie von Rogue. Zusätzlich setzt Rogue auf den sogenannten Permadeath. Stirbt der Spieler im Dungeon, verliert er all seinen Fortschritt und muss das Spiel von vorne beginnen, mit neu generiertem Level. Rogue zeichnet sich also vor allem dadurch aus, dass jeder Spieldurchlauf anders als der andere ist und dadurch ein besonders hohes Maß an Abwechslung und damit Wiederspielwert gegeben ist.  
+Bei jedem Neustart von Rogue werden die Level neu generiert. Das bedeutet der Aufbau der Level und die Anzahl und Positionierung von Monstern und Items\footnote{Items bezeichnen Gegenstände die der Spiele ausrüsten oder benutzen kann.} unterscheiden sich mit jedem Spieldurchlauf. Man spielt also niemals zweimal dieselbe Partie von Rogue. Zusätzlich setzt Rogue auf den sogenannten Permadeath. Stirbt der Spieler im Dungeon, verliert er all seinen Fortschritt und muss das Spiel von vorne beginnen, mit neu generiertem Level. Rogue zeichnet sich also vor allem dadurch aus, dass jeder Spieldurchlauf anders als der andere ist und dadurch ein besonders hohes Maß an Abwechslung und damit Wiederspielwert gegeben ist.  
 
 Rogue konnte sich schnell an einiger Beliebtheit erfreuen und es dauert nicht lange bis andere Entwickler ähnliche Spiele mit prozedural generierten Inhalten veröffentlichten.[@MattBarton2009] Es entwickelte sich das Genre der Rogue-Likes.
 
@@ -115,7 +115,9 @@ Sie konzeptionieren eigenständig das Verhalten von Monstern, implementieren Sch
 
 ![Ausschnitt aus dem PM-Dungeon. \label{pmd}](figs/chapter2/pmd.png){width=100%}
 
-Abbildung \ref{pmd} zeigt einen Ausschnitt aus dem Startlevel einer Beispielimplementierung des PM-Dungeons. Die Spielfigur (grüner Kreis) muss mithilfe der Leiter (blauer Kreis) in die nächste Ebene gebracht werden. Auf dem Weg dorthin kann der Spieler die Monster (roter Kreis) töten, um Erfahrungspunkte zu sammeln oder Items zu finden. Sowohl die Spielerposition als auch die Position der Monster werden zu Beginn des Levels zufällig bestimmt. Das Spielziel des PM-Dungeon ist an den Highscore-Automaten angelehnt, es geht also nicht darum einen bestimmten Boss zu besiegen oder ein Item zu sichern, sondern darum möglichst tief in das endlose Dungeon vorzudringen und mit jedem Durchlauf seinen persönlichen Rekord zu brechen. Jedoch kann auch das Spielziel von den Studierenden frei verändert werden. Zum aktuellen Zeitpunkt ist kein eigener Level-Generator im PM-Dungeon integriert. Das Dungeon wird mit einer Handvoll vorgenerierten Level ausgeliefert. Die Studierenden haben keine direkte Möglichkeit die Level zu verändern oder eigene Level zu erstellen.
+Abbildung \ref{pmd} zeigt einen Ausschnitt aus dem Startlevel einer Beispielimplementierung des PM-Dungeons. Die Spielfigur (grüner Kreis) muss mithilfe der Leiter (blauer Kreis) in die nächste Ebene gebracht werden. Auf dem Weg dorthin kann der Spieler die Monster (roter Kreis) töten, um Erfahrungspunkte zu sammeln oder Items zu finden. Sowohl die Spielerposition als auch die Position der Monster werden zu Beginn des Levels zufällig bestimmt. Das Spielziel des PM-Dungeon ist an den Highscore-Automaten angelehnt, es geht also nicht darum einen bestimmten Boss zu besiegen oder ein Item zu sichern, sondern darum möglichst tief in das endlose Dungeon vorzudringen und mit jedem Durchlauf seinen persönlichen Rekord zu brechen. Jedoch kann auch das Spielziel von den Studierenden frei verändert werden. 
+
+tuellen Zeitpunkt ist kein eigener Level-Generator im PM-Dungeon integriert. Das Dungeon wird mit einer Handvoll vorgenerierten Level ausgeliefert. Die Studierenden haben keine direkte Möglichkeit die Level zu verändern oder eigene Level zu erstellen.
 
 ## Regeln für gutes Level-Design
 
@@ -129,7 +131,7 @@ Die Grundlagen der Regeln stammen aus Dan Taylors *Ten Principles of Good Level-
 
 ### Lösbarkeit und Fehlerfreiheit
 
-Ein Level muss lösbar sein. Es darf keine Fehler geben, die das Voranschreiten verhindern. Es sollte zusätzlich darauf geachtet werden, dass Spieler nicht in Sackgassen geraten könne. Braucht der Spieler beispielsweise ein bestimmtes Item, um weiterzukommen, sollte er das Item an diesem Punkt immer noch erreichen können. Bei Spielen, die Lebensenergie verwenden, sollte das Level gelöst werden können, ohne Lebensenergie zu verlieren, so bleiben Spieler, die im vorherigen Abschnitt viel Schaden bekommen haben, nicht stecken. Gibt es im Spiel optionale Wege oder Ziele, müssen auch diese lösbar sein und dürfen nicht durch einen Fehler unlösbar werden. Bei optionalen Inhalten liegt es in der kreativen Entscheidungsfreiheit des Entwicklers, ob diese auch immer erreichbar sein müssen oder ob zum Beispiel ein optionales Item benötigt wird, welches nicht mehr erreichbar ist. Zusätzlich sollten die Level frei von Fehlern sein, die Spielern die Möglichkeit geben das Spiel oder dessen Mechaniken zu manipulieren oder auszunutzen, wie das ungewollte Überspringen von Abschnitten.
+Ein Level muss lösbar sein. Es darf keine Fehler geben, die das Voranschreiten verhindern. Es sollte zusätzlich darauf geachtet werden, dass Spieler nicht in Sackgassen geraten könne. Braucht der Spieler beispielsweise ein bestimmtes Item, um weiterzukommen, sollte er das Item an diesem Punkt immer noch erreichen können. Bei Spielen die Lebensenergie verwenden sollte das Level gelöst werden können, ohne Lebensenergie zu verlieren, so bleiben Spieler, die im vorherigen Abschnitt viel Schaden bekommen haben, nicht stecken. Gibt es im Spiel optionale Wege oder Ziele, müssen auch diese lösbar sein und dürfen nicht durch einen Fehler unlösbar werden. Bei optionalen Inhalten liegt es in der kreativen Entscheidungsfreiheit des Entwicklers, ob diese auch immer erreichbar sein müssen oder ob zum Beispiel ein optionales Item benötigt wird, welches nicht mehr erreichbar ist. Zusätzlich sollten die Level frei von Fehlern sein, die Spielern die Möglichkeit geben das Spiel oder dessen Mechaniken zu manipulieren oder auszunutzen, wie das ungewollte Überspringen von Abschnitten.
 
 **Regel 1: Gute Level sind lösbar und fehlerfrei.** 
 
@@ -169,13 +171,13 @@ Vor allem bei Rogue-Like Spielen sollte es ständig zu solchen Momenten kommen, 
 
 ### Pacing
 
-![Pacing im Wüstenpalast. \label{zelda3pacing}](figs/chapter2/Zelda3Pacing.png){width=70%} 
+![Pacing im Wüstenpalast von The Legend of Zelda 3. \label{zelda3pacing}](figs/chapter2/Zelda3Pacing.png){width=70%} 
 
 Der Begriff Pacing entstammt der Filmbranche und beschreibt die Spannungskurve des Films. Aus dem Film lassen sich drei Regeln für gutes Pacing ableiten, welche auch für Videospiele Anwendung finden können.[@Wesowski2009]
 
-1. Pacing verläuft nicht linear, nach Hochpunkten sollte ein Tiefpunkt folgen 
-2. Zu Beginn sollte viel Spannung erzeugt werden, um den Zuschauer bei Stange zu halten 
-3. Kurz vor Ende sollte der spannendste Moment sein, der sich am Ende entlädt
+1. Pacing verläuft nicht linear, nach Hochpunkten sollte ein Tiefpunkt folgen.
+2. Zu Beginn sollte viel Spannung erzeugt werden, um den Zuschauer bei Stange zu halten.
+3. Kurz vor Ende sollte der spannendste Moment sein, der sich am Ende entlädt.
 
 Auch Videospiele sollten darauf achten ihre Spannungskurve zu kontrollieren. Gutes Pacing sorgt dafür, dass ein Spiel nicht langweilig oder repetitiv wird  [@Brown2018]
 
@@ -220,7 +222,7 @@ Dies ist eine kritische Anforderung. Level, die nicht gelöst werden können, si
 
 ### Regel 2: Gute Level fordern die Mechanik des Spiels
 
-Es ist wichtig, dass die erzeugten Level für das Spiel verwendbar sind. Ein guter Generator bietet Schnittstellen um neben den standart Elementen (Wände, Böden, Türen) auch andere Elemente in den Generierungsprozess einfließen zu lassen (Fallen, Sprengbare Wände etc.).
+Es ist wichtig, dass die erzeugten Level für das Spiel verwendbar sind. Ein guter Generator bietet Schnittstellen um neben den standart Elementen (Wände, Böden, Türen) auch andere Elemente in den Generierungsprozess einfließen zu lassen (Fallen, sprengbare Wände etc.).
 
 ### Regel 3: Gute Level sind gut gebalanced
 
@@ -228,11 +230,11 @@ Das Balancing im Spiel wird stark von den Gamedesignentscheidungen gesteuert und
 
 ### Regel 4: Gute Level haben Risk and Reward Momente
 
-Um Riks and Reward Momente zu erzeugen, müssen alternative Pfade vom Generator erstellt werden können. Ein guter Generator bietet Schnittstellen für den Designer um gezielt auf alternative Pfade zugreifen zu können, um dort ein besonders schweres Hindernis und eine entsprechende Belohnung zu platzieren. Die Anzahl der alternativen Pfade sollte vom Designer konfigurierbar sein 
+Um Risk and Reward Momente zu erzeugen, müssen alternative Pfade vom Generator erstellt werden können. Ein guter Generator bietet Schnittstellen für den Designer, um gezielt auf alternative Pfade zugreifen zu können, um dort ein besonders schweres Hindernis und eine entsprechende Belohnung zu platzieren. Die Anzahl der alternativen Pfade sollte vom Designer konfigurierbar sein.
 
 ### Regel 5: Gute Level steuern das Pacing des Spiels
 
-Das Pacing wird durch das Layout der Level bestimmt. Ein guter Generator erzeugt Level mit abwechslungsreichem Layout, implementiert Verfahren, um Backtracking zu vermeiden und bietet Schnittstellen für den Designer, um das Layout des Levels zu manipulieren oder sogar ganz zu bestimmen.
+Das Pacing wird durch das Layout der Level bestimmt. Ein guter Generator erzeugt Level mit abwechslungsreichem Layout, implementiert Verfahren um Backtracking zu vermeiden und bietet Schnittstellen für den Designer, um das Layout des Levels zu manipulieren oder sogar ganz zu bestimmen.
 
 ### Regel 6: Gute Level sind einzigartig
 
