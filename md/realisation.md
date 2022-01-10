@@ -20,13 +20,13 @@ Abbildung \ref{graphgUML} zeigt ein reduziertes UML-Klassendiagramm für den Auf
 \begin{lstlisting}[label=copy, caption={Kopieren von Graphen und Kanten.}  ]
 //in Graph
 Graph (Graph g){
-        g.getNodes().forEach(n -> nodes.add(new Node(n)));
-        for (Node n : g.getNodes()) {
-            for (Integer nb : n.getNeighbours()) {
-                Node n1 = nodes.get(n.getIndex());
-                n1.connect(nodes.get(nb));
-            }
-        }
+	g.getNodes().forEach(n -> nodes.add(new Node(n)));
+	for (Node n : g.getNodes()) {
+		for (Integer nb : n.getNeighbours()) {
+			Node n1 = nodes.get(n.getIndex());
+			n1.connect(nodes.get(nb));
+		}
+	}
 }
 //in Node
 Node (Node n){
@@ -39,67 +39,66 @@ Listing \ref{cc} zeigt wie geprüft wird, ob Knoten miteinander verbunden werden
 `Graph#canConnect(Node n1, Node 2)` prüft, ob zwei bereits existierende Knoten miteinander verbunden werden können, ohne gegen die Bedingung zu verstoßen. Es wird wieder die Liste `manyNeighbours` mit allen Knoten die mehr als zwei Nachbarn haben angelegt. Jetzt wird für beide Knoten separat geprüft, ob diese mit einer neuen Verbindung in die Liste aufgenommen werden müssten, dies ist der Fall, wenn sie mit der neuen Verbindung mehr als zwei Nachbarn hätten und noch nicht in der Liste eingetragen sind. Hat die Liste noch Platz für die Knoten, die hinzugefügt werden müssen, dann ist die Verbindung erlaubt, sollte die Liste überfüllt werden, kann keine Verbindung stattfinden. 
 
 \begin{lstlisting}[language=python, label=cc, caption={Prüfen ob Knoten und Kanten hinzugefügt werden können.}]
-	private boolean canConnect(Node n) {
-	    List<Node> manyNeighbour = new ArrayList<>(nodes);
-		//MAX_NEIGHBOURS=2
-	    manyNeighbour.removeIf(node -> node.getNeighbours().size() <= MAX_NEIGHBOURS);
-		//MAX_NODES=4
-	    if (manyNeighbour.size() <= MAX_NODES
-	            || manyNeighbour.contains(n)
-	            || n.getNeighbours().size() + 1 <= MAX_NEIGHBOURS) return true;
-	    else return false;
-	}
+private boolean canConnect(Node n) {
+	List<Node> manyNeighbour = new ArrayList<>(nodes);
+	//MAX_NEIGHBOURS=2
+	manyNeighbour.removeIf(node -> node.getNeighbours().size() <= MAX_NEIGHBOURS);
+	//MAX_NODES=4
+	if (manyNeighbour.size() <= MAX_NODES 
+	|| manyNeighbour.contains(n)
+	|| n.getNeighbours().size() + 1 <= MAX_NEIGHBOURS) return true;
+	else return false;
+}
 	
 
-	private boolean canConnect(Node n1, Node n2) {
-	    List<Node> manyNeighbour = new ArrayList<>(nodes);
-	    manyNeighbour.removeIf(node -> node.getNeighbours().size() <= MAX_NEIGHBOURS);
-	    boolean addN1 =
-	            (n1.getNeighbours().size() >= MAX_NEIGHBOURS && !manyNeighbour.contains(n1));
-	    boolean addN2 =
-	            (n2.getNeighbours().size() >= MAX_NEIGHBOURS && !manyNeighbour.contains(n2));
+private boolean canConnect(Node n1, Node n2) {
+	List<Node> manyNeighbour = new ArrayList<>(nodes);
+	manyNeighbour.removeIf(node -> node.getNeighbours().size() <= MAX_NEIGHBOURS);
+	boolean addN1 =
+	(n1.getNeighbours().size() >= MAX_NEIGHBOURS && !manyNeighbour.contains(n1));
+	boolean addN2 =
+	(n2.getNeighbours().size() >= MAX_NEIGHBOURS && !manyNeighbour.contains(n2));
 	
-	    return (manyNeighbour.size() + (addN1 ? 1 : 0) + (addN2 ? 1 : 0) < MAX_NODES);
-	}
-
+	return (manyNeighbour.size() + (addN1 ? 1 : 0) + (addN2 ? 1 : 0) < MAX_NODES);
+}
 \end{lstlisting}
 
 Listing \ref{trees} zeigt die Methode `GraphG#calculateTrees`. Die Funktionsweise wurde bereits in Kapitel 4.3.1 erläutert, daher soll hier der Fokus nur auf Zeile 7 und 8 liegen. Zeile 7 kopiert mithilfe der oben beschriebenen Methode den aktuell betrachteten Graphen und Zeile 8 nutzt die Methode `Graph#connectNewNode(int index)`, um den betrachteten Knoten mit einem neuen Knoten zu verbinden. Die Methode gibt `true` zurück, wenn eine Verbindung erstellt wurde und `false` wenn keine Verbindung erstellt werden kann. Kann eine Verbindung erstellt werden, wird der kopierte Graph in der Liste der Teillösungen aufgenommen. Anzumerken ist, dass in Zeile 8 der Index des originalen Knotens `n` genutzt wird, um die Kopie des Knotens `n` in `newTree` anzusprechen. 
 
 \begin{lstlisting}[language=python, label=trees, caption={Breitensuchen nach allen gültigen Bäumen.}]
-	private List<Graph> calculateTrees(List<Graph> trees, int nodesLeft) {
-        if (nodesLeft <= 0) return trees;
-        else {
-            List<Graph> newTrees = new ArrayList<>();
-            for (Graph t : trees)
-                for (Node n : t.getNodes()) {
-                    Graph newTree = new Graph(tree);
-                    if (newTree.connectNewNode(n.getIndex())) newTrees.add(newTree);
-                }
-            return calculateTrees(newTrees, nodesLeft - 1);
-        }
-    }
+private List<Graph> calculateTrees(List<Graph> trees, int nodesLeft) {
+	if (nodesLeft <= 0) return trees;
+	else {
+		List<Graph> newTrees = new ArrayList<>();
+		for (Graph t : trees)
+			for (Node n : t.getNodes()) {
+				Graph newTree = new Graph(tree);
+				if (newTree.connectNewNode(n.getIndex())) newTrees.add(newTree);
+			}
+		return calculateTrees(newTrees, nodesLeft - 1);
+	}
+}
 \end{lstlisting}
 
 Listing \ref{graphs} zeigt die Funktionsweise der Methode `GraphG#calculateGraphs`.  Die Funktionsweise wurde bereits in Kapitel 4.3.1 erläutert, daher soll hier der Fokus nur auf Zeile 6 bis 11 liegen. In Zeile 6 wird über jeden Knoten im Graphen  `g` iteriert, `g` ist dabei keine Kopie eines Graphen, sondern stammt direkt aus der Liste, die übergeben wird. In Zeile 7 wird nun auch über jeden Knoten in `g` iteriert und in Zeile 8 wird `g` kopiert. In Zeile 9 wird geprüft ob `n1` und `n2` nicht identisch sind und in Zeile 10 wird versucht eine Verbindung zwischen den Kopien der Knoten `n1` und `n2` herzustellen, wenn dies gelingt wird in Zeile 11  der kopierte Graph in die Liste der Teillösungen aufgenommen. 
 
 \begin{lstlisting}[label=graphs, caption={Breitensuchen nach allen gültigen Graphen.}]
 List<Graph> calculateGraphs(List<Graph> graphs, int edgesLeft) {
-        if (edgesLeft <= 0) return graphs;
-        else {
-            List<Graph> newGraphs = new ArrayList<>();
-            for (Graph g : graphs)
-                for (Node n1 : g.getNodes())
-                    for (Node n2 : g.getNodes()) {
-                        Graph newGraph = new Graph(g);
-                        if (n1.getIndex() != n2.getIndex()
-                                && newGraph.connectNodes(n1.getIndex(), n2.getIndex())) {
+	if (edgesLeft <= 0) return graphs;
+	else {
+		List<Graph> newGraphs = new ArrayList<>();
+		for (Graph g : graphs)
+			for (Node n1 : g.getNodes())
+				for (Node n2 : g.getNodes()) {
+					Graph newGraph = new Graph(g);
+					if (n1.getIndex() != n2.getIndex()
+					&& newGraph.connectNodes(n1.getIndex(), n2.getIndex())) {
                             newGraphs.add(newGraph);
-                        }
-                    }
-            return calculateGraphs(newGraphs, edgesLeft - 1);
-        }
-    }
+					}
+				}
+		return calculateGraphs(newGraphs, edgesLeft - 1);
+	}
+}
 \end{lstlisting}
 
 

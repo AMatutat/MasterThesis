@@ -18,14 +18,14 @@ Ein gut konzeptionierter prozedurale Algorithmus kann auf Knopfdruck hunderte ve
 
 Ein simpler prozeduraler Algorithmus zur Erzeugung von Level ist der *Random Walk* oder auch *Drunkard's Walk*. Eigentlich wird dieser zur Generierung nicht deterministischer Zeitreihen, wie Aktienkurse in der Finanzmathematik verwendet, kann aber auch höhlenartige Level erzeugen.[@Wikipedia2020b] Listing **\ref{imdrunk}** zeigt den Algorithmus als Pseudocode.[@roguebasin2014]  Das Level wird als 2D-Array dargestellt und jeder Index im Array ist ein Feld im Level. Es gibt nicht betretbare Felder (Wände) und betretbare Felder (Böden). Zu Beginn wird ein zufälliges Feld als Startpunkt ausgewählt und zu einem Bodenfeld gemacht. Von diesem Feld aus wird nun in eine zufällige Richtung gegangen und das neue Feld wird wieder zu einem Bodenfeld umgewandelt. Dieser Prozess wird so lange wiederholt, bis die gewünschte Anzahl an Bodenfeldern vorhanden ist.  Der Vorteil des Random Walk Algorithmus liegt darin, dass sichergestellt werden kann, dass alle Bodenfelder auch erreichbar sind, da sie gezwungenermaßen alle miteinander verbunden sind. Allerdings bietet der Algorithmus abseits der gewünschten Bodenfelder keine Konfigurationsmöglichkeiten und die erzeugten Level ähneln sich von der Struktur sehr. Abbildung \ref{drunkexample} zeigt ein Beispiel wie ein Level aussehen könnte, welches durch den Random Walk erzeugt wurde.
 
-\begin{lstlisting}[language=, label=imdrunk, caption={Pseudocode Random Walk}  ]
-	erstelle ein Level in dem alle Felder Wände sind
-	wähle ein Feld als Startpunkt aus
-	verwandel das gewählte Feld in einen Boden
-	solange noch nicht genügen Boden im Level existiert
-    	mache ein Schritt in eine zufällige Richtung
-    	wenn das neue Feld eine Wand ist
-        	verwandel das Feld in einen Boden
+\begin{lstlisting}[label=imdrunk, caption={Random Walk in Pseudocode.}  ]
+erstelle ein Level in dem alle Felder Wände sind
+wähle ein Feld als Startpunkt aus
+verwandle das gewählte Feld in einen Boden
+solange noch nicht genügen Boden im Level existiert
+mache ein Schritt in eine zufällige Richtung
+wenn das neue Feld eine Wand ist
+	verwandle das Feld in einen Boden
 \end{lstlisting}
 
 ![Beispielergebnis eines Random Walk. Schwarze Flächen sind Wände, weiße Flächen sind Böden.[@Hagen2019] \label{drunkexample}](figs/chapter2/drunk.png){width=100%}
