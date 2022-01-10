@@ -227,18 +227,9 @@ Level getLevel(int nodeCounter, int edeCounter, DesignLabel design){
 }
 \end{lstlisting}
 
+Um den Graphen in Chains aufzuteilen, müssen die Back-Forward-Edges identifiziert werden. Wie oben beschrieben werden die Graphen zweiteilig Generiert. Erst wird wird ein Baum generiert und dann die extra Kanten in diesen Baum eingezeichnet. Diese extra Kanten sind die gesuchten Back-Forward-Edges. Daher müssen diese nicht gesucht werden sondern können bereits beim generieren des Graphen abgespeichert werden. Jedes mal wenn `Graph#connectNodes(index n1, index n2)` aufgerufen wird und die extra Kante eingezeichnet wird, speichert der Graph die Back-Forward-Edge zusätzlich in einer separaten Liste ab. In `LevelG#spliInChains` kann auf diese Liste zugegriffen werden und mithilfe der Graph-Search alle Zyklen im Graph gefunden werden. Dafür werden alle Pfade die von einem Knoten einer Back-Forward-Edge bis zum anderen Knoten führen gesucht, diejenigen entfernt welche die Back-Foward-Edge selbst enthalten und  dann der Pfad mit der geringsten Knotenanzahl genommen. Dies wird für alle Back-Forward-Edges im Graphen durchgeführt. 
 
-
-- Aufteilung in Chains
-  - ChainNode.class
-  - Chain.class
-  - `splitInChains`
-
-\begin{lstlisting}[language=java, label=dochain, caption={Aufteilen eines Graphen in Chains.}  ]
-todo
-\end{lstlisting}
-
-
+Nachdem alle Zyklen im Graphen gefunden wurden und jeweils als Chain abgespeichert wurden, müssen die Knoten die nicht in einen Zyklus sind in Chains aufgeteilt werden. Dafür wird ein Knoten der nicht bereits in einer Chain ist ausgewählt. Vom ausgewählten Knoten wird nun ein Nachbar Knoten ausgewählt der sich nicht in einer Chain befindet. Für den Nachbar wird wiederum wieder ein Nachbar ausgewählt der in keiner Chain ist usw. Dieser Vorgang wird wiederholt, bis ein Knoten erreicht wurde, der keine Nachbarn mehr hat die in keiner Chain sind. In diesem Fall wurde vom Ursprünglichen Startknoten ein Weg bis zum Ende gegangen. Vom urspünglichen Startknoten kann dieser Vorgang noch einmal mit einen anderen Nachbarknoten wiederholt werden, da jeder Knoten in einer Chain bis zu zwei Nachbarknoten haben darf. Nachdem beide Richtungen bis zum Ende gegangen wurden, bilden alle betrachteten Knoten eine Chain. Dies wird wiederholt, bis alle Knoten Teil einer Chain sind. Sollte ein Startknoten keine Nachbarn haben die nicht bereits in einer Chain sind, bildet er eine Chain mit nur einen Knoten.
 
 Listing \ref{getCS} zeigt wie alle gültigen configuration-spaces für einen Knoten gefunden werden. Der Methode werden die configuration-spaces für alle bereits platzierten Nachbarn übergeben. An diese configuration-spaces muss der platzierte Raum angebunden werden. Außerdem werden der Methode alle bereits gesetzten configuration-spaces übergeben. Bei der Platzierung des Raumes muss darauf geachtet werden, dass es zu keiner Überschneidung mit den anderen Räumen kommt. Die Methode gibt alle möglichen configuration-spaces für den Knoten mit dem zu verwendenden Template für die gegebene Umgebung zurück. Dafür wird mithilfe der Methode `calCS` jeder gültiger configuration-space berechnet bei dem der Knoten so platziert wird, dass er an den Nachbar anliegend ist. Diese Berechnung wird mit jedem Nachbar durchgeführt. Die Schnittmenge der gültigen configuration-spaces für die einzelnen Nachbarn, sind alle gültigen configuration-spaces für den Knoten, damit dieser so platziert werden kann, dass er mit allen seinen Nachbarn verbunden ist und zeitgleich keinen Raum überschneidet. 
 
