@@ -270,17 +270,7 @@ Listing \ref{calCS} zeigt wie die configuration-spaces für einen Knoten berechn
         }
 \end{lstlisting}
 
-Listing \ref{calAP} zeigt wie **TODO**
-
-\begin{lstlisting}[language=java, label=calAP, caption={Berechnen der globalen Positionen für ein Template um an den statischen Raum angebunden werden zu können.}  ]
-        private List<Point> calAttachingPoints(CS staticSpace, RoomTemplate template) {
-            List<Point> points = new ArrayList<>();
-    
-
-            // todo
-            return points;
-        }
-\end{lstlisting}
+Die Methode `calAttachingPoints` findet alle Punkte im globalen Raum an den ein Template platziert werden kann um an einen statischen Template angebunden zu werden. Dafür wird von jedem äußeren Wandfeld des statischen Templates solange in eine Richtung gegangen bis das dynamische Tempalte so platziert werden kann, dass es angebunden ist oder soweit entfernt ist, dass es nicht mehr in Reichweite ist. Für alle Punkte an den das Template platziert werden kann und angebunden ist, wird ein Configuration Space erstellt. 
 
 Abbildungen **TODO** zeigen verschiedene von LevelG generierte Level. In Kapitel 6 werden die Level analysiert und bewertet. 
 
