@@ -12,6 +12,25 @@ Hier werden verschiedene, von GraphG erzeugte, planare Graphen gezeigt. Diese Gr
 
 ![Von GraphG erzeugter Graph mit 7 Knoten und 1 extra Kanten. \label{graphex4}](figs/chapter4/graphgsol/example4.png)
 
+
+
+## Level
+
+In diesen Abschnitt werden unterschiedliche, von DungeonG erzeugte, Level gezeigt.
+
+![\label{lvl1}](figs/level/graphgsol/3_1.png)
+
+![\label{lvl2}](figs/level/graphgsol/6_1.png)
+
+![\label{lvl3}](figs/level/graphgsol/7_0.png)
+
+![\label{lvl4}](figs/level/graphgsol/7_0_ice_rep.png)
+
+![\label{lvl5}](figs/level/graphgsol/10_0.png)
+
+
+
+
 ## GitHub-Workflows 
 
 \label{workflows}
