@@ -1,0 +1,27 @@
+<diagram program="umletino" version="14.3.0"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>600</x><y>230</y><w>190</w><h>100</h></coordinates><panel_attributes>Replacement
+--
+-layout: int[][]
+-rotate: boolean
+-label: DesignLabel
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>190</x><y>440</y><w>340</w><h>80</h></coordinates><panel_attributes>ReplacementLoader
+--
+-replacements: List&lt;Replacment&gt;
+--
++getReplacements(label: DesignLabel):List&lt;Replacement&gt;
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>350</x><y>270</y><w>270</w><h>190</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;170;10;10;250;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>570</x><y>380</y><w>340</w><h>80</h></coordinates><panel_attributes>RoomTemplateLoader
+--
+-roomTemplates: List&lt;RoomTemplate&gt;
+--
++getRoomTemplate(label: DesignLabel):List&lt;Replacement&gt;
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>580</x><y>570</y><w>440</w><h>120</h></coordinates><panel_attributes>RoomTemplate
+--
+-layout: int[][]
+-label: DesignLabel
+--
++replace(replacements:List&lt;Replacement&gt;):Room
+-placeIn(layout:int[][],r:Replacement,xCor:int,yCor:int):boolean
+-canReplaceIn(layout:int[][],r:Replacement,xCor:int,yCor:int):boolean
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>750</x><y>450</y><w>30</w><h>140</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;120</additional_attributes></element><element><id>Relation</id><coordinates><x>780</x><y>260</y><w>240</w><h>320</h></coordinates><panel_attributes>lt=&lt;-</panel_attributes><additional_attributes>10;10;220;10;220;300</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1090</x><y>620</y><w>100</w><h>40</h></coordinates><panel_attributes>Room</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1010</x><y>630</y><w>100</w><h>30</h></coordinates><panel_attributes>lt=&lt;-</panel_attributes><additional_attributes>80;10;10;10</additional_attributes></element></diagram>
