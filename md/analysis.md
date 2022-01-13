@@ -1,6 +1,6 @@
 # Algorithmen zur prozeduralen Generierung
 
-In diesem Kapitel werden Algorithmen vorgestellt, die verschiedene Aspekte der prozeduralen Level-Generierung abdecken. Nicht jeder vorgestellter Algorithmus ist für die Generierung von Level konzeptioniert, kann aber für Teilaspekte verwendet werden. Es werden Algorithmen zur Generierung von planaren Graphen, Erzeugen von Level aus diesen Graphen sowie zum Erstellen von einzelnen Räumen vorgestellt. Ziel ist es, im nächsten Kapitel, die einzelnen Elemente der Algorithmen so zu kombinieren, dass das Resultat die in Kapitel 2 aufgestellten Anforderungen bestmöglich erfüllt. 
+In diesem Kapitel werden Algorithmen vorgestellt, die verschiedene Aspekte der prozeduralen Level-Generierung abdecken. Nicht jeder vorgestellter Algorithmus ist für die Generierung von Level konzeptioniert, kann aber für Teilaspekte verwendet werden. Es werden Algorithmen zur Generierung von planaren Graphen, zum Erzeugen von Level aus diesen Graphen sowie zum Erstellen von einzelnen Räumen vorgestellt. Ziel ist es, im nächsten Kapitel, die einzelnen Elemente der Algorithmen so zu kombinieren, dass das Resultat die in Kapitel 2.7 aufgestellten Anforderungen bestmöglich erfüllt. 
 
 
 ## Vom Graph zum Level 
@@ -14,15 +14,15 @@ Als Input werden dem Algorithmus zu einem der planare Level-Graph $G$ übergeben
 Der Algorithmus besteht im Wesentlichen aus zwei Schritten:
 
 1. Zerlegen von $G$ in Subgraphen
-2. Iteratives Auflösen der Knoten in den Subgraphen
+2. Inkrementelles Auflösen der Knoten in den Subgraphen
 
-Auflösung von Knoten meint, dass in der Darstellung von $G$ in physischer Anordnung der Blöcke aus $B$, also dem spielbaren Level, die Blöcke so platziert sind, dass die in $G$ dargestellten Verbindungen existieren, ohne dass sich die Blöcke überschneiden. Eine Verbindung existiert dann, wenn zwei Blöcke sich an einer Kante schneiden, ohne sich zu überlappen, und zusätzlich die Schnittlänge groß genug ist, um einen Durchgang zu erzeugen. Dazu wird ein *configuration Space* definiert. 
+Auflösung von Knoten meint, dass in der Darstellung von $G$ in physischer Anordnung der Blöcke aus $B$, also dem spielbaren Level, die Blöcke so platziert sind, dass die in $G$ dargestellten Verbindungen existieren, ohne dass sich die Blöcke überschneiden. Eine Verbindung existiert dann, wenn zwei Blöcke sich an einer Kante schneiden, ohne sich zu überlappen, und zusätzlich die Schnittlänge groß genug ist, um einen Durchgang zu erzeugen. Dazu wird ein *Configuration-Space* definiert. 
 
-![Beispiel: configuration space. \label{confspace}[@Ma2014]](figs/chapter3/configurationspace.PNG)
+![Beispiel: Configuration-Space. \label{confspace}[@Ma2014]](figs/chapter3/configurationspace.PNG)
 
-Abbildung \ref{confspace} a) zeigt wie der configuration space für eine Verbindung von zwei Blöcken aussehen könnte. Beim Auflösen einer solchen Verbindung ist ein Block statisch, kann also nicht bewegt oder rotiert werden und der andere Block ist dynamisch, kann also bewegt und rotiert werden. In diesem Fall ist der mittlere (umgedrehtes L) Block statisch und der quadratische Block dynamisch. Im dynamischen Block wird ein Referenzpunkt bestimmt, in diesen Fall das Zentrum des Blocks. Die rote Linie ist der configuration space und zeigt nun alle möglichen Positionen, die der Referenzpunkt einnehmen kann, um die Verbindung gültig zu lösen. Abbildung \ref{confspace} b) zeigt wie eine Verbindung mit zwei statischen und einem dynamischen Block aufgelöst wird. Zuerst wird für jeden statischen Block der configuration space bestimmt, die Schnittpunkte beider configuration spaces (gelbe Punkte) sind die gültigen Positionen für den Referenzpunkt des dynamischen Blocks.
+Abbildung \ref{confspace} a) zeigt wie der Configuration-Space für eine Verbindung von zwei Blöcken aussehen könnte. Beim Auflösen einer solchen Verbindung ist ein Block statisch, kann also nicht bewegt oder rotiert werden und der andere Block ist dynamisch, kann also bewegt und rotiert werden. In diesem Fall ist der mittlere (umgedrehtes L) Block statisch und der quadratische Block dynamisch. Im dynamischen Block wird ein Referenzpunkt bestimmt, in diesen Fall das Zentrum des Blocks. Die rote Linie ist der Configuration-Space und zeigt nun alle möglichen Positionen, die der Referenzpunkt einnehmen kann, um die Verbindung gültig zu lösen. Abbildung \ref{confspace} b) zeigt wie eine Verbindung mit zwei statischen und einem dynamischen Block aufgelöst wird. Zuerst wird für jeden statischen Block der Configuration-Space bestimmt, die Schnittpunkte beider Configuration-Spaces (gelbe Punkte) sind die gültigen Positionen für den Referenzpunkt des dynamischen Blocks.
 
-Das Berechnen des configuration spaces reduziert den lokalen Suchraum für die individuellen Knoten, jedoch ist der Suchraum für den gesamten Graphen weiterhin zu groß, um zuverlässig in einer angebrachten Zeit eine Lösung zu finden. Daher wird das Problem in kleinere, einfacher zu lösende, Teilprobleme aufgeteilt. Es hat sich herausgestellt, dass Graphen, in den jeder Knoten maximal zwei Nachbarn besitzt, einfacher aufzulösen sind, da die Anzahl der Kanten der Blöcke immer größer ist als die Anzahl der Kanten des Knotens im Graph. 
+Das Berechnen des Configuration-Spaces reduziert den lokalen Suchraum für die individuellen Knoten, jedoch ist der Suchraum für den gesamten Graphen weiterhin zu groß, um zuverlässig in einer angebrachten Zeit eine Lösung zu finden. Daher wird das Problem in kleinere, einfacher zu lösende, Teilprobleme aufgeteilt. Es hat sich herausgestellt, dass Graphen, in den jeder Knoten maximal zwei Nachbarn besitzt, einfacher aufzulösen sind, da die Anzahl der Kanten der Blöcke immer größer ist als die Anzahl der Kanten des Knotens im Graph. 
 
 ![Beispiel: Aufteilen eines Graphen in Chains. \label{how2chain}[@Nepozitek2019]](figs/chapter3/howtochain.PNG)
 
@@ -48,7 +48,7 @@ end procedure
 Listing \ref{laydown} zeigt den Peseudocode für das inkrementelle Erstellen eines Level mithilfe des beschriebenen Verfahrens.[@Ma2014]
 
 
-Zwar könnten die Chains auch separat aufgelöst werden und dann versucht werden die Teillösungen miteinander zu verbinden, jedoch würden dabei Lösungen erzeugt werden, die zwar die Chain auflösen aber nicht mit den gesamten Graphen kompatibel sind und daher unbrauchbar wären. Zusätzlich sind im Level alle miteinander verbunden, daher gibt es auch keine Vorteile die Chains einzeln zu lösen. 
+Zwar könnten die Chains auch separat aufgelöst werden und dann versucht werden die Teillösungen miteinander zu verbinden, jedoch würden dabei Lösungen erzeugt werden, die zwar die Chain auflösen aber nicht mit den gesamten Graphen kompatibel sind und daher unbrauchbar wären. Außerdem sind im Level alle Knoten miteinander verbunden, daher gibt es auch keine Vorteile die Chains einzeln zu lösen. 
 
 Das Erstellen von mehren Lösungen für eine Chain hat mehrere Vorteile. Zu einem ermöglicht und erleichtert es das schrittweise Backtracking, falls eine Chain nicht in der aktuellen Lösung angeschlossen werden kann und zusätzlich können schneller mehrere gültige Lösungen für ein Graph gefunden werden, indem beispielsweise nach der dritten Chain eine andere Teillösungen verwendet wird. Abbildung \ref{graphsolution} zeigt wie aus verschieden Teillösungen unterschiedliche Gesamtlösungen entstehen. Dies unterstreicht noch einmal die Effizienz des Algorithmus, da bereits aus einem einzigen Input-Graphen viele vollkommen unterschiedliche Level entstehen können. 
 
@@ -66,9 +66,9 @@ Vorteil: Die Level-Layouts unterscheiden sich selbst bei gleichen Input-Daten st
 
 Nachteil: Der Algorithmus funktioniert nicht ohne Input-Daten, sowohl Graph als auch das Set aus Räumen müssen vorher erstellt werden, dies senkt die Effizienz des Algorithmus. 
 
-Lösungsansatz: Ein weiterer Algorithmus zur Generierung planarer Graphen kann genutzt werden, um den Input-Grafen automatisch erstellen zu lassen. Auch ein Algorithmus zur automatischen Generierung von Input-Räumen wäre denkbar. Die vollständige automatisierte Generierung von Räumen stellt allerdings ein eigenes komplexes Problem dar, welches im Rahmen dieser Arbeit nicht besprochen wird. 
+Lösungsansatz: Ein weiterer Algorithmus zur Generierung planarer Graphen kann genutzt werden, um den Input-Graphen automatisch erstellen zu lassen. Auch ein Algorithmus zur automatischen Generierung von Input-Räumen wäre denkbar. Die vollständige automatisierte Generierung von Räumen stellt allerdings ein eigenes komplexes Problem dar, welches im Rahmen dieser Arbeit nicht besprochen wird. 
 
-Nachteil: Es werden immer dieselben Räume verwendet, bei wenigen Input-Räumen oder einen Spieler der viel Zeit im Spiel verbringt wird diese sichtbar und die Einzigartigkeit der Level ist nicht mehr gegeben. 
+Nachteil: Es werden immer dieselben Räume verwendet. Bei wenigen Input-Räumen oder einem Spieler der viel Zeit im Spiel verbringt, wird dies sichtbar und die Einzigartigkeit der Level ist nicht mehr gegeben. 
 
 Lösungsansatz: Auch hier könnte ein Algorithmus zur vollständigen Generierung von Räumen genutzt werden. Eine andere Möglichkeit wäre ein Algorithmus, der die Input-Räume anhand verschiedener Kriterien mutiert und so bereits aus wenigen Räumen eine Vielzahl unterschiedlicher Räume erzeugt. 
 
@@ -92,7 +92,7 @@ Das Satz von Kuratowski sagt, dass ein Graph genau dann planar ist, wenn er kein
 
 Bei der Generierung eines planaren Graphen muss also darauf geachtet werden, dass weder $K5$ noch $K3,3$ enthalten sind. 
 
-Die Untersuchung eines Graphen $G$ nach einem Teilgraphen der isomorph zu einem Graphen $H$ ist, ist ein NP-Vollständiges Problem.[@Cook1971] Besitzen $G$ und $H$ isomorphe Unterteilungsgraphen heißen diese homöomorph.[@wikipedia2016] Einen Graphen nach einem Teilgraphen zu durchsuchen der homöomorph zu $K5$ oder $K3,3$ ist, ist daher auch ein NP-Vollständiges Problem. Bei der Generierung des Graphen eine Untersuchung nach $K5$ oder $K3,3$ homöomorphen Teilgraphen durchzuführen ist daher kein effizientes Vorgehen. Es ist aber möglich, die Erzeugung von $K5$ oder $K3,3$ zu verhindern.
+Die Untersuchung eines Graphen $G$ nach einem Teilgraphen der isomorph zu einem Graphen $H$ ist, ist ein NP-Vollständiges Problem.[@Cook1971] Besitzen $G$ und $H$ isomorphe Unterteilungsgraphen, heißen diese homöomorph.[@wikipedia2016] Einen Graphen nach einem Teilgraphen zu durchsuchen der homöomorph zu $K5$ oder $K3,3$ ist, ist daher auch ein NP-Vollständiges Problem. Bei der Generierung des Graphen eine Untersuchung nach $K5$ oder $K3,3$ homöomorphen Teilgraphen durchzuführen ist daher kein effizientes Vorgehen. Es ist aber möglich, die Erzeugung von $K5$ oder $K3,3$ zu verhindern.
 
 $K5$ besteht aus fünf Knoten mit jeweils vier Kanten. Ein Graph, indem es maximal vier Knoten mit vier oder mehr Kanten gibt, kann $K5$ daher nicht enthalten. 
 
@@ -163,7 +163,7 @@ Derek Yu schrieb in seinem Buch:
 
 > This system doesn‘t create the most natural-looking caves ever, and players will quickly begin to recognize certain repeating landmarks and perhaps even sense that the levels are generated on a grid. But with enough templates and random mutations, there’s still plenty of variability. More importantly, it creates fun and engaging levels that the player can’t easily get stuck in, something much more valuable than realism when it comes to making an immersive experience.[@Yu2016] 
 
-![Beispiellevel aus Spelunky mit kritischem Pfad-Layout (rot) und Raum Nummerierung \label{spelunkylevel}[@Kezemi]](figs/chapter3/spelunky.png)
+![Beispiellevel aus Spelunky mit kritischem Pfad-Layout (rot) und Raum Nummerierung. \label{spelunkylevel}[@Kezemi]](figs/chapter3/spelunky.png)
 
 ### Vor- und Nachteile
 

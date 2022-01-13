@@ -4,7 +4,7 @@ In diesem Kapitel wird ein abschließendes Fazit über den Generator und die Arb
 
 ## Fazit
 
-Ziel dieser Arbeit war die Konzeptionierung und Implementierung eines prozeduralen graphenbasierten 2D-Level Generator für das PM-Dungeon-Framework. Um dieses Ziel zu erreichen, wurde zu Beginn der Arbeit das Konzept der graphenbasierten-Darstellung von Level sowie die Bedeutung der Begrifflichkeit der prozeduralen Generierung vorgestellt. Um die Qualität des Generators und der vom Generator erzeugten Level zu bewerten wurden Regeln für gutes Level-Design aufgestellt. Die generierten Level wurden dann anhand dieser Kriterien bewertet.
+Ziel dieser Arbeit war die Konzeptionierung und Implementierung eines prozeduralen graphenbasierten 2D-Level Generator für das PM-Dungeon-Framework. Um dieses Ziel zu erreichen, wurde zu Beginn der Arbeit das Konzept der graphenbasierten-Darstellung von Level sowie die Bedeutung der Begrifflichkeit der prozeduralen Generierung vorgestellt. Um die Qualität des Generators und der vom Generator erzeugten Level zu bewerten wurden Regeln für gutes Level-Design aufgestellt.
 
 DungeonG ist ein voll funktionsfähiger prozeduraler graphenbasierter Generator und erzeugt abwechslungsreiche und spaßige Level und arbeitet dabei mit wenigen Inputdaten sowie Parameter. DungeonG erzeugt selbständig planare Graphen, um die Level-Struktur festzulegen. Inspiriert durch das Spiel Spelunky werden zur Verfügung gestellte Templates genutzt und miteinander kombiniert, um verschieden aussehende und strukturierte Räume zu erzeugen. Durch einen inkrementellen prozeduralen Prozess werden die Graphen mithilfe der Räume zu spielbaren Level umgeformt. Die so erzeugten Level unterscheiden sich stark voneinander, können zusätzlich verschiedene Texturen benutzten und können daher als einzigartig bezeichnet werden. 
 
@@ -36,7 +36,7 @@ Da RoomG als einziger Baustein in DungeonG nicht ohne Inputdaten von außen ausk
 
 ### Schnittstelle
 
-Die Qualität der Schnittstelle zwischen DungeonG und Studierenden lässt sich nur schwer im Vorhinein bewerten. Daher sollte im ersten aktiven Einsatz des Generators im Modul Programmier-Methoden insbesondere auf auftretende Probleme und Vorschläge zur Verbesserung geachtet werden. 
+Die Qualität der Schnittstelle zwischen DungeonG und Studierenden lässt sich nur schwer im Vorhinein bewerten. Daher sollte im ersten aktiven Einsatz des Generators im Modul Programmiermethoden insbesondere auf auftretende Probleme und Vorschläge zur Verbesserung geachtet werden. 
 
 Eine eigene, speziell für DungeonG und das PM-Dungeon-Framework entwickelte, Beschreibungssprache könnte eine Vielzahl an neuen Möglichkeiten im Umgang mit dem Level und dem Framework liefern. Es wäre vorstellbar, eine Dot ähnliche Sprache zu verwenden, mit der die Studierenden eigene Graphen erstellen, den Knoten Raum-Layouts sowie Designs zuordnen und über die Sprache Monster und Items erstellen und im Level platzieren. 
 
@@ -44,6 +44,6 @@ Eine eigene, speziell für DungeonG und das PM-Dungeon-Framework entwickelte, Be
 
 Die Laufzeit des Generators ist in der praktischen Anwendung des Algorithmus sehr relevant. Die im Vorhinein der Arbeit aufgestellte Annahmen, dass die Laufzeit des Generators auf natürliche Art und Weise in einem akzeptablen Rahmen halten wird, hat sich als falsch herausgestellt.  
 
-Im gesamten Generierungsprozess werden viele verschiedene Teillösungen für die verschiedenen Aspekte berechnet. Dies ermöglicht es DungeonG die Varietät der Ergebnisse so groß wie möglich zu halten. Es ist davon auszugehen, dass die effektivste Form der Laufzeitoptimierung dadurch geschaffen werden kann, wenn die Anzahl der Teillösungen reduziert wird. Die Reduzierung der Teillösungen würde aber auch die Variation der Ergebnisse einschränken. Es kommt daher zur Wahl zwischen Zeit und Abwechslung. Wichtig ist auch zu bedenken, dass nicht berechnete Teillösungen in manchen Fällen die einzigen Teillösungen sind, die zu einer Gesamtlösung führen können. 
+Im gesamten Generierungsprozess werden viele verschiedene Teillösungen für die verschiedenen Aspekte berechnet. Dies ermöglicht es DungeonG die Variation der Ergebnisse so groß wie möglich zu halten. Es ist davon auszugehen, dass die effektivste Form der Laufzeitoptimierung dadurch geschaffen werden kann, wenn die Anzahl der Teillösungen reduziert wird. Die Reduzierung der Teillösungen würde aber auch die Variation der Ergebnisse einschränken. Es kommt daher zur Wahl zwischen Zeit und Abwechslung. Wichtig ist auch zu bedenken, dass nicht berechnete Teillösungen in manchen Fällen die einzigen Teillösungen sind, die zu einer Gesamtlösung führen können. 
 
-Ähnlich zum Optimierungs-Vorschlag für GraphG, könnte auch in diesen Fall eine Serverfarm genutzt werden, um die verschiedenen Level zu erzeugen, ohne Laufzeitoptimierung durchzuführen. Die erzeugten Level könnten dann ebenfalls in einer JSON-Datei abgespeichert werden, welche vom PM-Dungeon dann eingelesen werden. 
+Ähnlich zum Optimierungs-Vorschlag für GraphG, könnte auch in diesen Fall eine Serverfarm genutzt werden, um die verschiedenen Level zu erzeugen, ohne Laufzeitoptimierung durchzuführen. Die erzeugten Level könnten dann ebenfalls in einer JSON-Datei abgespeichert werden, welche vom PM-Dungeon eingelesen werden. 
