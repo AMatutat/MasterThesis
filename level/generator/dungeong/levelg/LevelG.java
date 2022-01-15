@@ -553,8 +553,7 @@ public class LevelG implements IGenerator {
             int yMovement,
             List<Coordinate> attachingPoints,
             ConfigurationSpace staticSpace,
-            RoomTemplate template) {
-        System.out.println("ENTER");
+            RoomTemplate template) {    
         Coordinate newPosition = new Coordinate(position);
         do {
             newPosition = new Coordinate(newPosition.x, newPosition.y);
