@@ -445,7 +445,7 @@ public class LevelG implements IGenerator {
         return spaces;
     }
 
-    /**
+     /**
      * Calculate where a dynamic room-template can be attached to a static room-template.
      *
      * @param staticSpace Where to attach.
@@ -462,92 +462,108 @@ public class LevelG implements IGenerator {
         List<Coordinate> outerWalls = staticSpace.getOuterWalls();
 
         for (Coordinate wall : outerWalls) {
-
             Coordinate localPoint = new Coordinate(wall.x - difx, wall.y - dify);
+            Coordinate moveSpeed = getTypeOfWall(localPoint, layout);
+            int xMovement = moveSpeed.x;
+            int yMovement = moveSpeed.y;
+            Coordinate position = new Coordinate(wall.x, wall.y);
+            if (yMovement != 0) {
+                Coordinate newPosition = new Coordinate(position.x, position.y + yMovement);
+                do {
+                    if (staticSpace.attached(template, newPosition, DOOR_SIZE))
+                        attachingPoints.add(newPosition);
 
-            // wall is on the right
-            int xMovement = 1;
-            int yMovement = 0;
-            // or wall is on the left?
-            if (localPoint.x == 0
-                    || layout[(int) localPoint.y][(int) localPoint.x - 1] == LevelElement.SKIP)
-                xMovement = -1;
-            // or wall is on the top?
-            else if (localPoint.y == layout.length - 1
-                    || layout[(int) localPoint.y + 1][(int) localPoint.x] == LevelElement.SKIP) {
-                xMovement = 0;
-                yMovement = 1;
+                    // move up or down
+                    newPosition = new Coordinate(newPosition.x, newPosition.y + yMovement);
+
+                    // moveleft
+                    moveTemplate(newPosition, -1, 0, attachingPoints, staticSpace, template);
+                    // move right
+                    moveTemplate(newPosition, 1, 0, attachingPoints, staticSpace, template);
+                } while (staticSpace.overlap(template, newPosition));
+
+            } else if (xMovement != 0) {
+                Coordinate newPosition = new Coordinate(position.x, position.y + yMovement);
+                do {
+                    if (staticSpace.attached(template, newPosition, DOOR_SIZE))
+                        attachingPoints.add(newPosition);
+
+                    // move left or right
+                    newPosition = new Coordinate(newPosition.x + xMovement, newPosition.y);
+
+                    // movedown
+                    moveTemplate(newPosition, 0, -1, attachingPoints, staticSpace, template);
+                    // move up
+                    moveTemplate(newPosition, 0, 1, attachingPoints, staticSpace, template);
+                } while (staticSpace.overlap(template, newPosition));
             }
-            // or wall is on the bottom?
-            else if (localPoint.y == 0
-                    || layout[(int) localPoint.y - 1][(int) localPoint.x] == LevelElement.SKIP) {
-                xMovement = 0;
-                yMovement = -1;
-            }
-            Coordinate place = new Coordinate(wall.x, wall.y);
-            Coordinate place2 = new Coordinate(place.x, place.y);
-
-            do {
-                if (staticSpace.attached(template, place, DOOR_SIZE)) {
-                    attachingPoints.add(place);
-                }
-                place = new Coordinate(place.x, place.y);
-                if (yMovement != 0) {
-
-                    // move him all the way up
-                    do {
-                        place2 = new Coordinate(place.x, place2.y);
-                        place2.y++;
-                        if (staticSpace.attached(template, place2, DOOR_SIZE)) {
-                            attachingPoints.add(place2);
-                        }
-                    } while (staticSpace.overlap(
-                            template, place2)); // && attachingPoints.size() < 10);
-                }
-                place = new Coordinate(place.x, place.y);
-                if (yMovement != 0) {
-                    // move him all the way down
-                    do {
-                        place2 = new Coordinate(place.x, place2.y - 1);
-                        place2.y--;
-                        if (staticSpace.attached(template, place2, DOOR_SIZE)) {
-                            attachingPoints.add(place2);
-                        }
-                    } while (staticSpace.overlap(
-                            template, place2)); // && attachingPoints.size() < 10);
-                }
-                place = new Coordinate(place.x, place.y);
-                if (xMovement != 0) {
-                    // move him all the way left
-                    do {
-                        place2 = new Coordinate(place2.x, place.y);
-                        place2.x--;
-                        if (staticSpace.attached(template, place2, DOOR_SIZE)) {
-                            attachingPoints.add(place2);
-                        }
-                    } while (staticSpace.overlap(
-                            template, place2)); // && attachingPoints.size() < 10);
-                }
-                place = new Coordinate(place.x, place.y);
-
-                if (xMovement != 0) {
-                    // move him all the way right
-                    do {
-                        place2 = new Coordinate(place2.x, place.y);
-                        place2.x++;
-                        if (staticSpace.attached(template, place2, DOOR_SIZE)) {
-                            attachingPoints.add(place2);
-                        }
-                    } while (staticSpace.overlap(
-                            template, place2)); // && attachingPoints.size() < 10);
-                }
-                place = new Coordinate(place.x, place.y);
-                place.x += xMovement;
-                place.x += yMovement;
-            } while (staticSpace.overlap(template, place)); // && attachingPoints.size() < 10);
         }
 
         return attachingPoints;
+    }
+
+    /**
+     * help method for calAttachingPoints. x=-1 y=0 if wall is on the left x=1 y=0 if wall is on the
+     * right x=0 y=-1 if wall is on the bottom x=0 y=1 if wall is on the top
+     *
+     * @param localPoint
+     * @param layout
+     * @return
+     */
+    private Coordinate getTypeOfWall(Coordinate localPoint, LevelElement[][] layout) {
+        int xMovement;
+        int yMovement;
+        // wall is on the right
+        xMovement = 1;
+        yMovement = 0;
+        // or wall is on the left?
+        if (localPoint.x == 0
+                || layout[(int) localPoint.y][(int) localPoint.x - 1] == LevelElement.SKIP)
+            xMovement = -1;
+        // or wall is on the top?
+        else if (localPoint.y == layout.length - 1
+                || layout[(int) localPoint.y + 1][(int) localPoint.x] == LevelElement.SKIP) {
+            xMovement = 0;
+            yMovement = 1;
+        }
+        // or wall is on the bottom?
+        else if (localPoint.y == 0
+                || layout[(int) localPoint.y - 1][(int) localPoint.x] == LevelElement.SKIP) {
+            xMovement = 0;
+            yMovement = -1;
+        }
+
+        return new Coordinate(xMovement, yMovement);
+    }
+
+    /**
+     * moves a template in the given direction and checks, if it can be attached. stops if out of
+     * range-
+     *
+     * @param position where to start
+     * @param xMovement go left or right?
+     * @param yMovement go down or up?
+     * @param attachingPoints where to add the attachingPoints?
+     * @param staticSpace space to attach on
+     * @param template RoomTemplate to use
+     */
+    private void moveTemplate(
+            Coordinate position,
+            int xMovement,
+            int yMovement,
+            List<Coordinate> attachingPoints,
+            ConfigurationSpace staticSpace,
+            RoomTemplate template) {
+        System.out.println("ENTER");
+        Coordinate newPosition = new Coordinate(position);
+        do {
+            newPosition = new Coordinate(newPosition.x, newPosition.y);
+            newPosition.y += yMovement;
+            newPosition.x += xMovement;
+            if (staticSpace.attached(template, newPosition, DOOR_SIZE)) {
+                attachingPoints.add(newPosition);
+            }
+        } while (staticSpace.overlap(template, newPosition));
     }
 
     /**
