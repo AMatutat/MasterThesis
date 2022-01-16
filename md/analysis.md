@@ -1,15 +1,15 @@
 # Algorithmen zur prozeduralen Generierung
 
-In diesem Kapitel werden Algorithmen vorgestellt, die verschiedene Aspekte der prozeduralen Level-Generierung abdecken. Nicht jeder vorgestellter Algorithmus ist für die Generierung von Level konzeptioniert, kann aber für Teilaspekte verwendet werden. Es werden Algorithmen zur Generierung von planaren Graphen, zum Erzeugen von Level aus diesen Graphen sowie zum Erstellen von einzelnen Räumen vorgestellt. Ziel ist es, im nächsten Kapitel, die einzelnen Elemente der Algorithmen so zu kombinieren, dass das Resultat die in Kapitel 2.7 aufgestellten Anforderungen bestmöglich erfüllt. 
+In diesem Kapitel werden Algorithmen vorgestellt, die verschiedene Aspekte der prozeduralen Level-Generierung abdecken. Nicht jeder vorgestellte Algorithmus ist für die Generierung von Leveln konzeptioniert, kann aber für Teilaspekte verwendet werden. Es werden Algorithmen zur Generierung von planaren Graphen, zum Erzeugen von Leveln aus diesen Graphen, sowie zum Erstellen von einzelnen Räumen vorgestellt. Ziel ist es, im nächsten Kapitel die einzelnen Elemente der Algorithmen so zu kombinieren, dass das Resultat die in Kapitel 2.7 aufgestellten Anforderungen bestmöglich erfüllt. 
 
 
 ## Vom Graph zum Level 
 
-Zwar kann das Layout eines Level mithilfe eines Graphen dargestellt werden, schlussendlich muss aus diesen Graphen aber eine physische Anordnung von Räumen und Strukturen generiert werden, die dann das eigentliche Level im Spiel ist. Die Arbeit von Ma et al stellt einen effizienten Algorithmus vor, um diese Umwandlung durchzuführen.[@Ma2014]
+Zwar kann das Layout eines Levels mithilfe eines Graphen dargestellt werden, schlussendlich muss aus diesem Graphen aber eine physische Anordnung von Räumen und Strukturen generiert werden, die dann das eigentliche Level im Spiel ist. Die Arbeit von Ma et al stellt einen effizienten Algorithmus vor, um diese Umwandlung durchzuführen.[@Ma2014]
 
 ![Beispiel: Output für einen Graphen und Strukturen. \label{graph2level}[@Ma2014]](figs/chapter3/fromgraphtolevel.PNG)
 
-Als Input werden dem Algorithmus zu einem der planare Level-Graph $G$ übergeben sowie ein Set aus 2D-Polygonalen Blöcken $B$ (vgl. Abbildung \ref{graph2level}). Diese Blöcke können als Räume des Level betrachtet werden und werden im Verlaufe des Algorithmus genutzt, um die Knoten im Graphen aufzulösen. Dabei ist zu beachten, dass der Algorithmus die Blöcke zufällig und mehrfach auswählt. Der Algorithmus erlaubt es nicht Bedingungen festzulegen, wie dass ein spezifischer Knoten durch einen spezifischen Block aufgelöst werden soll oder ein Block nur einmal verwendet werden soll. So lässt sich zum Beispiel kein spezifischer Bossraum mit einem einzigartigen Layout bestimmen. Wenn es eine mögliche Lösung für $G$ mit $B$ gibt, ist diese der Output des Algorithmus. Durch sein inkrementelles Vorgehen, welches im weiteren Verlauf des Abschnittes beschrieben wird, ist der Algorithmus effizient in der Lage auch mehrere Lösungen für ein Input $G$ und $B$ zu finden. 
+Als Input wird dem Algorithmus zu einem der planare Level-Graph $G$ übergeben, sowie ein Set aus 2D-Polygonalen Blöcken $B$ (vgl. Abbildung \ref{graph2level}). Diese Blöcke können als Räume des Levels betrachtet werden und werden im Verlauf des Algorithmus genutzt, um die Knoten im Graphen aufzulösen. Dabei ist zu beachten, dass der Algorithmus die Blöcke zufällig und mehrfach auswählt. Der Algorithmus erlaubt es nicht Bedingungen festzulegen, wie dass ein spezifischer Knoten durch einen spezifischen Block aufgelöst werden soll oder ein Block nur einmal verwendet werden soll. So lässt sich zum Beispiel kein spezifischer Bossraum mit einem einzigartigen Layout bestimmen. Wenn es eine mögliche Lösung für $G$ mit $B$ gibt, ist diese der Output des Algorithmus. Durch sein inkrementelles Vorgehen, welches im weiteren Verlauf des Abschnittes beschrieben wird, ist der Algorithmus effizient in der Lage auch mehrere Lösungen für ein Input $G$ und $B$ zu finden. 
 
 Der Algorithmus besteht im Wesentlichen aus zwei Schritten:
 
@@ -22,7 +22,7 @@ Auflösung von Knoten meint, dass in der Darstellung von $G$ in physischer Anord
 
 Abbildung \ref{confspace} a) zeigt wie der Configuration-Space für eine Verbindung von zwei Blöcken aussehen könnte. Beim Auflösen einer solchen Verbindung ist ein Block statisch, kann also nicht bewegt oder rotiert werden und der andere Block ist dynamisch, kann also bewegt und rotiert werden. In diesem Fall ist der mittlere (umgedrehtes L) Block statisch und der quadratische Block dynamisch. Im dynamischen Block wird ein Referenzpunkt bestimmt, in diesen Fall das Zentrum des Blocks. Die rote Linie ist der Configuration-Space und zeigt nun alle möglichen Positionen, die der Referenzpunkt einnehmen kann, um die Verbindung gültig zu lösen. Abbildung \ref{confspace} b) zeigt wie eine Verbindung mit zwei statischen und einem dynamischen Block aufgelöst wird. Zuerst wird für jeden statischen Block der Configuration-Space bestimmt, die Schnittpunkte beider Configuration-Spaces (gelbe Punkte) sind die gültigen Positionen für den Referenzpunkt des dynamischen Blocks.
 
-Das Berechnen des Configuration-Spaces reduziert den lokalen Suchraum für die individuellen Knoten, jedoch ist der Suchraum für den gesamten Graphen weiterhin zu groß, um zuverlässig in einer angebrachten Zeit eine Lösung zu finden. Daher wird das Problem in kleinere, einfacher zu lösende, Teilprobleme aufgeteilt. Es hat sich herausgestellt, dass Graphen, in den jeder Knoten maximal zwei Nachbarn besitzt, einfacher aufzulösen sind, da die Anzahl der Kanten der Blöcke immer größer ist als die Anzahl der Kanten des Knotens im Graph. 
+Das Berechnen des Configuration-Spaces reduziert den lokalen Suchraum für die individuellen Knoten, jedoch ist der Suchraum für den gesamten Graphen weiterhin zu groß, um zuverlässig in einer angebrachten Zeit eine Lösung zu finden. Daher wird das Problem in kleinere, einfacher zu lösende Teilprobleme aufgeteilt. Es hat sich herausgestellt, dass Graphen, in den jeder Knoten maximal zwei Nachbarn besitzt, einfacher aufzulösen sind, da die Anzahl der Kanten der Blöcke immer größer ist als die Anzahl der Kanten des Knotens im Graph. 
 
 ![Beispiel: Aufteilen eines Graphen in Chains. \label{how2chain}[@Nepozitek2019]](figs/chapter3/howtochain.PNG)
 
@@ -45,14 +45,14 @@ procedure INCREMENTALLAYOUT(G,B,S)
 end procedure
 \end{lstlisting}
 
-Listing \ref{laydown} zeigt den Peseudocode für das inkrementelle Erstellen eines Level mithilfe des beschriebenen Verfahrens.[@Ma2014]
+Listing \ref{laydown} zeigt den Peseudocode für das inkrementelle Erstellen eines Levels mithilfe des beschriebenen Verfahrens.[@Ma2014]
 
 
 Zwar könnten die Chains auch separat aufgelöst werden und dann versucht werden die Teillösungen miteinander zu verbinden, jedoch würden dabei Lösungen erzeugt werden, die zwar die Chain auflösen aber nicht mit den gesamten Graphen kompatibel sind und daher unbrauchbar wären. Außerdem sind im Level alle Knoten miteinander verbunden, daher gibt es auch keine Vorteile die Chains einzeln zu lösen. 
 
-Das Erstellen von mehren Lösungen für eine Chain hat mehrere Vorteile. Zu einem ermöglicht und erleichtert es das schrittweise Backtracking, falls eine Chain nicht in der aktuellen Lösung angeschlossen werden kann und zusätzlich können schneller mehrere gültige Lösungen für ein Graph gefunden werden, indem beispielsweise nach der dritten Chain eine andere Teillösungen verwendet wird. Abbildung \ref{graphsolution} zeigt wie aus verschieden Teillösungen unterschiedliche Gesamtlösungen entstehen. Dies unterstreicht noch einmal die Effizienz des Algorithmus, da bereits aus einem einzigen Input-Graphen viele vollkommen unterschiedliche Level entstehen können. 
+Das Erstellen von mehren Lösungen für eine Chain hat mehrere Vorteile. Zu einem ermöglicht und erleichtert es das schrittweise Backtracking, falls eine Chain nicht in der aktuellen Lösung angeschlossen werden kann und zusätzlich können schneller mehrere gültige Lösungen für einen Graph gefunden werden, indem beispielsweise nach der dritten Chain eine andere Teillösungen verwendet wird. Abbildung \ref{graphsolution} zeigt wie aus verschieden Teillösungen unterschiedliche Gesamtlösungen entstehen. Dies unterstreicht noch einmal die Effizienz des Algorithmus, da bereits aus einem einzigen Input-Graphen viele vollkommen unterschiedliche Level entstehen können. 
 
-![Beispiel: Unterschiedliche Teillösungen für die selbe Chain. \label{graphpartsolution}[@Ma2014]](figs/chapter3/graphpatrsol.PNG)
+![Beispiel: Unterschiedliche Teillösungen für dieselbe Chain. \label{graphpartsolution}[@Ma2014]](figs/chapter3/graphpatrsol.PNG)
 
 ![Beispiel: Unterschiedliche Teillösungen führen zu unterschiedlichen Gesamtlösungen. \label{graphsolution}[@Ma2014]](figs/chapter3/graphsolution.PNG)
 
@@ -60,7 +60,7 @@ Das Erstellen von mehren Lösungen für eine Chain hat mehrere Vorteile. Zu eine
 
 Vorteil: Der Algorithmus kann viele Level aus einem Graphen und Set aus Räumen erstellen und ist daher sehr effizient in der Nutzung der Inputs.
 
-Vorteil: Sofern der Input Graph einen kritischen Pfad zwischen Start und Ziel hat, kann der Algorithmus gewährleisten, dass alle ausgegebenen Level auch lösbar sind.
+Vorteil: Sofern der Input-Graph einen kritischen Pfad zwischen Start und Ziel hat, kann der Algorithmus gewährleisten, dass alle ausgegebenen Level auch lösbar sind.
 
 Vorteil: Die Level-Layouts unterscheiden sich selbst bei gleichen Input-Daten stark voneinander und können als einzigartig bezeichnet werden.
 
@@ -68,11 +68,11 @@ Nachteil: Der Algorithmus funktioniert nicht ohne Input-Daten, sowohl Graph als 
 
 Lösungsansatz: Ein weiterer Algorithmus zur Generierung planarer Graphen kann genutzt werden, um den Input-Graphen automatisch erstellen zu lassen. Auch ein Algorithmus zur automatischen Generierung von Input-Räumen wäre denkbar. Die vollständige automatisierte Generierung von Räumen stellt allerdings ein eigenes komplexes Problem dar, welches im Rahmen dieser Arbeit nicht besprochen wird. 
 
-Nachteil: Es werden immer dieselben Räume verwendet. Bei wenigen Input-Räumen oder einem Spieler der viel Zeit im Spiel verbringt, wird dies sichtbar und die Einzigartigkeit der Level ist nicht mehr gegeben. 
+Nachteil: Es werden immer dieselben Räume verwendet. Bei wenigen Input-Räumen oder einem Spieler, der viel Zeit im Spiel verbringt, wird dies sichtbar und die Einzigartigkeit der Level ist nicht mehr gegeben. 
 
 Lösungsansatz: Auch hier könnte ein Algorithmus zur vollständigen Generierung von Räumen genutzt werden. Eine andere Möglichkeit wäre ein Algorithmus, der die Input-Räume anhand verschiedener Kriterien mutiert und so bereits aus wenigen Räumen eine Vielzahl unterschiedlicher Räume erzeugt. 
 
-Nachteil: Der Algorithmus bietet keine Möglichkeit, um das Pacing zu kontrollieren, Risk and Reward Momente zu erzeugen oder das Spiel zu balancen. Es gibt keine Schnittstelle, um das Aussehen der Level oder das Level Layout abseits des Input-Graphen anzupassen. 
+Nachteil: Der Algorithmus bietet keine Möglichkeit, um das Pacing zu kontrollieren, Risk and Reward Momente zu erzeugen oder das Spiel zu balancen. Es gibt keine Schnittstelle, um das Aussehen der Level oder das Levellayout abseits des Input-Graphen anzupassen. 
 
 Lösungsansatz: Der Algorithmus kann als Grundlage für die Konzeptionierung eines Level-Generators genutzt werden. Die Konfiguration der einzelnen Aspekte findet dann bei der Erstellung des Graphen bzw. bei der Mutation der Räume statt.
 
@@ -82,21 +82,21 @@ Lösungsansatz: Der Algorithmus kann als Grundlage für die Konzeptionierung ein
 
 Bekannte Verfahren zur Generierung von planaren Graphen wie das *plantri* Programm nutzen Triangulation oder Quadrangulation.[@Brinkmann] Die erzeugten Graphen zeichnen sich dadurch aus, dass jedes Face im Graph ein Dreieck bzw. ein Quadrat ist. Dieses Verfahren ist zwar besonders effizient unter Betrachtung der Rechenleistung, die erzeugten Graphen eignen sich aber kaum, um gute Videospiellevel darzustellen.
 
-Abbildung \ref{plantri} zeigt zwei verschiedene Graphen, die mithilfe von *plantri* erzeugt werden können, einmal durch Triangulation und einmal durch Quadrangulation. Die Graphen zeichnen sich vor allem durch ihre zyklische Struktur aus, jeder Knoten kann auf mehrere Wege erreicht werden und es gibt keine klaren Endpunkte. Würde man zwei zufällige Punkte im Graphen als Start- und Endpunkt bestimmen und alle kritischen Pfade einzeichnen, wäre jede Kante markiert. Der Endpunkt kann daher durch viele verschiedenen Pfade erreicht werden. Was zunächst nach einem Vorteil klingt, da der Spieler so maximale Freiheit bei der Wahl seines Weges hat, stellt sich als Nachteil für das Pacing und Balancing heraus. Da (fast) jeder Knoten als kritisch und optional gleichzeitig betrachtet werden kann, ist es schwer Risk and Reward Momente zu platzieren, Monster gezielt auf kritischen bzw. optionalen Pfade zu platzieren oder sicherzustellen, dass der Spieler an kritischen Events vorbei muss. Zusätzlich unterscheiden sich die Teilaspekte der Graphen im Grunde gar nicht, jedes Teilstück besteht entweder aus einem Dreieck oder einem Quadrat, daher würden die erzeugten Level sich überwiegend in der Größe der Level unterscheiden und nur wenig Variation im Layout aufweisen.
+Abbildung \ref{plantri} zeigt zwei verschiedene Graphen, die mithilfe von *plantri* erzeugt werden können, einmal durch Triangulation und einmal durch Quadrangulation. Die Graphen zeichnen sich vor allem durch ihre zyklische Struktur aus, jeder Knoten kann auf mehrere Wege erreicht werden und es gibt keine klaren Endpunkte. Würde man zwei zufällige Punkte im Graphen als Start- und Endpunkt bestimmen und alle kritischen Pfade einzeichnen, wäre jede Kante markiert. Der Endpunkt kann daher durch viele verschiedene Pfade erreicht werden. Was zunächst nach einem Vorteil klingt, da der Spieler so maximale Freiheit bei der Wahl seines Weges hat, stellt sich als Nachteil für das Pacing und Balancing heraus. Da (fast) jeder Knoten als kritisch und optional gleichzeitig betrachtet werden kann, ist es schwer Risk and Reward Momente zu platzieren, Monster gezielt auf kritischen bzw. optionalen Pfade zu platzieren oder sicherzustellen, dass der Spieler an kritischen Events vorbei muss. Zusätzlich unterscheiden sich die Teilaspekte der Graphen im Grunde gar nicht, jedes Teilstück besteht entweder aus einem Dreieck oder einem Quadrat, daher würden die erzeugten Level sich überwiegend in der Größe der Level unterscheiden und nur wenig Variation im Layout aufweisen.
 
   ![Planare Graphen erzeugt durch Triangulation (links) und Quadrangulation (rechts) \label{plantri} [@Brinkmann] ](figs/chapter3/plantriexample.png)
 
 Eine andere Möglichkeit zur Generierung von Planaren Graphen ist die kontrollierte Zufallssuche. Ein Algorithmus, der vollkommen zufällig einen Graphen erzeugt, würde auch planare Graphen erzeugen. Da dies weder ein zuverlässiger noch effizienter Weg zur Generierung ist, muss der Zufall so eingeschränkt werden, dass die Generierung von nicht planaren Graphen unmöglich wird.
 
-Das Satz von Kuratowski sagt, dass ein Graph genau dann planar ist, wenn er keinen Teilgraph besitzt, der ein Unterteilungsgraph des $K5$ oder $K3,3$ ist. Ein Untereilungsgraph ist ein Graph, der dadurch entsteht, dass in einen Graphen $G$ neue Knoten durch Kantenunterteilung hinzugefügt werden. $K5$ und $K3,3$ sind zwei Graphen für die es keine planare Darstellung gibt (vgl. Abbildung \ref{k5} und Abbildung \ref{k3}).[@Diestel2010]
+Der Satz von Kuratowski sagt, dass ein Graph genau dann planar ist, wenn er keinen Teilgraph besitzt, der ein Unterteilungsgraph des $K5$ oder $K3,3$ ist. Ein Untereilungsgraph ist ein Graph, der dadurch entsteht, dass in einen Graphen $G$ neue Knoten durch Kantenunterteilung hinzugefügt werden. $K5$ und $K3,3$ sind zwei Graphen für die es keine planare Darstellung gibt (vgl. Abbildung \ref{k5} und Abbildung \ref{k3}).[@Diestel2010]
 
 Bei der Generierung eines planaren Graphen muss also darauf geachtet werden, dass weder $K5$ noch $K3,3$ enthalten sind. 
 
 Die Untersuchung eines Graphen $G$ nach einem Teilgraphen der isomorph zu einem Graphen $H$ ist, ist ein NP-Vollständiges Problem.[@Cook1971] Besitzen $G$ und $H$ isomorphe Unterteilungsgraphen, heißen diese homöomorph.[@wikipedia2016] Einen Graphen nach einem Teilgraphen zu durchsuchen der homöomorph zu $K5$ oder $K3,3$ ist, ist daher auch ein NP-Vollständiges Problem. Bei der Generierung des Graphen eine Untersuchung nach $K5$ oder $K3,3$ homöomorphen Teilgraphen durchzuführen ist daher kein effizientes Vorgehen. Es ist aber möglich, die Erzeugung von $K5$ oder $K3,3$ zu verhindern.
 
-$K5$ besteht aus fünf Knoten mit jeweils vier Kanten. Ein Graph, indem es maximal vier Knoten mit vier oder mehr Kanten gibt, kann $K5$ daher nicht enthalten. 
+$K5$ besteht aus fünf Knoten mit jeweils vier Kanten. Ein Graph, in dem es maximal vier Knoten mit vier oder mehr Kanten gibt, kann $K5$ daher nicht enthalten. 
 
-$K3,3$ besteht aus sechs Knoten mit jeweils drei Kanten. Ein Graph, indem es maximal fünf Knoten mit drei oder mehr Kanten gibt, kann $K3,3$ daher nicht enthalten.
+$K3,3$ besteht aus sechs Knoten mit jeweils drei Kanten. Ein Graph, in dem es maximal fünf Knoten mit drei oder mehr Kanten gibt, kann $K3,3$ daher nicht enthalten.
 
 Daraus lässt sich ableiten, dass ein Graph, der maximal vier Knoten mit drei oder mehr Kanten hat, weder $K5$ noch $K3,3$ enthalten kann und daher planar ist. 
 
@@ -130,7 +130,7 @@ Lösungsansatz: Verschiedene Verfahren zur Graphenanalyse können genutzt werden
 
 ## Spelunky
 
-Spelunky ist ein 2D-Rogue-Like-Plattformer. Es verbindet das klassische Gameplay von Plattformern und erweitert sie um prozedural generierte Level und Permadeath aus dem Rogue-Like Genre. Derek Yu, der Entwickler von Spelunky beschreibt im gleichnamigen Buch "Spelunky" unter anderem wie die Level im Spiel generiert werden.[@Yu2016]
+Spelunky ist ein 2D-Rogue-Like-Plattformer. Es verbindet das klassische Gameplay von Plattformern und erweitert sie um prozedural generierte Level und Permadeath aus dem Rogue-Like Genre. Derek Yu, der Entwickler von Spelunky, beschreibt im gleichnamigen Buch "Spelunky" unter anderem wie die Level im Spiel generiert werden.[@Yu2016]
 
 Die Aufgabe des Spielers in Spelunky ist es, vom Start des Levels bis zum Ausgang zu gelangen, dabei kann er zusätzlich Schätze sammeln, um Bonuspunkte zu erhalten. Auf dem Weg lauern verschiedene Gegner und Fallen. 
 
@@ -145,7 +145,7 @@ Abhängig von der Markierung eines Raumes wird er mit einem von mehreren per Han
 Jedes Template lässt sich als String darstellen und kann als 8x10 Matrix verstanden werden. In jedem Feld der Matrix steht ein Wert, dieser Wert gibt an, welche Art von Block an der jeweiligen Stelle zu platzieren ist (vgl. Tabelle \ref{spelunkytable}). Einige Felder, sogenannte Chunks, ersetzten eine 5x3 große Fläche durch eines von zehn vorgefertigten Chunk-Templates. Durch die Veränderung der Templates lassen sich viele unterschiedliche Räume generieren. 
 
 Um Monster und Items zu verteilen, wird zum Schluss für jedes als 1 gekennzeichnetes Feld entschieden, ob ein Monster oder ein Schatz darauf oder darunter platziert wird oder das Feld leer bleibt. Bei der Platzierung nehmen auch umliegende Felder Einfluss, so werden beispielsweise Truhen bevorzugt in Nischen platziert. 
-Spelunky verwendet verschiedene Texturen, um die optische Abwechslung zu gewährleisten. Nach einer bestimmten Anzahl an Level wird ein neues Theme angewandt. Auf die Struktur und den Aufbau der Level hat dies keinen Einfluss, es werden lediglich Texturen ersetzt. 
+Spelunky verwendet verschiedene Texturen, um die optische Abwechslung zu gewährleisten. Nach einer bestimmten Anzahl an Leveln wird ein neues Theme angewandt. Auf die Struktur und den Aufbau der Level hat dies keinen Einfluss, es werden lediglich Texturen ersetzt. 
 
 | Wert | Ersetzen durch                               |
 | ---- | -------------------------------------------- |

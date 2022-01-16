@@ -10,7 +10,7 @@ Hier werden verschiedene, von GraphG erzeugte, planare Graphen gezeigt. Diese Gr
 
 ![Von GraphG erzeugter Graph mit 20 Knoten und 4 extra Kanten. \label{graphex3}](figs/chapter4/graphgsol/example3.png)
 
-![Von GraphG erzeugter Graph mit 7 Knoten und 1 extra Kanten. \label{graphex4}](figs/chapter4/graphgsol/example4.png)
+![Von GraphG erzeugter Graph mit 7 Knoten und 1 extra Kanten. \label{graphex4}](figs/chapter4/graphgsol/example4.png){width=50%}
 
 
 
